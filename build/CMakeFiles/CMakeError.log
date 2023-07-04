@@ -1,0 +1,1080 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 17:37:31.266 xcodebuild[27227:1332191] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: c1a360dc7cc55a0a9548b5c03664f146
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/c1a360dc7cc55a0a9548b5c03664f146.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 17:37:33.302 xcodebuild[27236:1332326] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 1a4cc8eb87d0a90612fcbed9828859ce
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/1a4cc8eb87d0a90612fcbed9828859ce.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 17:37:34.756 xcodebuild[27245:1332385] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: b78b726d52c33fe0345f21887f7c07f2
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/b78b726d52c33fe0345f21887f7c07f2.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 17:37:36.158 xcodebuild[27254:1332448] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 48591b491d8b849a7523796d99798ddf
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/48591b491d8b849a7523796d99798ddf.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:00:07.279 xcodebuild[27922:1353155] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 546ce96051b6a5138686d10e2d7bdbdb
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/546ce96051b6a5138686d10e2d7bdbdb.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:00:09.060 xcodebuild[27930:1353270] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 98349fbdfd2c04d68c0d69bb69c54136
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/98349fbdfd2c04d68c0d69bb69c54136.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:00:10.603 xcodebuild[27939:1353327] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 7dd4e9816d0f22198a4c0e99133b0845
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/7dd4e9816d0f22198a4c0e99133b0845.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:00:12.186 xcodebuild[27957:1353442] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: fe240a5546b18065b068b19ba5115bed
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/fe240a5546b18065b068b19ba5115bed.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:03:49.991 xcodebuild[28173:1356987] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 17fc4cc64a54deb0391b8b29c79d964e
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/17fc4cc64a54deb0391b8b29c79d964e.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:03:51.566 xcodebuild[28180:1357076] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 646ceac9cef1016cfb6090b2a04e36e4
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/646ceac9cef1016cfb6090b2a04e36e4.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:03:53.132 xcodebuild[28189:1357136] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 89e656e4d304852621fae9ca8a18ca27
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/89e656e4d304852621fae9ca8a18ca27.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:03:54.578 xcodebuild[28198:1357186] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: f73036953c2d6aa3cca8a5a2913d8720
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/f73036953c2d6aa3cca8a5a2913d8720.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:06:43.340 xcodebuild[28396:1360180] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 005b041065c5843e7afab2b019ba4956
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/005b041065c5843e7afab2b019ba4956.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:06:44.888 xcodebuild[28406:1360303] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 7fd52514130d7a068d3b8700fe765537
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/7fd52514130d7a068d3b8700fe765537.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:06:46.405 xcodebuild[28415:1360360] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 81d7ced9dc72b5d3701adc638f6413e7
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/81d7ced9dc72b5d3701adc638f6413e7.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-20 18:06:47.889 xcodebuild[28424:1360415] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 45d01c7d196688d803aee8121b848e6f
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/45d01c7d196688d803aee8121b848e6f.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:34:12.147 xcodebuild[33090:1497080] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: eb4d9da2b13fd5a7883a2d9559b8eb3b
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/eb4d9da2b13fd5a7883a2d9559b8eb3b.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:34:13.776 xcodebuild[33097:1497199] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 49fca30f27624d6cd4f2735dbb7a5695
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/49fca30f27624d6cd4f2735dbb7a5695.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:34:15.201 xcodebuild[33106:1497259] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: b3155cccd452246f5c21d79d22b2e0c3
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/b3155cccd452246f5c21d79d22b2e0c3.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:34:16.568 xcodebuild[33115:1497311] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 480b7a969c3a41c63b574624c8c759f5
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/480b7a969c3a41c63b574624c8c759f5.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:37:38.842 xcodebuild[33373:1500585] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 7edea6a825dfefe75daeac667cbce551
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/7edea6a825dfefe75daeac667cbce551.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:37:40.270 xcodebuild[33383:1500714] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 003d0aa49a3fbccedbc85b1750740b97
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/003d0aa49a3fbccedbc85b1750740b97.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:37:41.685 xcodebuild[33392:1500776] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: d377eafeffb94b11cbbcd434ba22a786
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/d377eafeffb94b11cbbcd434ba22a786.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:37:43.072 xcodebuild[33402:1500864] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 8b4d3e6d1662760ec689068eb176bbf8
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/8b4d3e6d1662760ec689068eb176bbf8.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:59:43.785 xcodebuild[34299:1526755] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 57ffb80571ad5fc0243758fec19103fb
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/57ffb80571ad5fc0243758fec19103fb.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:59:46.683 xcodebuild[34309:1526888] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: ab9e08284710b00beff6361496246bdd
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/ab9e08284710b00beff6361496246bdd.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:59:48.258 xcodebuild[34318:1526945] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 6426e0de247c01d1267d3e2bed803bf2
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/6426e0de247c01d1267d3e2bed803bf2.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 13:59:49.913 xcodebuild[34328:1527008] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: ef5460850cd76d90cc8ecb24fb506031
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/ef5460850cd76d90cc8ecb24fb506031.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 14:00:16.662 xcodebuild[34394:1527890] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 2983108cbee5ae8a8473856dd4d32427
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/2983108cbee5ae8a8473856dd4d32427.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 14:00:18.111 xcodebuild[34401:1527984] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 95f3a5784d26fb435dec2d33a9790632
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/95f3a5784d26fb435dec2d33a9790632.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 14:00:19.673 xcodebuild[34410:1528043] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: e9a2366ed5d38d882a72a03e229f7743
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/e9a2366ed5d38d882a72a03e229f7743.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 14:00:21.099 xcodebuild[34419:1528099] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 935113a74c854d06e696e391ce11e558
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/935113a74c854d06e696e391ce11e558.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 14:10:51.092 xcodebuild[34898:1536221] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 5fbdc3f146759a874025456958fa665a
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/5fbdc3f146759a874025456958fa665a.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/bin/clang 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 14:10:52.608 xcodebuild[34907:1536345] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 4f73e105f8fbe5af11ead6b32b99b84a
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdC/./XCBuildData/4f73e105f8fbe5af11ead6b32b99b84a.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdC' from project 'CompilerIdC')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdC' from project 'CompilerIdC')
+** BUILD FAILED **
+
+
+
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 14:10:54.130 xcodebuild[34916:1536401] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 3a9c17b114d0b8879cdfb8f1b42ca66f
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/3a9c17b114d0b8879cdfb8f1b42ca66f.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/clang++ 
+Build flags: 
+Id flags:  
+
+The output was:
+65
+2023-06-21 14:10:55.615 xcodebuild[34933:1536485] DVTCoreDeviceEnabledState: DVTCoreDeviceEnabledState_Disabled set via user default (DVTEnableCoreDevice=disabled)
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Computing target dependency graph and provisioning inputs
+
+Create build description
+Build description signature: 18897a40e23bca24466ea543f445a76d
+Build description path: /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/3.22.3/CompilerIdCXX/./XCBuildData/18897a40e23bca24466ea543f445a76d.xcbuilddata
+
+warning: Building targets in manual order is deprecated - check "Parallelize build for command-line builds" in the project editor, or set DISABLE_MANUAL_TARGET_ORDER_BUILD_WARNING in any of the targets in the current build to suppress this warning
+error: An empty identity is not valid when signing a binary for the product type 'Command-line Tool'. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Traditional headermap style is no longer supported; please migrate to using separate headermaps and set 'ALWAYS_SEARCH_USER_PATHS' to NO. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+warning: Run script build phase 'Run Script' will be run during every build because it does not specify any outputs. To address this warning, either add output dependencies to the script phase, or configure it to run in every build by unchecking "Based on dependency analysis" in the script phase. (in target 'CompilerIdCXX' from project 'CompilerIdCXX')
+** BUILD FAILED **
+
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+clang: error: no input files

@@ -1,0 +1,4 @@
+/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/GLAD.dir
+/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/CustomRenderer.dir
+/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/ALL_BUILD.dir
+/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/ZERO_CHECK.dir
