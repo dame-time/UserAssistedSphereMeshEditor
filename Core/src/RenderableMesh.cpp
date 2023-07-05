@@ -266,7 +266,7 @@ namespace Renderer {
     }
 
     RenderableMesh& RenderableMesh::addSubSphere(bool isPickable) {
-        static RenderableMesh sphere = RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/Sphere.obj", shader);
+        static RenderableMesh sphere = RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/SphereHighRes.obj", shader);
         
         RenderableMesh m(sphere);
         m.isPickable = isPickable;

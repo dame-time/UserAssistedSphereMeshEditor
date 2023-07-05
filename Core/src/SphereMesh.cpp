@@ -271,11 +271,12 @@ namespace Renderer {
 
         for (int i = 1; i < nSpheres - 1; i++)
         {
-            RenderableMesh& s = referenceMesh->addSubSphere();
-//            this->renderedSphereVertexMeshes.push_back(s);
+            RenderableMesh& s = referenceMesh->addSubSphere(false);
             
             s.scaleUniform(Math::lerp(sphere[e.i].radius, sphere[e.j].radius, i * 1.0f / (nSpheres - 1)));
             s.translate(Math::lerp(sphere[e.i].center, sphere[e.j].center, i * 1.0f / (nSpheres - 1)));
+            
+//            s.setUniformColor(Math::Vector3(0, 0, 1));
             
             renderedSpheres.push_back(s.getID());
         }
@@ -299,10 +300,11 @@ namespace Renderer {
                 Math::Scalar ck = k * 1.0 / (nSpheres - 1);
                 
                 RenderableMesh& s = referenceMesh->addSubSphere();
-//                this->renderedSphereVertexMeshes.push_back(s);
                 
                 s.scaleUniform(sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck);
                 s.translate(sphere[e.i].center * ci + sphere[e.j].center * cj + sphere[e.k].center * ck);
+                
+//                s.setUniformColor(Math::Vector3(0, 0, 1));
                 
                 renderedSpheres.push_back(s.getID());
             }

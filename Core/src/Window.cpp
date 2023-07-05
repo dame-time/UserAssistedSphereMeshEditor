@@ -260,20 +260,12 @@ namespace Renderer {
             glReadPixels(scaled_mouse_x, viewport[3] - scaled_mouse_y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
             pickedPoint = windowClassInstance->screenPosToObjPos(Math::Vector3(xpos, ypos, depth));
             
-//            auto& s = windowClassInstance->mesh->addSubSphere();
-//            s.scaleUniform(0.5);
-//            s.translate(Math::Vector3(pickedPoint.coordinates.x, pickedPoint.coordinates.y, pickedPoint.coordinates.z));
-//            s.setUniformColor(Math::Vector3(1, 1, 0));
-//
             Math::Scalar minDistance = DBL_MAX;
             for (int i = 0; i < windowClassInstance->mesh->subSpheres.size(); i++) {
                 auto check = (pickedPoint - windowClassInstance->mesh->subSpheres[i].getPosition()).magnitude() - windowClassInstance->mesh->subSpheres[i].getScale().coordinates.x;
                 
                 if (check < threshold) {
                     if (check < minDistance) {
-//                        std::cout << "Picked sphere at: " << pickedPoint.coordinates.x << ", " << pickedPoint.coordinates.y << ", " << pickedPoint.coordinates.z << std::endl;
-//                        std::cout << "Selecte sphere at: " << windowClassInstance->mesh->subSpheres[i].getPosition().coordinates.x << ", " << windowClassInstance->mesh->subSpheres[i].getPosition().coordinates.y << ", " << windowClassInstance->mesh->subSpheres[i].getPosition().coordinates.z << std::endl;
-                        
                         windowClassInstance->pickedMesh = windowClassInstance->mesh->getSubSphere(i);
                         
                         minDistance = check;
@@ -282,8 +274,6 @@ namespace Renderer {
             }
             
             if (windowClassInstance->pickedMesh != nullptr) {
-//                std::cout << "Picked sphere at: " << pickedPoint.coordinates.x << ", " << pickedPoint.coordinates.y << ", " << pickedPoint.coordinates.z << std::endl;
-//                std::cout << "Selecte sphere at: " << windowClassInstance->pickedMesh->getPosition().coordinates.x << ", " << windowClassInstance->pickedMesh->getPosition().coordinates.y << ", " << windowClassInstance->pickedMesh->getPosition().coordinates.z << std::endl;
                 windowClassInstance->pickedMesh->setUniformColor(Math::Vector3(1, 0, 0));
                 
                 bool isPresent = false;
