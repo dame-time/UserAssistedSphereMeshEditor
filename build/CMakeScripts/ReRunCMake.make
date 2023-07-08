@@ -25,6 +25,10 @@ TARGETS += $(subst $(space),$(spaceplus),$(wildcard /usr/local/lib/cmake/glfw3/g
 TARGETS += $(subst $(space),$(spaceplus),$(wildcard /usr/local/lib/cmake/glfw3/glfw3ConfigVersion.cmake))
 TARGETS += $(subst $(space),$(spaceplus),$(wildcard /usr/local/lib/cmake/glfw3/glfw3Targets-release.cmake))
 TARGETS += $(subst $(space),$(spaceplus),$(wildcard /usr/local/lib/cmake/glfw3/glfw3Targets.cmake))
+TARGETS += $(subst $(space),$(spaceplus),$(wildcard /usr/local/lib/cmake/yaml-cpp/yaml-cpp-config-version.cmake))
+TARGETS += $(subst $(space),$(spaceplus),$(wildcard /usr/local/lib/cmake/yaml-cpp/yaml-cpp-config.cmake))
+TARGETS += $(subst $(space),$(spaceplus),$(wildcard /usr/local/lib/cmake/yaml-cpp/yaml-cpp-targets-noconfig.cmake))
+TARGETS += $(subst $(space),$(spaceplus),$(wildcard /usr/local/lib/cmake/yaml-cpp/yaml-cpp-targets.cmake))
 
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CMakeFiles/cmake.check_cache: $(TARGETS)
 	/usr/local/Cellar/cmake/3.22.3/bin/cmake -H/Users/davidepaollilo/Workspaces/C++/CustomRenderer -B/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build

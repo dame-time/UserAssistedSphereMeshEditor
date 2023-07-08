@@ -7,6 +7,8 @@
 
 #include <Sphere.hpp>
 
+#include <random>
+
 namespace Renderer {
     Sphere::Sphere()
     {
@@ -14,6 +16,8 @@ namespace Renderer {
         region = Region();
         
         this->quadricWeights = 0.0;
+        
+        generateUUID();
     }
 
     Sphere::Sphere(const Vertex& vertex, Math::Scalar k)
@@ -25,15 +29,39 @@ namespace Renderer {
         this->center = result.toQuaternion().immaginary;
         this->radius = result.coordinates.w;
         
+        this->color = Math::Vector3(1, 0, 0);
+        
         this->quadricWeights = 1e-6;
         
         this->vertices.push_back(vertex);
+        
+        generateUUID();
     }
 
     Sphere::Sphere(const Math::Vector3& center, Math::Scalar radius)
     {
         this->center = center;
         this->radius = radius;
+        
+        this->color = Math::Vector3(1, 0, 0);
+        
+        generateUUID();
+    }
+
+    void Sphere::generateUUID()
+    {
+        std::random_device rd;
+        std::mt19937 generator(rd());
+        std::uniform_int_distribution<> distr(0, 999999);
+        
+        int random_number = distr(generator);
+        
+        this->renderedMeshID = random_number;
+    }
+
+    int Sphere::getID()
+    {
+        return this->renderedMeshID;
     }
 
     Quadric Sphere::getSphereQuadric()
@@ -68,48 +96,6 @@ namespace Renderer {
     void Sphere::addVertex(const Vertex& vertex)
     {
         vertices.push_back(vertex);
-    }
-
-    void Sphere::renderAssociatedVertices(RenderableMesh& referenceMesh, Math::Scalar sphereSize)
-    {
-        const Math::Vector3 color = Math::Vector3(0, 1, 0);
-
-        for (int i = 0; i < vertices.size(); i++)
-        {
-            // The point is inside the triangle
-            RenderableMesh& s = referenceMesh.addSubSphere();
-//            referenceMesh.renderedSphereVertexMeshes.push_back(s);
-            
-            s.setUniformColor(Math::Vector3(0, 1, 0));
-
-            s.scaleUniform(sphereSize);
-            s.translate(vertices[i].position);
-
-            renderedSpheres.push_back(s.getID());
-        }
-    }
-
-    void Sphere::clearRenderedSpheres(RenderableMesh& referenceMesh)
-    {
-        std::vector<RenderableMesh> tempSpheres;
-
-        for (auto& sphere : referenceMesh.subSpheres) {
-            bool found = false;
-
-            for (auto it = renderedSpheres.begin(); it != renderedSpheres.end(); ++it) {
-                if (sphere.getID() == *it) {
-                    found = true;
-                    renderedSpheres.erase(it);
-                    break;
-                }
-            }
-
-            if (!found) {
-                tempSpheres.push_back(std::move(sphere));
-            }
-        }
-
-        referenceMesh.subSpheres = std::move(tempSpheres);
     }
 
     Sphere Sphere::lerp(const Sphere &s, Math::Scalar t)

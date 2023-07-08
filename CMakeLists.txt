@@ -10,6 +10,9 @@ project(CustomRenderer)
 
 list(PREPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
+# Find yaml-cpp package
+find_package(yaml-cpp REQUIRED)
+
 include_directories(Math Math/Vector/ Math/Versor/ Math/Rotation/ Math/Point/ Math/Matrix/ Shader Core include/imgui)
 
 find_package(glfw3 3.3 REQUIRED)
@@ -17,6 +20,8 @@ find_package(glfw3 3.3 REQUIRED)
 set(GLAD_DIR include/)
 add_library(GLAD "${GLAD_DIR}/glad.c")
 include_directories("${GLAD_DIR}")
+
+add_library(tinyfiledialogs STATIC Core/tinyfiledialogs.c)
 
 file(GLOB_RECURSE SOURCES "*.cpp" "*.hpp")
 
@@ -49,7 +54,9 @@ foreach(source ${SOURCES})
     message(STATUS "Source file: ${source}")
 endforeach()
 
+link_directories(/usr/local/lib)
+
 add_executable(${PROJECT_NAME} ${SOURCES} main.cpp)
 target_compile_options(${PROJECT_NAME} PUBLIC -g -O2 -std=c++17)
 #target_include_directories(${PROJECT_NAME} PUBLIC ${includes})
-target_link_libraries(${PROJECT_NAME} glfw GLAD ${CMAKE_DL_LIBS})
+target_link_libraries(${PROJECT_NAME} glfw GLAD ${CMAKE_DL_LIBS} yaml-cpp tinyfiledialogs)

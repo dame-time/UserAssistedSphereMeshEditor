@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/yaml_cpp-subbuild/CMakeFiles/yaml_cpp-populate"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/yaml_cpp-subbuild/CMakeFiles/yaml_cpp-populate.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/yaml_cpp-subbuild/CMakeFiles/CMakeFiles/yaml_cpp-populate-complete.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/CMakeFiles/yaml_cpp-populate-build.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/CMakeFiles/yaml_cpp-populate-configure.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/CMakeFiles/yaml_cpp-populate-download.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/CMakeFiles/yaml_cpp-populate-install.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/CMakeFiles/yaml_cpp-populate-mkdir.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/CMakeFiles/yaml_cpp-populate-patch.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/CMakeFiles/yaml_cpp-populate-test.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/yaml_cpp-subbuild/yaml_cpp-populate-prefix/src/yaml_cpp-populate-stamp/CMakeFiles/yaml_cpp-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"yaml_cpp-populate"
+		],
+		"name" : "yaml_cpp-populate"
+	}
+}

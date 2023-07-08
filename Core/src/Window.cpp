@@ -4,6 +4,8 @@
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_glfw.h"
 
+#include <tinyfiledialogs.h>
+
 namespace Renderer {
     Window::Window(unsigned int SCR_WIDTH, unsigned int SCR_HEIGHT, const std::string& title, Camera* mainCamera)
         : SCR_WIDTH(SCR_WIDTH), SCR_HEIGHT(SCR_HEIGHT),
@@ -14,6 +16,9 @@ namespace Renderer {
         
         rotationSensitivity = 0.3f;
         scrollSpeed = 1.0f;
+        
+        renderFullSMWithNSpheres = 0;
+        renderConnectivity = false;
         
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -61,8 +66,12 @@ namespace Renderer {
         glfwTerminate();
     }
 
-    void Window::setShader(Shader* shader) {
+    void Window::setMeshShader(Shader* shader) {
         this->mainShader = shader;
+    }
+
+    void Window::setSphereMeshShader(Shader* shader) {
+        this->sphereShader = shader;
     }
 
     void Window::setTargetMesh(RenderableMesh *targetMesh) {
@@ -109,12 +118,35 @@ namespace Renderer {
 
             mesh->render();
             
+            renderSphereMesh(perspective);
+            
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
             glfwSwapBuffers(window);
             glfwPollEvents();
         }
+    }
+
+    void Window::renderSphereMesh(const Math::Matrix4& perspective)
+    {
+        sphereShader->use();
+        sphereShader->setMat4("view", mainCamera->getViewMatrix());
+        sphereShader->setMat4("projection", perspective);
+        
+        sphereShader->setVec3("light.position", Math::Vector3(-1, 1, 0));
+        sphereShader->setVec3("light.ambient", Math::Vector3(.5, .5, .5));
+        sphereShader->setVec3("light.diffuse", Math::Vector3(0.3, 0.3, 0.3));
+        sphereShader->setVec3("light.specular", Math::Vector3(0.3, 0.3, 0.3));
+        
+        sm->renderSpheresOnly();
+        if (renderVertices)
+            for (int i = 0; i < pickedMeshes.size(); i++)
+                sm->renderSphereVertices(pickedMeshes[i]->getID());
+        if (renderFullSMWithNSpheres > 0)
+            sm->renderWithNSpherePerEdge(renderFullSMWithNSpheres);
+        if (renderConnectivity)
+            sm->renderConnectivity(); // TODO: set a way to increment the number of spheres for representing the connectivity
     }
 
     void Window::processInput()
@@ -135,23 +167,24 @@ namespace Renderer {
         Window* windowClassInstance = static_cast<Window*>(glfwGetWindowUserPointer(window));
         
         if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS && windowClassInstance->pickedMeshes.size() > 1) {
+            for (auto& m : windowClassInstance->pickedMeshes)
+                m->color = Math::Vector3(1, 0, 0);
+            
             windowClassInstance->sm->collapse(windowClassInstance->pickedMeshes[windowClassInstance->pickedMeshes.size() - 1]->getID(), windowClassInstance->pickedMeshes[windowClassInstance->pickedMeshes.size() - 2]->getID());
-            windowClassInstance->sm->clearRenderedMeshes();
-            windowClassInstance->sm->renderSpheresOnly();
             windowClassInstance->pickedMeshes.clear();
             windowClassInstance->pickedMesh = nullptr;
         }
         
         if (key == GLFW_KEY_A && action == GLFW_RELEASE && windowClassInstance->pickedMeshes.size() > 1)
         {
+            for (auto& m : windowClassInstance->pickedMeshes)
+                m->color = Math::Vector3(1, 0, 0);
+            
             int i = windowClassInstance->pickedMeshes.size();
             while (i - 1 > 0) {
                 windowClassInstance->sm->collapse(windowClassInstance->pickedMeshes[i - 1]->getID(), windowClassInstance->pickedMeshes[i - 2]->getID());
                 i -= 2;
             }
-            
-            windowClassInstance->sm->clearRenderedMeshes();
-            windowClassInstance->sm->renderSpheresOnly();
             
             windowClassInstance->pickedMeshes.clear();
             windowClassInstance->pickedMesh = nullptr;
@@ -160,7 +193,7 @@ namespace Renderer {
         if (key == GLFW_KEY_R && action == GLFW_RELEASE && windowClassInstance->pickedMeshes.size() > 0)
         {
             for (auto& m : windowClassInstance->pickedMeshes)
-                m->setUniformColor(Math::Vector3(1, 1, 1));
+                m->color = Math::Vector3(1, 0, 0);
             
             windowClassInstance->pickedMesh = nullptr;
             windowClassInstance->pickedMeshes.clear();
@@ -169,27 +202,12 @@ namespace Renderer {
         if (key == GLFW_KEY_E && action == GLFW_RELEASE)
         {
             windowClassInstance->pickedMeshes.clear();
-            windowClassInstance->sm->clearRenderedMeshes();
             windowClassInstance->sm->reset();
-            windowClassInstance->sm->renderSpheresOnly();
         }
         
-        static bool status = false;
-        
-        if (key == GLFW_KEY_V && action == GLFW_RELEASE)
+        if (key == GLFW_KEY_V && action == GLFW_PRESS)
         {
-            status = !status;
-        }
-        
-        if (key == GLFW_KEY_V && action == GLFW_PRESS && windowClassInstance->pickedMeshes.size() > 0)
-        {
-            if (!status) {
-                for (int i = 0; i < windowClassInstance->pickedMeshes.size(); i++)
-                    windowClassInstance->sm->renderSphereVertices(windowClassInstance->pickedMeshes[i]->getID());
-            }
-            else {
-                windowClassInstance->sm->clearRenderedSphereVertices();
-            }
+            windowClassInstance->renderVertices = !windowClassInstance->renderVertices;
         }
     }
 
@@ -261,30 +279,30 @@ namespace Renderer {
             pickedPoint = windowClassInstance->screenPosToObjPos(Math::Vector3(xpos, ypos, depth));
             
             Math::Scalar minDistance = DBL_MAX;
-            for (int i = 0; i < windowClassInstance->mesh->subSpheres.size(); i++) {
-                auto check = (pickedPoint - windowClassInstance->mesh->subSpheres[i].getPosition()).magnitude() - windowClassInstance->mesh->subSpheres[i].getScale().coordinates.x;
-                
+            for (int i = 0; i < windowClassInstance->sm->sphere.size(); i++) {
+                auto check = (pickedPoint - windowClassInstance->sm->sphere[i].center).magnitude() - windowClassInstance->sm->sphere[i].radius;
+
                 if (check < threshold) {
                     if (check < minDistance) {
-                        windowClassInstance->pickedMesh = windowClassInstance->mesh->getSubSphere(i);
-                        
+                        windowClassInstance->pickedMesh = &windowClassInstance->sm->sphere[i];
                         minDistance = check;
                     }
                 }
             }
             
             if (windowClassInstance->pickedMesh != nullptr) {
-                windowClassInstance->pickedMesh->setUniformColor(Math::Vector3(1, 0, 0));
+                windowClassInstance->pickedMesh->color = Math::Vector3(1, 1, 0);
                 
                 bool isPresent = false;
                 for (int i = 0; i < windowClassInstance->pickedMeshes.size(); i++)
-                    if(windowClassInstance->pickedMeshes[i]->getID() == windowClassInstance->pickedMesh->getID()) {
+                    if((windowClassInstance->pickedMeshes[i]->center - windowClassInstance->pickedMesh->center).magnitude() < Math::EPSILON &&
+                       std::abs(windowClassInstance->pickedMeshes[i]->radius - windowClassInstance->pickedMesh->radius) < Math::EPSILON) {
                         isPresent = true;
                         continue;
                     }
                         
                 if (!isPresent)
-                    windowClassInstance->pickedMeshes.push_back(windowClassInstance->pickedMesh); // TODO: Use this in order to select spheres to collapse
+                    windowClassInstance->pickedMeshes.push_back(windowClassInstance->pickedMesh);
             }
         }
         
@@ -306,13 +324,9 @@ namespace Renderer {
 
             xoffset *= sensitivity;
             
-            Math::Vector3 scale = windowClassInstance->pickedMesh->getScale();
-            if (scale.coordinates.x >= 0) {
-                windowClassInstance->pickedMesh->scale(Math::Vector3(scale.coordinates.x - xoffset, scale.coordinates.y - xoffset, scale.coordinates.z - xoffset));
-                if (windowClassInstance->pickedMesh->getScale().coordinates.x < 0.01)
-                    windowClassInstance->pickedMesh->scale(Math::Vector3(0.01, 0.01, 0.01));
-            }
-                
+            Math::Scalar radius = windowClassInstance->pickedMesh->radius;
+            if (radius >= 0)
+                windowClassInstance->pickedMesh->radius = Math::Math::clamp(0.01, DBL_MAX, radius - xoffset);
         }
         
         if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE)
@@ -328,7 +342,6 @@ namespace Renderer {
                 translateX = xpos;
                 translateY = ypos;
                 
-                // Unproject to get the initial world point
                 initialWorldPoint = windowClassInstance->screenPosToObjPos(Math::Vector3(xpos, ypos, depth));
             }
             
@@ -343,8 +356,8 @@ namespace Renderer {
             xoffset *= sensitivity;
             yoffset *= sensitivity;
             
-            Math::Vector3 oldPosition = windowClassInstance->pickedMesh->getPosition();
-            windowClassInstance->pickedMesh->translate(Math::Vector3(oldPosition.coordinates.x - xoffset, oldPosition.coordinates.y + yoffset, oldPosition.coordinates.z));
+            Math::Vector3 oldPosition = windowClassInstance->pickedMesh->center;
+            windowClassInstance->pickedMesh->center = Math::Vector3(oldPosition.coordinates.x - xoffset, oldPosition.coordinates.y + yoffset, oldPosition.coordinates.z);
         }
         
         if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
@@ -366,8 +379,8 @@ namespace Renderer {
 
             zoffset *= sensitivity;
             
-            Math::Vector3 oldPosition = windowClassInstance->pickedMesh->getPosition();
-            windowClassInstance->pickedMesh->translate(Math::Vector3(oldPosition.coordinates.x, oldPosition.coordinates.y, oldPosition.coordinates.z - zoffset));
+            Math::Vector3 oldPosition = windowClassInstance->pickedMesh->center;
+            windowClassInstance->pickedMesh->center = Math::Vector3(oldPosition.coordinates.x, oldPosition.coordinates.y, oldPosition.coordinates.z - zoffset);
         }
         
         if(glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_RELEASE)
@@ -452,10 +465,8 @@ namespace Renderer {
         ImGui::SliderFloat("Rotation Speed", &rotationSpeed, 0.0f, 1.0f);
         rotationSensitivity = rotationSpeed;
         
-        // Create a button
         if (ImGui::Button("Collapse Best BF Sphere Mesh Edge"))
         {
-            sm->clearRenderedMeshes();
             sm->collapseSphereMesh();
             sm->renderSpheresOnly();
         }
@@ -469,7 +480,6 @@ namespace Renderer {
         
         if (ImGui::Button("Render Sphere BF Mesh Vetices Collapsed"))
         {
-            sm->clearRenderedMeshes();
             sm->collapseSphereMesh(j);
             sm->renderSpheresOnly();
         }
@@ -483,7 +493,6 @@ namespace Renderer {
         
         if (ImGui::Button("Render BF Sphere Mesh Vetices"))
         {
-            sm->clearRenderedMeshes();
             for (int i = 0; i < k; i++)
                 sm->collapseSphereMesh();
             sm->renderSpheresOnly();
@@ -498,7 +507,6 @@ namespace Renderer {
         
         if (ImGui::Button("Collapse Best Fast Sphere Mesh Edge"))
         {
-            sm->clearRenderedMeshes();
             sm->collapseSphereMeshFast();
             sm->renderSpheresOnly();
         }
@@ -512,7 +520,6 @@ namespace Renderer {
         
         if (ImGui::Button("Render Fast Sphere Mesh Vetices"))
         {
-            sm->clearRenderedMeshes();
             for (int i = 0; i < f; i++)
                 sm->collapseSphereMeshFast();
             sm->renderSpheresOnly();
@@ -527,7 +534,6 @@ namespace Renderer {
         
         if (ImGui::Button("Render Fast Sphere Mesh Vetices Collapsed"))
         {
-            sm->clearRenderedMeshes();
             sm->collapseSphereMeshFast(d);
             sm->renderSpheresOnly();
         }
@@ -544,51 +550,88 @@ namespace Renderer {
         ImGui::InputInt("Spheres Per Edge", &n);
         ImGui::PopItemWidth();
         
-        Math::Math::clamp(1, 20, n);
+        Math::Math::clamp(1, 50, n);
         
         ImGui::SameLine();
         
         if (ImGui::Button("Render N Full Sphere Mesh"))
         {
-            sm->clearRenderedMeshes();
             sm->renderWithNSpherePerEdge(n);
-        }
-        
-        if (ImGui::Button("Render Full Sphere Mesh"))
-        {
-            sm->render();
+            renderFullSMWithNSpheres = n;
         }
         
         if (ImGui::Button("Render Sphere Only Sphere Mesh"))
         {
+            renderFullSMWithNSpheres = 0;
             sm->renderSpheresOnly();
         }
         
         if (ImGui::Button("Render Connectivity of Sphere Mesh"))
         {
-            sm->renderConnectivity();
+            renderConnectivity = true;
         }
         
         if (ImGui::Button("Clear Connectivity of Sphere Mesh"))
         {
-            sm->clearRenderedEdges();
+            renderConnectivity = false;
         }
         
         if (ImGui::Button("Clear Sphere Mesh"))
         {
-            sm->clearRenderedMeshes();
+            renderFullSMWithNSpheres = 0;
         }
         
         ImGui::Separator();
         
-//        if (ImGui::Button("Save Sphere Mesh To YAML"))
-//        {
-//            sm->saveYAML();
-//        }
+        if (ImGui::Button("Save Sphere Mesh To YAML"))
+        {
+            sm->saveYAML();
+        }
         
         if (ImGui::Button("Save Sphere Mesh To TXT"))
         {
             sm->saveTXT();
+        }
+        
+        ImGui::Separator();
+        
+        if (ImGui::Button("Load Sphere Mesh"))
+        {
+            const char *filters[0] = { };
+            const char *selectedFilePath = tinyfd_openFileDialog("Select a sphere mesh *.yaml file", "", 0, filters, "Yaml files", 0);
+
+            if (selectedFilePath) {
+                std::string filePath(selectedFilePath);
+                std::cout << "Selected file path: " << filePath << std::endl;
+                
+                sm->loadFromYaml(filePath);
+            } else {
+                std::cout << "No file selected!" << std::endl;
+            }
+        }
+        
+        if (ImGui::Button("Load new Mesh from OBJ file"))
+        {
+            const char *filters[2] = { "*.obj", "*.OBJ" };
+            const char *selectedFilePath = tinyfd_openFileDialog("Select a mesh *.obj file", "", 2, filters, "Object files", 0);
+
+            if (selectedFilePath) {
+                std::string filePath(selectedFilePath);
+                std::cout << "Selected file path: " << filePath << std::endl;
+                
+                delete mesh;
+                delete sm;
+                
+                mesh = new RenderableMesh(filePath, mainShader);
+                sm = new Renderer::SphereMesh(mesh, sphereShader);
+                
+                mainCamera->resetRotation();
+                mainCamera->resetTranslation();
+                
+                mainCamera->setTarget(mesh->getCentroid());
+            } else {
+                std::cout << "No file selected!" << std::endl;
+            }
         }
         
         ImGui::Separator();
@@ -602,8 +645,6 @@ namespace Renderer {
         ImGui::Text("Press 'V' to visualize the vertices of the selected spheres");
         ImGui::Text("Press 'R' to reset the selection");
         ImGui::Text("Press 'E' to reset the Sphere Mesh to the original Sphere Mesh");
-//        ImGui::Text("Press 'F' to toggle the filling of the mesh");
-//        ImGui::Text("Press 'W' to toggle the wireframe of the mesh");
         ImGui::Text("Press 'W' to increase zoom percentage");
         ImGui::Text("Press 'S' to increase zoom percentage");
     }

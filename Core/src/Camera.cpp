@@ -26,11 +26,20 @@ namespace Renderer {
     void Camera::rotateAroundX(Math::Scalar delta) {
         theta += delta;
         
-        theta = Math::Math::clamp(-90.0f, 90.0f, theta);
+        theta = Math::Math::clamp(-90.0, 90.0, theta);
+    }
+
+    void Camera::resetRotation() {
+        phi = 0;
+        theta = 0;
     }
 
     void Camera::translate(Math::Scalar delta) {
         ro += delta;
+    }
+
+    void Camera::resetTranslation() {
+        ro = 0;
     }
 
     Math::Matrix4 Camera::getViewMatrix() {

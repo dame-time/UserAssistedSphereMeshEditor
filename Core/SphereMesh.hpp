@@ -27,6 +27,7 @@ namespace Renderer
     {
         int i, j;
 
+        Edge() : i(0), j(0) {}
         Edge(int first, int second)
         {
             i = first;
@@ -78,21 +79,17 @@ namespace Renderer
 
     class SphereMesh
     {
-        private:            
-            std::vector<Sphere> sphere;
+        private:
             std::vector<Sphere> initialSpheres;
             
             std::vector<Triangle> triangle;
             std::vector<Edge> edge;
         
-            std::vector<int> renderedSpheres;
-            std::vector<int> renderedSphereVertexMeshes;
-        
-            std::vector<RenderableMesh*> renderedEdgesSpheres;
-        
             RenderableMesh* referenceMesh;
         
             Math::Scalar BDDSize;
+            
+            Shader* sphereShader;
             
             void initializeSphereMeshTriangles(const std::vector<Face>& Faces);
             void initializeSpheres(const std::vector<Vertex>& vertices, Math::Scalar initialRadius);
@@ -114,17 +111,20 @@ namespace Renderer
             
             void drawSpheresOverEdge(const Edge &e, int nSpheres = 4);
             void drawSpheresOverTriangle(const Triangle& t, int nSpheres = 4);
-        
-            void renderEdge(const Math::Vector3& p1, const Math::Vector3& p2, const Math::Vector3& color = Math::Vector3(1, 0, 0));
             
             Math::Vector3 getTriangleCentroid(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
             Math::Vector3 getTriangleNormal(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
         
             void checkSphereIntersections(Sphere& s);
         
+            void renderOneSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
+            void renderOneLine(const Math::Vector3& p0, const Math::Vector3& p1, const Math::Vector3& color);
+        
         public:
+            std::vector<Sphere> sphere;
+        
             SphereMesh(const SphereMesh& sm);
-            SphereMesh(RenderableMesh* mesh, Math::Scalar vertexSphereRadius = 0.1f);
+            SphereMesh(RenderableMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius = 0.1f);
         
             SphereMesh& operator = (const SphereMesh& sm);
             
@@ -139,12 +139,6 @@ namespace Renderer
         
             void renderSphereVertices(int i);
             void clearRenderedSphereVertices();
-        
-            void colorSelectedSphere(int i);
-            void resetColorOfSpheres();
-        
-            void clearRenderedEdges();
-            void clearRenderedMeshes();
             
             void collapse(int sphereIndexA, int sphereIndexB);
             
@@ -157,7 +151,9 @@ namespace Renderer
             void resizeSphereVertex(int sphereIndex, Math::Scalar newSize);
             void translateSphereVertex(int sphereIndex, Math::Vector3& translation);
         
-//            void saveYAML(const std::string& path = ".", const std::string& fileName = "SphereMesh.yaml");
+            void loadFromYaml(const std::string& path);
+        
+            void saveYAML(const std::string& path = ".", const std::string& fileName = "SphereMesh.yaml");
             void saveTXT(const std::string& path = ".", const std::string& fileName = "SphereMesh.txt");
             
             void clear();

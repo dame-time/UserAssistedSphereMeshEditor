@@ -12,20 +12,15 @@ int main()
     Renderer::Window* window = new Renderer::Window(1200, 1000, "Custom Renderer", mainCamera);
     
     Renderer::Shader* mainShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/vertex.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/fragment.frag");
+    Renderer::Shader* sphereShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
+    
     Renderer::RenderableMesh* mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/foot-500.obj", mainShader);
 //    Renderer::RenderableMesh* mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/Capsule.obj", mainShader);
-    Renderer::SphereMesh* sm = new Renderer::SphereMesh(mesh);
-
-    sm->renderSpheresOnly();
-//    auto& s = mesh->addSubSphere();
-//    s.scaleUniform(0.5f);
-//    s.translateUniform(-0.5f);
-//    mesh->addSubSphere();
-//
-//    for (int i = 0; i < 15000; i++)
-//        mesh->addSubSphere();
+    Renderer::SphereMesh* sm = new Renderer::SphereMesh(mesh, sphereShader);
     
-    window->setShader(mainShader);
+    window->setMeshShader(mainShader);
+    window->setSphereMeshShader(sphereShader);
+    
     window->setTargetMesh(mesh);
     window->setSphereMesh(sm);
     

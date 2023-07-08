@@ -20,11 +20,12 @@ namespace Renderer {
     {
         private:
             std::vector<int> renderedSpheres;
+            int renderedMeshID;
+        
+            void generateUUID();
         
         public:
             std::vector<Vertex> vertices;
-        
-            int renderedMeshID;
         
             Math::Scalar quadricWeights;
         
@@ -33,6 +34,7 @@ namespace Renderer {
 
             Math::Vector3 center;
             Math::Scalar radius;
+            Math::Vector3 color;
 
             Sphere();
             Sphere(const Vertex& vertex, Math::Scalar targetSphereRadius);
@@ -45,9 +47,6 @@ namespace Renderer {
         
             void addVertex(const Vertex& vertex);
         
-            void renderAssociatedVertices(RenderableMesh& referenceMesh, Math::Scalar sphereSize = 0.01);
-            void clearRenderedSpheres(RenderableMesh& referenceMesh);
-        
             void operator = (const Sphere& s)
             {
                 this->quadric = s.quadric;
@@ -57,6 +56,8 @@ namespace Renderer {
                 this->radius = s.radius;
                 this->vertices = s.vertices;
             }
+        
+            int getID();
 
             Sphere lerp(const Sphere &s, Math::Scalar t);
     };

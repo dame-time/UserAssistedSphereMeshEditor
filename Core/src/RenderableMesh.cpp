@@ -19,6 +19,7 @@
 namespace Renderer {
     RenderableMesh::RenderableMesh(const std::string& pathToLoadFrom, Shader* s) :  shader(s) {
         ObjLoader loader = ObjLoader();
+        path = pathToLoadFrom;
         
         if (!loader.loadOBJ(pathToLoadFrom)) {
             std::cerr << "ERROR LOADING THE OBJ MODEL" << std::endl;
@@ -168,10 +169,6 @@ namespace Renderer {
         return Math::Vector3(model.data[3], model.data[7], model.data[11]);
     }
 
-    void RenderableMesh::clearSubSpheres() {
-        this->subSpheres.clear();
-    }
-
     void RenderableMesh::setup() {
         isPickable = false;
         model = Math::Matrix4();
@@ -265,28 +262,6 @@ namespace Renderer {
         this->isFilled = isFilledActive;
     }
 
-    RenderableMesh& RenderableMesh::addSubSphere(bool isPickable) {
-        static RenderableMesh sphere = RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/SphereHighRes.obj", shader);
-        
-        RenderableMesh m(sphere);
-        m.isPickable = isPickable;
-        m.generateUUID();
-        
-        m.isWireframe = false;
-        m.isFilled = true;
-        m.scaleUniform(1.0f / m.getMeshRadius());
-        
-        this->subSpheres.push_back(m);
-        
-        int indexOfSubsphere = this->subSpheres.size() - 1;
-        
-        return this->subSpheres[indexOfSubsphere];
-    }
-
-    RenderableMesh* RenderableMesh::getSubSphere(const int& i) {
-        return &this->subSpheres[i];
-    }
-
     void RenderableMesh::setWireframeColor(const Math::Vector3& color) {
         wireframeColor = color;
         wireframeColorSetted = true;
@@ -350,8 +325,5 @@ namespace Renderer {
             glDisable(GL_POLYGON_OFFSET_LINE);
             this->setUniformColor(fillColor);
         }
-        
-        for (auto& s : subSpheres)
-            s.render();
     }
 }

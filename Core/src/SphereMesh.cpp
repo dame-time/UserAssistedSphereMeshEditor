@@ -3,7 +3,7 @@
 
 #include <Math.hpp>
 
-//#include <YAMLUtils.hpp>
+#include <YAMLUtils.hpp>
 
 #include <filesystem>
 #include <algorithm>
@@ -21,20 +21,15 @@ namespace Renderer {
         triangle = sm.triangle;
         edge = sm.edge;
         
-        renderedSpheres = sm.renderedSpheres;
-        renderedSphereVertexMeshes = sm.renderedSphereVertexMeshes;
+        sphereShader = sm.sphereShader;
     }
 
-    SphereMesh::SphereMesh(RenderableMesh* mesh, Math::Scalar vertexSphereRadius) : referenceMesh(mesh)
+    SphereMesh::SphereMesh(RenderableMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius) : referenceMesh(mesh)
     {
         auto vertices = mesh->vertices;
         auto faces = mesh->faces;
         
-//        for (auto v : mesh.vertices)
-//            v.position.print();
-//
-//        for (auto f : mesh.faces)
-//            std::cout << f.i << ", " << f.j << ", " << f.k << std::endl;
+        this->sphereShader = shader;
         
         BDDSize = mesh->bbox.BDD().magnitude();
 
@@ -56,9 +51,6 @@ namespace Renderer {
         
         triangle = sm.triangle;
         edge = sm.edge;
-        
-        renderedSpheres = sm.renderedSpheres;
-        renderedSphereVertexMeshes = sm.renderedSphereVertexMeshes;
         
         return *this;
     }
@@ -270,16 +262,9 @@ namespace Renderer {
         const Math::Vector3 color = Math::Vector3(0.1, 0.7, 1);
 
         for (int i = 1; i < nSpheres - 1; i++)
-        {
-            RenderableMesh& s = referenceMesh->addSubSphere(false);
-            
-            s.scaleUniform(Math::lerp(sphere[e.i].radius, sphere[e.j].radius, i * 1.0f / (nSpheres - 1)));
-            s.translate(Math::lerp(sphere[e.i].center, sphere[e.j].center, i * 1.0f / (nSpheres - 1)));
-            
-//            s.setUniformColor(Math::Vector3(0, 0, 1));
-            
-            renderedSpheres.push_back(s.getID());
-        }
+            renderOneSphere(Math::lerp(sphere[e.i].center, sphere[e.j].center, i * 1.0f / (nSpheres - 1)),
+                            Math::lerp(sphere[e.i].radius, sphere[e.j].radius, i * 1.0f / (nSpheres - 1)),
+                            color);
     }
 
     void SphereMesh::drawSpheresOverTriangle(const Triangle& e, int ns)
@@ -299,77 +284,39 @@ namespace Renderer {
                 Math::Scalar cj = j * 1.0 / (nSpheres - 1);
                 Math::Scalar ck = k * 1.0 / (nSpheres - 1);
                 
-                RenderableMesh& s = referenceMesh->addSubSphere();
-                
-                s.scaleUniform(sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck);
-                s.translate(sphere[e.i].center * ci + sphere[e.j].center * cj + sphere[e.k].center * ck);
-                
-//                s.setUniformColor(Math::Vector3(0, 0, 1));
-                
-                renderedSpheres.push_back(s.getID());
+                Math::Vector3 origin = Math::Vector3(sphere[e.i].center * ci + sphere[e.j].center * cj + sphere[e.k].center * ck);
+                Math::Scalar radius = sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck;
+                renderOneSphere(origin, radius, color);
+
+//                s.scaleUniform(sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck);
+//                s.translate(sphere[e.i].center * ci + sphere[e.j].center * cj + sphere[e.k].center * ck);
             }
     }
 
-    void SphereMesh::renderEdge(const Math::Vector3& p1, const Math::Vector3& p2, const Math::Vector3& color)
-    {
-//        TODO: Add a way to render lines instead of spheres
-        double i = 0;
+    void SphereMesh::renderOneLine(const Math::Vector3& p0, const Math::Vector3& p1, const Math::Vector3& color) {
+        Math::Scalar t = 0.0;
         
-        while (i < 1.0)
-        {
-            auto position = Math::lerp<Math::Vector3>(p1, p2, i);
-            auto& s = referenceMesh->addSubSphere(false);
+        while (t < 1.0) {
+            Math::Vector3 point = Math::lerp<Math::Vector3>(p0, p1, t);
             
-            s.scaleUniform(0.075);
-            s.translate(position);
+            renderOneSphere(point, BDDSize * 0.002, color);
             
-            s.setUniformColor(color);
-            
-            renderedEdgesSpheres.push_back(&s);
-            
-            i += 0.1;
+            t += 0.05;
         }
     }
 
     void SphereMesh::renderConnectivity()
     {
-        clearRenderedEdges();
-        
         const Math::Vector3 color = Math::Vector3(1, 1, 0);
         for (Triangle& t : triangle)
         {
-            renderEdge(sphere[t.i].center, sphere[t.j].center, color);
-            renderEdge(sphere[t.i].center, sphere[t.k].center, color);
-            renderEdge(sphere[t.j].center, sphere[t.j].center, color);
+            renderOneLine(sphere[t.i].center, sphere[t.j].center, color);
+            renderOneLine(sphere[t.i].center, sphere[t.k].center, color);
+            renderOneLine(sphere[t.j].center, sphere[t.j].center, color);
         }
         
         for (Edge& e : edge)
-            renderEdge(sphere[e.i].center, sphere[e.j].center, color);
-    }
-
-    void SphereMesh::clearRenderedEdges()
-    {
-        auto& subspheres = referenceMesh->subSpheres;
-        auto& edgesSpheres = renderedEdgesSpheres;
-        std::vector<RenderableMesh> tempSpheres;
-
-        for (auto& sphere : subspheres) {
-            bool found = false;
-
-            for (auto it = edgesSpheres.begin(); it != edgesSpheres.end(); ++it) {
-                if (sphere.getID() == (*it)->getID()) {
-                    found = true;
-                    edgesSpheres.erase(it);
-                    break;
-                }
-            }
-
-            if (!found) {
-                tempSpheres.push_back(std::move(sphere));
-            }
-        }
-
-        subspheres = std::move(tempSpheres);
+            renderOneLine(sphere[e.i].center, sphere[e.j].center, color);
     }
 
     void SphereMesh::render()
@@ -379,8 +326,6 @@ namespace Renderer {
 
         for (int i = 0; i < edge.size(); i++)
             this->drawSpheresOverEdge(edge[i]);
-
-        renderSpheresOnly();
     }
 
     void SphereMesh::renderWithNSpherePerEdge(int n)
@@ -390,8 +335,132 @@ namespace Renderer {
 
         for (int i = 0; i < edge.size(); i++)
             this->drawSpheresOverEdge(edge[i], n);
-        
-        renderSpheresOnly();
+    }
+
+    void SphereMesh::renderOneSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color) {
+        static GLuint VAO = 0xBAD, VBO = 0xBAD , EBO = 0xBAD;
+        static std::vector<float> vertices;
+        static std::vector<int> faces;
+
+        if (VAO == 0xBAD)
+        {
+            // Create an icosahedron
+            float t = (1.0f + std::sqrt(5.0f)) / 2.0f;
+            std::vector<float> initialVertices = {
+                -1,  t,  0,
+                 1,  t,  0,
+                -1, -t,  0,
+                 1, -t,  0,
+                 0, -1,  t,
+                 0,  1,  t,
+                 0, -1, -t,
+                 0,  1, -t,
+                 t,  0, -1,
+                 t,  0,  1,
+                -t,  0, -1,
+                -t,  0,  1,
+            };
+
+            for (int i = 0; i < initialVertices.size(); i += 3) {
+                float length = std::sqrt(initialVertices[i]*initialVertices[i] +
+                                         initialVertices[i+1]*initialVertices[i+1] +
+                                         initialVertices[i+2]*initialVertices[i+2]);
+                vertices.push_back(initialVertices[i] / length);
+                vertices.push_back(initialVertices[i+1] / length);
+                vertices.push_back(initialVertices[i+2] / length);
+            }
+
+            faces = {
+                0, 11, 5,
+                0, 5, 1,
+                0, 1, 7,
+                0, 7, 10,
+                0, 10, 11,
+                1, 5, 9,
+                5, 11, 4,
+                11, 10, 2,
+                10, 7, 6,
+                7, 1, 8,
+                3, 9, 4,
+                3, 4, 2,
+                3, 2, 6,
+                3, 6, 8,
+                3, 8, 9,
+                4, 9, 5,
+                2, 4, 11,
+                6, 2, 10,
+                8, 6, 7,
+                9, 8, 1
+            };
+
+            int subdivisions = 2;
+            std::vector<int> newFaces;
+            for (int level = 0; level < subdivisions; level++) {
+                newFaces.clear();
+                for (int i = 0; i < faces.size(); i += 3) {
+                    // Compute the midpoints of each edge in the triangle and add them to the vertices list
+                    int mid[3];
+                    for (int edge = 0; edge < 3; edge++) {
+                        int i1 = faces[i + edge];
+                        int i2 = faces[i + (edge + 1) % 3];
+                        // Compute the midpoint of i1 and i2
+                        float midpoint[3] = {
+                            (vertices[i1 * 3 + 0] + vertices[i2 * 3 + 0]) / 2,
+                            (vertices[i1 * 3 + 1] + vertices[i2 * 3 + 1]) / 2,
+                            (vertices[i1 * 3 + 2] + vertices[i2 * 3 + 2]) / 2,
+                        };
+                        // Normalize the midpoint to create a point on the sphere
+                        float length = std::sqrt(midpoint[0] * midpoint[0] + midpoint[1] * midpoint[1] + midpoint[2] * midpoint[2]);
+                        midpoint[0] /= length;
+                        midpoint[1] /= length;
+                        midpoint[2] /= length;
+                        // Add the midpoint to the vertices and store the index in mid[edge]
+                        vertices.insert(vertices.end(), midpoint, midpoint + 3);
+                        mid[edge] = vertices.size() / 3 - 1;
+                    }
+                    // Create the four new faces
+                    newFaces.insert(newFaces.end(), {
+                        faces[i], mid[0], mid[2],
+                        faces[i + 1], mid[1], mid[0],
+                        faces[i + 2], mid[2], mid[1],
+                        mid[0], mid[1], mid[2]
+                    });
+                }
+
+                faces.swap(newFaces);
+            }
+
+            glGenVertexArrays(1, &VAO);
+            glBindVertexArray(VAO);
+
+            glGenBuffers(1, &VBO);
+            glBindBuffer(GL_ARRAY_BUFFER, VBO);
+            glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+
+            // position attribute
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+            glEnableVertexAttribArray(0);
+
+            glGenBuffers(1, &EBO);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, faces.size() * sizeof(unsigned int), faces.data(), GL_STATIC_DRAW);
+
+            glBindVertexArray(0);
+        }
+
+        sphereShader->use();
+        sphereShader->setVec3("center", center);
+        sphereShader->setVec3("material.ambient", color);
+        sphereShader->setVec3("material.diffuse", Math::Vector3(0.9, 0.9, 0.9));
+        sphereShader->setVec3("material.specular", Math::Vector3(0, 0, 0));
+        sphereShader->setFloat("material.shininess", 0);
+        sphereShader->setFloat("radius", radius);
+
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glBindVertexArray(VAO);
+        glDrawElements(GL_TRIANGLES, faces.size(), GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+        glUseProgram(0);
     }
 
     void SphereMesh::renderSpheresOnly()
@@ -406,60 +475,32 @@ namespace Renderer {
                 continue;
             }
             
-            RenderableMesh& s = referenceMesh->addSubSphere();
-//            this->renderedSphereVertexMeshes.push_back(s);
-            
-            s.scaleUniform(sphere[i].radius);
-            s.translate(sphere[i].center);
-            
-//            sphere[i].quadric.print();
-//            std::cout << sphere[i].radius << std::endl;
-//            sphere[i].center.print();
-            
-            sphere[i].renderedMeshID = s.getID();
-            
-            renderedSpheres.push_back(s.getID());
+            renderOneSphere(sphere[i].center, sphere[i].radius, sphere[i].color);
         }
     }
 
     void SphereMesh::renderSelectedSpheresOnly()
     {
-        Math::Vector3 color = Math::Vector3(0, 1, 0);
-        
         CollapsableEdge e = getBestCollapseBruteForce();
         
         if (e.i.radius > 0)
         {
-            // The point is inside the triangle
-            RenderableMesh& s = referenceMesh->addSubSphere();
-
             auto r = e.i.radius;
             if (r > e.i.region.directionalWidth)
                 r = e.i.region.directionalWidth;
             
-            s.scaleUniform(r + 0.01f);
-            s.translate(e.i.center);
-            
-            e.i.renderedMeshID = s.getID();
-            
-            renderedSpheres.push_back(s.getID());
+            renderOneSphere(e.i.center, r + 0.01f, e.i.color);
+            // The point is inside the triangle
         }
         
         if (e.j.radius > 0)
         {
-            // The point is inside the triangle
-            RenderableMesh& s = referenceMesh->addSubSphere();
-
             auto r = e.j.radius;
             if (r > e.j.region.directionalWidth)
                 r = e.j.region.directionalWidth;
             
-            s.scaleUniform(r + 0.01f);
-            s.translate(e.j.center);
-            
-            e.j.renderedMeshID = s.getID();
-            
-            renderedSpheres.push_back(s.getID());
+            renderOneSphere(e.j.center, r + 0.01f, e.j.color);
+            // The point is inside the triangle
         }
     }
 
@@ -471,95 +512,34 @@ namespace Renderer {
         
         if (e.i.radius > 0)
         {
-            // The point is inside the triangle
-            RenderableMesh& s = referenceMesh->addSubSphere();
-//            this->renderedSphereVertexMeshes.push_back(s);
-
             auto r = e.i.radius;
             if (r > e.i.region.directionalWidth)
                 r = e.i.region.directionalWidth;
             
-            s.scaleUniform(r + 0.01f);
-            s.translate(e.i.center);
-            
-            e.i.renderedMeshID = s.getID();
-            
-            renderedSpheres.push_back(s.getID());
+            renderOneSphere(e.i.center, r + 0.01f, e.i.color);
+            // The point is inside the triangle
         }
         
         if (e.j.radius > 0)
         {
-            // The point is inside the triangle
-            RenderableMesh& s = referenceMesh->addSubSphere();
-//            this->renderedSphereVertexMeshes.push_back(s);
-
             auto r = e.j.radius;
             if (r > e.j.region.directionalWidth)
                 r = e.j.region.directionalWidth;
             
-            s.scaleUniform(r + 0.01f);
-            s.translate(e.j.center);
-            
-            e.j.renderedMeshID = s.getID();
-            
-            renderedSpheres.push_back(s.getID());
+            renderOneSphere(e.j.center, r + 0.01f, e.j.color);
+            // The point is inside the triangle
         }
     }
 
     void SphereMesh::renderSphereVertices(int i)
     {
-        int size = sphere.size();
-        
-        for (int idx = 0; idx < size; idx++)
-            if (sphere[idx].renderedMeshID == i)
+        for (int idx = 0; idx < sphere.size(); idx++)
+            if (sphere[idx].getID() == i)
             {
-                sphere[idx].renderAssociatedVertices(*referenceMesh, 0.02 * BDDSize);
-                renderedSphereVertexMeshes.push_back(idx);
+                for (int j = 0; j < sphere[idx].vertices.size(); j++)
+                    renderOneSphere(sphere[idx].vertices[j].position, 0.02 * BDDSize, Math::Vector3(0, 1, 0));
             }
                 
-    }
-
-    void SphereMesh::clearRenderedSphereVertices()
-    {
-        for (int idx = 0; idx < renderedSphereVertexMeshes.size(); idx++)
-            sphere[renderedSphereVertexMeshes[renderedSphereVertexMeshes.size() - 1 - idx]].clearRenderedSpheres(*referenceMesh);
-
-        renderedSphereVertexMeshes.clear();
-    }
-
-    void SphereMesh::colorSelectedSphere(int i)
-    {
-        // TODO: Implement this
-//        for (int idx = 0; idx < i; idx++)
-//            if (sphere[idx].renderedMeshID == i)
-//            {
-//                Eigen::MatrixXd C(this->viewer.data_list[sphere[idx].renderedMeshID].F.rows(), 3);
-//                C.rowwise() = Eigen::RowVector3d(0, 0, 1);
-//
-//                std::cout << "0. error of sphere -> " << sphere[idx].quadric.evaluateSQEM(sphere[idx].quadric.minimizer()) << std::endl;
-//
-//                this->viewer.data_list[sphere[idx].renderedMeshID].set_colors(C);
-//                return;
-//            }
-    }
-//
-//    void SphereMesh::resetColorOfSpheres()
-//    {
-//        for (int idx = 0; idx < sphere.size(); idx++)
-//        {
-//            Eigen::MatrixXd C(this->viewer.data_list[sphere[idx].renderedMeshID].F.rows(), 3);
-//            C.rowwise() = Eigen::RowVector3d(1, 0, 0);
-//
-//            this->viewer.data_list[sphere[idx].renderedMeshID].set_colors(C);
-//        }
-//    }
-//
-
-    void SphereMesh::clearRenderedMeshes()
-    {
-        referenceMesh->clearSubSpheres();
-        renderedSpheres.clear();
-        renderedSphereVertexMeshes.clear();
     }
 
     Sphere SphereMesh::collapseEdgeIntoSphere(const CollapsableEdge& edgeToCollapse)
@@ -667,14 +647,14 @@ namespace Renderer {
     void SphereMesh::collapse(int i, int j)
     {
         for (int idx = 0; idx < sphere.size(); idx++)
-            if (sphere[idx].renderedMeshID == i)
+            if (sphere[idx].getID() == i)
             {
                 i = idx;
                 break;
             }
         
         for (int idx = 0; idx < sphere.size(); idx++)
-            if (sphere[idx].renderedMeshID == j)
+            if (sphere[idx].getID() == j)
             {
                 j = idx;
                 break;
@@ -779,7 +759,7 @@ namespace Renderer {
     Sphere SphereMesh::getSelectedVertexSphere(int i)
     {
         for (int idx = 0; idx < sphere.size(); idx++)
-            if (sphere[idx].renderedMeshID == i)
+            if (sphere[idx].getID() == i)
             {
                 return sphere[idx];
             }
@@ -788,7 +768,7 @@ namespace Renderer {
     void SphereMesh::resizeSphereVertex(int i, Math::Scalar newSize)
     {
         for (int idx = 0; idx < sphere.size(); idx++)
-            if (sphere[idx].renderedMeshID == i)
+            if (sphere[idx].getID() == i)
             {
                 sphere[idx].radius = newSize;
                 break;
@@ -798,77 +778,126 @@ namespace Renderer {
     void SphereMesh::translateSphereVertex(int i, Math::Vector3& translation)
     {
         for (int idx = 0; idx < sphere.size(); idx++)
-            if (sphere[idx].renderedMeshID == i)
+            if (sphere[idx].getID() == i)
             {
                 sphere[idx].center += translation;
                 break;
             }
     }
 
-// TODO: Import YAML and use this function
-//    void SphereMesh::saveYAML(const std::string& path, const std::string& fn)
-//    {
-//        YAML::Emitter out;
-//
-//        out << YAML::Comment("Sphere Mesh YAML @ author Davide Paolillo");
-//        out << YAML::Key << "Start Mesh Resolution" << YAML::Value << initialSpheres.size();
-//        out << YAML::Key << "Sphere Mesh Resolution" << YAML::Value << sphere.size();
-//        out << YAML::Key << "Spheres" << YAML::Value;
-//        out << YAML::BeginSeq;
-//            for (int i = 0; i < sphere.size(); i++)
-//            {
-//                out << YAML::BeginMap;
-//                    out << YAML::Key << "Center" << YAML::Value;
-//                    YAMLSerializeVector3(out, sphere[i].center);
-//                    out << YAML::Key << "Radius" << YAML::Value << sphere[i].radius;
-//                    out << YAML::Key << "Quadric" << YAML::Value;
-//                    YAMLSerializeQuadric(out, sphere[i].quadric);
-//                out << YAML::EndMap;
-//            }
-//        out << YAML::EndSeq;
-//        out << YAML::Key << "Connectivity" << YAML::Value;
-//        out << YAML::BeginMap;
-//            out << YAML::Key << "Edges" << YAML::Value;
-//            out << YAML::BeginSeq;
-//                for (int i = 0; i < edge.size(); i++)
-//                {
-//                    out << YAML::BeginMap;
-//                        out << YAML::Key << "E1" << YAML::Value << edge[i].i;
-//                        out << YAML::Key << "E2" << YAML::Value << edge[i].j;
-//                    out << YAML::EndMap;
-//                }
-//            out << YAML::EndSeq;
-//            out << YAML::Key << "Triangles" << YAML::Value;
-//            out << YAML::BeginSeq;
-//                for (int i = 0; i < triangle.size(); i++)
-//                {
-//                    out << YAML::BeginMap;
-//                        out << YAML::Key << "T0" << YAML::Value << triangle[i].i;
-//                        out << YAML::Key << "T1" << YAML::Value << triangle[i].j;
-//                        out << YAML::Key << "T2" << YAML::Value << triangle[i].k;
-//                    out << YAML::EndMap;
-//                }
-//            out << YAML::EndSeq;
-//        out << YAML::EndMap;
-//
-//        namespace fs = std::__fs::filesystem;
-//
-//        fs::path cwd = fs::current_path();
-//
-//        std::string separator = std::string(1, fs::path::preferred_separator);
-//
-//        std::string filePath = fn;
-//        std::string folderPath = "." + separator;
-//        if (path != ".")
-//        {
-//            folderPath = path;
-//        }
-//
-//        std::ofstream fout(folderPath + filePath);
-//        std::cout << "File location: " << cwd << std::endl;
-//        fout << out.c_str();
-//        fout.close();
-//    }
+    void SphereMesh::saveYAML(const std::string& path, const std::string& fn)
+    {
+        YAML::Emitter out;
+
+        out << YAML::Comment("Sphere Mesh YAML @ author Davide Paolillo");
+        out << YAML::BeginMap;
+            out << YAML::Key << "Reference Mesh" << YAML::Value << referenceMesh->path;
+            out << YAML::Key << "Rendering Shader" << YAML::Value;
+            out << YAML::BeginMap;
+                out << YAML::Key << "Vertex Shader" << YAML::Value << sphereShader->vertexShaderPath;
+                out << YAML::Key << "Fragment Shader" << YAML::Value << sphereShader->fragmentShaderPath;
+            out << YAML::EndMap;
+            out << YAML::Key << "Start Mesh Resolution" << YAML::Value << initialSpheres.size();
+            out << YAML::Key << "Sphere Mesh Resolution" << YAML::Value << sphere.size();
+            out << YAML::Key << "Spheres" << YAML::Value;
+            out << YAML::BeginSeq;
+                for (int i = 0; i < sphere.size(); i++)
+                {
+                    out << YAML::BeginMap;
+                        out << YAML::Key << "Center" << YAML::Value;
+                        YAMLSerializeVector3(out, sphere[i].center);
+                        out << YAML::Key << "Radius" << YAML::Value << sphere[i].radius;
+                        out << YAML::Key << "Quadric" << YAML::Value;
+                        YAMLSerializeQuadric(out, sphere[i].quadric);
+                    out << YAML::EndMap;
+                }
+            out << YAML::EndSeq;
+            out << YAML::Key << "Connectivity" << YAML::Value;
+            out << YAML::BeginMap;
+                out << YAML::Key << "Edges" << YAML::Value;
+                out << YAML::BeginSeq;
+                    for (int i = 0; i < edge.size(); i++)
+                    {
+                        out << YAML::BeginMap;
+                            out << YAML::Key << "E0" << YAML::Value << edge[i].i;
+                            out << YAML::Key << "E1" << YAML::Value << edge[i].j;
+                        out << YAML::EndMap;
+                    }
+                out << YAML::EndSeq;
+                out << YAML::Key << "Triangles" << YAML::Value;
+                out << YAML::BeginSeq;
+                    for (int i = 0; i < triangle.size(); i++)
+                    {
+                        out << YAML::BeginMap;
+                            out << YAML::Key << "T0" << YAML::Value << triangle[i].i;
+                            out << YAML::Key << "T1" << YAML::Value << triangle[i].j;
+                            out << YAML::Key << "T2" << YAML::Value << triangle[i].k;
+                        out << YAML::EndMap;
+                    }
+                out << YAML::EndSeq;
+            out << YAML::EndMap;
+        out << YAML::EndMap;
+
+        namespace fs = std::__fs::filesystem;
+
+        fs::path cwd = fs::current_path();
+
+        std::string separator = std::string(1, fs::path::preferred_separator);
+
+        std::string filePath = fn;
+        std::string folderPath = "." + separator;
+        if (path != ".")
+            folderPath = path;
+
+        std::ofstream fout(folderPath + filePath);
+        std::cout << "File location: " << cwd << std::endl;
+        fout << out.c_str();
+        fout.close();
+    }
+
+    void SphereMesh::loadFromYaml(const std::string& path)
+    {
+        triangle.clear();
+        edge.clear();
+        sphere.clear();
+        
+        std::ifstream stream(path);
+        std::stringstream strStream;
+        strStream << stream.rdbuf();
+
+        YAML::Node data = YAML::Load(strStream.str());
+        
+        std::cout << data << std::endl;
+        for (const auto& node : data["Spheres"]) {
+            Sphere s;
+            
+            s.center = node["Center"].as<Math::Vector3>();
+            s.radius = node["Radius"].as<Math::Scalar>();
+            s.quadric = node["Quadric"].as<Renderer::Quadric>();
+            s.color = Math::Vector3(1, 0, 0);
+
+            sphere.push_back(s);
+        }
+        
+        for (const auto& node : data["Connectivity"]["Triangles"]) {
+            Triangle t;
+            
+            t.i = node["T0"].as<int>();
+            t.j = node["T1"].as<int>();
+            t.k = node["T2"].as<int>();
+
+            triangle.push_back(t);
+        }
+        
+        for (const auto& node : data["Connectivity"]["Edges"]) {
+            Edge e;
+            
+            e.i = node["E0"].as<int>();
+            e.j = node["E1"].as<int>();
+            
+            edge.push_back(e);
+        }
+    }
 
     void SphereMesh::saveTXT(const std::string& path, const std::string& fn)
     {

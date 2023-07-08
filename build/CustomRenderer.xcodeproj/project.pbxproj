@@ -9,7 +9,7 @@
 /* Begin PBXAggregateTarget section */
 		50C429161736424691CED79C /* ZERO_CHECK */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 004C047B8F2B48019AD80D23 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildConfigurationList = 3BCB29D63D5F4B699B4E70C3 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
 			buildPhases = (
 				F3E6B42683D64750C9B0C1AA /* Generate CMakeFiles/ZERO_CHECK */,
 			);
@@ -20,14 +20,15 @@
 		};
 		F80A51CD4EFA4F72AE752170 /* ALL_BUILD */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 6CC0BDE99FF04D8BAE6BDC65 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildConfigurationList = 5FF5A7C1C3294B2B83E9102E /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
 			buildPhases = (
 				EABE96275A8180B70B970F81 /* Generate CMakeFiles/ALL_BUILD */,
 			);
 			dependencies = (
-				34BF95A03EB14B84844B03E9 /* PBXTargetDependency */,
-				3F63D330CB5A4B10A5A7D8E2 /* PBXTargetDependency */,
-				390C464FE5C4434A92259074 /* PBXTargetDependency */,
+				BFE0A7FDBBBB4D16AD964DAF /* PBXTargetDependency */,
+				EA724B151979495D8200536F /* PBXTargetDependency */,
+				8EE625DB886A466196C0224B /* PBXTargetDependency */,
+				795661000A46486B92A807D4 /* PBXTargetDependency */,
 			);
 			name = ALL_BUILD;
 			productName = ALL_BUILD;
@@ -35,213 +36,252 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		023D12AC2D7A4F2390D56D9B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector4.hpp */ = {isa = PBXBuildFile; fileRef = FBA21CD6A6504D63A6A0D50B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector4.hpp */; };
-		04BF5FD69F784015A8FE8E9F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point2.hpp */ = {isa = PBXBuildFile; fileRef = EDDDBFC229B34098A694F4A7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point2.hpp */; };
-		0BE1C6418DAC48F788500D53 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Math.hpp */ = {isa = PBXBuildFile; fileRef = DABDB891D56643B4A7B3F8EE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Math.hpp */; };
-		0C8D056A3CCB49809DE4DEC6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor3.cpp */ = {isa = PBXBuildFile; fileRef = 493BD7DDDA19430ABC80A0DA /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor3.cpp */; };
-		0DE4E80B70A34114BDEAF6FE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp */ = {isa = PBXBuildFile; fileRef = 341F85C3C6FF455AA3532383 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp */; };
-		1557EF1ADBE442C5954CA30D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point3.cpp */ = {isa = PBXBuildFile; fileRef = 03C62699E934417CBE020040 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point3.cpp */; };
-		158FF1778C904D7498C08FCC /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Scalar.hpp */ = {isa = PBXBuildFile; fileRef = 32045FF8CE0245FCACB78074 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Scalar.hpp */; };
-		16644F004273430B815A843B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Sphere.cpp */ = {isa = PBXBuildFile; fileRef = BE7A956CC835470DBD37ADD5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Sphere.cpp */; };
-		1E3ADFBBF98549F9B9BDAA99 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector4.cpp */ = {isa = PBXBuildFile; fileRef = 437DD147C5FE4E6B8CFA237F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector4.cpp */; };
-		2269F38167F347CAB6132A3A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Camera.hpp */ = {isa = PBXBuildFile; fileRef = 49B88758F814482986073C86 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Camera.hpp */; };
-		23905B6C92854DE5BA6BB70E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/src/Shader.cpp */ = {isa = PBXBuildFile; fileRef = EEABF1EFF0A342CC9E838B77 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/src/Shader.cpp */; };
-		28719E7B4DA1482EA8806B59 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector2.cpp */ = {isa = PBXBuildFile; fileRef = DC2A7079096549EAA8A36FF1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector2.cpp */; };
-		29BF217B3F184E79BB69206F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableMesh.cpp */ = {isa = PBXBuildFile; fileRef = C881ACDD11004E43AEDF233F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableMesh.cpp */; };
-		2E93843BE9E94C39B76EBD90 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Window.cpp */ = {isa = PBXBuildFile; fileRef = 30AC1EFD35464B719C54BC43 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Window.cpp */; };
-		317BDC5EA7294A31AB3F0310 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/main.cpp */ = {isa = PBXBuildFile; fileRef = C6A3D94E29614578BBC04C8D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/main.cpp */; };
-		37156E3760344CC3A8041819 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point3.hpp */ = {isa = PBXBuildFile; fileRef = 05A3D1CFA14A436A8D0D150D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point3.hpp */; };
-		3A05A449EFAA43F7AABC7ABA /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor4.hpp */ = {isa = PBXBuildFile; fileRef = 128230FF06C54D4188C3F918 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor4.hpp */; };
-		3A2125FC370B4A5F9DC942D0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/SphereMesh.hpp */ = {isa = PBXBuildFile; fileRef = 305A993A9AB143D499E5C592 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/SphereMesh.hpp */; };
-		3F537BAADAF4422695BF110B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix3.cpp */ = {isa = PBXBuildFile; fileRef = 25EAFE6B44E3404899C51E43 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix3.cpp */; };
-		442CA5C39CC6471F9728CBBD /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = FEA27EDACAC84470AB108BD4 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */; };
-		4564500CBC1B4826B3C26B67 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point2.cpp */ = {isa = PBXBuildFile; fileRef = 6BEF4CEA068C4E86A41DE560 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point2.cpp */; };
-		45C79B54CCB44D6FBA8DE281 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix4.hpp */ = {isa = PBXBuildFile; fileRef = 59B34202B6AA416883259EC5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix4.hpp */; };
-		47BFB6A633C94A81862D9784 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector3.hpp */ = {isa = PBXBuildFile; fileRef = 6329CD5546B74F29A3596917 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector3.hpp */; };
-		49F84D89742749BFBFA4AFDA /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector3.cpp */ = {isa = PBXBuildFile; fileRef = D3AED017313A4E69ACC348F2 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector3.cpp */; };
-		4A7567B2D6A14ECAB17E5A72 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/Quaternion.hpp */ = {isa = PBXBuildFile; fileRef = 655979FFD23D4D309EDEBC41 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/Quaternion.hpp */; };
-		4EEAF7BDC27344B590F0A7CE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Region.hpp */ = {isa = PBXBuildFile; fileRef = 75A0BF3B55964EBDA1925DB1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Region.hpp */; };
-		51D0E031193A471991F37AE9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector2.hpp */ = {isa = PBXBuildFile; fileRef = B3806958DDA14A2DA44C2DF6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector2.hpp */; };
-		57F72E84B0844AEDAB6B2A5A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_demo.cpp */ = {isa = PBXBuildFile; fileRef = 08163C6EAD2E4B0A8550CD84 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_demo.cpp */; };
-		60DD5384947045F7996FDCA7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/Shader.hpp */ = {isa = PBXBuildFile; fileRef = 945BE0A3BE9C4248B92A2EA3 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/Shader.hpp */; };
-		632CD9D7375545C59B1CBE72 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor4.cpp */ = {isa = PBXBuildFile; fileRef = B4AD427D51B54D93A30C5B23 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor4.cpp */; };
-		66166BD8BB0C44F296E4E271 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point4.hpp */ = {isa = PBXBuildFile; fileRef = 86F6D85B92BF4394BE780448 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point4.hpp */; };
-		68105C33445646128AE30939 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Window.hpp */ = {isa = PBXBuildFile; fileRef = E51AD566A6374EE1841D2AFB /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Window.hpp */; };
-		69F2EA81737840559D295915 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui.cpp */ = {isa = PBXBuildFile; fileRef = 6B914C6E0574443AB69F07B0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui.cpp */; };
-		6B40BD4AC7FD4AE6BB9A49B2 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix2.cpp */ = {isa = PBXBuildFile; fileRef = A228AF93B6C54001AADEA6FE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix2.cpp */; };
-		6D4D62B3260B49529A78A57C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Sphere.hpp */ = {isa = PBXBuildFile; fileRef = 09B0D78A5BE7467FB4304934 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Sphere.hpp */; };
-		71C0DD86161A49A1892D9341 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_tables.cpp */ = {isa = PBXBuildFile; fileRef = 54B331E26C60439A87D25985 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_tables.cpp */; };
-		72B9F74E22474806B0FC1F0B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_draw.cpp */ = {isa = PBXBuildFile; fileRef = BFE553E5E609456BBB580C49 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_draw.cpp */; };
-		7BD0BE5AECAE44F780EEB625 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_glfw.cpp */ = {isa = PBXBuildFile; fileRef = 4F7BB369DB21427D8E4EFD68 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_glfw.cpp */; };
-		7CBB5BC099BD40AA9691F68C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Region.cpp */ = {isa = PBXBuildFile; fileRef = AB7576CDFA684E24A02BC9EE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Region.cpp */; };
-		7D0F39E0B38D492EBDA08BB0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor2.hpp */ = {isa = PBXBuildFile; fileRef = DDC2DAFE77174D7382EC4C2A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor2.hpp */; };
-		87BA3B7616DE4FACBBBF2193 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix2.hpp */ = {isa = PBXBuildFile; fileRef = 51E6A7ECABA4406E8462B1C9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix2.hpp */; };
-		923F9D8F20E143908DCE3E78 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor2.cpp */ = {isa = PBXBuildFile; fileRef = 1ED3B1FF5E8F40F2934545ED /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor2.cpp */; };
-		9321669A18A1455988770F0C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix3.hpp */ = {isa = PBXBuildFile; fileRef = 84BE1B84AEF2442BA0EB4C63 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix3.hpp */; };
-		9BF1556C0E0A4CE3B9583948 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/ObjLoader.hpp */ = {isa = PBXBuildFile; fileRef = 405D234D169A42A188EE26AE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/ObjLoader.hpp */; };
-		A7AEE915E30844D985C56FA0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_widgets.cpp */ = {isa = PBXBuildFile; fileRef = B4D6937899084F798398CDC6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_widgets.cpp */; };
-		B16901D6EF87428D9227787F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/glad.c */ = {isa = PBXBuildFile; fileRef = 120ED69FE82649C5B76D3AFE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/glad.c */; };
-		BC02667D13E34F998E265709 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix4.cpp */ = {isa = PBXBuildFile; fileRef = 42229147A5D141D4857C75A7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix4.cpp */; };
-		C86B194399AC445098D22334 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Camera.cpp */ = {isa = PBXBuildFile; fileRef = E84F9D5CA3A14E00B182769B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Camera.cpp */; };
-		D09CBBB181B6475C97461E64 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableMesh.hpp */ = {isa = PBXBuildFile; fileRef = 039A6F7726E442B39F66036E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableMesh.hpp */; };
-		D1B33DBFF3CD43318B89279C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point4.cpp */ = {isa = PBXBuildFile; fileRef = 2D1C15AE5A2445EEA0662DE5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point4.cpp */; };
-		D79DA0DA5AFF4633AACE3844 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/ObjLoader.cpp */ = {isa = PBXBuildFile; fileRef = 97516C5FD1C14612B3D5CE28 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/ObjLoader.cpp */; };
-		E050B1777A1C4C31867FBBB1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 5DB7E2896E4C437BA3FDC160 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */; };
-		E4B79D11564C4E4683BB49F4 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor3.hpp */ = {isa = PBXBuildFile; fileRef = 9E17DBEC80644474B0E00D5E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor3.hpp */; };
-		E5A698EE34F64492A01D8B26 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Quadric.cpp */ = {isa = PBXBuildFile; fileRef = BC8EA49DBD04413AB7AE1507 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Quadric.cpp */; };
-		E90C24A9EF664C3A9B893B54 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_opengl3.cpp */ = {isa = PBXBuildFile; fileRef = E2C05141614C4459B44B1B4B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_opengl3.cpp */; };
-		EFE87C110A1146ECA3263AA5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Quadric.hpp */ = {isa = PBXBuildFile; fileRef = EDF58020F92D4DFD80ADAAF7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Quadric.hpp */; };
-		F25D656ABE574A98AB8FEDF5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/src/Quaternion.cpp */ = {isa = PBXBuildFile; fileRef = 924D281A3C134B1392EFF330 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/src/Quaternion.cpp */; };
+		03FA92C358824E80AB4440BE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/Quaternion.hpp */ = {isa = PBXBuildFile; fileRef = 28B1DD10590E4E0CBF47CA90 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/Quaternion.hpp */; };
+		08ECC7D6FBEE4E5BAECBA204 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point2.cpp */ = {isa = PBXBuildFile; fileRef = 3AC1C3B19A974715BF640119 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point2.cpp */; };
+		0A2726A5DA1B49E1A6A18228 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point2.hpp */ = {isa = PBXBuildFile; fileRef = 063AF2DE26A045B48324AE36 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point2.hpp */; };
+		0AE2DF78FA434ECDAA8B39DB /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableSphere.hpp */ = {isa = PBXBuildFile; fileRef = E037651272574A74A200A92A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableSphere.hpp */; };
+		0E54AE886EE04BAF9A4EE261 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/glad.c */ = {isa = PBXBuildFile; fileRef = 0C7DB330FB744C35AAB181AE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/glad.c */; };
+		1A3A76D5EBDF403F80325F03 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Region.hpp */ = {isa = PBXBuildFile; fileRef = 53E8875C78234EDE90FE01DC /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Region.hpp */; };
+		1BCD70B4A18846158393ABF6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Window.hpp */ = {isa = PBXBuildFile; fileRef = 10CA38F7D8564488852C4205 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Window.hpp */; };
+		22562C14B10644E28442BE84 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix2.cpp */ = {isa = PBXBuildFile; fileRef = CD99374CD3D243CAA66756D7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix2.cpp */; };
+		2C0C0DBF24FE47E4848145B5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/Shader.hpp */ = {isa = PBXBuildFile; fileRef = 08FF36123EFD43EBB5A9F71D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/Shader.hpp */; };
+		2D63C94FDA5F4B6CB81CC20B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableSphere.cpp */ = {isa = PBXBuildFile; fileRef = E788D457530B455698F31443 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableSphere.cpp */; };
+		32D3D2ECB5F64FADBE2C2DF2 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Quadric.cpp */ = {isa = PBXBuildFile; fileRef = 8A2FA810E0E34444AD907319 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Quadric.cpp */; };
+		33EF20004BC247FD8B2E7154 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix3.hpp */ = {isa = PBXBuildFile; fileRef = C666321E8F75458B81DAD1C9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix3.hpp */; };
+		35DE12DAC9904CF7B5338F2C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor4.hpp */ = {isa = PBXBuildFile; fileRef = 5C51934CF00C4AB59628086B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor4.hpp */; };
+		3D73F36BD69D4D3798D1B906 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_widgets.cpp */ = {isa = PBXBuildFile; fileRef = 8629FDEC17CB4DABA0C0F0F1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_widgets.cpp */; };
+		3ED8757432B148AAA34D3B6E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Camera.hpp */ = {isa = PBXBuildFile; fileRef = 83DC94ADD23545149BF860A6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Camera.hpp */; };
+		45555688A29747C4B14AC929 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_opengl3.cpp */ = {isa = PBXBuildFile; fileRef = AAC8385A860042E78DEB78EA /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_opengl3.cpp */; };
+		499534AF0A9F41FAAC27D53E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui.cpp */ = {isa = PBXBuildFile; fileRef = 681AB8A4B9AD48BCAC535C64 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui.cpp */; };
+		4B0BAD58460A48779CFDDFA7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector4.cpp */ = {isa = PBXBuildFile; fileRef = 39AC08B6C133465BA0CF5F51 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector4.cpp */; };
+		4E262DB7C42040AEAA0DB3DE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point4.hpp */ = {isa = PBXBuildFile; fileRef = E202BECF27FD45E9A2578E7B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point4.hpp */; };
+		56E42DB820C84A108DF6467D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/src/Shader.cpp */ = {isa = PBXBuildFile; fileRef = 608234313DF14859B069AA46 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/src/Shader.cpp */; };
+		5B2B3E93C1ED446AB5DBE061 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point3.cpp */ = {isa = PBXBuildFile; fileRef = EB11EBD009184984B36C5B76 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point3.cpp */; };
+		698C391C99354C6E9906D738 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/src/Quaternion.cpp */ = {isa = PBXBuildFile; fileRef = 1655EC70DEA740629ACB1D10 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/src/Quaternion.cpp */; };
+		6E29EF1DD9A04C9BA8C1FD32 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_demo.cpp */ = {isa = PBXBuildFile; fileRef = 1A962FD03B3E4785B637CC61 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_demo.cpp */; };
+		75B5A538A4634CDAB9CE5BA8 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor2.cpp */ = {isa = PBXBuildFile; fileRef = ACF2DB05D57448049BACFA13 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor2.cpp */; };
+		773F7E10149347D48F2218DC /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor3.cpp */ = {isa = PBXBuildFile; fileRef = AB43C4EC550743E78C4A6253 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor3.cpp */; };
+		7AEA65711A9744E6BAF1C852 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/ObjLoader.hpp */ = {isa = PBXBuildFile; fileRef = FFEC44DA7C1C4AE8B62FF4B1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/ObjLoader.hpp */; };
+		7EDFC40A92FC4515AF936DE3 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector4.hpp */ = {isa = PBXBuildFile; fileRef = 19ABB0FC6EA641C98F5DD398 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector4.hpp */; };
+		82B1AEDDA4494A21B43342F3 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector2.hpp */ = {isa = PBXBuildFile; fileRef = 14FF31D859F044109B11DF64 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector2.hpp */; };
+		83027BF99100407293A4287E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix4.cpp */ = {isa = PBXBuildFile; fileRef = ED13E3A91D2448F0A0FB4050 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix4.cpp */; };
+		85D0F49130FD43888CD39DE4 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Window.cpp */ = {isa = PBXBuildFile; fileRef = 11702156D1F54EAC84A37FE1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Window.cpp */; };
+		8B8F2F1DEACD45CBA1FC8D21 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor4.cpp */ = {isa = PBXBuildFile; fileRef = 3D5B35F7943445578A74135D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor4.cpp */; };
+		8EE15112A80E406683474AB9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = C10A9C065101467C98AE060A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */; };
+		8FB7AC53F6B145878CDAB994 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/SphereMesh.hpp */ = {isa = PBXBuildFile; fileRef = 42D5A1503BB44910A05EE25F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/SphereMesh.hpp */; };
+		94E8029CBBB5439E9E45DBA9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point4.cpp */ = {isa = PBXBuildFile; fileRef = 17A514168D2B4A019A24E019 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point4.cpp */; };
+		9767ABFCF6894E00A6DBDA71 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Math.hpp */ = {isa = PBXBuildFile; fileRef = 938C2C68B7AE4EC0AF7BE95F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Math.hpp */; };
+		9AF18D6EDB944231809F9191 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp */ = {isa = PBXBuildFile; fileRef = BE687E993DE64877A686AEF1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp */; };
+		9FB0D09087D74EF79CCCE821 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_draw.cpp */ = {isa = PBXBuildFile; fileRef = 82EDFC9E1072480EBD174D21 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_draw.cpp */; };
+		A4B240624299499DB82767BE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix4.hpp */ = {isa = PBXBuildFile; fileRef = F7B1D038BC774E4D9D45CB7E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix4.hpp */; };
+		A822364635BD48B5B42437D0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Sphere.cpp */ = {isa = PBXBuildFile; fileRef = C7C2189DFA604F81A20B7F02 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Sphere.cpp */; };
+		AE7422B7021544C482699EF0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor2.hpp */ = {isa = PBXBuildFile; fileRef = F319DF96A94A4CFC870DE77E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor2.hpp */; };
+		B7231FD89DCD44E7B0A27AD1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableMesh.hpp */ = {isa = PBXBuildFile; fileRef = 8C0677B06CE8425793DC9AB6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableMesh.hpp */; };
+		B8460C6FEE9B496D9B9A55F0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/YAMLUtils.hpp */ = {isa = PBXBuildFile; fileRef = 8AEC319D65804DBDA2694FD1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/YAMLUtils.hpp */; };
+		BA601A2A5D054CF4AB3B8915 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Camera.cpp */ = {isa = PBXBuildFile; fileRef = DB88CA53190C466E84980803 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Camera.cpp */; };
+		BB3C09A81DC249B98B761152 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_glfw.cpp */ = {isa = PBXBuildFile; fileRef = 99E101F8C2484DE59A62F153 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_glfw.cpp */; };
+		BFB0E8A099D0456A954C497F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix2.hpp */ = {isa = PBXBuildFile; fileRef = 0F6E12D9D3C34B159A302864 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix2.hpp */; };
+		C0146926A88F4320ADB6D658 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor3.hpp */ = {isa = PBXBuildFile; fileRef = 8F901DD0A4024CD4B915EE78 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor3.hpp */; };
+		C2A30164D9EE4640B8644EC9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_tables.cpp */ = {isa = PBXBuildFile; fileRef = F3F928B1C86F424F8F3BDC99 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_tables.cpp */; };
+		C3D338FDFA004211B2A9D97D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = 82445E60904D49098E988821 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */; };
+		C41DA5EE45B948579DD234F3 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Quadric.hpp */ = {isa = PBXBuildFile; fileRef = F9EA7C88C56441FDB98C08FE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Quadric.hpp */; };
+		C6775D43A27A4DF1B563B018 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableMesh.cpp */ = {isa = PBXBuildFile; fileRef = DD17D7E3C8394B9589108F3D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableMesh.cpp */; };
+		D23B8C4FEBA146238FCECBEB /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix3.cpp */ = {isa = PBXBuildFile; fileRef = B783C283A0E949118D66B9AB /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix3.cpp */; };
+		D3E51A777E7E45CC9C50EF5D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Scalar.hpp */ = {isa = PBXBuildFile; fileRef = F770995F1EC14C8A9EF20A9C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Scalar.hpp */; };
+		D6D1F6A2415B4105B52B6658 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector3.cpp */ = {isa = PBXBuildFile; fileRef = 11CEB4EFCE6347BC9FC0E7B4 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector3.cpp */; };
+		D9034D9D5D144B0C83C3B3E2 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = EE82B00D8DA540F3B18E9494 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */; };
+		E857DDE5B3B74767B5D2A7C7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Region.cpp */ = {isa = PBXBuildFile; fileRef = F89828D50347461BAE4FC2B5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Region.cpp */; };
+		E962A49D666546E7896FBDB3 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/tinyfiledialogs.c */ = {isa = PBXBuildFile; fileRef = B36DFBCA5417492E85346F67 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/tinyfiledialogs.c */; };
+		EC345ED247774AABA74DDDB4 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/main.cpp */ = {isa = PBXBuildFile; fileRef = 163DA3CAC78E4BC7B6D79758 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/main.cpp */; };
+		ECD002E39DD7416CAD0F0438 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector2.cpp */ = {isa = PBXBuildFile; fileRef = 4A9462FD64ED42209AFFC36B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector2.cpp */; };
+		F7282E929E68427CB4F690B3 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/ObjLoader.cpp */ = {isa = PBXBuildFile; fileRef = DDD9EAB54A0A419999C9A882 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/ObjLoader.cpp */; };
+		FA4039BB26F640A0B88CA9AB /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point3.hpp */ = {isa = PBXBuildFile; fileRef = 0F88FEA5D9684B3CA1AD341C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point3.hpp */; };
+		FBA55E9033F340A7BBAB9970 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector3.hpp */ = {isa = PBXBuildFile; fileRef = D1F5A2F1C2BD4F0E9506540B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector3.hpp */; };
+		FCF10377C0D045C183A6594A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Sphere.hpp */ = {isa = PBXBuildFile; fileRef = AD2AFFE8965D427182B051B0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Sphere.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildStyle section */
-		2B08FB71893C4ABE9F87A3AB /* MinSizeRel */ = {
+		25B7C65A176C43BDBDFD4F6E /* MinSizeRel */ = {
 			isa = PBXBuildStyle;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 			};
 			name = MinSizeRel;
 		};
-		3091F6A9FF8845E58CC5C3EC /* Release */ = {
+		2F5A3607D5124C4081BF342A /* Release */ = {
 			isa = PBXBuildStyle;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 			};
 			name = Release;
 		};
-		588E76737D24402389A2ABF3 /* Debug */ = {
-			isa = PBXBuildStyle;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-			};
-			name = Debug;
-		};
-		8CCA14180B344F2C868F2BE8 /* RelWithDebInfo */ = {
+		8452B16FBD1A4EDFAACF4FE1 /* RelWithDebInfo */ = {
 			isa = PBXBuildStyle;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 			};
 			name = RelWithDebInfo;
 		};
+		84C39132550B44A18452D10E /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
 /* End PBXBuildStyle section */
 
 /* Begin PBXContainerItemProxy section */
-		38C36927926D4E689C85214C /* PBXContainerItemProxy */ = {
+		0D6B199B9C4843129771C4EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE294BFB6B3F4C458ACC4BB5;
+			remoteInfo = GLAD;
+		};
+		0E3B28C10D804F078DDD88F8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1349EAF6832E413F9E1BA8C2;
 			remoteInfo = CustomRenderer;
 		};
-		5A11BF0E31EE4096837112F1 /* PBXContainerItemProxy */ = {
+		497149DC3AA349A4916C7196 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50C429161736424691CED79C;
+			remoteInfo = ZERO_CHECK;
+		};
+		70F904E485C04839A6AD8B55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50C429161736424691CED79C;
+			remoteInfo = ZERO_CHECK;
+		};
+		B84306EC9C0448A69C0AB537 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50C429161736424691CED79C;
+			remoteInfo = ZERO_CHECK;
+		};
+		CC62E404427C4159AF184A08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6674EADF10574ADC880AB7AB;
+			remoteInfo = tinyfiledialogs;
+		};
+		CC63E5C49D4B4785901D6DB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50C429161736424691CED79C;
+			remoteInfo = ZERO_CHECK;
+		};
+		D880E8B8FB6C4E4694525090 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = BE294BFB6B3F4C458ACC4BB5;
 			remoteInfo = GLAD;
 		};
-		8BCC03D56B6448CEA33E07D8 /* PBXContainerItemProxy */ = {
+		EBCBA2530E414B2A844D1070 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BE294BFB6B3F4C458ACC4BB5;
-			remoteInfo = GLAD;
-		};
-		B6F953F345114F77A7EDA389 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 50C429161736424691CED79C;
-			remoteInfo = ZERO_CHECK;
-		};
-		C448F031251348A78AEF723B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 50C429161736424691CED79C;
-			remoteInfo = ZERO_CHECK;
-		};
-		C5A28321F8B64F039F6FF09B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 50C429161736424691CED79C;
-			remoteInfo = ZERO_CHECK;
+			remoteGlobalIDString = 6674EADF10574ADC880AB7AB;
+			remoteInfo = tinyfiledialogs;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		039A6F7726E442B39F66036E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableMesh.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = RenderableMesh.hpp; path = Core/RenderableMesh.hpp; sourceTree = SOURCE_ROOT; };
-		03C62699E934417CBE020040 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point3.cpp; path = Math/Point/src/Point3.cpp; sourceTree = SOURCE_ROOT; };
-		05A3D1CFA14A436A8D0D150D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point3.hpp; path = Math/Point/Point3.hpp; sourceTree = SOURCE_ROOT; };
-		08163C6EAD2E4B0A8550CD84 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_demo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_demo.cpp; path = include/imgui/imgui_demo.cpp; sourceTree = SOURCE_ROOT; };
-		09B0D78A5BE7467FB4304934 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Sphere.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Sphere.hpp; path = Core/Sphere.hpp; sourceTree = SOURCE_ROOT; };
-		120ED69FE82649C5B76D3AFE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/glad.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = glad.c; path = include/glad.c; sourceTree = SOURCE_ROOT; };
-		128230FF06C54D4188C3F918 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor4.hpp; path = Math/Versor/Versor4.hpp; sourceTree = SOURCE_ROOT; };
-		1ED3B1FF5E8F40F2934545ED /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor2.cpp; path = Math/Versor/src/Versor2.cpp; sourceTree = SOURCE_ROOT; };
-		25EAFE6B44E3404899C51E43 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix3.cpp; path = Math/Matrix/src/Matrix3.cpp; sourceTree = SOURCE_ROOT; };
-		2D1C15AE5A2445EEA0662DE5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point4.cpp; path = Math/Point/src/Point4.cpp; sourceTree = SOURCE_ROOT; };
-		305A993A9AB143D499E5C592 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/SphereMesh.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = SphereMesh.hpp; path = Core/SphereMesh.hpp; sourceTree = SOURCE_ROOT; };
-		30AC1EFD35464B719C54BC43 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Window.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Window.cpp; path = Core/src/Window.cpp; sourceTree = SOURCE_ROOT; };
-		32045FF8CE0245FCACB78074 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Scalar.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Scalar.hpp; path = Math/Scalar.hpp; sourceTree = SOURCE_ROOT; };
-		341F85C3C6FF455AA3532383 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SphereMesh.cpp; path = Core/src/SphereMesh.cpp; sourceTree = SOURCE_ROOT; };
-		405D234D169A42A188EE26AE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/ObjLoader.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ObjLoader.hpp; path = Core/ObjLoader.hpp; sourceTree = SOURCE_ROOT; };
-		42229147A5D141D4857C75A7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix4.cpp; path = Math/Matrix/src/Matrix4.cpp; sourceTree = SOURCE_ROOT; };
-		437DD147C5FE4E6B8CFA237F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector4.cpp; path = Math/Vector/src/Vector4.cpp; sourceTree = SOURCE_ROOT; };
-		493BD7DDDA19430ABC80A0DA /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor3.cpp; path = Math/Versor/src/Versor3.cpp; sourceTree = SOURCE_ROOT; };
-		49B88758F814482986073C86 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Camera.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Camera.hpp; path = Core/Camera.hpp; sourceTree = SOURCE_ROOT; };
-		4F7BB369DB21427D8E4EFD68 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_glfw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_impl_glfw.cpp; path = include/imgui/imgui_impl_glfw.cpp; sourceTree = SOURCE_ROOT; };
-		51E6A7ECABA4406E8462B1C9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix2.hpp; path = Math/Matrix/Matrix2.hpp; sourceTree = SOURCE_ROOT; };
-		54B331E26C60439A87D25985 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_tables.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_tables.cpp; path = include/imgui/imgui_tables.cpp; sourceTree = SOURCE_ROOT; };
-		59B34202B6AA416883259EC5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix4.hpp; path = Math/Matrix/Matrix4.hpp; sourceTree = SOURCE_ROOT; };
-		5DB7E2896E4C437BA3FDC160 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
-		6329CD5546B74F29A3596917 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector3.hpp; path = Math/Vector/Vector3.hpp; sourceTree = SOURCE_ROOT; };
-		655979FFD23D4D309EDEBC41 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/Quaternion.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Quaternion.hpp; path = Math/Rotation/Quaternion.hpp; sourceTree = SOURCE_ROOT; };
-		67535A4279394713A54C9B97 /* CustomRenderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = CustomRenderer; sourceTree = BUILT_PRODUCTS_DIR; };
-		6B914C6E0574443AB69F07B0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui.cpp; path = include/imgui/imgui.cpp; sourceTree = SOURCE_ROOT; };
-		6BEF4CEA068C4E86A41DE560 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point2.cpp; path = Math/Point/src/Point2.cpp; sourceTree = SOURCE_ROOT; };
-		75A0BF3B55964EBDA1925DB1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Region.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Region.hpp; path = Core/Region.hpp; sourceTree = SOURCE_ROOT; };
-		84BE1B84AEF2442BA0EB4C63 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix3.hpp; path = Math/Matrix/Matrix3.hpp; sourceTree = SOURCE_ROOT; };
-		86F6D85B92BF4394BE780448 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point4.hpp; path = Math/Point/Point4.hpp; sourceTree = SOURCE_ROOT; };
-		924D281A3C134B1392EFF330 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/src/Quaternion.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Quaternion.cpp; path = Math/Rotation/src/Quaternion.cpp; sourceTree = SOURCE_ROOT; };
-		945BE0A3BE9C4248B92A2EA3 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/Shader.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Shader.hpp; path = Shader/Shader.hpp; sourceTree = SOURCE_ROOT; };
-		97516C5FD1C14612B3D5CE28 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/ObjLoader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ObjLoader.cpp; path = Core/src/ObjLoader.cpp; sourceTree = SOURCE_ROOT; };
-		9E17DBEC80644474B0E00D5E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor3.hpp; path = Math/Versor/Versor3.hpp; sourceTree = SOURCE_ROOT; };
-		A228AF93B6C54001AADEA6FE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix2.cpp; path = Math/Matrix/src/Matrix2.cpp; sourceTree = SOURCE_ROOT; };
-		AB7576CDFA684E24A02BC9EE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Region.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Region.cpp; path = Core/src/Region.cpp; sourceTree = SOURCE_ROOT; };
-		B3806958DDA14A2DA44C2DF6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector2.hpp; path = Math/Vector/Vector2.hpp; sourceTree = SOURCE_ROOT; };
-		B4AD427D51B54D93A30C5B23 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor4.cpp; path = Math/Versor/src/Versor4.cpp; sourceTree = SOURCE_ROOT; };
-		B4D6937899084F798398CDC6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_widgets.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_widgets.cpp; path = include/imgui/imgui_widgets.cpp; sourceTree = SOURCE_ROOT; };
-		BC8EA49DBD04413AB7AE1507 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Quadric.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Quadric.cpp; path = Core/src/Quadric.cpp; sourceTree = SOURCE_ROOT; };
-		BE7A956CC835470DBD37ADD5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Sphere.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Sphere.cpp; path = Core/src/Sphere.cpp; sourceTree = SOURCE_ROOT; };
-		BFE553E5E609456BBB580C49 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_draw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_draw.cpp; path = include/imgui/imgui_draw.cpp; sourceTree = SOURCE_ROOT; };
-		C6A3D94E29614578BBC04C8D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = main.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
-		C881ACDD11004E43AEDF233F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = RenderableMesh.cpp; path = Core/src/RenderableMesh.cpp; sourceTree = SOURCE_ROOT; };
-		CFF9883BF6344353934AD992 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
-		D3AED017313A4E69ACC348F2 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector3.cpp; path = Math/Vector/src/Vector3.cpp; sourceTree = SOURCE_ROOT; };
-		DABDB891D56643B4A7B3F8EE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Math.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Math.hpp; path = Math/Math.hpp; sourceTree = SOURCE_ROOT; };
-		DC2A7079096549EAA8A36FF1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector2.cpp; path = Math/Vector/src/Vector2.cpp; sourceTree = SOURCE_ROOT; };
-		DCB3D65678BC4190A46BBDCF /* GLAD */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGLAD.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		DDC2DAFE77174D7382EC4C2A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor2.hpp; path = Math/Versor/Versor2.hpp; sourceTree = SOURCE_ROOT; };
-		E2C05141614C4459B44B1B4B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_opengl3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_impl_opengl3.cpp; path = include/imgui/imgui_impl_opengl3.cpp; sourceTree = SOURCE_ROOT; };
-		E51AD566A6374EE1841D2AFB /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Window.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Window.hpp; path = Core/Window.hpp; sourceTree = SOURCE_ROOT; };
-		E84F9D5CA3A14E00B182769B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Camera.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Camera.cpp; path = Core/src/Camera.cpp; sourceTree = SOURCE_ROOT; };
-		EDDDBFC229B34098A694F4A7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point2.hpp; path = Math/Point/Point2.hpp; sourceTree = SOURCE_ROOT; };
-		EDF58020F92D4DFD80ADAAF7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Quadric.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Quadric.hpp; path = Core/Quadric.hpp; sourceTree = SOURCE_ROOT; };
-		EEABF1EFF0A342CC9E838B77 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/src/Shader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Shader.cpp; path = Shader/src/Shader.cpp; sourceTree = SOURCE_ROOT; };
-		FBA21CD6A6504D63A6A0D50B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector4.hpp; path = Math/Vector/Vector4.hpp; sourceTree = SOURCE_ROOT; };
-		FEA27EDACAC84470AB108BD4 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		063AF2DE26A045B48324AE36 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point2.hpp; path = Math/Point/Point2.hpp; sourceTree = SOURCE_ROOT; };
+		08FF36123EFD43EBB5A9F71D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/Shader.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Shader.hpp; path = Shader/Shader.hpp; sourceTree = SOURCE_ROOT; };
+		0AA32BBC2592449CADD54AD8 /* GLAD */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGLAD.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C7DB330FB744C35AAB181AE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/glad.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = glad.c; path = include/glad.c; sourceTree = SOURCE_ROOT; };
+		0F6E12D9D3C34B159A302864 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix2.hpp; path = Math/Matrix/Matrix2.hpp; sourceTree = SOURCE_ROOT; };
+		0F88FEA5D9684B3CA1AD341C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point3.hpp; path = Math/Point/Point3.hpp; sourceTree = SOURCE_ROOT; };
+		10CA38F7D8564488852C4205 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Window.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Window.hpp; path = Core/Window.hpp; sourceTree = SOURCE_ROOT; };
+		11702156D1F54EAC84A37FE1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Window.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Window.cpp; path = Core/src/Window.cpp; sourceTree = SOURCE_ROOT; };
+		11CEB4EFCE6347BC9FC0E7B4 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector3.cpp; path = Math/Vector/src/Vector3.cpp; sourceTree = SOURCE_ROOT; };
+		14FF31D859F044109B11DF64 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector2.hpp; path = Math/Vector/Vector2.hpp; sourceTree = SOURCE_ROOT; };
+		163DA3CAC78E4BC7B6D79758 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = main.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		1655EC70DEA740629ACB1D10 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/src/Quaternion.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Quaternion.cpp; path = Math/Rotation/src/Quaternion.cpp; sourceTree = SOURCE_ROOT; };
+		17A514168D2B4A019A24E019 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point4.cpp; path = Math/Point/src/Point4.cpp; sourceTree = SOURCE_ROOT; };
+		19ABB0FC6EA641C98F5DD398 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector4.hpp; path = Math/Vector/Vector4.hpp; sourceTree = SOURCE_ROOT; };
+		1A962FD03B3E4785B637CC61 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_demo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_demo.cpp; path = include/imgui/imgui_demo.cpp; sourceTree = SOURCE_ROOT; };
+		28B1DD10590E4E0CBF47CA90 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/Quaternion.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Quaternion.hpp; path = Math/Rotation/Quaternion.hpp; sourceTree = SOURCE_ROOT; };
+		39AC08B6C133465BA0CF5F51 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector4.cpp; path = Math/Vector/src/Vector4.cpp; sourceTree = SOURCE_ROOT; };
+		3AC1C3B19A974715BF640119 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point2.cpp; path = Math/Point/src/Point2.cpp; sourceTree = SOURCE_ROOT; };
+		3D5B35F7943445578A74135D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor4.cpp; path = Math/Versor/src/Versor4.cpp; sourceTree = SOURCE_ROOT; };
+		42D5A1503BB44910A05EE25F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/SphereMesh.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = SphereMesh.hpp; path = Core/SphereMesh.hpp; sourceTree = SOURCE_ROOT; };
+		4A9462FD64ED42209AFFC36B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector2.cpp; path = Math/Vector/src/Vector2.cpp; sourceTree = SOURCE_ROOT; };
+		53E8875C78234EDE90FE01DC /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Region.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Region.hpp; path = Core/Region.hpp; sourceTree = SOURCE_ROOT; };
+		5C51934CF00C4AB59628086B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor4.hpp; path = Math/Versor/Versor4.hpp; sourceTree = SOURCE_ROOT; };
+		608234313DF14859B069AA46 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/src/Shader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Shader.cpp; path = Shader/src/Shader.cpp; sourceTree = SOURCE_ROOT; };
+		681AB8A4B9AD48BCAC535C64 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui.cpp; path = include/imgui/imgui.cpp; sourceTree = SOURCE_ROOT; };
+		82445E60904D49098E988821 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		82EDFC9E1072480EBD174D21 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_draw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_draw.cpp; path = include/imgui/imgui_draw.cpp; sourceTree = SOURCE_ROOT; };
+		83DC94ADD23545149BF860A6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Camera.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Camera.hpp; path = Core/Camera.hpp; sourceTree = SOURCE_ROOT; };
+		8629FDEC17CB4DABA0C0F0F1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_widgets.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_widgets.cpp; path = include/imgui/imgui_widgets.cpp; sourceTree = SOURCE_ROOT; };
+		8A2FA810E0E34444AD907319 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Quadric.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Quadric.cpp; path = Core/src/Quadric.cpp; sourceTree = SOURCE_ROOT; };
+		8AEC319D65804DBDA2694FD1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/YAMLUtils.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = YAMLUtils.hpp; path = Core/YAMLUtils.hpp; sourceTree = SOURCE_ROOT; };
+		8B23FED550F5431F95C542C2 /* tinyfiledialogs */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libtinyfiledialogs.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C0677B06CE8425793DC9AB6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableMesh.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = RenderableMesh.hpp; path = Core/RenderableMesh.hpp; sourceTree = SOURCE_ROOT; };
+		8F901DD0A4024CD4B915EE78 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor3.hpp; path = Math/Versor/Versor3.hpp; sourceTree = SOURCE_ROOT; };
+		938C2C68B7AE4EC0AF7BE95F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Math.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Math.hpp; path = Math/Math.hpp; sourceTree = SOURCE_ROOT; };
+		99E101F8C2484DE59A62F153 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_glfw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_impl_glfw.cpp; path = include/imgui/imgui_impl_glfw.cpp; sourceTree = SOURCE_ROOT; };
+		9B61AC70B2F74C7596311E2D /* CustomRenderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = CustomRenderer; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAC8385A860042E78DEB78EA /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_opengl3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_impl_opengl3.cpp; path = include/imgui/imgui_impl_opengl3.cpp; sourceTree = SOURCE_ROOT; };
+		AB43C4EC550743E78C4A6253 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor3.cpp; path = Math/Versor/src/Versor3.cpp; sourceTree = SOURCE_ROOT; };
+		ACF2DB05D57448049BACFA13 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor2.cpp; path = Math/Versor/src/Versor2.cpp; sourceTree = SOURCE_ROOT; };
+		AD2AFFE8965D427182B051B0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Sphere.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Sphere.hpp; path = Core/Sphere.hpp; sourceTree = SOURCE_ROOT; };
+		B36DFBCA5417492E85346F67 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/tinyfiledialogs.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = tinyfiledialogs.c; path = Core/tinyfiledialogs.c; sourceTree = SOURCE_ROOT; };
+		B783C283A0E949118D66B9AB /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix3.cpp; path = Math/Matrix/src/Matrix3.cpp; sourceTree = SOURCE_ROOT; };
+		BE687E993DE64877A686AEF1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SphereMesh.cpp; path = Core/src/SphereMesh.cpp; sourceTree = SOURCE_ROOT; };
+		C10A9C065101467C98AE060A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		C666321E8F75458B81DAD1C9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix3.hpp; path = Math/Matrix/Matrix3.hpp; sourceTree = SOURCE_ROOT; };
+		C7C2189DFA604F81A20B7F02 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Sphere.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Sphere.cpp; path = Core/src/Sphere.cpp; sourceTree = SOURCE_ROOT; };
+		CD99374CD3D243CAA66756D7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix2.cpp; path = Math/Matrix/src/Matrix2.cpp; sourceTree = SOURCE_ROOT; };
+		D1F5A2F1C2BD4F0E9506540B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector3.hpp; path = Math/Vector/Vector3.hpp; sourceTree = SOURCE_ROOT; };
+		DB88CA53190C466E84980803 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Camera.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Camera.cpp; path = Core/src/Camera.cpp; sourceTree = SOURCE_ROOT; };
+		DD17D7E3C8394B9589108F3D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = RenderableMesh.cpp; path = Core/src/RenderableMesh.cpp; sourceTree = SOURCE_ROOT; };
+		DDD9EAB54A0A419999C9A882 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/ObjLoader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ObjLoader.cpp; path = Core/src/ObjLoader.cpp; sourceTree = SOURCE_ROOT; };
+		E037651272574A74A200A92A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableSphere.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = RenderableSphere.hpp; path = Core/RenderableSphere.hpp; sourceTree = SOURCE_ROOT; };
+		E202BECF27FD45E9A2578E7B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point4.hpp; path = Math/Point/Point4.hpp; sourceTree = SOURCE_ROOT; };
+		E788D457530B455698F31443 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableSphere.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = RenderableSphere.cpp; path = Core/src/RenderableSphere.cpp; sourceTree = SOURCE_ROOT; };
+		E9CEFF49271243C391C83B4B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		EB11EBD009184984B36C5B76 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point3.cpp; path = Math/Point/src/Point3.cpp; sourceTree = SOURCE_ROOT; };
+		ED13E3A91D2448F0A0FB4050 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix4.cpp; path = Math/Matrix/src/Matrix4.cpp; sourceTree = SOURCE_ROOT; };
+		EE82B00D8DA540F3B18E9494 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		F319DF96A94A4CFC870DE77E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor2.hpp; path = Math/Versor/Versor2.hpp; sourceTree = SOURCE_ROOT; };
+		F3F928B1C86F424F8F3BDC99 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_tables.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_tables.cpp; path = include/imgui/imgui_tables.cpp; sourceTree = SOURCE_ROOT; };
+		F770995F1EC14C8A9EF20A9C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Scalar.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Scalar.hpp; path = Math/Scalar.hpp; sourceTree = SOURCE_ROOT; };
+		F7B1D038BC774E4D9D45CB7E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix4.hpp; path = Math/Matrix/Matrix4.hpp; sourceTree = SOURCE_ROOT; };
+		F89828D50347461BAE4FC2B5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Region.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Region.cpp; path = Core/src/Region.cpp; sourceTree = SOURCE_ROOT; };
+		F9EA7C88C56441FDB98C08FE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Quadric.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Quadric.hpp; path = Core/Quadric.hpp; sourceTree = SOURCE_ROOT; };
+		FFEC44DA7C1C4AE8B62FF4B1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/ObjLoader.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ObjLoader.hpp; path = Core/ObjLoader.hpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		E966EB8F0C4C4EBE97891D71 /* Frameworks */ = {
+		11AF0402A8154166A3AB3E3C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F40B7C58186F48CA9DB2DA65 /* Frameworks */ = {
+		2EA2133EDA67413F9419043A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD9EE2F2F25F4446A079CF65 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -251,142 +291,164 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2AE8B98F1F4948AFA767A03B /* CustomRenderer */ = {
-			isa = PBXGroup;
-			children = (
-				3441F318F7F94BD3A2AA8DFE /* Header Files */,
-				E79F94967D2248F18891A567 /* Source Files */,
-				FEA27EDACAC84470AB108BD4 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */,
-			);
-			name = CustomRenderer;
-			sourceTree = "<group>";
-		};
-		3441F318F7F94BD3A2AA8DFE /* Header Files */ = {
-			isa = PBXGroup;
-			children = (
-				49B88758F814482986073C86 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Camera.hpp */,
-				405D234D169A42A188EE26AE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/ObjLoader.hpp */,
-				EDF58020F92D4DFD80ADAAF7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Quadric.hpp */,
-				75A0BF3B55964EBDA1925DB1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Region.hpp */,
-				039A6F7726E442B39F66036E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableMesh.hpp */,
-				09B0D78A5BE7467FB4304934 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Sphere.hpp */,
-				305A993A9AB143D499E5C592 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/SphereMesh.hpp */,
-				E51AD566A6374EE1841D2AFB /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Window.hpp */,
-				DABDB891D56643B4A7B3F8EE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Math.hpp */,
-				51E6A7ECABA4406E8462B1C9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix2.hpp */,
-				84BE1B84AEF2442BA0EB4C63 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix3.hpp */,
-				59B34202B6AA416883259EC5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix4.hpp */,
-				EDDDBFC229B34098A694F4A7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point2.hpp */,
-				05A3D1CFA14A436A8D0D150D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point3.hpp */,
-				86F6D85B92BF4394BE780448 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point4.hpp */,
-				655979FFD23D4D309EDEBC41 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/Quaternion.hpp */,
-				32045FF8CE0245FCACB78074 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Scalar.hpp */,
-				B3806958DDA14A2DA44C2DF6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector2.hpp */,
-				6329CD5546B74F29A3596917 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector3.hpp */,
-				FBA21CD6A6504D63A6A0D50B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector4.hpp */,
-				DDC2DAFE77174D7382EC4C2A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor2.hpp */,
-				9E17DBEC80644474B0E00D5E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor3.hpp */,
-				128230FF06C54D4188C3F918 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor4.hpp */,
-				945BE0A3BE9C4248B92A2EA3 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/Shader.hpp */,
-			);
-			name = "Header Files";
-			sourceTree = "<group>";
-		};
-		481E8C98EDE3428FBA5D006A /* ALL_BUILD */ = {
-			isa = PBXGroup;
-			children = (
-				CA127FEB50C14A6DB0C14DC7 /* CMake Rules */,
-				CFF9883BF6344353934AD992 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */,
-			);
-			name = ALL_BUILD;
-			sourceTree = "<group>";
-		};
-		4917EE894A9C4EC2A4B101D5 /* Source Files */ = {
-			isa = PBXGroup;
-			children = (
-				120ED69FE82649C5B76D3AFE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/glad.c */,
-			);
-			name = "Source Files";
-			sourceTree = "<group>";
-		};
-		655528425C2C40FC901F5269 = {
-			isa = PBXGroup;
-			children = (
-				B5085B61D353496E90B5BBBA /* GLAD */,
-				2AE8B98F1F4948AFA767A03B /* CustomRenderer */,
-				481E8C98EDE3428FBA5D006A /* ALL_BUILD */,
-				753B0E74AFDB44D19D0CCBE0 /* Products */,
-				8611723F0DAB4923A921DBA0 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		753B0E74AFDB44D19D0CCBE0 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				67535A4279394713A54C9B97 /* CustomRenderer */,
-				DCB3D65678BC4190A46BBDCF /* GLAD */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		8611723F0DAB4923A921DBA0 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B5085B61D353496E90B5BBBA /* GLAD */ = {
-			isa = PBXGroup;
-			children = (
-				4917EE894A9C4EC2A4B101D5 /* Source Files */,
-				5DB7E2896E4C437BA3FDC160 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */,
-			);
-			name = GLAD;
-			sourceTree = "<group>";
-		};
-		CA127FEB50C14A6DB0C14DC7 /* CMake Rules */ = {
+		0B98A9FD35C24A708D6A144A /* CMake Rules */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = "CMake Rules";
 			sourceTree = "<group>";
 		};
-		E79F94967D2248F18891A567 /* Source Files */ = {
+		221770075D0446A59F790AB3 /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
-				E84F9D5CA3A14E00B182769B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Camera.cpp */,
-				97516C5FD1C14612B3D5CE28 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/ObjLoader.cpp */,
-				BC8EA49DBD04413AB7AE1507 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Quadric.cpp */,
-				AB7576CDFA684E24A02BC9EE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Region.cpp */,
-				C881ACDD11004E43AEDF233F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableMesh.cpp */,
-				BE7A956CC835470DBD37ADD5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Sphere.cpp */,
-				341F85C3C6FF455AA3532383 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp */,
-				30AC1EFD35464B719C54BC43 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Window.cpp */,
-				A228AF93B6C54001AADEA6FE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix2.cpp */,
-				25EAFE6B44E3404899C51E43 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix3.cpp */,
-				42229147A5D141D4857C75A7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix4.cpp */,
-				6BEF4CEA068C4E86A41DE560 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point2.cpp */,
-				03C62699E934417CBE020040 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point3.cpp */,
-				2D1C15AE5A2445EEA0662DE5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point4.cpp */,
-				924D281A3C134B1392EFF330 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/src/Quaternion.cpp */,
-				DC2A7079096549EAA8A36FF1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector2.cpp */,
-				D3AED017313A4E69ACC348F2 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector3.cpp */,
-				437DD147C5FE4E6B8CFA237F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector4.cpp */,
-				1ED3B1FF5E8F40F2934545ED /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor2.cpp */,
-				493BD7DDDA19430ABC80A0DA /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor3.cpp */,
-				B4AD427D51B54D93A30C5B23 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor4.cpp */,
-				EEABF1EFF0A342CC9E838B77 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/src/Shader.cpp */,
-				6B914C6E0574443AB69F07B0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui.cpp */,
-				08163C6EAD2E4B0A8550CD84 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_demo.cpp */,
-				BFE553E5E609456BBB580C49 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_draw.cpp */,
-				4F7BB369DB21427D8E4EFD68 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_glfw.cpp */,
-				E2C05141614C4459B44B1B4B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_opengl3.cpp */,
-				54B331E26C60439A87D25985 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_tables.cpp */,
-				B4D6937899084F798398CDC6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_widgets.cpp */,
-				C6A3D94E29614578BBC04C8D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/main.cpp */,
+				B36DFBCA5417492E85346F67 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/tinyfiledialogs.c */,
 			);
 			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		2331F7382F3E479BA80741B6 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				83DC94ADD23545149BF860A6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Camera.hpp */,
+				FFEC44DA7C1C4AE8B62FF4B1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/ObjLoader.hpp */,
+				F9EA7C88C56441FDB98C08FE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Quadric.hpp */,
+				53E8875C78234EDE90FE01DC /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Region.hpp */,
+				8C0677B06CE8425793DC9AB6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableMesh.hpp */,
+				E037651272574A74A200A92A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/RenderableSphere.hpp */,
+				AD2AFFE8965D427182B051B0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Sphere.hpp */,
+				42D5A1503BB44910A05EE25F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/SphereMesh.hpp */,
+				10CA38F7D8564488852C4205 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Window.hpp */,
+				8AEC319D65804DBDA2694FD1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/YAMLUtils.hpp */,
+				938C2C68B7AE4EC0AF7BE95F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Math.hpp */,
+				0F6E12D9D3C34B159A302864 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix2.hpp */,
+				C666321E8F75458B81DAD1C9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix3.hpp */,
+				F7B1D038BC774E4D9D45CB7E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix4.hpp */,
+				063AF2DE26A045B48324AE36 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point2.hpp */,
+				0F88FEA5D9684B3CA1AD341C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point3.hpp */,
+				E202BECF27FD45E9A2578E7B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/Point4.hpp */,
+				28B1DD10590E4E0CBF47CA90 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/Quaternion.hpp */,
+				F770995F1EC14C8A9EF20A9C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Scalar.hpp */,
+				14FF31D859F044109B11DF64 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector2.hpp */,
+				D1F5A2F1C2BD4F0E9506540B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector3.hpp */,
+				19ABB0FC6EA641C98F5DD398 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/Vector4.hpp */,
+				F319DF96A94A4CFC870DE77E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor2.hpp */,
+				8F901DD0A4024CD4B915EE78 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor3.hpp */,
+				5C51934CF00C4AB59628086B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/Versor4.hpp */,
+				08FF36123EFD43EBB5A9F71D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/Shader.hpp */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		2C0E2193EF1B46E787571E1A /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				0B98A9FD35C24A708D6A144A /* CMake Rules */,
+				E9CEFF49271243C391C83B4B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		3ED33EB0731445E6BF9AE741 /* tinyfiledialogs */ = {
+			isa = PBXGroup;
+			children = (
+				221770075D0446A59F790AB3 /* Source Files */,
+				82445E60904D49098E988821 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */,
+			);
+			name = tinyfiledialogs;
+			sourceTree = "<group>";
+		};
+		B68C9F2B5EC94FBB88BC32AB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9B61AC70B2F74C7596311E2D /* CustomRenderer */,
+				0AA32BBC2592449CADD54AD8 /* GLAD */,
+				8B23FED550F5431F95C542C2 /* tinyfiledialogs */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C612B66AB5AB4EA6B5B98543 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C7DB330FB744C35AAB181AE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/glad.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		CF8CD1217ED24F0BB693C685 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D65CD229C07441159B409204 /* GLAD */ = {
+			isa = PBXGroup;
+			children = (
+				C612B66AB5AB4EA6B5B98543 /* Source Files */,
+				C10A9C065101467C98AE060A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */,
+			);
+			name = GLAD;
+			sourceTree = "<group>";
+		};
+		E0EEE2B9DDFF4BBD944EDF3A = {
+			isa = PBXGroup;
+			children = (
+				D65CD229C07441159B409204 /* GLAD */,
+				3ED33EB0731445E6BF9AE741 /* tinyfiledialogs */,
+				E989C2CFCEB54FD9BB0480EC /* CustomRenderer */,
+				2C0E2193EF1B46E787571E1A /* ALL_BUILD */,
+				B68C9F2B5EC94FBB88BC32AB /* Products */,
+				CF8CD1217ED24F0BB693C685 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E16138061A684DB1AFAC201C /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				DB88CA53190C466E84980803 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Camera.cpp */,
+				DDD9EAB54A0A419999C9A882 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/ObjLoader.cpp */,
+				8A2FA810E0E34444AD907319 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Quadric.cpp */,
+				F89828D50347461BAE4FC2B5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Region.cpp */,
+				DD17D7E3C8394B9589108F3D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableMesh.cpp */,
+				E788D457530B455698F31443 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableSphere.cpp */,
+				C7C2189DFA604F81A20B7F02 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Sphere.cpp */,
+				BE687E993DE64877A686AEF1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp */,
+				11702156D1F54EAC84A37FE1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Window.cpp */,
+				CD99374CD3D243CAA66756D7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix2.cpp */,
+				B783C283A0E949118D66B9AB /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix3.cpp */,
+				ED13E3A91D2448F0A0FB4050 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix4.cpp */,
+				3AC1C3B19A974715BF640119 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point2.cpp */,
+				EB11EBD009184984B36C5B76 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point3.cpp */,
+				17A514168D2B4A019A24E019 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point4.cpp */,
+				1655EC70DEA740629ACB1D10 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/src/Quaternion.cpp */,
+				4A9462FD64ED42209AFFC36B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector2.cpp */,
+				11CEB4EFCE6347BC9FC0E7B4 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector3.cpp */,
+				39AC08B6C133465BA0CF5F51 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector4.cpp */,
+				ACF2DB05D57448049BACFA13 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor2.cpp */,
+				AB43C4EC550743E78C4A6253 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor3.cpp */,
+				3D5B35F7943445578A74135D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor4.cpp */,
+				608234313DF14859B069AA46 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/src/Shader.cpp */,
+				681AB8A4B9AD48BCAC535C64 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui.cpp */,
+				1A962FD03B3E4785B637CC61 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_demo.cpp */,
+				82EDFC9E1072480EBD174D21 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_draw.cpp */,
+				99E101F8C2484DE59A62F153 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_glfw.cpp */,
+				AAC8385A860042E78DEB78EA /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_opengl3.cpp */,
+				F3F928B1C86F424F8F3BDC99 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_tables.cpp */,
+				8629FDEC17CB4DABA0C0F0F1 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_widgets.cpp */,
+				163DA3CAC78E4BC7B6D79758 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/main.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		E989C2CFCEB54FD9BB0480EC /* CustomRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				2331F7382F3E479BA80741B6 /* Header Files */,
+				E16138061A684DB1AFAC201C /* Source Files */,
+				EE82B00D8DA540F3B18E9494 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/CMakeLists.txt */,
+			);
+			name = CustomRenderer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -394,37 +456,55 @@
 /* Begin PBXNativeTarget section */
 		1349EAF6832E413F9E1BA8C2 /* CustomRenderer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B9FFF325D0BB480EA913D768 /* Build configuration list for PBXNativeTarget "CustomRenderer" */;
+			buildConfigurationList = 5FAEAB4CBC6A421AB38699DE /* Build configuration list for PBXNativeTarget "CustomRenderer" */;
 			buildPhases = (
-				50D16534AD824C38A13A9CFB /* Sources */,
-				F40B7C58186F48CA9DB2DA65 /* Frameworks */,
+				F4AC415EC3294F30A5CBBAE9 /* Sources */,
+				2EA2133EDA67413F9419043A /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				842A70D39DFD43FCA303FE3A /* PBXTargetDependency */,
-				ACBAB6884F62461D8C9E4072 /* PBXTargetDependency */,
+				7111AECD0E0C4137A1C7C0FF /* PBXTargetDependency */,
+				F84C54E568E3412CBC6768BF /* PBXTargetDependency */,
+				B2EF6539F58442F3B1D0F280 /* PBXTargetDependency */,
 			);
 			name = CustomRenderer;
 			productName = CustomRenderer;
-			productReference = 67535A4279394713A54C9B97 /* CustomRenderer */;
+			productReference = 9B61AC70B2F74C7596311E2D /* CustomRenderer */;
 			productType = "com.apple.product-type.tool";
 		};
-		BE294BFB6B3F4C458ACC4BB5 /* GLAD */ = {
+		6674EADF10574ADC880AB7AB /* tinyfiledialogs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF4C89F8BA2A45358BFD693B /* Build configuration list for PBXNativeTarget "GLAD" */;
+			buildConfigurationList = A6A5F45F2064429A93999B24 /* Build configuration list for PBXNativeTarget "tinyfiledialogs" */;
 			buildPhases = (
-				9E41E897228644F6ADEDA4CD /* Sources */,
-				E966EB8F0C4C4EBE97891D71 /* Frameworks */,
+				AAE7216B589B4B4DB510320A /* Sources */,
+				11AF0402A8154166A3AB3E3C /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8EAF197B28454725BB743A81 /* PBXTargetDependency */,
+				529A617F6DC446C1BA4EE567 /* PBXTargetDependency */,
+			);
+			name = tinyfiledialogs;
+			productName = tinyfiledialogs;
+			productReference = 8B23FED550F5431F95C542C2 /* tinyfiledialogs */;
+			productType = "com.apple.product-type.library.static";
+		};
+		BE294BFB6B3F4C458ACC4BB5 /* GLAD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B69A10B24374C5EA6AB8B04 /* Build configuration list for PBXNativeTarget "GLAD" */;
+			buildPhases = (
+				FFD7DE68B78E49E195EB90DD /* Sources */,
+				FD9EE2F2F25F4446A079CF65 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				259FA3F840C04749A2F6027C /* PBXTargetDependency */,
 			);
 			name = GLAD;
 			productName = GLAD;
-			productReference = DCB3D65678BC4190A46BBDCF /* GLAD */;
+			productReference = 0AA32BBC2592449CADD54AD8 /* GLAD */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -436,18 +516,18 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 			};
-			buildConfigurationList = 2AD5B99B9B28432E891A0B11 /* Build configuration list for PBXProject "CustomRenderer" */;
+			buildConfigurationList = 096AF645372840B3B33F631E /* Build configuration list for PBXProject "CustomRenderer" */;
 			buildSettings = {
 			};
 			buildStyles = (
-				588E76737D24402389A2ABF3 /* Debug */,
-				3091F6A9FF8845E58CC5C3EC /* Release */,
-				2B08FB71893C4ABE9F87A3AB /* MinSizeRel */,
-				8CCA14180B344F2C868F2BE8 /* RelWithDebInfo */,
+				84C39132550B44A18452D10E /* Debug */,
+				2F5A3607D5124C4081BF342A /* Release */,
+				25B7C65A176C43BDBDFD4F6E /* MinSizeRel */,
+				8452B16FBD1A4EDFAACF4FE1 /* RelWithDebInfo */,
 			);
 			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 0;
-			mainGroup = 655528425C2C40FC901F5269;
+			mainGroup = E0EEE2B9DDFF4BBD944EDF3A;
 			projectDirPath = ../;
 			projectRoot = "";
 			targets = (
@@ -455,6 +535,7 @@
 				1349EAF6832E413F9E1BA8C2 /* CustomRenderer */,
 				BE294BFB6B3F4C458ACC4BB5 /* GLAD */,
 				50C429161736424691CED79C /* ZERO_CHECK */,
+				6674EADF10574ADC880AB7AB /* tinyfiledialogs */,
 			);
 		};
 /* End PBXProject section */
@@ -559,88 +640,132 @@ fi
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		50D16534AD824C38A13A9CFB /* Sources */ = {
+		AAE7216B589B4B4DB510320A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C86B194399AC445098D22334 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Camera.cpp */,
-				D79DA0DA5AFF4633AACE3844 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/ObjLoader.cpp */,
-				E5A698EE34F64492A01D8B26 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Quadric.cpp */,
-				7CBB5BC099BD40AA9691F68C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Region.cpp */,
-				29BF217B3F184E79BB69206F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableMesh.cpp */,
-				16644F004273430B815A843B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Sphere.cpp */,
-				0DE4E80B70A34114BDEAF6FE /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp */,
-				2E93843BE9E94C39B76EBD90 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Window.cpp */,
-				6B40BD4AC7FD4AE6BB9A49B2 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix2.cpp */,
-				3F537BAADAF4422695BF110B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix3.cpp */,
-				BC02667D13E34F998E265709 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix4.cpp */,
-				4564500CBC1B4826B3C26B67 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point2.cpp */,
-				1557EF1ADBE442C5954CA30D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point3.cpp */,
-				D1B33DBFF3CD43318B89279C /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point4.cpp */,
-				F25D656ABE574A98AB8FEDF5 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/src/Quaternion.cpp */,
-				28719E7B4DA1482EA8806B59 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector2.cpp */,
-				49F84D89742749BFBFA4AFDA /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector3.cpp */,
-				1E3ADFBBF98549F9B9BDAA99 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector4.cpp */,
-				923F9D8F20E143908DCE3E78 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor2.cpp */,
-				0C8D056A3CCB49809DE4DEC6 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor3.cpp */,
-				632CD9D7375545C59B1CBE72 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor4.cpp */,
-				23905B6C92854DE5BA6BB70E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/src/Shader.cpp */,
-				69F2EA81737840559D295915 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui.cpp */,
-				57F72E84B0844AEDAB6B2A5A /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_demo.cpp */,
-				72B9F74E22474806B0FC1F0B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_draw.cpp */,
-				7BD0BE5AECAE44F780EEB625 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_glfw.cpp */,
-				E90C24A9EF664C3A9B893B54 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_opengl3.cpp */,
-				71C0DD86161A49A1892D9341 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_tables.cpp */,
-				A7AEE915E30844D985C56FA0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_widgets.cpp */,
-				317BDC5EA7294A31AB3F0310 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/main.cpp */,
+				E962A49D666546E7896FBDB3 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/tinyfiledialogs.c */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9E41E897228644F6ADEDA4CD /* Sources */ = {
+		F4AC415EC3294F30A5CBBAE9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B16901D6EF87428D9227787F /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/glad.c */,
+				BA601A2A5D054CF4AB3B8915 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Camera.cpp */,
+				F7282E929E68427CB4F690B3 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/ObjLoader.cpp */,
+				32D3D2ECB5F64FADBE2C2DF2 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Quadric.cpp */,
+				E857DDE5B3B74767B5D2A7C7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Region.cpp */,
+				C6775D43A27A4DF1B563B018 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableMesh.cpp */,
+				2D63C94FDA5F4B6CB81CC20B /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/RenderableSphere.cpp */,
+				A822364635BD48B5B42437D0 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Sphere.cpp */,
+				9AF18D6EDB944231809F9191 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp */,
+				85D0F49130FD43888CD39DE4 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/Window.cpp */,
+				22562C14B10644E28442BE84 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix2.cpp */,
+				D23B8C4FEBA146238FCECBEB /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix3.cpp */,
+				83027BF99100407293A4287E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/src/Matrix4.cpp */,
+				08ECC7D6FBEE4E5BAECBA204 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point2.cpp */,
+				5B2B3E93C1ED446AB5DBE061 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point3.cpp */,
+				94E8029CBBB5439E9E45DBA9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point/src/Point4.cpp */,
+				698C391C99354C6E9906D738 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation/src/Quaternion.cpp */,
+				ECD002E39DD7416CAD0F0438 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector2.cpp */,
+				D6D1F6A2415B4105B52B6658 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector3.cpp */,
+				4B0BAD58460A48779CFDDFA7 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector/src/Vector4.cpp */,
+				75B5A538A4634CDAB9CE5BA8 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor2.cpp */,
+				773F7E10149347D48F2218DC /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor3.cpp */,
+				8B8F2F1DEACD45CBA1FC8D21 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor/src/Versor4.cpp */,
+				56E42DB820C84A108DF6467D /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/src/Shader.cpp */,
+				499534AF0A9F41FAAC27D53E /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui.cpp */,
+				6E29EF1DD9A04C9BA8C1FD32 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_demo.cpp */,
+				9FB0D09087D74EF79CCCE821 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_draw.cpp */,
+				BB3C09A81DC249B98B761152 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_glfw.cpp */,
+				45555688A29747C4B14AC929 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_impl_opengl3.cpp */,
+				C2A30164D9EE4640B8644EC9 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_tables.cpp */,
+				3D73F36BD69D4D3798D1B906 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui/imgui_widgets.cpp */,
+				EC345ED247774AABA74DDDB4 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/main.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFD7DE68B78E49E195EB90DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E54AE886EE04BAF9A4EE261 /* /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/glad.c */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		34BF95A03EB14B84844B03E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BE294BFB6B3F4C458ACC4BB5 /* GLAD */;
-			targetProxy = 5A11BF0E31EE4096837112F1 /* PBXContainerItemProxy */;
-		};
-		390C464FE5C4434A92259074 /* PBXTargetDependency */ = {
+		259FA3F840C04749A2F6027C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 50C429161736424691CED79C /* ZERO_CHECK */;
-			targetProxy = B6F953F345114F77A7EDA389 /* PBXContainerItemProxy */;
+			targetProxy = 70F904E485C04839A6AD8B55 /* PBXContainerItemProxy */;
 		};
-		3F63D330CB5A4B10A5A7D8E2 /* PBXTargetDependency */ = {
+		529A617F6DC446C1BA4EE567 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50C429161736424691CED79C /* ZERO_CHECK */;
+			targetProxy = CC63E5C49D4B4785901D6DB3 /* PBXContainerItemProxy */;
+		};
+		7111AECD0E0C4137A1C7C0FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE294BFB6B3F4C458ACC4BB5 /* GLAD */;
+			targetProxy = 0D6B199B9C4843129771C4EA /* PBXContainerItemProxy */;
+		};
+		795661000A46486B92A807D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50C429161736424691CED79C /* ZERO_CHECK */;
+			targetProxy = B84306EC9C0448A69C0AB537 /* PBXContainerItemProxy */;
+		};
+		8EE625DB886A466196C0224B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1349EAF6832E413F9E1BA8C2 /* CustomRenderer */;
-			targetProxy = 38C36927926D4E689C85214C /* PBXContainerItemProxy */;
+			targetProxy = 0E3B28C10D804F078DDD88F8 /* PBXContainerItemProxy */;
 		};
-		842A70D39DFD43FCA303FE3A /* PBXTargetDependency */ = {
+		B2EF6539F58442F3B1D0F280 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50C429161736424691CED79C /* ZERO_CHECK */;
+			targetProxy = 497149DC3AA349A4916C7196 /* PBXContainerItemProxy */;
+		};
+		BFE0A7FDBBBB4D16AD964DAF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BE294BFB6B3F4C458ACC4BB5 /* GLAD */;
-			targetProxy = 8BCC03D56B6448CEA33E07D8 /* PBXContainerItemProxy */;
+			targetProxy = D880E8B8FB6C4E4694525090 /* PBXContainerItemProxy */;
 		};
-		8EAF197B28454725BB743A81 /* PBXTargetDependency */ = {
+		EA724B151979495D8200536F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 50C429161736424691CED79C /* ZERO_CHECK */;
-			targetProxy = C5A28321F8B64F039F6FF09B /* PBXContainerItemProxy */;
+			target = 6674EADF10574ADC880AB7AB /* tinyfiledialogs */;
+			targetProxy = CC62E404427C4159AF184A08 /* PBXContainerItemProxy */;
 		};
-		ACBAB6884F62461D8C9E4072 /* PBXTargetDependency */ = {
+		F84C54E568E3412CBC6768BF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 50C429161736424691CED79C /* ZERO_CHECK */;
-			targetProxy = C448F031251348A78AEF723B /* PBXContainerItemProxy */;
+			target = 6674EADF10574ADC880AB7AB /* tinyfiledialogs */;
+			targetProxy = EBCBA2530E414B2A844D1070 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0A4D4725D8784CF597BC0B6F /* RelWithDebInfo */ = {
+		0475FB6C6C214F2283B64CBE /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		09932816E13B4C5493BD49EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -654,8 +779,183 @@ fi
 				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
 				INSTALL_PATH = "";
 				LD_RUNPATH_SEARCH_PATHS = (/usr/local/lib,"$(inherited)");
+				LIBRARY_SEARCH_PATHS = ("/usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",/usr/local/lib,"$(inherited)");
 				OTHER_CPLUSPLUSFLAGS = "       '-std=c++17' ";
-				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/usr/local/lib/libglfw.3.3.dylib,"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/RelWithDebInfo/libGLAD.a","$(inherited)");
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/usr/local/lib/libglfw.3.3.dylib,"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Debug/libGLAD.a","-lyaml-cpp","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Debug/libtinyfiledialogs.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CustomRenderer;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				SYSTEM_HEADER_SEARCH_PATHS = (/usr/local/include,"$(inherited)");
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		09A54A79A36E4EF2BBC2DAF3 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		1062B2B985DC43448B120A5F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = (" ","$(inherited)");
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = tinyfiledialogs;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		24527C3C87FA488DA458CE9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		24F8B8C2D000444F8FC9A17E /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = (" ","$(inherited)");
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = tinyfiledialogs;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		289025AC779D4E6F8DDB7A09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = (/usr/local/lib,"$(inherited)");
+				LIBRARY_SEARCH_PATHS = ("/usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",/usr/local/lib,"$(inherited)");
+				OTHER_CPLUSPLUSFLAGS = "       '-std=c++17' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/usr/local/lib/libglfw.3.3.dylib,"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Release/libGLAD.a","-lyaml-cpp","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Release/libtinyfiledialogs.a","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CustomRenderer;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				SYSTEM_HEADER_SEARCH_PATHS = (/usr/local/include,"$(inherited)");
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		3036A3F0D89343F98583252C /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
+			};
+			name = RelWithDebInfo;
+		};
+		361F6050BE284E4B90DD8B8F /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		522FF4A12B0D48C595EC954D /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = (/usr/local/lib,"$(inherited)");
+				LIBRARY_SEARCH_PATHS = ("/usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",/usr/local/lib,"$(inherited)");
+				OTHER_CPLUSPLUSFLAGS = "       '-std=c++17' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/usr/local/lib/libglfw.3.3.dylib,"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/RelWithDebInfo/libGLAD.a","-lyaml-cpp","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/RelWithDebInfo/libtinyfiledialogs.a","$(inherited)");
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = CustomRenderer;
 				SECTORDER_FLAGS = "";
@@ -666,7 +966,92 @@ fi
 			};
 			name = RelWithDebInfo;
 		};
-		0B750DF082AA4220A6E14E65 /* RelWithDebInfo */ = {
+		58A386217A15471D859C9AB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = (" ","$(inherited)");
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GLAD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		7F5B564E5A844BA1BE33D7FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		817F3A4E4F4F471C916A1F5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		81EB353FB1FC473698E4D3E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Debug;
+		};
+		83F36E03427B44619FC82C0A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
@@ -674,9 +1059,124 @@ fi
 				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
 			};
+			name = Release;
+		};
+		8438F2B715864ED59C0E33A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = (" ","$(inherited)");
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GLAD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = Release;
+		};
+		87F27C48BD034EA3AEE9A1F6 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
+			};
+			name = MinSizeRel;
+		};
+		8F371F9D4E744B218E559E56 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = ("","$(inherited)");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
 			name = RelWithDebInfo;
 		};
-		1465CB6402584839A8505C36 /* MinSizeRel */ = {
+		9A43A5D735704200AB3BB5BE /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = (" ","$(inherited)");
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GLAD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = RelWithDebInfo;
+		};
+		AB5258FE160F4DEC815DA8E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
+			};
+			name = Debug;
+		};
+		C778C452854C4B21A7E17A2C /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = (" ","$(inherited)");
+				OTHER_LIBTOOLFLAGS = ("");
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = tinyfiledialogs;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("$(inherited)");
+			};
+			name = MinSizeRel;
+		};
+		CBD0917444624BAE9693B8D0 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -701,47 +1201,34 @@ fi
 			};
 			name = MinSizeRel;
 		};
-		179BF1009CDA40A09BAE922F /* RelWithDebInfo */ = {
+		DAC9B09B7CD9491A81B7DAFA /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 2;
 				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
 				INSTALL_PATH = "";
-				OTHER_LDFLAGS = ("","$(inherited)");
+				LD_RUNPATH_SEARCH_PATHS = (/usr/local/lib,"$(inherited)");
+				LIBRARY_SEARCH_PATHS = ("/usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",/usr/local/lib,"$(inherited)");
+				OTHER_CPLUSPLUSFLAGS = "       '-std=c++17' ";
+				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/usr/local/lib/libglfw.3.3.dylib,"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/MinSizeRel/libGLAD.a","-lyaml-cpp","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/MinSizeRel/libtinyfiledialogs.a","$(inherited)");
 				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
+				PRODUCT_NAME = CustomRenderer;
 				SECTORDER_FLAGS = "";
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = RelWithDebInfo;
-		};
-		5EC83813CA6F4CE9800DFF81 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = ("","$(inherited)");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				SYSTEM_HEADER_SEARCH_PATHS = (/usr/local/include,"$(inherited)");
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = ("$(inherited)");
 			};
 			name = MinSizeRel;
 		};
-		5FFCDF19669F42C2A4262842 /* RelWithDebInfo */ = {
+		E0AA8B4E9A604A9CA084C1B9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -758,287 +1245,9 @@ fi
 				OTHER_CFLAGS = (" ","$(inherited)");
 				OTHER_LIBTOOLFLAGS = ("");
 				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = GLAD;
+				PRODUCT_NAME = tinyfiledialogs;
 				SECTORDER_FLAGS = "";
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = RelWithDebInfo;
-		};
-		64970BDCB52D44DABE70FF5E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = lib;
-				EXECUTABLE_SUFFIX = .a;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
-				INSTALL_PATH = "";
-				LIBRARY_STYLE = STATIC;
-				OTHER_CFLAGS = (" ","$(inherited)");
-				OTHER_LIBTOOLFLAGS = ("");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = GLAD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = Release;
-		};
-		6E3ABAC8F0E04175846178C1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
-			};
-			name = Debug;
-		};
-		6EE0348A6CA147608D40689F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
-			};
-			name = Release;
-		};
-		869C928C658E4F43B9524AC7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = ("","$(inherited)");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = Debug;
-		};
-		946821CDDE964B018F23DE90 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = lib;
-				EXECUTABLE_SUFFIX = .a;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
-				INSTALL_PATH = "";
-				LIBRARY_STYLE = STATIC;
-				OTHER_CFLAGS = (" ","$(inherited)");
-				OTHER_LIBTOOLFLAGS = ("");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = GLAD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = Debug;
-		};
-		AB6978AD41BC44CB8925CB19 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = ("","$(inherited)");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = Release;
-		};
-		B1C91BDAEBF4417B9B7DA0C2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = ("","$(inherited)");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = Release;
-		};
-		BC6ED99718C04A9BB7648887 /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = ("","$(inherited)");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = RelWithDebInfo;
-		};
-		C85B960E739C4F35B72C42A9 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
-			};
-			name = MinSizeRel;
-		};
-		CF39E46961764E1FBAAD0644 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = "";
-				EXECUTABLE_SUFFIX = "";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
-				INSTALL_PATH = "";
-				LD_RUNPATH_SEARCH_PATHS = (/usr/local/lib,"$(inherited)");
-				OTHER_CPLUSPLUSFLAGS = "       '-std=c++17' ";
-				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/usr/local/lib/libglfw.3.3.dylib,"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/MinSizeRel/libGLAD.a","$(inherited)");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = CustomRenderer;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				SYSTEM_HEADER_SEARCH_PATHS = (/usr/local/include,"$(inherited)");
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = MinSizeRel;
-		};
-		D8370760370244909B62CF5D /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = ("","$(inherited)");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = MinSizeRel;
-		};
-		E23B8DDAF32D4869BB42ABB7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = ("","$(inherited)");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = Debug;
-		};
-		EF298D6B435040A696EB3615 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = "";
-				EXECUTABLE_SUFFIX = "";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
-				INSTALL_PATH = "";
-				LD_RUNPATH_SEARCH_PATHS = (/usr/local/lib,"$(inherited)");
-				OTHER_CPLUSPLUSFLAGS = "       '-std=c++17' ";
-				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/usr/local/lib/libglfw.3.3.dylib,"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Release/libGLAD.a","$(inherited)");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = CustomRenderer;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				SYSTEM_HEADER_SEARCH_PATHS = (/usr/local/include,"$(inherited)");
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = ("$(inherited)");
-			};
-			name = Release;
-		};
-		F77D8E89A2EE45B688C79EEA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = "";
-				EXECUTABLE_SUFFIX = "";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
-				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'","$(inherited)");
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = ("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui","/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include","$(inherited)");
-				INSTALL_PATH = "";
-				LD_RUNPATH_SEARCH_PATHS = (/usr/local/lib,"$(inherited)");
-				OTHER_CPLUSPLUSFLAGS = "       '-std=c++17' ";
-				OTHER_LDFLAGS = (" -Wl,-search_paths_first -Wl,-headerpad_max_install_names",/usr/local/lib/libglfw.3.3.dylib,"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Debug/libGLAD.a","$(inherited)");
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = CustomRenderer;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				SYSTEM_HEADER_SEARCH_PATHS = (/usr/local/include,"$(inherited)");
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = ("$(inherited)");
 			};
@@ -1047,57 +1256,68 @@ fi
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		004C047B8F2B48019AD80D23 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+		096AF645372840B3B33F631E /* Build configuration list for PBXProject "CustomRenderer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E23B8DDAF32D4869BB42ABB7 /* Debug */,
-				AB6978AD41BC44CB8925CB19 /* Release */,
-				5EC83813CA6F4CE9800DFF81 /* MinSizeRel */,
-				179BF1009CDA40A09BAE922F /* RelWithDebInfo */,
+				AB5258FE160F4DEC815DA8E9 /* Debug */,
+				83F36E03427B44619FC82C0A /* Release */,
+				87F27C48BD034EA3AEE9A1F6 /* MinSizeRel */,
+				3036A3F0D89343F98583252C /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		2AD5B99B9B28432E891A0B11 /* Build configuration list for PBXProject "CustomRenderer" */ = {
+		3BCB29D63D5F4B699B4E70C3 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6E3ABAC8F0E04175846178C1 /* Debug */,
-				6EE0348A6CA147608D40689F /* Release */,
-				C85B960E739C4F35B72C42A9 /* MinSizeRel */,
-				0B750DF082AA4220A6E14E65 /* RelWithDebInfo */,
+				7F5B564E5A844BA1BE33D7FA /* Debug */,
+				24527C3C87FA488DA458CE9D /* Release */,
+				09A54A79A36E4EF2BBC2DAF3 /* MinSizeRel */,
+				8F371F9D4E744B218E559E56 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		6CC0BDE99FF04D8BAE6BDC65 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+		5B69A10B24374C5EA6AB8B04 /* Build configuration list for PBXNativeTarget "GLAD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				869C928C658E4F43B9524AC7 /* Debug */,
-				B1C91BDAEBF4417B9B7DA0C2 /* Release */,
-				D8370760370244909B62CF5D /* MinSizeRel */,
-				BC6ED99718C04A9BB7648887 /* RelWithDebInfo */,
+				58A386217A15471D859C9AB4 /* Debug */,
+				8438F2B715864ED59C0E33A3 /* Release */,
+				CBD0917444624BAE9693B8D0 /* MinSizeRel */,
+				9A43A5D735704200AB3BB5BE /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		AF4C89F8BA2A45358BFD693B /* Build configuration list for PBXNativeTarget "GLAD" */ = {
+		5FAEAB4CBC6A421AB38699DE /* Build configuration list for PBXNativeTarget "CustomRenderer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				946821CDDE964B018F23DE90 /* Debug */,
-				64970BDCB52D44DABE70FF5E /* Release */,
-				1465CB6402584839A8505C36 /* MinSizeRel */,
-				5FFCDF19669F42C2A4262842 /* RelWithDebInfo */,
+				09932816E13B4C5493BD49EE /* Debug */,
+				289025AC779D4E6F8DDB7A09 /* Release */,
+				DAC9B09B7CD9491A81B7DAFA /* MinSizeRel */,
+				522FF4A12B0D48C595EC954D /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		B9FFF325D0BB480EA913D768 /* Build configuration list for PBXNativeTarget "CustomRenderer" */ = {
+		5FF5A7C1C3294B2B83E9102E /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F77D8E89A2EE45B688C79EEA /* Debug */,
-				EF298D6B435040A696EB3615 /* Release */,
-				CF39E46961764E1FBAAD0644 /* MinSizeRel */,
-				0A4D4725D8784CF597BC0B6F /* RelWithDebInfo */,
+				81EB353FB1FC473698E4D3E3 /* Debug */,
+				817F3A4E4F4F471C916A1F5E /* Release */,
+				361F6050BE284E4B90DD8B8F /* MinSizeRel */,
+				0475FB6C6C214F2283B64CBE /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A6A5F45F2064429A93999B24 /* Build configuration list for PBXNativeTarget "tinyfiledialogs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E0AA8B4E9A604A9CA084C1B9 /* Debug */,
+				1062B2B985DC43448B120A5F /* Release */,
+				C778C452854C4B21A7E17A2C /* MinSizeRel */,
+				24F8B8C2D000444F8FC9A17E /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

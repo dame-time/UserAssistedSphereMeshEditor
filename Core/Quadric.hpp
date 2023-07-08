@@ -15,12 +15,11 @@ namespace Renderer
 {
     class Quadric
     {
-        private:
+        public:
             Math::Matrix4 A;
             Math::Vector4 b;
             Math::Scalar c;
-
-        public:
+            
             Quadric();
             Quadric(const Math::Vector3& faceOrigin, const Math::Vector3& faceNormal);
 

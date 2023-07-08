@@ -23,8 +23,8 @@ namespace Renderer {
             static constexpr Math::Scalar UNKNOWN = -666;
             GLFWwindow* window;
         
-            RenderableMesh* pickedMesh;
-            std::vector<RenderableMesh*> pickedMeshes;
+            Sphere* pickedMesh;
+            std::vector<Sphere*> pickedMeshes;
         
             float rotationSensitivity;
             float scrollSpeed;
@@ -32,7 +32,8 @@ namespace Renderer {
             Window(unsigned int width, unsigned int height, const std::string& title, Camera* mainCamera);
             ~Window();
             
-            void setShader(Shader* shader);
+            void setMeshShader(Shader* shader);
+            void setSphereMeshShader(Shader* shader);
             void setTargetMesh(RenderableMesh* targetMesh);
             void setSphereMesh(SphereMesh* sphereMesh);
         
@@ -44,11 +45,16 @@ namespace Renderer {
             unsigned int SCR_WIDTH;
             unsigned int SCR_HEIGHT;
             Renderer::Shader* mainShader;
+            Renderer::Shader* sphereShader;
             Renderer::RenderableMesh* mesh;
             Renderer::SphereMesh* sm;
             Renderer::Camera* mainCamera;
             bool commandPressed;
             float lastX, lastY;
+        
+            bool renderVertices;
+            int renderFullSMWithNSpheres;
+            bool renderConnectivity;
         
             float deltaTime;
             float lastFrame;
@@ -56,6 +62,7 @@ namespace Renderer {
             void processInput();
         
             void renderImGUI();
+            void renderSphereMesh(const Math::Matrix4& perspective);
 
             static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
             static void mouse_callback(GLFWwindow* window, double xpos, double ypos);

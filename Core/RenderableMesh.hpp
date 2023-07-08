@@ -88,11 +88,10 @@ namespace Renderer {
         
         public:
             AABB bbox;
+            std::string path;
         
             std::vector<Vertex> vertices;
             std::vector<Face> faces;
-        
-            std::vector<RenderableMesh> subSpheres;
         
             RenderableMesh(const std::string& pathToLoadFrom, Shader* shader);
             RenderableMesh(const std::vector<Vertex>& vertices, const std::vector<Face>& faces, Shader* shader);
@@ -100,7 +99,6 @@ namespace Renderer {
             RenderableMesh& operator = (const RenderableMesh& other) {
                 this->vertices = other.vertices;
                 this->faces = other.faces;
-                this->subSpheres = other.subSpheres;
                 
                 this->model = other.model;
                 this->shader = other.shader;
@@ -128,8 +126,6 @@ namespace Renderer {
             Math::Vector3 getPosition();
             Math::Vector3 getScale();
         
-            void clearSubSpheres();
-        
             Math::Vector3 getCurrentScale();
             Math::Vector3 getCurrentTranslation();
         
@@ -142,9 +138,6 @@ namespace Renderer {
             void setUniformColor(Math::Vector3 color);
         
             void setWireframeColor(const Math::Vector3& color);
-        
-            RenderableMesh& addSubSphere(bool isPickable = true);
-            RenderableMesh* getSubSphere(const int& i);
         
             void render();
     };

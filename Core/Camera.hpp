@@ -24,8 +24,10 @@ namespace Renderer {
         
         void rotateAroundY(Math::Scalar delta);
         void rotateAroundX(Math::Scalar delta);
+        void resetRotation();
         
         void translate(Math::Scalar delta);
+        void resetTranslation();
         
         Math::Matrix4 getViewMatrix();
         Math::Matrix4 getPerspectiveMatrix(Math::Scalar fov, Math::Scalar aspect, Math::Scalar near, Math::Scalar far);
