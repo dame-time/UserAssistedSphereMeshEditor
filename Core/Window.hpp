@@ -37,6 +37,7 @@ namespace Renderer {
             void setTargetMesh(RenderableMesh* targetMesh);
             void setSphereMesh(SphereMesh* sphereMesh);
         
+            Math::Vector3 worldPosToClipPos(const Math::Vector3& worldPos);
             Math::Vector3 screenPosToObjPos(const Math::Vector3& mouse);
         
             void render();
@@ -55,6 +56,12 @@ namespace Renderer {
             bool renderVertices;
             int renderFullSMWithNSpheres;
             bool renderConnectivity;
+            float sphereSize;
+        
+            std::vector<std::vector<Sphere>> sphereBuffer;
+            
+            int connectivitySpheresPerEdge;
+            Math::Scalar connectivitySpheresSize;
         
             float deltaTime;
             float lastFrame;
@@ -63,6 +70,9 @@ namespace Renderer {
         
             void renderImGUI();
             void renderSphereMesh(const Math::Matrix4& perspective);
+        
+            void addSphereVectorToBuffer(const std::vector<Sphere>& spheres);
+            void removeLastSphereVectorFromBuffer();
 
             static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
             static void mouse_callback(GLFWwindow* window, double xpos, double ypos);

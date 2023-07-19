@@ -255,7 +255,7 @@ namespace Renderer {
         edge.clear();
     }
 
-    void SphereMesh::drawSpheresOverEdge(const Edge &e, int ns)
+    void SphereMesh::drawSpheresOverEdge(const Edge &e, int ns, Math::Scalar size)
     {
         int nSpheres = ns;
 
@@ -263,11 +263,11 @@ namespace Renderer {
 
         for (int i = 1; i < nSpheres - 1; i++)
             renderOneSphere(Math::lerp(sphere[e.i].center, sphere[e.j].center, i * 1.0f / (nSpheres - 1)),
-                            Math::lerp(sphere[e.i].radius, sphere[e.j].radius, i * 1.0f / (nSpheres - 1)),
+                            Math::lerp(sphere[e.i].radius, sphere[e.j].radius, i * 1.0f / (nSpheres - 1)) * size,
                             color);
     }
 
-    void SphereMesh::drawSpheresOverTriangle(const Triangle& e, int ns)
+    void SphereMesh::drawSpheresOverTriangle(const Triangle& e, int ns, Math::Scalar size)
     {
         Math::Vector3 color = Math::Vector3(0.1f, 0.7f, 1);
 
@@ -286,6 +286,7 @@ namespace Renderer {
                 
                 Math::Vector3 origin = Math::Vector3(sphere[e.i].center * ci + sphere[e.j].center * cj + sphere[e.k].center * ck);
                 Math::Scalar radius = sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck;
+                radius *= size;
                 renderOneSphere(origin, radius, color);
 
 //                s.scaleUniform(sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck);
@@ -305,6 +306,19 @@ namespace Renderer {
         }
     }
 
+    void SphereMesh::renderOneLine(const Math::Vector3& p0, const Math::Vector3& p1, const Math::Vector3& color, int spheresPerEdge, Math::Scalar sphereSize) {
+        Math::Scalar t = 0.0;
+        Math::Scalar cyclesIncrement = 1.0 / (Math::Scalar)spheresPerEdge;
+        
+        while (t < 1.0) {
+            Math::Vector3 point = Math::lerp<Math::Vector3>(p0, p1, t);
+            
+            renderOneSphere(point, BDDSize * sphereSize, color);
+            
+            t += cyclesIncrement;
+        }
+    }
+
     void SphereMesh::renderConnectivity()
     {
         const Math::Vector3 color = Math::Vector3(1, 1, 0);
@@ -319,6 +333,19 @@ namespace Renderer {
             renderOneLine(sphere[e.i].center, sphere[e.j].center, color);
     }
 
+    void SphereMesh::renderConnectivity(int spheresPerEdge, Math::Scalar sphereSize) {
+        const Math::Vector3 color = Math::Vector3(1, 1, 0);
+        for (Triangle& t : triangle)
+        {
+            renderOneLine(sphere[t.i].center, sphere[t.j].center, color, spheresPerEdge, sphereSize);
+            renderOneLine(sphere[t.i].center, sphere[t.k].center, color, spheresPerEdge, sphereSize);
+            renderOneLine(sphere[t.j].center, sphere[t.j].center, color, spheresPerEdge, sphereSize);
+        }
+        
+        for (Edge& e : edge)
+            renderOneLine(sphere[e.i].center, sphere[e.j].center, color, spheresPerEdge, sphereSize);
+    }
+
     void SphereMesh::render()
     {
         for (int i = 0; i < triangle.size(); i++)
@@ -328,13 +355,64 @@ namespace Renderer {
             this->drawSpheresOverEdge(edge[i]);
     }
 
-    void SphereMesh::renderWithNSpherePerEdge(int n)
+    void SphereMesh::renderWithNSpherePerEdge(int n, Math::Scalar size)
     {
         for (int i = 0; i < triangle.size(); i++)
-            this->drawSpheresOverTriangle(triangle[i], n);
+            this->drawSpheresOverTriangle(triangle[i], n, size);
 
         for (int i = 0; i < edge.size(); i++)
-            this->drawSpheresOverEdge(edge[i], n);
+            this->drawSpheresOverEdge(edge[i], n, size);
+    }
+
+    void SphereMesh::renderOneBillboardSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color)
+    {
+        static GLuint VAO = 0xBAD, VBO = 0xBAD, EBO = 0xBAD;
+        static std::vector<float> vertices;
+        static std::vector<unsigned int> indices;
+
+        if (VAO == 0xBAD)
+        {
+            vertices = {
+                -1.0f,  1.0f,
+                 1.0f,  1.0f,
+                 1.0f, -1.0f,
+                -1.0f, -1.0f
+            };
+
+            indices = {
+                0, 1, 2,
+                2, 3, 0
+            };
+
+            glGenVertexArrays(1, &VAO);
+            glBindVertexArray(VAO);
+
+            glGenBuffers(1, &VBO);
+            glBindBuffer(GL_ARRAY_BUFFER, VBO);
+            glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+
+            glGenBuffers(1, &EBO);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+
+            glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+            glEnableVertexAttribArray(0);
+
+            glBindVertexArray(0);
+        }
+
+        sphereShader->use();
+        sphereShader->setVec3("center", center);
+        sphereShader->setFloat("radius", radius);
+        sphereShader->setVec3("color", color);
+
+        glDisable(GL_CULL_FACE);
+        glDisable(GL_BLEND);
+
+        glBindVertexArray(VAO);
+        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+        glUseProgram(0);
     }
 
     void SphereMesh::renderOneSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color) {
@@ -457,10 +535,13 @@ namespace Renderer {
         sphereShader->setFloat("radius", radius);
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+//        glEnable(GL_BLEND);
+//        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, faces.size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
         glUseProgram(0);
+//        glDisable(GL_BLEND);
     }
 
     void SphereMesh::renderSpheresOnly()
@@ -475,6 +556,7 @@ namespace Renderer {
                 continue;
             }
             
+//            renderOneBillboardSphere(sphere[i].center, sphere[i].radius, sphere[i].color);
             renderOneSphere(sphere[i].center, sphere[i].radius, sphere[i].color);
         }
     }
@@ -799,6 +881,21 @@ namespace Renderer {
             out << YAML::EndMap;
             out << YAML::Key << "Start Mesh Resolution" << YAML::Value << initialSpheres.size();
             out << YAML::Key << "Sphere Mesh Resolution" << YAML::Value << sphere.size();
+            out << YAML::Key << "Initial Spheres" << YAML::Value;
+            out << YAML::BeginSeq;
+                for (int i = 0; i < initialSpheres.size(); i++)
+                {
+                    out << YAML::BeginMap;
+                        out << YAML::Key << "Center" << YAML::Value;
+                        YAMLSerializeVector3(out, initialSpheres[i].center);
+                        out << YAML::Key << "Radius" << YAML::Value << initialSpheres[i].radius;
+                        out << YAML::Key << "Quadric" << YAML::Value;
+                        YAMLSerializeQuadric(out, initialSpheres[i].quadric);
+                        out << YAML::Key << "Color" << YAML::Value;
+                        YAMLSerializeVector3(out, initialSpheres[i].color);
+                    out << YAML::EndMap;
+                }
+            out << YAML::EndSeq;
             out << YAML::Key << "Spheres" << YAML::Value;
             out << YAML::BeginSeq;
                 for (int i = 0; i < sphere.size(); i++)
@@ -809,6 +906,8 @@ namespace Renderer {
                         out << YAML::Key << "Radius" << YAML::Value << sphere[i].radius;
                         out << YAML::Key << "Quadric" << YAML::Value;
                         YAMLSerializeQuadric(out, sphere[i].quadric);
+                        out << YAML::Key << "Color" << YAML::Value;
+                        YAMLSerializeVector3(out, sphere[i].color);
                     out << YAML::EndMap;
                 }
             out << YAML::EndSeq;
@@ -857,6 +956,7 @@ namespace Renderer {
 
     void SphereMesh::loadFromYaml(const std::string& path)
     {
+        initialSpheres.clear();
         triangle.clear();
         edge.clear();
         sphere.clear();
@@ -867,14 +967,24 @@ namespace Renderer {
 
         YAML::Node data = YAML::Load(strStream.str());
         
-        std::cout << data << std::endl;
+        for (const auto& node : data["Initial Spheres"]) {
+            Sphere s;
+            
+            s.center = node["Center"].as<Math::Vector3>();
+            s.radius = node["Radius"].as<Math::Scalar>();
+            s.quadric = node["Quadric"].as<Renderer::Quadric>();
+            s.color = node["Color"].as<Math::Vector3>();
+
+            initialSpheres.push_back(s);
+        }
+        
         for (const auto& node : data["Spheres"]) {
             Sphere s;
             
             s.center = node["Center"].as<Math::Vector3>();
             s.radius = node["Radius"].as<Math::Scalar>();
             s.quadric = node["Quadric"].as<Renderer::Quadric>();
-            s.color = Math::Vector3(1, 0, 0);
+            s.color = node["Color"].as<Math::Vector3>();
 
             sphere.push_back(s);
         }

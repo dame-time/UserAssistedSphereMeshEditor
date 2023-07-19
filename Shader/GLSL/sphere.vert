@@ -14,9 +14,9 @@ uniform vec3 center;
 
 void main()
 {
-    vec4 worldPosition = vec4(aPos * radius + center, 1.0);
+    vec3 worldPosition = aPos * radius + center;
     
-    gl_Position = projection * view * worldPosition;
+    gl_Position = projection * view * vec4(worldPosition,1.0);
     
     FragPos = vec3(worldPosition.xyz);
     Normal = aPos;

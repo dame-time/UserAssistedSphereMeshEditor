@@ -1,0 +1,10 @@
+Target dependency graph (4 targets)
+ZERO_CHECK in CustomRenderer, no dependencies
+GLAD in CustomRenderer, depends on:
+ZERO_CHECK in CustomRenderer (explicit)
+tinyfiledialogs in CustomRenderer, depends on:
+ZERO_CHECK in CustomRenderer (explicit)
+CustomRenderer in CustomRenderer, depends on:
+GLAD in CustomRenderer (explicit)
+tinyfiledialogs in CustomRenderer (explicit)
+ZERO_CHECK in CustomRenderer (explicit)

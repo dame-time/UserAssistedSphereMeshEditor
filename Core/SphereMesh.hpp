@@ -109,8 +109,8 @@ namespace Renderer
             void updateTrianglessAfterCollapse(int i, int j);
             void removeDegenerates();
             
-            void drawSpheresOverEdge(const Edge &e, int nSpheres = 4);
-            void drawSpheresOverTriangle(const Triangle& t, int nSpheres = 4);
+            void drawSpheresOverEdge(const Edge &e, int nSpheres = 4, Math::Scalar size = 1.0);
+            void drawSpheresOverTriangle(const Triangle& t, int nSpheres = 4, Math::Scalar size = 1.0);
             
             Math::Vector3 getTriangleCentroid(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
             Math::Vector3 getTriangleNormal(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
@@ -119,6 +119,9 @@ namespace Renderer
         
             void renderOneSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
             void renderOneLine(const Math::Vector3& p0, const Math::Vector3& p1, const Math::Vector3& color);
+            void renderOneLine(const Math::Vector3& p0, const Math::Vector3& p1, const Math::Vector3& color, int spheresPerEdge, Math::Scalar sphereSize);
+        
+            void renderOneBillboardSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
         
         public:
             std::vector<Sphere> sphere;
@@ -133,9 +136,10 @@ namespace Renderer
             void renderSelectedSpheresOnly();
             void renderFastSelectedSpheresOnly();
             void render();
-            void renderWithNSpherePerEdge(int n);
+            void renderWithNSpherePerEdge(int n, Math::Scalar size = 1.0);
             void renderSpheresOnly();
             void renderConnectivity();
+            void renderConnectivity(int spheresPerEdge, Math::Scalar sphereSize);
         
             void renderSphereVertices(int i);
             void clearRenderedSphereVertices();

@@ -15,7 +15,14 @@
 #include <Matrix4.hpp>
 #include <Quadric.hpp>
 
-void YAMLSerializeVector3(YAML::Emitter& out, const Math::Vector3& vector) {
+#include <string>
+
+struct ShaderPath {
+    std::string vertexShaderPath;
+    std::string fragmentShaderPath;
+};
+
+inline void YAMLSerializeVector3(YAML::Emitter& out, const Math::Vector3& vector) {
     out << YAML::BeginMap;
     out << YAML::Key << "X" << YAML::Value << vector.coordinates.x;
     out << YAML::Key << "Y" << YAML::Value << vector.coordinates.y;
@@ -23,7 +30,7 @@ void YAMLSerializeVector3(YAML::Emitter& out, const Math::Vector3& vector) {
     out << YAML::EndMap;
 }
 
-void YAMLSerializeVector4(YAML::Emitter& out, const Math::Vector4& vector) {
+inline void YAMLSerializeVector4(YAML::Emitter& out, const Math::Vector4& vector) {
     out << YAML::BeginMap;
     out << YAML::Key << "X" << YAML::Value << vector.coordinates.x;
     out << YAML::Key << "Y" << YAML::Value << vector.coordinates.y;
@@ -32,7 +39,7 @@ void YAMLSerializeVector4(YAML::Emitter& out, const Math::Vector4& vector) {
     out << YAML::EndMap;
 }
 
-void YAMLSerializeMatrix4(YAML::Emitter& out, const Math::Matrix4& matrix) {
+inline void YAMLSerializeMatrix4(YAML::Emitter& out, const Math::Matrix4& matrix) {
     out << YAML::BeginMap;
     out << YAML::Key << "0" << YAML::Value << matrix.data[0];
     out << YAML::Key << "1" << YAML::Value << matrix.data[1];
@@ -53,7 +60,7 @@ void YAMLSerializeMatrix4(YAML::Emitter& out, const Math::Matrix4& matrix) {
     out << YAML::EndMap;
 }
 
-void YAMLSerializeQuadric(YAML::Emitter& out, Renderer::Quadric& q) {
+inline void YAMLSerializeQuadric(YAML::Emitter& out, Renderer::Quadric& q) {
     out << YAML::BeginMap;
     out << YAML::Key << "A" << YAML::Value;
     YAMLSerializeMatrix4(out, q.getA());
@@ -61,6 +68,31 @@ void YAMLSerializeQuadric(YAML::Emitter& out, Renderer::Quadric& q) {
     YAMLSerializeVector4(out, q.getB());
     out << YAML::Key << "c" << YAML::Value << q.getC();
     out << YAML::EndMap;
+}
+
+inline std::string getYAMLRenderableMeshPath(const std::string& path) {
+    std::ifstream stream(path);
+    std::stringstream strStream;
+    strStream << stream.rdbuf();
+
+    YAML::Node data = YAML::Load(strStream.str());
+    
+    return data["Reference Mesh"].as<std::string>();
+}
+
+inline ShaderPath getYAMLSphereShaderPath(const std::string& path) {
+    ShaderPath shaderPath;
+    
+    std::ifstream stream(path);
+    std::stringstream strStream;
+    strStream << stream.rdbuf();
+
+    YAML::Node data = YAML::Load(strStream.str());
+    
+    shaderPath.vertexShaderPath = data["Rendering Shader"]["Vertex Shader"].as<std::string>();
+    shaderPath.fragmentShaderPath = data["Rendering Shader"]["Fragment Shader"].as<std::string>();
+    
+    return shaderPath;
 }
 
 namespace YAML {

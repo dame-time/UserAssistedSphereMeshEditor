@@ -6,6 +6,8 @@
 
 #include <tinyfiledialogs.h>
 
+#include <YAMLUtils.hpp>
+
 namespace Renderer {
     Window::Window(unsigned int SCR_WIDTH, unsigned int SCR_HEIGHT, const std::string& title, Camera* mainCamera)
         : SCR_WIDTH(SCR_WIDTH), SCR_HEIGHT(SCR_HEIGHT),
@@ -19,6 +21,9 @@ namespace Renderer {
         
         renderFullSMWithNSpheres = 0;
         renderConnectivity = false;
+        
+        connectivitySpheresPerEdge = 0;
+        connectivitySpheresSize = 0;
         
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -80,6 +85,7 @@ namespace Renderer {
 
     void Window::setSphereMesh(SphereMesh* sphereMesh) {
         this->sm = sphereMesh;
+        sphereBuffer.clear();
     }
 
     void Window::render() {
@@ -96,7 +102,9 @@ namespace Renderer {
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
             
-            renderImGUI();
+            ImGui::Begin("Inspector");
+                renderImGUI();
+            ImGui::End();
             
             Math::Scalar currentFrame = glfwGetTime();
             deltaTime = currentFrame - lastFrame;
@@ -116,9 +124,8 @@ namespace Renderer {
             mainShader->setVec3("light.diffuse", Math::Vector3(0.3, 0.3, 0.3));
             mainShader->setVec3("light.specular", Math::Vector3(0.3, 0.3, 0.3));
 
-            mesh->render();
-            
             renderSphereMesh(perspective);
+            mesh->render();
             
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -143,10 +150,14 @@ namespace Renderer {
         if (renderVertices)
             for (int i = 0; i < pickedMeshes.size(); i++)
                 sm->renderSphereVertices(pickedMeshes[i]->getID());
+        
         if (renderFullSMWithNSpheres > 0)
-            sm->renderWithNSpherePerEdge(renderFullSMWithNSpheres);
-        if (renderConnectivity)
-            sm->renderConnectivity(); // TODO: set a way to increment the number of spheres for representing the connectivity
+            sm->renderWithNSpherePerEdge(renderFullSMWithNSpheres, sphereSize);
+        
+        if (renderConnectivity && connectivitySpheresPerEdge == 0)
+            sm->renderConnectivity();
+        else if (renderConnectivity && connectivitySpheresPerEdge > 0)
+            sm->renderConnectivity(connectivitySpheresPerEdge, connectivitySpheresSize);
     }
 
     void Window::processInput()
@@ -162,11 +173,59 @@ namespace Renderer {
         
     }
 
+    Math::Vector3 Window::worldPosToClipPos(const Math::Vector3& worldPos) {
+        auto translation = pickedMesh->center;
+        
+        Math::Matrix4 model = Math::Matrix4();
+        model.setColumnVector(3, Math::Vector4(translation, 1));
+        
+        Math::Matrix4 view = mainCamera->getViewMatrix();
+        Math::Matrix4 projection = mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0);
+
+        Math::Vector4 clipPos = projection * view * model * Math::Vector4(worldPos, 1.0f);
+
+        clipPos /= clipPos.coordinates.w;
+
+        return Math::Vector3(clipPos.coordinates.x, clipPos.coordinates.y, clipPos.coordinates.z);
+    }
+
+    void Window::addSphereVectorToBuffer(const std::vector<Sphere>& spheres) {
+        if (sphereBuffer.size() > 30)
+            sphereBuffer.erase(sphereBuffer.begin());
+        
+        sphereBuffer.push_back(spheres);
+    }
+
+    void Window::removeLastSphereVectorFromBuffer() {
+        sphereBuffer.pop_back();
+    }
+
     void Window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
     {
         Window* windowClassInstance = static_cast<Window*>(glfwGetWindowUserPointer(window));
         
+        static bool isFilled = false;
+        static bool isBlended = false;
+        static bool isWireframe = false;
+        
+        if (key == GLFW_KEY_TAB && action == GLFW_PRESS) {
+            isFilled = windowClassInstance->mesh->isFilled;
+            isBlended = windowClassInstance->mesh->isBlended;
+            isWireframe = windowClassInstance->mesh->isWireframe;
+            
+            windowClassInstance->mesh->setFilled(false);
+            windowClassInstance->mesh->setBlended(false);
+            windowClassInstance->mesh->setWireframe(false);
+        }
+        
+        if (key == GLFW_KEY_TAB && action == GLFW_RELEASE) {
+            windowClassInstance->mesh->setFilled(isFilled);
+            windowClassInstance->mesh->setBlended(isBlended);
+            windowClassInstance->mesh->setWireframe(isWireframe);
+        }
+        
         if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS && windowClassInstance->pickedMeshes.size() > 1) {
+            windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->sphere);
             for (auto& m : windowClassInstance->pickedMeshes)
                 m->color = Math::Vector3(1, 0, 0);
             
@@ -177,6 +236,7 @@ namespace Renderer {
         
         if (key == GLFW_KEY_A && action == GLFW_RELEASE && windowClassInstance->pickedMeshes.size() > 1)
         {
+            windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->sphere);
             for (auto& m : windowClassInstance->pickedMeshes)
                 m->color = Math::Vector3(1, 0, 0);
             
@@ -201,6 +261,7 @@ namespace Renderer {
         
         if (key == GLFW_KEY_E && action == GLFW_RELEASE)
         {
+            windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->sphere);
             windowClassInstance->pickedMeshes.clear();
             windowClassInstance->sm->reset();
         }
@@ -208,6 +269,19 @@ namespace Renderer {
         if (key == GLFW_KEY_V && action == GLFW_PRESS)
         {
             windowClassInstance->renderVertices = !windowClassInstance->renderVertices;
+        }
+        
+        if (key == GLFW_KEY_Z && action == GLFW_PRESS)
+        {
+            if (windowClassInstance->sphereBuffer.size() > 0) {
+                windowClassInstance->sm->sphere = windowClassInstance->sphereBuffer[windowClassInstance->sphereBuffer.size() - 1];
+                windowClassInstance->removeLastSphereVectorFromBuffer();
+                
+                if (windowClassInstance->pickedMesh != nullptr)
+                    windowClassInstance->pickedMesh->color = Math::Vector3(1, 0, 0);
+                
+                windowClassInstance->pickedMesh = nullptr;
+            }
         }
     }
 
@@ -249,7 +323,7 @@ namespace Renderer {
     void Window::mouse_callback(GLFWwindow* window, double xpos, double ypos)
     {
         Window* windowClassInstance = static_cast<Window*>(glfwGetWindowUserPointer(window));
-        GLfloat depth;
+        static GLfloat depth;
         
         Math::Vector3 pickedPoint = Math::Vector3();
         
@@ -277,6 +351,9 @@ namespace Renderer {
             
             glReadPixels(scaled_mouse_x, viewport[3] - scaled_mouse_y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
             pickedPoint = windowClassInstance->screenPosToObjPos(Math::Vector3(xpos, ypos, depth));
+            
+            if (windowClassInstance->pickedMesh != nullptr)
+                windowClassInstance->pickedMesh->color = Math::Vector3(0.5, 0.5, 0);
             
             Math::Scalar minDistance = DBL_MAX;
             for (int i = 0; i < windowClassInstance->sm->sphere.size(); i++) {
@@ -311,6 +388,7 @@ namespace Renderer {
         static double pickY = 0.0;
         if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS && windowClassInstance->pickedMesh != nullptr) {
             if (!isRightPressed) {
+                windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->sphere);
                 isRightPressed = true;
                 pickX = xpos;
                 pickY = ypos;
@@ -325,8 +403,9 @@ namespace Renderer {
             xoffset *= sensitivity;
             
             Math::Scalar radius = windowClassInstance->pickedMesh->radius;
-            if (radius >= 0)
+            if (radius >= 0) {
                 windowClassInstance->pickedMesh->radius = Math::Math::clamp(0.01, DBL_MAX, radius - xoffset);
+            }
         }
         
         if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE)
@@ -336,8 +415,10 @@ namespace Renderer {
         static double translateX = 0.0;
         static double translateY = 0.0;
         static Math::Vector3 initialWorldPoint;
-        if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS && windowClassInstance->pickedMesh != nullptr) {
+        if((glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
+           && windowClassInstance->pickedMesh != nullptr) {
             if (!isLeftShiftPressed) {
+                windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->sphere);
                 isLeftShiftPressed = true;
                 translateX = xpos;
                 translateY = ypos;
@@ -345,46 +426,14 @@ namespace Renderer {
                 initialWorldPoint = windowClassInstance->screenPosToObjPos(Math::Vector3(xpos, ypos, depth));
             }
             
-            Math::Scalar xoffset = translateX - xpos;
-            Math::Scalar yoffset = translateY - ypos;
-
-            translateX = xpos;
-            translateY = ypos;
-
-            Math::Scalar sensitivity = 0.01;
-
-            xoffset *= sensitivity;
-            yoffset *= sensitivity;
+            Math::Vector3 endWorldPoint = windowClassInstance->screenPosToObjPos(Math::Vector3(xpos, ypos, depth));
+            Math::Vector3 delta = endWorldPoint - initialWorldPoint;
             
-            Math::Vector3 oldPosition = windowClassInstance->pickedMesh->center;
-            windowClassInstance->pickedMesh->center = Math::Vector3(oldPosition.coordinates.x - xoffset, oldPosition.coordinates.y + yoffset, oldPosition.coordinates.z);
+            windowClassInstance->pickedMesh->center += delta;
+            initialWorldPoint = endWorldPoint;
         }
-        
-        if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
+        else
             isLeftShiftPressed = false;
-        
-        static bool isRightShiftPressed = false;
-        static double translateZ = 0.0;
-        if(glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS && windowClassInstance->pickedMesh != nullptr) {
-            if (!isRightShiftPressed) {
-                isRightShiftPressed = true;
-                translateZ = xpos;
-            }
-            
-            Math::Scalar zoffset = translateZ - xpos;
-
-            translateZ = xpos;
-
-            Math::Scalar sensitivity = 0.01;
-
-            zoffset *= sensitivity;
-            
-            Math::Vector3 oldPosition = windowClassInstance->pickedMesh->center;
-            windowClassInstance->pickedMesh->center = Math::Vector3(oldPosition.coordinates.x, oldPosition.coordinates.y, oldPosition.coordinates.z - zoffset);
-        }
-        
-        if(glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_RELEASE)
-            isRightShiftPressed = false;
 
         if(glfwGetKey(window, GLFW_KEY_LEFT_SUPER) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SUPER) == GLFW_PRESS) {
             if (!windowClassInstance->commandPressed) {
@@ -445,13 +494,36 @@ namespace Renderer {
 
         ImGui::Separator();
         
-        static bool checkboxValue = false;
-        if (ImGui::Checkbox("Wireframe", &checkboxValue))
-            mesh->setWireframe(checkboxValue);
+        static bool blended = true;
+        static bool filled = false;
+        static bool wireframe = false;
         
-        static bool checkboxVal = true;
-        if (ImGui::Checkbox("Filled", &checkboxVal))
-            mesh->setFilled(checkboxVal);
+        if (ImGui::Checkbox("Wireframe", &wireframe)) {
+            mesh->setWireframe(wireframe);
+            
+            if (wireframe) {
+                filled = false;
+                blended = false;
+            }
+        }
+        
+        if (ImGui::Checkbox("Filled", &filled)) {
+            mesh->setFilled(filled);
+            
+            if (filled) {
+                wireframe = false;
+                blended = false;
+            }
+        }
+        
+        if (ImGui::Checkbox("Blended", &blended)) {
+            mesh->setBlended(blended);
+            
+            if (blended) {
+                wireframe = false;
+                filled = false;
+            }
+        }
         
         ImGui::Separator();
         
@@ -553,27 +625,30 @@ namespace Renderer {
         Math::Math::clamp(1, 50, n);
         
         ImGui::SameLine();
+        static float sphereSizes = 1.0f;
+        ImGui::PushItemWidth(80);
+        ImGui::SliderFloat("Sphere Size", &sphereSizes, 0.001f, 10.0f, "%.4f");
+        ImGui::SameLine();
+        ImGui::InputFloat("##Sphere Size", &sphereSizes, 0.001f, 10.0f, "%.4f");
+        ImGui::PopItemWidth();
+        ImGui::SameLine();
+        
+        if (sphereSize != sphereSizes)
+            sphereSize = sphereSizes;
         
         if (ImGui::Button("Render N Full Sphere Mesh"))
         {
-            sm->renderWithNSpherePerEdge(n);
+            sm->renderWithNSpherePerEdge(n, sphereSizes);
             renderFullSMWithNSpheres = n;
         }
+        
+        if (ImGui::Button("Reset Full Sphere Mesh Size"))
+            sphereSizes = 1;
         
         if (ImGui::Button("Render Sphere Only Sphere Mesh"))
         {
             renderFullSMWithNSpheres = 0;
             sm->renderSpheresOnly();
-        }
-        
-        if (ImGui::Button("Render Connectivity of Sphere Mesh"))
-        {
-            renderConnectivity = true;
-        }
-        
-        if (ImGui::Button("Clear Connectivity of Sphere Mesh"))
-        {
-            renderConnectivity = false;
         }
         
         if (ImGui::Button("Clear Sphere Mesh"))
@@ -583,14 +658,34 @@ namespace Renderer {
         
         ImGui::Separator();
         
+        static char fileName[128] = "";
+        static std::string fileNameStr = "";
+        ImGui::PushItemWidth(120);
+        if (ImGui::InputText("Save File As", fileName, sizeof(fileName)))
+            fileNameStr = fileName;
+        ImGui::PopItemWidth();
+        
         if (ImGui::Button("Save Sphere Mesh To YAML"))
         {
-            sm->saveYAML();
+            if(fileNameStr == "")
+                sm->saveYAML();
+            else
+                sm->saveYAML(".", fileNameStr);
         }
         
         if (ImGui::Button("Save Sphere Mesh To TXT"))
         {
-            sm->saveTXT();
+            if(fileNameStr == "")
+                sm->saveTXT(".", fileNameStr);
+            else
+                sm->saveTXT();
+        }
+        
+        ImGui::Separator();
+        
+        if (ImGui::Button("Cache Sphere Mesh"))
+        {
+            sm->saveYAML(".", ".cache");
         }
         
         ImGui::Separator();
@@ -603,6 +698,17 @@ namespace Renderer {
             if (selectedFilePath) {
                 std::string filePath(selectedFilePath);
                 std::cout << "Selected file path: " << filePath << std::endl;
+                
+                delete mesh;
+                delete sm;
+                delete sphereShader;
+                
+                std::string referenceMeshPath = getYAMLRenderableMeshPath(filePath);
+                ShaderPath shaderPath = getYAMLSphereShaderPath(filePath);
+                sphereShader = new Renderer::Shader(shaderPath.vertexShaderPath.c_str(), shaderPath.fragmentShaderPath.c_str());
+                
+                mesh = new RenderableMesh(referenceMeshPath, mainShader);
+                sm = new Renderer::SphereMesh(mesh, sphereShader);
                 
                 sm->loadFromYaml(filePath);
             } else {
@@ -640,6 +746,7 @@ namespace Renderer {
         ImGui::Text("Right click over a sphere in order to scale it");
         ImGui::Text("Hold LEFT SHIFT while dragging your mouse in order to translate a sphere over the XY plane");
         ImGui::Text("Hold RIGHT SHIFT while dragging your mouse in order to translate a sphere over the Z axis");
+        ImGui::Text("Hold TAB to toggle on and off the core mesh");
         ImGui::Text("Press 'C' to collapse the last two spheres selected");
         ImGui::Text("Press 'A' to collapse all the spheres selected");
         ImGui::Text("Press 'V' to visualize the vertices of the selected spheres");
@@ -647,5 +754,6 @@ namespace Renderer {
         ImGui::Text("Press 'E' to reset the Sphere Mesh to the original Sphere Mesh");
         ImGui::Text("Press 'W' to increase zoom percentage");
         ImGui::Text("Press 'S' to increase zoom percentage");
+        ImGui::Text("Press 'Z' to undo up to 50 actions!");
     }
 }

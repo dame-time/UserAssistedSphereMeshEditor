@@ -74,9 +74,6 @@ namespace Renderer {
             Math::Vector3 wireframeColor;
             bool wireframeColorSetted = false;
         
-            bool isWireframe;
-            bool isFilled;
-        
             void setup();
             void updateGPUVertexData();
         
@@ -92,6 +89,10 @@ namespace Renderer {
         
             std::vector<Vertex> vertices;
             std::vector<Face> faces;
+        
+            bool isWireframe;
+            bool isFilled;
+            bool isBlended;
         
             RenderableMesh(const std::string& pathToLoadFrom, Shader* shader);
             RenderableMesh(const std::vector<Vertex>& vertices, const std::vector<Face>& faces, Shader* shader);
@@ -133,6 +134,7 @@ namespace Renderer {
         
             void setWireframe(bool isWireframeActive);
             void setFilled(bool isFilledActive);
+            void setBlended(bool isBlendedActive);
         
             void setColors(const std::vector<Math::Vector3>& color);
             void setUniformColor(Math::Vector3 color);

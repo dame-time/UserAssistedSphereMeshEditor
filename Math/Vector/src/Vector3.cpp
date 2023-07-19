@@ -92,13 +92,11 @@ namespace Math {
         Matrix4 inverseProjection = projection.inverse();
         Matrix4 inverseView = view.inverse();
 
-        // Transform to normalized device coordinates
         wincoord.coordinates.x = (wincoord.coordinates.x - viewport.coordinates.x) / viewport.coordinates.z;
         wincoord.coordinates.y = (wincoord.coordinates.y - viewport.coordinates.y) / viewport.coordinates.w;
 
         wincoord = wincoord * 2.0 - Vector3(1.0, 1.0, 1.0);
 
-        // Perform the un-projection
         Vector4 tmp = Vector4(wincoord, 1.0);
         tmp = inverseProjection * tmp;
         tmp = inverseView * tmp;

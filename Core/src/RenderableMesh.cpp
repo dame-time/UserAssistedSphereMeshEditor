@@ -45,7 +45,7 @@ namespace Renderer {
         generateUUID();
         updateBBOX();
         
-        this->isFilled = true;
+        this->setBlended(true);
     }
 
     RenderableMesh::RenderableMesh(const std::vector<Vertex>& vertices, const std::vector<Face>& faces, Shader* s) : shader(s) {
@@ -57,7 +57,7 @@ namespace Renderer {
         generateUUID();
         updateBBOX();
         
-        this->isFilled = true;
+        this->setBlended(true);
     }
 
     int RenderableMesh::getID() {
@@ -256,10 +256,29 @@ namespace Renderer {
 
     void RenderableMesh::setWireframe(bool isActive) {
         this->isWireframe = isActive;
+        
+        if (isActive) {
+            this->isFilled = false;
+            this->isBlended = false;
+        }
     }
 
-    void RenderableMesh::setFilled(bool isFilledActive) {
-        this->isFilled = isFilledActive;
+    void RenderableMesh::setFilled(bool isActive) {
+        this->isFilled = isActive;
+        
+        if (isActive) {
+            this->isWireframe = false;
+            this->isBlended = false;
+        }
+    }
+
+    void RenderableMesh::setBlended(bool isActive) {
+        this->isBlended = isActive;
+        
+        if (isActive) {
+            this->isWireframe = false;
+            this->isFilled = false;
+        }
     }
 
     void RenderableMesh::setWireframeColor(const Math::Vector3& color) {
@@ -293,8 +312,7 @@ namespace Renderer {
                 glUseProgram(0);
             }
         }
-        
-        if (isWireframe) {
+        else if (isWireframe) {
             Math::Vector3 fillColor = vertices[0].color;
             
             if (wireframeColorSetted)
@@ -324,6 +342,20 @@ namespace Renderer {
             }
             glDisable(GL_POLYGON_OFFSET_LINE);
             this->setUniformColor(fillColor);
+        } else if (isBlended) {
+            shader->setVec3("material.ambient", vertices[0].color);
+            shader->setVec3("material.diffuse", Math::Vector3(0.9, 0.9, 0.9));
+            shader->setVec3("material.specular", Math::Vector3(0, 0, 0));
+            shader->setFloat("material.shininess", 0);
+            glPolygonMode(GL_FRONT, GL_FILL);
+            glEnable(GL_CULL_FACE);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glBindVertexArray(VAO);
+            glDrawElements(GL_TRIANGLES, faces.size() * 3, GL_UNSIGNED_INT, 0);
+            glBindVertexArray(0);
+            glUseProgram(0);
+            glDisable(GL_BLEND);
         }
     }
 }
