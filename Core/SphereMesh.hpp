@@ -35,6 +35,7 @@ namespace Renderer
         }
     };
 
+    // TODO: Cambia nello shader la depth per le billboards
     struct CollapsableEdge
     {
         Sphere i, j;
@@ -77,6 +78,11 @@ namespace Renderer
         }
     };
 
+    enum RenderType {
+        SPHERES,
+        BILLBOARDS
+    };
+
     class SphereMesh
     {
         private:
@@ -90,6 +96,11 @@ namespace Renderer
             Math::Scalar BDDSize;
             
             Shader* sphereShader;
+        
+            RenderType renderType;
+            
+            std::vector<std::vector<bool>> edgeConnectivity;
+            std::vector<std::vector<std::vector<bool>>> triangleConnectivity;
             
             void initializeSphereMeshTriangles(const std::vector<Face>& Faces);
             void initializeSpheres(const std::vector<Vertex>& vertices, Math::Scalar initialRadius);
@@ -109,7 +120,7 @@ namespace Renderer
             void updateTrianglessAfterCollapse(int i, int j);
             void removeDegenerates();
             
-            void drawSpheresOverEdge(const Edge &e, int nSpheres = 4, Math::Scalar size = 1.0);
+            void drawSpheresOverEdge(const Edge &e, int nSpheres = 4, Math::Scalar rescaleRadii = 1.0);
             void drawSpheresOverTriangle(const Triangle& t, int nSpheres = 4, Math::Scalar size = 1.0);
             
             Math::Vector3 getTriangleCentroid(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
@@ -123,6 +134,15 @@ namespace Renderer
         
             void renderOneBillboardSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
         
+            void buildEdgeConnectivity();
+            void buildTriangleConnectivity();
+        
+            void clearEdges();
+            void clearTriangles();
+            void clearSphereMesh();
+        
+            void renderSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
+        
         public:
             std::vector<Sphere> sphere;
         
@@ -132,11 +152,14 @@ namespace Renderer
             SphereMesh& operator = (const SphereMesh& sm);
             
             void constructTest();
+        
+            RenderType getRenderType();
+            void setRenderType(const RenderType& renderType);
             
             void renderSelectedSpheresOnly();
             void renderFastSelectedSpheresOnly();
             void render();
-            void renderWithNSpherePerEdge(int n, Math::Scalar size = 1.0);
+            void renderWithNSpherePerEdge(int n, Math::Scalar rescaleRadii = 1.0);
             void renderSpheresOnly();
             void renderConnectivity();
             void renderConnectivity(int spheresPerEdge, Math::Scalar sphereSize);
@@ -159,6 +182,9 @@ namespace Renderer
         
             void saveYAML(const std::string& path = ".", const std::string& fileName = "SphereMesh.yaml");
             void saveTXT(const std::string& path = ".", const std::string& fileName = "SphereMesh.txt");
+        
+            void addEdge(int selectedSphereID);
+            void addTriangle(int sphereA, int sphereB);
             
             void clear();
         

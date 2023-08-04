@@ -1,21 +1,68 @@
 #version 330 core
 
+struct Material {
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+};
+
+struct Light {
+    vec3 position;
+
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+
 in vec2 TexCoords;
+in vec4 worldPos;
+flat in float radiusClip;
 
 out vec4 FragColor;
 
-uniform vec3 color;
+uniform vec3 viewPos;
+uniform Material material;
+uniform Light light;
+uniform vec3 sphereCenter;
+
+uniform mat4 view;
+uniform mat4 projection;
+uniform float radius;
 
 void main()
 {
-    vec2 pos = TexCoords * 2.0 - 1.0;
+    vec2 pos = TexCoords;
 
-    // Calculate the squared distance from the center
     float distSqr = dot(pos, pos);
 
-    // If the fragment is outside of the circle (distSqr > 1), discard the fragment
     if (distSqr > 1.0)
         discard;
+    
+    float normalZ = sqrt(1.0 - distSqr);
 
-    FragColor = vec4(color, 1.0);
+    vec3 normal = vec3(pos, normalZ);
+
+    // TODO: Light Dir diventa costante
+    // Light direction
+    vec3 lightDir = normalize(light.position - sphereCenter);
+
+    // Ambient component
+    vec3 ambient = light.ambient * material.ambient;
+
+    // Diffuse component
+    float diff = max(dot(normal, lightDir), 0.0);
+    vec3 diffuse = light.diffuse * diff * material.diffuse;
+
+    // Specular component
+    vec3 viewDir = normalize(viewPos - sphereCenter);
+    vec3 reflectDir = reflect(-lightDir, normal);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    vec3 specular = light.specular * spec * material.specular;
+
+    // Final color
+    vec3 result = ambient + diffuse + specular;
+    FragColor = vec4(result, 1.0);
+    
+    gl_FragDepth = gl_FragCoord.z - normalZ * radiusClip;
 }

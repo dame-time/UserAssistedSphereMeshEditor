@@ -60,7 +60,7 @@ namespace Renderer
         this->c = this->c * multiplier;
     }
 
-Math::Scalar Quadric::evaluateSQEM (const Math::Vector4 &s)
+    Math::Scalar Quadric::evaluateSQEM (const Math::Vector4 &s)
     {
         return s.dot(A * s) + b.dot(s) + c;
     }

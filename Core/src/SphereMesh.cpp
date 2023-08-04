@@ -22,6 +22,9 @@ namespace Renderer {
         edge = sm.edge;
         
         sphereShader = sm.sphereShader;
+        renderType = RenderType::SPHERES;
+        
+        clearSphereMesh();
     }
 
     SphereMesh::SphereMesh(RenderableMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius) : referenceMesh(mesh)
@@ -30,6 +33,7 @@ namespace Renderer {
         auto faces = mesh->faces;
         
         this->sphereShader = shader;
+        renderType = RenderType::SPHERES;
         
         BDDSize = mesh->bbox.BDD().magnitude();
 
@@ -40,6 +44,8 @@ namespace Renderer {
         updateSpheres();
 
         initialSpheres = sphere;
+        
+        clearSphereMesh();
     }
 
     SphereMesh& SphereMesh::operator = (const SphereMesh& sm)
@@ -51,6 +57,9 @@ namespace Renderer {
         
         triangle = sm.triangle;
         edge = sm.edge;
+        
+        edgeConnectivity = sm.edgeConnectivity;
+        triangleConnectivity = sm.triangleConnectivity;
         
         return *this;
     }
@@ -65,6 +74,102 @@ namespace Renderer {
     {
         for (int i = 0; i < vertices.size(); i++)
             sphere.push_back(Sphere(vertices[i], initialRadius));
+    }
+
+    RenderType SphereMesh::getRenderType() {
+        return this->renderType;
+    }
+
+    void SphereMesh::setRenderType(const RenderType &renderType) {
+        this->renderType = renderType;
+    }
+
+    void SphereMesh::buildEdgeConnectivity() {
+        edgeConnectivity.clear();
+        
+        for (int i = 0; i < sphere.size(); i++) {
+            std::vector<bool> row;
+            for (int j = 0; j < sphere.size(); j++)
+                row.push_back(false);
+
+            edgeConnectivity.push_back(row);
+        }
+    }
+
+    void SphereMesh::buildTriangleConnectivity() {
+        triangleConnectivity.clear();
+        
+        for (int i = 0; i < sphere.size(); i++) {
+            std::vector<std::vector<bool>> x;
+            for (int j = 0; j < sphere.size(); j++) {
+                std::vector<bool> y;
+                
+                for (int k = 0; k < sphere.size(); k++)
+                    y.push_back(false);
+                
+                x.push_back(y);
+            }
+
+            triangleConnectivity.push_back(x);
+        }
+    }
+
+    void SphereMesh::clearEdges() {
+        for (int i = 0; i < edge.size(); i++)
+            if (edge[i].i > edge[i].j) {
+                int tmp = edge[i].i;
+                edge[i].i = edge[i].j;
+                edge[i].j = tmp;
+            }
+        
+        for (int i = 0; i < edge.size(); i++)
+            edgeConnectivity[edge[i].i][edge[i].j] = true;
+        
+        edge.clear();
+        for (int i = 0; i < edgeConnectivity.size(); i++)
+            for (int j = 0; j < edgeConnectivity[i].size(); j++)
+                if (edgeConnectivity[i][j])
+                    edge.push_back(Edge(i, j));
+    }
+
+    void SphereMesh::clearTriangles() {
+        for (int i = 0; i < triangle.size(); i++) {
+            int min = std::min(triangle[i].i, std::min(triangle[i].j, triangle[i].k));
+            int max = std::max(triangle[i].i, std::max(triangle[i].j, triangle[i].k));
+            
+            if (triangle[i].i != min && triangle[i].i != max) triangle[i] = Triangle(min, triangle[i].i, max);
+            if (triangle[i].j != min && triangle[i].j != max) triangle[i] = Triangle(min, triangle[i].j, max);
+            if (triangle[i].k != min && triangle[i].k != max) triangle[i] = Triangle(min, triangle[i].k, max);
+        }
+        
+        for (int i = 0; i < triangle.size(); i++) {
+            edgeConnectivity[triangle[i].i][triangle[i].j] = false;
+            edgeConnectivity[triangle[i].i][triangle[i].k] = false;
+            edgeConnectivity[triangle[i].j][triangle[i].k] = false;
+            triangleConnectivity[triangle[i].i][triangle[i].j][triangle[i].k] = true;
+        }
+        
+        triangle.clear();
+        for (int i = 0; i < triangleConnectivity.size(); i++)
+            for (int j = 0; j < triangleConnectivity[i].size(); j++)
+                for (int k = 0; k < triangleConnectivity[i][j].size(); k++)
+                    if (triangleConnectivity[i][j][k])
+                        triangle.push_back(Triangle(i, j, k));
+    }
+
+    void SphereMesh::clearSphereMesh() {
+        buildEdgeConnectivity();
+        buildTriangleConnectivity();
+
+        clearTriangles();
+        clearEdges();
+    }
+
+    void SphereMesh::renderSphere(const Math::Vector3 &center, Math::Scalar radius, const Math::Vector3 &color) {
+        if (renderType == RenderType::SPHERES)
+            renderOneSphere(center, radius, color);
+        else
+            renderOneBillboardSphere(center, radius, color);
     }
 
     CollapsableEdge SphereMesh::getBestCollapseBruteForce()
@@ -255,21 +360,25 @@ namespace Renderer {
         edge.clear();
     }
 
-    void SphereMesh::drawSpheresOverEdge(const Edge &e, int ns, Math::Scalar size)
+    void SphereMesh::drawSpheresOverEdge(const Edge &e, int ns, Math::Scalar rescaleRadii)
     {
         int nSpheres = ns;
 
         const Math::Vector3 color = Math::Vector3(0.1, 0.7, 1);
 
         for (int i = 1; i < nSpheres - 1; i++)
-            renderOneSphere(Math::lerp(sphere[e.i].center, sphere[e.j].center, i * 1.0f / (nSpheres - 1)),
-                            Math::lerp(sphere[e.i].radius, sphere[e.j].radius, i * 1.0f / (nSpheres - 1)) * size,
+            renderSphere(Math::lerp(sphere[e.i].center, sphere[e.j].center, i * 1.0 / (nSpheres - 1)),
+                            Math::lerp(
+                                       0.3,
+                                       Math::lerp(sphere[e.i].radius, sphere[e.j].radius, i * 1.0 / (nSpheres - 1)),
+                                       rescaleRadii
+                                       ),
                             color);
     }
 
     void SphereMesh::drawSpheresOverTriangle(const Triangle& e, int ns, Math::Scalar size)
     {
-        Math::Vector3 color = Math::Vector3(0.1f, 0.7f, 1);
+        Math::Vector3 color = Math::Vector3(0.7f, 0.1f, 1);
 
         int nSpheres = ns;
 
@@ -285,12 +394,9 @@ namespace Renderer {
                 Math::Scalar ck = k * 1.0 / (nSpheres - 1);
                 
                 Math::Vector3 origin = Math::Vector3(sphere[e.i].center * ci + sphere[e.j].center * cj + sphere[e.k].center * ck);
-                Math::Scalar radius = sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck;
-                radius *= size;
-                renderOneSphere(origin, radius, color);
-
-//                s.scaleUniform(sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck);
-//                s.translate(sphere[e.i].center * ci + sphere[e.j].center * cj + sphere[e.k].center * ck);
+                Math::Scalar radius = Math::lerp(0.3, sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck, size);
+                
+                renderSphere(origin, radius, color);
             }
     }
 
@@ -300,7 +406,7 @@ namespace Renderer {
         while (t < 1.0) {
             Math::Vector3 point = Math::lerp<Math::Vector3>(p0, p1, t);
             
-            renderOneSphere(point, BDDSize * 0.002, color);
+            renderSphere(point, BDDSize * 0.002, color);
             
             t += 0.05;
         }
@@ -313,7 +419,7 @@ namespace Renderer {
         while (t < 1.0) {
             Math::Vector3 point = Math::lerp<Math::Vector3>(p0, p1, t);
             
-            renderOneSphere(point, BDDSize * sphereSize, color);
+            renderSphere(point, BDDSize * sphereSize, color);
             
             t += cyclesIncrement;
         }
@@ -355,13 +461,13 @@ namespace Renderer {
             this->drawSpheresOverEdge(edge[i]);
     }
 
-    void SphereMesh::renderWithNSpherePerEdge(int n, Math::Scalar size)
+    void SphereMesh::renderWithNSpherePerEdge(int n, Math::Scalar rescaleRadii)
     {
         for (int i = 0; i < triangle.size(); i++)
-            this->drawSpheresOverTriangle(triangle[i], n, size);
+            this->drawSpheresOverTriangle(triangle[i], n, rescaleRadii);
 
         for (int i = 0; i < edge.size(); i++)
-            this->drawSpheresOverEdge(edge[i], n, size);
+            this->drawSpheresOverEdge(edge[i], n, rescaleRadii);
     }
 
     void SphereMesh::renderOneBillboardSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color)
@@ -403,11 +509,17 @@ namespace Renderer {
 
         sphereShader->use();
         sphereShader->setVec3("center", center);
+//        sphereShader->setFloat("radius", radius);
+        sphereShader->setVec3("material.ambient", color);
+        sphereShader->setVec3("material.diffuse", Math::Vector3(0.9, 0.9, 0.9));
+        sphereShader->setVec3("material.specular", Math::Vector3(0, 0, 0));
+        sphereShader->setFloat("material.shininess", 0);
         sphereShader->setFloat("radius", radius);
-        sphereShader->setVec3("color", color);
+//        sphereShader->setVec3("color", color);
 
         glDisable(GL_CULL_FACE);
         glDisable(GL_BLEND);
+        glEnable(GL_DEPTH_TEST);
 
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
@@ -556,8 +668,7 @@ namespace Renderer {
                 continue;
             }
             
-//            renderOneBillboardSphere(sphere[i].center, sphere[i].radius, sphere[i].color);
-            renderOneSphere(sphere[i].center, sphere[i].radius, sphere[i].color);
+            renderSphere(sphere[i].center, sphere[i].radius, sphere[i].color);
         }
     }
 
@@ -571,8 +682,7 @@ namespace Renderer {
             if (r > e.i.region.directionalWidth)
                 r = e.i.region.directionalWidth;
             
-            renderOneSphere(e.i.center, r + 0.01f, e.i.color);
-            // The point is inside the triangle
+            renderSphere(e.i.center, r + 0.01f, e.i.color);
         }
         
         if (e.j.radius > 0)
@@ -581,8 +691,7 @@ namespace Renderer {
             if (r > e.j.region.directionalWidth)
                 r = e.j.region.directionalWidth;
             
-            renderOneSphere(e.j.center, r + 0.01f, e.j.color);
-            // The point is inside the triangle
+            renderSphere(e.j.center, r + 0.01f, e.j.color);
         }
     }
 
@@ -598,8 +707,7 @@ namespace Renderer {
             if (r > e.i.region.directionalWidth)
                 r = e.i.region.directionalWidth;
             
-            renderOneSphere(e.i.center, r + 0.01f, e.i.color);
-            // The point is inside the triangle
+            renderSphere(e.i.center, r + 0.01f, e.i.color);
         }
         
         if (e.j.radius > 0)
@@ -608,8 +716,7 @@ namespace Renderer {
             if (r > e.j.region.directionalWidth)
                 r = e.j.region.directionalWidth;
             
-            renderOneSphere(e.j.center, r + 0.01f, e.j.color);
-            // The point is inside the triangle
+            renderSphere(e.j.center, r + 0.01f, e.j.color);
         }
     }
 
@@ -619,7 +726,7 @@ namespace Renderer {
             if (sphere[idx].getID() == i)
             {
                 for (int j = 0; j < sphere[idx].vertices.size(); j++)
-                    renderOneSphere(sphere[idx].vertices[j].position, 0.02 * BDDSize, Math::Vector3(0, 1, 0));
+                    renderSphere(sphere[idx].vertices[j].position, 0.02 * BDDSize, Math::Vector3(0, 1, 0));
             }
                 
     }
@@ -668,6 +775,7 @@ namespace Renderer {
         std::cout << sphere.size() << std::endl;
 
         removeDegenerates();
+        clearSphereMesh();
     }
 
     void SphereMesh::collapseSphereMeshFast()
@@ -686,6 +794,7 @@ namespace Renderer {
         std::cout << sphere.size() << std::endl;
 
         removeDegenerates();
+        clearSphereMesh();
     }
 
     void SphereMesh::updateEdgesAfterCollapse(int i, int j)
@@ -778,6 +887,7 @@ namespace Renderer {
         std::cout << sphere.size() << std::endl;
 
         removeDegenerates();
+        clearSphereMesh();
     }
 
     void SphereMesh::checkSphereIntersections(Sphere& s)
@@ -1052,5 +1162,55 @@ namespace Renderer {
     void SphereMesh::reset()
     {
         sphere = initialSpheres;
+    }
+
+    void SphereMesh::addEdge(int selectedSphereID) {
+        int selectedSphereIndex = -1;
+        
+        for (int i = 0; i < sphere.size(); i++)
+            if (selectedSphereID == sphere[i].getID()) {
+                selectedSphereIndex = i;
+                break;
+            }
+        
+        if (selectedSphereIndex == -1)
+            return;
+        
+        auto selectedSphere = sphere[selectedSphereIndex];
+        Sphere sphereCopy = Sphere(sphere[selectedSphereIndex].center, sphere[selectedSphereIndex].radius);
+        sphereCopy.quadric = selectedSphere.quadric;
+        sphereCopy.center += Math::Vector3(0.05, 0.05, 0) * BDDSize;
+        
+        sphere.push_back(sphereCopy);
+        edge.push_back(Edge(selectedSphereIndex, sphere.size() - 1));
+        
+        clearSphereMesh();
+    }
+
+    // FIXME: For some weird reason it does not create a new sphere
+    void SphereMesh::addTriangle(int sphereA, int sphereB) {
+        int idxA = -1;
+        int idxB = -1;
+        
+        for (int i = 0; i < sphere.size(); i++) {
+            if (sphereA == sphere[i].getID())
+                idxA = i;
+            if (sphereB == sphere[i].getID())
+                idxB = i;
+        }
+        
+        if (idxA == -1 || idxB == -1)
+            return;
+        
+        auto selectedA = sphere[idxA];
+        auto selectedB = sphere[idxB];
+        Sphere sphereCopy = Sphere(Math::lerp<Math::Vector3>(selectedA.center, selectedB.center, 0.5), Math::lerp(selectedA.radius, selectedB.radius, 0.5));
+        sphereCopy.quadric = selectedA.quadric;
+        sphereCopy.center += Math::Vector3(0.05, 0.05, 0) * BDDSize;
+        
+        sphere.push_back(sphereCopy);
+        triangle.push_back(Triangle(idxA, idxB, sphere.size() - 1));
+        
+        clearSphereMesh();
     }
 }

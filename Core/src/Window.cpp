@@ -271,6 +271,17 @@ namespace Renderer {
             windowClassInstance->renderVertices = !windowClassInstance->renderVertices;
         }
         
+        if (key == GLFW_KEY_B && action == GLFW_PRESS)
+        {
+            if (windowClassInstance->sm->getRenderType() == RenderType::SPHERES) {
+                windowClassInstance->sm->setRenderType(RenderType::BILLBOARDS);
+                *windowClassInstance->sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.frag");
+            } else {
+                windowClassInstance->sm->setRenderType(RenderType::SPHERES);
+                *windowClassInstance->sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
+            }
+        }
+        
         if (key == GLFW_KEY_Z && action == GLFW_PRESS)
         {
             if (windowClassInstance->sphereBuffer.size() > 0) {
@@ -281,6 +292,26 @@ namespace Renderer {
                     windowClassInstance->pickedMesh->color = Math::Vector3(1, 0, 0);
                 
                 windowClassInstance->pickedMesh = nullptr;
+            }
+        }
+        
+        if (key == GLFW_KEY_N && action == GLFW_PRESS) {
+            if (windowClassInstance->pickedMesh != nullptr){
+                windowClassInstance->sm->addEdge(windowClassInstance->pickedMesh->getID());
+                windowClassInstance->pickedMesh->color = Math::Vector3(1, 0, 0);
+                windowClassInstance->pickedMesh = nullptr;
+            }
+        }
+        
+        // FIXME: for some reason it does not create any sphere
+        if (key == GLFW_KEY_T && action == GLFW_PRESS) {
+            if (windowClassInstance->pickedMesh != nullptr && windowClassInstance->pickedMeshes.size() > 1){
+                windowClassInstance->sm->addTriangle(windowClassInstance->pickedMesh->getID(), windowClassInstance->pickedMeshes[windowClassInstance->pickedMeshes.size() - 2]->getID());
+                windowClassInstance->pickedMesh->color = Math::Vector3(1, 0, 0);
+                windowClassInstance->pickedMesh = nullptr;
+                windowClassInstance->pickedMeshes.pop_back();
+                windowClassInstance->pickedMeshes[windowClassInstance->pickedMeshes.size() - 1]->color = Math::Vector3(1, 0, 0);
+                windowClassInstance->pickedMeshes.pop_back();
             }
         }
     }
@@ -627,9 +658,7 @@ namespace Renderer {
         ImGui::SameLine();
         static float sphereSizes = 1.0f;
         ImGui::PushItemWidth(80);
-        ImGui::SliderFloat("Sphere Size", &sphereSizes, 0.001f, 10.0f, "%.4f");
-        ImGui::SameLine();
-        ImGui::InputFloat("##Sphere Size", &sphereSizes, 0.001f, 10.0f, "%.4f");
+        ImGui::SliderFloat("Sphere Size", &sphereSizes, 0.f, 1.0f, "%.4f");
         ImGui::PopItemWidth();
         ImGui::SameLine();
         
@@ -755,5 +784,6 @@ namespace Renderer {
         ImGui::Text("Press 'W' to increase zoom percentage");
         ImGui::Text("Press 'S' to increase zoom percentage");
         ImGui::Text("Press 'Z' to undo up to 50 actions!");
+        ImGui::Text("Press 'B' to toggle between billboards and concrete spheres");
     }
 }
