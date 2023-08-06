@@ -70,9 +70,23 @@ namespace Renderer {
         perspectiveMatrix.data[0] = 1.0 / (aspect * tanHalfFOV);
         perspectiveMatrix.data[5] = 1.0 / tanHalfFOV;
         perspectiveMatrix.data[10] = -(far + near) / (far - near);
-        perspectiveMatrix.data[14] = -(2.0 * far * near) / (far - near);
+        perspectiveMatrix.data[11] = -(2.0 * far * near) / (far - near);
         perspectiveMatrix.data[14] = -1.0;
         
         return perspectiveMatrix;
+    }
+
+    Math::Matrix4 Camera::getOrthographicMatrix(Math::Scalar width, Math::Scalar heigh, Math::Scalar near, Math::Scalar far) {
+        Math::Matrix4 orthographicMatrix = Math::Matrix4();
+        
+        orthographicMatrix.data[0] = 2.0 / width;
+        orthographicMatrix.data[5] = 2.0 / heigh;
+        orthographicMatrix.data[10] = -2.0 / (far - near);
+        orthographicMatrix.data[12] = -width / width;
+        orthographicMatrix.data[13] = -heigh / heigh;
+        orthographicMatrix.data[14] = -(far + near) / (far - near);
+        orthographicMatrix.data[15] = 1.0;
+        
+        return orthographicMatrix;
     }
 }

@@ -53,6 +53,8 @@ namespace Renderer {
             bool commandPressed;
             float lastX, lastY;
         
+            bool isCameraPerspective;
+        
             bool renderVertices;
             int renderFullSMWithNSpheres;
             bool renderConnectivity;

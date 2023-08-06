@@ -65,6 +65,8 @@ namespace Renderer {
         ImGui_ImplOpenGL3_Init();
 
         ImGui::StyleColorsDark();
+        
+        isCameraPerspective = true;
     }
 
     Window::~Window() {
@@ -94,7 +96,8 @@ namespace Renderer {
         
         mainCamera->setTarget(mesh->getCentroid());
         
-        Math::Matrix4 perspective = mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0);
+        Math::Matrix4 perspective = isCameraPerspective ? mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0) :
+        mainCamera->getOrthographicMatrix(SCR_WIDTH, SCR_HEIGHT, 0.1, 100000.0);
 
         while (!glfwWindowShouldClose(window))
         {
@@ -180,7 +183,8 @@ namespace Renderer {
         model.setColumnVector(3, Math::Vector4(translation, 1));
         
         Math::Matrix4 view = mainCamera->getViewMatrix();
-        Math::Matrix4 projection = mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0);
+        Math::Matrix4 projection = isCameraPerspective ? mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0) :
+        mainCamera->getOrthographicMatrix(SCR_WIDTH, SCR_HEIGHT, 0.1, 100000.0);
 
         Math::Vector4 clipPos = projection * view * model * Math::Vector4(worldPos, 1.0f);
 
@@ -303,7 +307,6 @@ namespace Renderer {
             }
         }
         
-        // FIXME: for some reason it does not create any sphere
         if (key == GLFW_KEY_T && action == GLFW_PRESS) {
             if (windowClassInstance->pickedMesh != nullptr && windowClassInstance->pickedMeshes.size() > 1){
                 windowClassInstance->sm->addTriangle(windowClassInstance->pickedMesh->getID(), windowClassInstance->pickedMeshes[windowClassInstance->pickedMeshes.size() - 2]->getID());
@@ -313,6 +316,10 @@ namespace Renderer {
                 windowClassInstance->pickedMeshes[windowClassInstance->pickedMeshes.size() - 1]->color = Math::Vector3(1, 0, 0);
                 windowClassInstance->pickedMeshes.pop_back();
             }
+        }
+        
+        if (key == GLFW_KEY_P && action == GLFW_PRESS) {
+            windowClassInstance->isCameraPerspective = !windowClassInstance->isCameraPerspective;
         }
     }
 
@@ -344,7 +351,8 @@ namespace Renderer {
 
         // Unproject this point back into the world
         Math::Matrix4 view = mainCamera->getViewMatrix();
-        Math::Matrix4 projection = mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0);
+        Math::Matrix4 projection = isCameraPerspective ? mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0) :
+        mainCamera->getOrthographicMatrix(SCR_WIDTH, SCR_HEIGHT, 0.1, 100000.0);
         Math::Vector3 wincoord = Math::Vector3(scaled_mouse_x, viewport[3] - scaled_mouse_y, mouse.coordinates.z);
         Math::Vector3 objcoord = Math::Vector3::unProject(wincoord, view, projection, Math::Vector4(viewport[0], viewport[1], viewport[2], viewport[3]));
 
@@ -776,6 +784,7 @@ namespace Renderer {
         ImGui::Text("Hold LEFT SHIFT while dragging your mouse in order to translate a sphere over the XY plane");
         ImGui::Text("Hold RIGHT SHIFT while dragging your mouse in order to translate a sphere over the Z axis");
         ImGui::Text("Hold TAB to toggle on and off the core mesh");
+        ImGui::Text("Press 'P' to switch camera from projection to perspective");
         ImGui::Text("Press 'C' to collapse the last two spheres selected");
         ImGui::Text("Press 'A' to collapse all the spheres selected");
         ImGui::Text("Press 'V' to visualize the vertices of the selected spheres");
@@ -785,5 +794,7 @@ namespace Renderer {
         ImGui::Text("Press 'S' to increase zoom percentage");
         ImGui::Text("Press 'Z' to undo up to 50 actions!");
         ImGui::Text("Press 'B' to toggle between billboards and concrete spheres");
+        ImGui::Text("Press 'N' after selecting a sphere to create an edge with a new sphere");
+        ImGui::Text("Press 'T' after selecting two spheres to create a triangle with a new mid point sphere");
     }
 }
