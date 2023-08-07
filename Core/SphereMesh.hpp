@@ -185,6 +185,8 @@ namespace Renderer
         
             void addEdge(int selectedSphereID);
             void addTriangle(int sphereA, int sphereB);
+        
+            void removeSphere(int selectedSphereID);
             
             void clear();
         

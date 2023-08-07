@@ -13,6 +13,8 @@ namespace Renderer {
         ro = 0;
         phi = 0;
         theta = 0;
+        
+        orthographicScale = 1;
     }
 
     void Camera::setTarget(const Math::Vector3& target) {
@@ -40,6 +42,14 @@ namespace Renderer {
 
     void Camera::resetTranslation() {
         ro = 0;
+    }
+
+    void Camera::scale(Math::Scalar scale) {
+        orthographicScale += scale;
+    }
+
+    void Camera::resetScale() {
+        orthographicScale = 1;
     }
 
     Math::Matrix4 Camera::getViewMatrix() {
@@ -76,15 +86,21 @@ namespace Renderer {
         return perspectiveMatrix;
     }
 
-    Math::Matrix4 Camera::getOrthographicMatrix(Math::Scalar width, Math::Scalar heigh, Math::Scalar near, Math::Scalar far) {
+    Math::Matrix4 Camera::getOrthographicMatrix(Math::Scalar width, Math::Scalar height, Math::Scalar near, Math::Scalar far) {
+        width *= Math::Math::clamp(0.0, 10000000.0, orthographicScale);
+        height *= Math::Math::clamp(0.0, 10000000.0, orthographicScale);
+        
         Math::Matrix4 orthographicMatrix = Math::Matrix4();
         
         orthographicMatrix.data[0] = 2.0 / width;
-        orthographicMatrix.data[5] = 2.0 / heigh;
+        orthographicMatrix.data[5] = 2.0 / height;
         orthographicMatrix.data[10] = -2.0 / (far - near);
-        orthographicMatrix.data[12] = -width / width;
-        orthographicMatrix.data[13] = -heigh / heigh;
-        orthographicMatrix.data[14] = -(far + near) / (far - near);
+        
+        // The following lines should calculate the translations based on left, right, bottom, and top values
+        // Since we're dealing with width and height, we can assume left = -width / 2, right = width / 2, bottom = -height / 2, and top = height / 2
+        orthographicMatrix.data[3] = -(width / 2 + (-width / 2)) / width;
+        orthographicMatrix.data[7] = -(height / 2 + (-height / 2)) / height;
+        orthographicMatrix.data[11] = -(far + near) / (far - near);
         orthographicMatrix.data[15] = 1.0;
         
         return orthographicMatrix;

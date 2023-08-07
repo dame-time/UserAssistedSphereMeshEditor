@@ -1187,7 +1187,6 @@ namespace Renderer {
         clearSphereMesh();
     }
 
-    // FIXME: For some weird reason it does not create a new sphere
     void SphereMesh::addTriangle(int sphereA, int sphereB) {
         int idxA = -1;
         int idxB = -1;
@@ -1211,6 +1210,51 @@ namespace Renderer {
         sphere.push_back(sphereCopy);
         triangle.push_back(Triangle(idxA, idxB, sphere.size() - 1));
         
+        clearSphereMesh();
+    }
+
+    void SphereMesh::removeSphere(int selectedSphereID) {
+        int selectedSphereIndex = -1;
+        
+        for (int i = 0; i < sphere.size(); i++)
+            if (selectedSphereID == sphere[i].getID()) {
+                selectedSphereIndex = i;
+                break;
+            }
+        
+        if (selectedSphereIndex == -1)
+            return;
+        
+        sphere[selectedSphereIndex] = sphere.back();
+        sphere.pop_back();
+        
+        for (int i = 0; i < triangle.size();)
+            if (triangle[i].i == selectedSphereIndex || triangle[i].j == selectedSphereIndex || triangle[i].k == selectedSphereIndex)
+                triangle.erase(triangle.begin() + i);
+            else
+                ++i;
+        
+        for (int i = 0; i < edge.size();)
+            if (edge[i].i == selectedSphereIndex || edge[i].j == selectedSphereIndex)
+                edge.erase(edge.begin() + i);
+            else
+                ++i;
+        
+        for (int i = 0; i < edge.size(); i++)
+            if (edge[i].i == sphere.size())
+                edge[i].i = selectedSphereIndex;
+            else if (edge[i].j == sphere.size())
+                edge[i].j = selectedSphereIndex;
+        
+        for (int i = 0; i < triangle.size(); i++)
+            if (triangle[i].i == sphere.size())
+                triangle[i].i = selectedSphereIndex;
+            else if (triangle[i].j == sphere.size())
+                triangle[i].j = selectedSphereIndex;
+            else if (triangle[i].k == sphere.size())
+                triangle[i].k = selectedSphereIndex;
+        
+        removeDegenerates();
         clearSphereMesh();
     }
 }

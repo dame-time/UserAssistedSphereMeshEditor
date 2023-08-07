@@ -95,12 +95,12 @@ namespace Renderer {
         mainCamera->translate(cameraDistance);
         
         mainCamera->setTarget(mesh->getCentroid());
-        
-        Math::Matrix4 perspective = isCameraPerspective ? mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0) :
-        mainCamera->getOrthographicMatrix(SCR_WIDTH, SCR_HEIGHT, 0.1, 100000.0);
 
         while (!glfwWindowShouldClose(window))
         {
+            Math::Matrix4 perspective = isCameraPerspective ? mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0) :
+            mainCamera->getOrthographicMatrix(SCR_WIDTH, SCR_HEIGHT, 0.1, 100000.0);
+            
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
@@ -170,9 +170,16 @@ namespace Renderer {
         
         Math::Scalar cameraSpeed = scrollSpeed;
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-            mainCamera->translate(-cameraSpeed * deltaTime);
+            if (isCameraPerspective)
+                mainCamera->translate(-cameraSpeed * deltaTime);
+            else
+                mainCamera->scale(-cameraSpeed/10 * deltaTime);
+        
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-            mainCamera->translate(cameraSpeed * deltaTime);
+            if (isCameraPerspective)
+                mainCamera->translate(cameraSpeed * deltaTime);
+            else
+                mainCamera->scale(cameraSpeed/10 * deltaTime);
         
     }
 
@@ -320,6 +327,14 @@ namespace Renderer {
         
         if (key == GLFW_KEY_P && action == GLFW_PRESS) {
             windowClassInstance->isCameraPerspective = !windowClassInstance->isCameraPerspective;
+        }
+        
+        if (key == GLFW_KEY_D && action == GLFW_PRESS) {
+            if (windowClassInstance->pickedMesh != nullptr) {
+                windowClassInstance->sm->removeSphere(windowClassInstance->pickedMesh->getID());
+                windowClassInstance->pickedMesh = nullptr;
+                windowClassInstance->pickedMeshes.clear();
+            }
         }
     }
 
@@ -796,5 +811,6 @@ namespace Renderer {
         ImGui::Text("Press 'B' to toggle between billboards and concrete spheres");
         ImGui::Text("Press 'N' after selecting a sphere to create an edge with a new sphere");
         ImGui::Text("Press 'T' after selecting two spheres to create a triangle with a new mid point sphere");
+        ImGui::Text("Press 'D' to delete a sphere (NOT UNDOABLE)");
     }
 }

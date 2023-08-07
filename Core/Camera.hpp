@@ -11,6 +11,8 @@ namespace Renderer {
         Math::Scalar theta;
         Math::Scalar ro;
         
+        Math::Scalar orthographicScale;
+        
         Math::Matrix4 yRotation;
         Math::Matrix4 xRotation;
         Math::Matrix4 originTranslation;
@@ -28,6 +30,9 @@ namespace Renderer {
         
         void translate(Math::Scalar delta);
         void resetTranslation();
+        
+        void scale(Math::Scalar scale);
+        void resetScale();
         
         Math::Matrix4 getViewMatrix();
         Math::Matrix4 getPerspectiveMatrix(Math::Scalar fov, Math::Scalar aspect, Math::Scalar near, Math::Scalar far);
