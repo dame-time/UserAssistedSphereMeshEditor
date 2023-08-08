@@ -80,21 +80,6 @@ inline std::string getYAMLRenderableMeshPath(const std::string& path) {
     return data["Reference Mesh"].as<std::string>();
 }
 
-inline ShaderPath getYAMLSphereShaderPath(const std::string& path) {
-    ShaderPath shaderPath;
-    
-    std::ifstream stream(path);
-    std::stringstream strStream;
-    strStream << stream.rdbuf();
-
-    YAML::Node data = YAML::Load(strStream.str());
-    
-    shaderPath.vertexShaderPath = data["Rendering Shader"]["Vertex Shader"].as<std::string>();
-    shaderPath.fragmentShaderPath = data["Rendering Shader"]["Fragment Shader"].as<std::string>();
-    
-    return shaderPath;
-}
-
 namespace YAML {
     template<>
     struct convert<Math::Vector3> {

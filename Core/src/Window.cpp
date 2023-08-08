@@ -1,5 +1,7 @@
 #include <Window.hpp>
 
+#define IMGUI_ENABLE_DOCKING
+
 #include "imgui.h"
 #include "imgui_impl_opengl3.h"
 #include "imgui_impl_glfw.h"
@@ -101,13 +103,31 @@ namespace Renderer {
             Math::Matrix4 perspective = isCameraPerspective ? mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0) :
             mainCamera->getOrthographicMatrix(SCR_WIDTH, SCR_HEIGHT, 0.1, 100000.0);
             
+            ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+            
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
             
+//            ImGui::Begin("DockSpace Demo", nullptr, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking);
+            ImGuiID dockspace_id = ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
+//            ImGui::End();
+            
             ImGui::Begin("Inspector");
                 renderImGUI();
             ImGui::End();
+            
+            ImGui::Begin("Application Stats");
+                ImGui::Text("Frames per second: %f", ImGui::GetIO().Framerate);
+                ImGui::Text("Mesh Vertices: %lu", mesh->vertices.size());
+                ImGui::Text("Sphere Mesh Spheres: %lu", sm->sphere.size());
+                ImGui::Text("Sphere Mesh Edges: %d", sm->getEdgeSize());
+                ImGui::Text("Sphere Mesh Triangles: %d", sm->getTriangleSize());
+                ImGui::Text("Rendered vertices per sphere: %d", sm->getPerSphereVertexCount());
+                ImGui::Text("Total vertices rendered: %lu", (sm->getRenderCalls() * sm->getPerSphereVertexCount()) +
+                            (mesh->isFilled || mesh->isBlended || mesh->isWireframe ? mesh->vertices.size() : 0));
+            ImGui::End();
+            sm->resetRenderCalls();
             
             Math::Scalar currentFrame = glfwGetTime();
             deltaTime = currentFrame - lastFrame;
@@ -240,9 +260,13 @@ namespace Renderer {
             for (auto& m : windowClassInstance->pickedMeshes)
                 m->color = Math::Vector3(1, 0, 0);
             
-            windowClassInstance->sm->collapse(windowClassInstance->pickedMeshes[windowClassInstance->pickedMeshes.size() - 1]->getID(), windowClassInstance->pickedMeshes[windowClassInstance->pickedMeshes.size() - 2]->getID());
+            auto result = windowClassInstance->sm->collapse(windowClassInstance->pickedMeshes[windowClassInstance->pickedMeshes.size() - 1]->getID(), windowClassInstance->pickedMeshes[windowClassInstance->pickedMeshes.size() - 2]->getID());
             windowClassInstance->pickedMeshes.clear();
             windowClassInstance->pickedMesh = nullptr;
+            
+            if (!result)
+                std::cerr << "Failed to collapse the two spheres" << std::endl;
+            // TODO: Print in gui the total number of spheres
         }
         
         if (key == GLFW_KEY_A && action == GLFW_RELEASE && windowClassInstance->pickedMeshes.size() > 1)
@@ -253,12 +277,18 @@ namespace Renderer {
             
             int i = windowClassInstance->pickedMeshes.size();
             while (i - 1 > 0) {
-                windowClassInstance->sm->collapse(windowClassInstance->pickedMeshes[i - 1]->getID(), windowClassInstance->pickedMeshes[i - 2]->getID());
+                auto result = windowClassInstance->sm->collapse(windowClassInstance->pickedMeshes[i - 1]->getID(),
+                                                                windowClassInstance->pickedMeshes[i - 2]->getID());
+                
+                if (!result)
+                    std::cerr << "Failed to collapse the two spheres: (" << i << ", " << i + 1 << ")" << std::endl;
                 i -= 2;
             }
             
             windowClassInstance->pickedMeshes.clear();
             windowClassInstance->pickedMesh = nullptr;
+            
+            // TODO: Print in gui the total number of spheres
         }
         
         if (key == GLFW_KEY_R && action == GLFW_RELEASE && windowClassInstance->pickedMeshes.size() > 0)
@@ -593,7 +623,12 @@ namespace Renderer {
         
         if (ImGui::Button("Collapse Best BF Sphere Mesh Edge"))
         {
-            sm->collapseSphereMesh();
+            auto result = sm->collapseSphereMesh();
+            
+            // TODO: Display this in the GUI
+            if (!result)
+                std::cerr << "Could not find any good sphere to collapse" << std::endl;
+            
             sm->renderSpheresOnly();
         }
         
@@ -606,7 +641,13 @@ namespace Renderer {
         
         if (ImGui::Button("Render Sphere BF Mesh Vetices Collapsed"))
         {
-            sm->collapseSphereMesh(j);
+            int initialSpheres = sm->sphere.size();
+            auto result = sm->collapseSphereMesh(j);
+            
+            // TODO: Display this in the GUI
+            if (!result)
+                std::cerr << "Could not find any good sphere to collapse, spheres collapsed: " << initialSpheres - sm->sphere.size() << std::endl;
+            
             sm->renderSpheresOnly();
         }
         
@@ -620,7 +661,10 @@ namespace Renderer {
         if (ImGui::Button("Render BF Sphere Mesh Vetices"))
         {
             for (int i = 0; i < k; i++)
-                sm->collapseSphereMesh();
+                if (!sm->collapseSphereMesh()) {
+                    std::cerr << "Could not find any good sphere to collapse, spheres collapsed: " << i << std::endl;
+                    break;
+                }
             sm->renderSpheresOnly();
         }
         
@@ -633,7 +677,12 @@ namespace Renderer {
         
         if (ImGui::Button("Collapse Best Fast Sphere Mesh Edge"))
         {
-            sm->collapseSphereMeshFast();
+            auto result = sm->collapseSphereMeshFast();
+            
+            // TODO: Display this in the GUI
+            if (!result)
+                std::cerr << "Could not find any good sphere to collapse" << std::endl;
+            
             sm->renderSpheresOnly();
         }
         
@@ -647,7 +696,11 @@ namespace Renderer {
         if (ImGui::Button("Render Fast Sphere Mesh Vetices"))
         {
             for (int i = 0; i < f; i++)
-                sm->collapseSphereMeshFast();
+                if (!sm->collapseSphereMeshFast())
+                {
+                    std::cerr << "Could not find any good sphere to collapse, spheres collapsed: " << i << std::endl;
+                    break;
+                }
             sm->renderSpheresOnly();
         }
         
@@ -660,7 +713,12 @@ namespace Renderer {
         
         if (ImGui::Button("Render Fast Sphere Mesh Vetices Collapsed"))
         {
-            sm->collapseSphereMeshFast(d);
+            int initialSpheres = sm->sphere.size();
+            auto result = sm->collapseSphereMeshFast(d);
+            
+            // TODO: Display this in the GUI
+            if (!result)
+                std::cerr << "Could not find any good sphere to collapse, spheres collapsed: " << initialSpheres - sm->sphere.size() << std::endl;
             sm->renderSpheresOnly();
         }
         
@@ -756,8 +814,6 @@ namespace Renderer {
                 delete sphereShader;
                 
                 std::string referenceMeshPath = getYAMLRenderableMeshPath(filePath);
-                ShaderPath shaderPath = getYAMLSphereShaderPath(filePath);
-                sphereShader = new Renderer::Shader(shaderPath.vertexShaderPath.c_str(), shaderPath.fragmentShaderPath.c_str());
                 
                 mesh = new RenderableMesh(referenceMeshPath, mainShader);
                 sm = new Renderer::SphereMesh(mesh, sphereShader);

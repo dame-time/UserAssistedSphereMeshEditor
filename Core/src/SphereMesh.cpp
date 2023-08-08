@@ -48,6 +48,26 @@ namespace Renderer {
         clearSphereMesh();
     }
 
+    int SphereMesh::getPerSphereVertexCount() {
+        return perSphereVertices;
+    }
+
+    int SphereMesh::getRenderCalls() {
+        return renderCalls;
+    }
+
+    void SphereMesh::resetRenderCalls() {
+        renderCalls = 0;
+    }
+
+    int SphereMesh::getTriangleSize() {
+        return triangle.size();
+    }
+
+    int SphereMesh::getEdgeSize() {
+        return edge.size();
+    }
+
     SphereMesh& SphereMesh::operator = (const SphereMesh& sm)
     {
         BDDSize = sm.BDDSize;
@@ -166,6 +186,7 @@ namespace Renderer {
     }
 
     void SphereMesh::renderSphere(const Math::Vector3 &center, Math::Scalar radius, const Math::Vector3 &color) {
+        ++renderCalls;
         if (renderType == RenderType::SPHERES)
             renderOneSphere(center, radius, color);
         else
@@ -176,7 +197,8 @@ namespace Renderer {
     {
         const Math::Scalar EPSILON = 0.05 * BDDSize;
         
-        assert(sphere.size() > 1);
+        if (sphere.size() <= 1)
+            return CollapsableEdge();
         
         Math::Scalar minErorr = DBL_MAX;
         CollapsableEdge bestEdge = CollapsableEdge(sphere[0], sphere[1], -1, -1);
@@ -197,7 +219,8 @@ namespace Renderer {
             }
         }
         
-        assert(bestEdge.idxI != -1 && bestEdge.idxJ != -1);
+        if (bestEdge.idxI == -1 || bestEdge.idxJ == -1)
+            return CollapsableEdge();
         
         if (bestEdge.idxI > bestEdge.idxJ)
             bestEdge.updateEdge(bestEdge.j, bestEdge.i, bestEdge.idxJ, bestEdge.idxI);
@@ -209,7 +232,8 @@ namespace Renderer {
     {
         const Math::Scalar EPSILON = DBL_MAX;
         
-        assert(triangle.size() > 0 || edge.size() > 0);
+        if (triangle.size() < 1 && edge.size() < 1)
+            return CollapsableEdge();
         
         Math::Scalar minErorr = DBL_MAX;
         CollapsableEdge bestEdge;
@@ -252,7 +276,8 @@ namespace Renderer {
             }
         }
         
-        assert(bestEdge.idxI != -1 && bestEdge.idxJ != -1);
+        if (bestEdge.idxI == -1 || bestEdge.idxJ == -1)
+            return CollapsableEdge();
         
         if (bestEdge.idxI > bestEdge.idxJ)
             bestEdge.updateEdge(bestEdge.j, bestEdge.i, bestEdge.idxJ, bestEdge.idxI);
@@ -475,6 +500,7 @@ namespace Renderer {
         static GLuint VAO = 0xBAD, VBO = 0xBAD, EBO = 0xBAD;
         static std::vector<float> vertices;
         static std::vector<unsigned int> indices;
+        static int vertexCount = 0;
 
         if (VAO == 0xBAD)
         {
@@ -489,6 +515,8 @@ namespace Renderer {
                 0, 1, 2,
                 2, 3, 0
             };
+            
+            vertexCount = vertices.size();
 
             glGenVertexArrays(1, &VAO);
             glBindVertexArray(VAO);
@@ -506,6 +534,8 @@ namespace Renderer {
 
             glBindVertexArray(0);
         }
+        
+        perSphereVertices = vertexCount;
 
         sphereShader->use();
         sphereShader->setVec3("center", center);
@@ -531,6 +561,7 @@ namespace Renderer {
         static GLuint VAO = 0xBAD, VBO = 0xBAD , EBO = 0xBAD;
         static std::vector<float> vertices;
         static std::vector<int> faces;
+        static int vertexCount = 0;
 
         if (VAO == 0xBAD)
         {
@@ -618,6 +649,7 @@ namespace Renderer {
                 }
 
                 faces.swap(newFaces);
+                vertexCount = vertices.size();
             }
 
             glGenVertexArrays(1, &VAO);
@@ -637,6 +669,8 @@ namespace Renderer {
 
             glBindVertexArray(0);
         }
+        
+        perSphereVertices = vertexCount;
 
         sphereShader->use();
         sphereShader->setVec3("center", center);
@@ -675,6 +709,8 @@ namespace Renderer {
     void SphereMesh::renderSelectedSpheresOnly()
     {
         CollapsableEdge e = getBestCollapseBruteForce();
+        if (e.idxI == -1 || e.idxJ == -1)
+            return;
         
         if (e.i.radius > 0)
         {
@@ -700,6 +736,8 @@ namespace Renderer {
         Math::Vector3 color = Math::Vector3(0, 1, 0);
         
         CollapsableEdge e = getBestCollapseInConnectivity();
+        if (e.idxI == -1 || e.idxJ == -1)
+            return;
         
         if (e.i.radius > 0)
         {
@@ -757,9 +795,12 @@ namespace Renderer {
         return newSphere;
     }
 
-    void SphereMesh::collapseSphereMesh()
+    bool SphereMesh::collapseSphereMesh()
     {
         CollapsableEdge e = getBestCollapseBruteForce();
+        if (e.idxI == -1 || e.idxJ == -1)
+            return false;
+        
         Sphere newSphere = collapseEdgeIntoSphere(e);
         
         checkSphereIntersections(newSphere);
@@ -771,16 +812,19 @@ namespace Renderer {
         
         updateEdgesAfterCollapse(e.idxI, e.idxJ);
         updateTrianglessAfterCollapse(e.idxI, e.idxJ);
-        
-        std::cout << sphere.size() << std::endl;
 
         removeDegenerates();
         clearSphereMesh();
+        
+        return true;
     }
 
-    void SphereMesh::collapseSphereMeshFast()
+    bool SphereMesh::collapseSphereMeshFast()
     {
         CollapsableEdge e = getBestCollapseInConnectivity();
+        if (e.idxI == -1 || e.idxJ == -1)
+            return false;
+        
         Sphere newSphere = collapseEdgeIntoSphere(e);
         
         sphere[e.idxI] = newSphere;
@@ -795,6 +839,8 @@ namespace Renderer {
 
         removeDegenerates();
         clearSphereMesh();
+        
+        return true;
     }
 
     void SphereMesh::updateEdgesAfterCollapse(int i, int j)
@@ -823,19 +869,25 @@ namespace Renderer {
         }
     }
 
-    void SphereMesh::collapseSphereMesh(int n)
+    bool SphereMesh::collapseSphereMesh(int n)
     {
         while (this->sphere.size() > n)
-            this->collapseSphereMesh();
+            if(!this->collapseSphereMesh())
+                return false;
+        
+        return true;
     }
 
-    void SphereMesh::collapseSphereMeshFast(int n)
+    bool SphereMesh::collapseSphereMeshFast(int n)
     {
         while (this->sphere.size() > n)
-            this->collapseSphereMeshFast();
+            if(!this->collapseSphereMeshFast())
+                return false;
+        
+        return true;
     }
 
-    void SphereMesh::collapse(int i, int j)
+    bool SphereMesh::collapse(int i, int j)
     {
         for (int idx = 0; idx < sphere.size(); idx++)
             if (sphere[idx].getID() == i)
@@ -851,14 +903,11 @@ namespace Renderer {
                 break;
             }
         
-        assert(i != j);
-        assert(i < sphere.size());
-        assert(j < sphere.size());
+        if (i == j || i >= sphere.size() || j >= sphere.size())
+            return false;
 
         if (i > j)
             std::swap(i, j);
-
-        // Sphere newSphere = sphere[i].lerp(sphere[j], 0.5f);
         
         Sphere newSphere = Sphere();
         newSphere.addQuadric(sphere[i].getSphereQuadric());
@@ -883,11 +932,11 @@ namespace Renderer {
 
         updateEdgesAfterCollapse(i, j);
         updateTrianglessAfterCollapse(i, j);
-        
-        std::cout << sphere.size() << std::endl;
 
         removeDegenerates();
         clearSphereMesh();
+        
+        return true;
     }
 
     void SphereMesh::checkSphereIntersections(Sphere& s)
@@ -984,11 +1033,6 @@ namespace Renderer {
         out << YAML::Comment("Sphere Mesh YAML @ author Davide Paolillo");
         out << YAML::BeginMap;
             out << YAML::Key << "Reference Mesh" << YAML::Value << referenceMesh->path;
-            out << YAML::Key << "Rendering Shader" << YAML::Value;
-            out << YAML::BeginMap;
-                out << YAML::Key << "Vertex Shader" << YAML::Value << sphereShader->vertexShaderPath;
-                out << YAML::Key << "Fragment Shader" << YAML::Value << sphereShader->fragmentShaderPath;
-            out << YAML::EndMap;
             out << YAML::Key << "Start Mesh Resolution" << YAML::Value << initialSpheres.size();
             out << YAML::Key << "Sphere Mesh Resolution" << YAML::Value << sphere.size();
             out << YAML::Key << "Initial Spheres" << YAML::Value;

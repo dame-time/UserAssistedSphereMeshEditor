@@ -19,8 +19,6 @@ bool loadCachedResult() {
         std::filesystem::path filePath = std::filesystem::absolute(".cache");
         
         std::string referenceMeshPath = getYAMLRenderableMeshPath(filePath);
-//        ShaderPath shaderPath = getYAMLSphereShaderPath(filePath);
-//        sphereShader = new Renderer::Shader(shaderPath.vertexShaderPath.c_str(), shaderPath.fragmentShaderPath.c_str());
         
         mesh = new Renderer::RenderableMesh(referenceMeshPath, mainShader);
         sm = new Renderer::SphereMesh(mesh, sphereShader);
@@ -42,7 +40,6 @@ int main()
     
     mainShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/vertex.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/fragment.frag");
     sphereShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
-//    sphereShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.frag");
     
     if (!loadCachedResult()) {
         mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/foot-500.obj", mainShader);

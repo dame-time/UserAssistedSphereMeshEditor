@@ -35,7 +35,6 @@ namespace Renderer
         }
     };
 
-    // TODO: Cambia nello shader la depth per le billboards
     struct CollapsableEdge
     {
         Sphere i, j;
@@ -90,6 +89,9 @@ namespace Renderer
             
             std::vector<Triangle> triangle;
             std::vector<Edge> edge;
+        
+            int perSphereVertices;
+            int renderCalls;
         
             RenderableMesh* referenceMesh;
         
@@ -150,6 +152,13 @@ namespace Renderer
             SphereMesh(RenderableMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius = 0.1f);
         
             SphereMesh& operator = (const SphereMesh& sm);
+        
+            int getPerSphereVertexCount();
+            int getRenderCalls();
+            int getTriangleSize();
+            int getEdgeSize();
+        
+            void resetRenderCalls();
             
             void constructTest();
         
@@ -167,12 +176,12 @@ namespace Renderer
             void renderSphereVertices(int i);
             void clearRenderedSphereVertices();
             
-            void collapse(int sphereIndexA, int sphereIndexB);
+            bool collapse(int sphereIndexA, int sphereIndexB);
             
-            void collapseSphereMesh();
-            void collapseSphereMesh(int n);
-            void collapseSphereMeshFast();
-            void collapseSphereMeshFast(int n);
+            bool collapseSphereMesh();
+            bool collapseSphereMesh(int n);
+            bool collapseSphereMeshFast();
+            bool collapseSphereMeshFast(int n);
         
             Sphere getSelectedVertexSphere(int sphereIndex);
             void resizeSphereVertex(int sphereIndex, Math::Scalar newSize);
