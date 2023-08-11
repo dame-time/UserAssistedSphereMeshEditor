@@ -10,6 +10,13 @@
 
 #include <YAMLUtils.hpp>
 
+#define ICON_FA_SAVE "\xEF\x83\x87"
+#define STORE_ICON "\xEF\x88\xB3"
+#define STORE_TEXT_ICON "\xEF\x80\x8B"
+#define UPLOAD_ICON "\xEF\x82\x93"
+#define FILE_UPLOAD_ICON "\xEF\x87\x89"
+#define SETTINGS_ICON "\xEF\x80\x93"
+
 namespace Renderer {
     Window::Window(unsigned int SCR_WIDTH, unsigned int SCR_HEIGHT, const std::string& title, Camera* mainCamera)
         : SCR_WIDTH(SCR_WIDTH), SCR_HEIGHT(SCR_HEIGHT),
@@ -61,7 +68,6 @@ namespace Renderer {
         
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
-        ImGuiIO& io = ImGui::GetIO(); (void)io;
 
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init();
@@ -69,6 +75,29 @@ namespace Renderer {
         ImGui::StyleColorsDark();
         
         isCameraPerspective = true;
+        
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
+        
+        io.Fonts->AddFontDefault();
+
+        // Load the FontAwesome icon font
+        static const ImWchar icons_ranges[] = { 0xf000, 0xf3ff, 0 }; // Will cover your icon characters
+        ImFontConfig icons_config;
+        icons_config.MergeMode = true;
+        icons_config.PixelSnapH = true;
+
+        std::filesystem::path currentPath = std::filesystem::current_path();
+        auto parentPath = currentPath.parent_path().parent_path();
+
+        std::string fontPath = (parentPath.string() + "/Assets/Fonts/fa-Solid-900.ttf");
+
+        if (!std::filesystem::exists(fontPath)) {
+            std::cerr << "Font file does not exist!" << std::endl;
+        } else {
+            io.Fonts->AddFontFromFileTTF(fontPath.c_str(), 16.0f, &icons_config, icons_ranges);
+        }
+
+        io.Fonts->Build();
     }
 
     Window::~Window() {
@@ -109,9 +138,7 @@ namespace Renderer {
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
             
-//            ImGui::Begin("DockSpace Demo", nullptr, ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking);
             ImGuiID dockspace_id = ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
-//            ImGui::End();
             
             ImGui::Begin("Inspector");
                 renderImGUI();
@@ -128,6 +155,22 @@ namespace Renderer {
                             (mesh->isFilled || mesh->isBlended || mesh->isWireframe ? mesh->vertices.size() : 0));
             ImGui::End();
             sm->resetRenderCalls();
+            
+            static bool isOpen = true;
+            console.Draw("Console", &isOpen);
+            
+            ImGuiStyle& style = ImGui::GetStyle();
+            float originalPaddingY = style.FramePadding.y;
+
+            style.FramePadding.y += 5.0f;
+
+            if (ImGui::BeginMainMenuBar()) {
+                renderMenu();
+                ImGui::EndMainMenuBar();
+            }
+
+            style.FramePadding.y = originalPaddingY;
+                
             
             Math::Scalar currentFrame = glfwGetTime();
             deltaTime = currentFrame - lastFrame;
@@ -201,6 +244,119 @@ namespace Renderer {
             else
                 mainCamera->scale(cameraSpeed/10 * deltaTime);
         
+        if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
+            && (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
+            && glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+            sm->saveYAML(".", ".cache");
+        
+        if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
+            && (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
+            && glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
+        {
+            const char *defaultDescription = "Yaml files";
+            const char *defaultExtension = ".yaml";
+            const char *filterPatterns[1] = { "*.yaml" };
+
+            const char *selectedSavePath = tinyfd_saveFileDialog("Save sphere mesh as *.yaml file", "", 1, filterPatterns, defaultDescription);
+
+            if (selectedSavePath) {
+                std::string savePath(selectedSavePath);
+
+                // Extracting file name from path
+                std::filesystem::path pathObj(savePath);
+                std::string fileNameStr = pathObj.filename().string();
+                if (fileNameStr.size() <= 5 || fileNameStr.substr(fileNameStr.size() - 5) != ".yaml")
+                    fileNameStr += ".yaml";
+                
+                std::cout << "Selected save path: " << pathObj.parent_path().string() << std::endl;
+
+                sm->saveYAML(pathObj.parent_path().string() + "/", fileNameStr);
+            } else {
+                displayErrorMessage("No path selected for saving!");
+            }
+        }
+            
+        if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
+            && (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
+            && glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+        {
+            const char *defaultDescription = "Txt files";
+            const char *defaultExtension = ".txt";
+            const char *filterPatterns[1] = { "*.txt" };
+
+            const char *selectedSavePath = tinyfd_saveFileDialog("Save sphere mesh as *.txt file", "", 1, filterPatterns, defaultDescription);
+
+            if (selectedSavePath) {
+                std::string savePath(selectedSavePath);
+
+                // Extracting file name from path
+                std::filesystem::path pathObj(savePath);
+                std::string fileNameStr = pathObj.filename().string();
+                if (fileNameStr.size() <= 5 || fileNameStr.substr(fileNameStr.size() - 5) != ".txt")
+                    fileNameStr += ".txt";
+                
+                std::cout << "Selected save path: " << pathObj.parent_path().string() << std::endl;
+
+                sm->saveTXT(pathObj.parent_path().string() + "/", fileNameStr);
+            } else {
+                displayErrorMessage("No path selected for saving!");
+            }
+        }
+            
+        if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
+            && (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
+            && glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
+        {
+            const char *filters[0] = { };
+            const char *selectedFilePath = tinyfd_openFileDialog("Select a sphere mesh *.yaml file", "", 0, filters, "Yaml files", 0);
+
+            if (selectedFilePath) {
+                std::string filePath(selectedFilePath);
+                std::cout << "Selected file path: " << filePath << std::endl;
+                
+                delete mesh;
+                delete sm;
+                
+                std::string referenceMeshPath = getYAMLRenderableMeshPath(filePath);
+                
+                mesh = new RenderableMesh(referenceMeshPath, mainShader);
+                sm = new Renderer::SphereMesh(mesh, sphereShader);
+                
+                sm->loadFromYaml(filePath);
+            } else {
+                displayWarningMessage("No file selected!");
+            }
+            
+            if (sm->getRenderType() == RenderType::SPHERES)
+                *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
+            else
+                *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.frag");
+        }
+            
+        if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
+            && glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
+        {
+            const char *filters[2] = { "*.obj", "*.OBJ" };
+            const char *selectedFilePath = tinyfd_openFileDialog("Select a mesh *.obj file", "", 2, filters, "Object files", 0);
+
+            if (selectedFilePath) {
+                std::string filePath(selectedFilePath);
+                std::cout << "Selected file path: " << filePath << std::endl;
+                
+                delete mesh;
+                delete sm;
+                
+                mesh = new RenderableMesh(filePath, mainShader);
+                sm = new Renderer::SphereMesh(mesh, sphereShader);
+                
+                mainCamera->resetRotation();
+                mainCamera->resetTranslation();
+                
+                mainCamera->setTarget(mesh->getCentroid());
+            } else {
+                displayWarningMessage("No file selected!");
+            }
+        }
     }
 
     Math::Vector3 Window::worldPosToClipPos(const Math::Vector3& worldPos) {
@@ -265,8 +421,9 @@ namespace Renderer {
             windowClassInstance->pickedMesh = nullptr;
             
             if (!result)
-                std::cerr << "Failed to collapse the two spheres" << std::endl;
-            // TODO: Print in gui the total number of spheres
+                windowClassInstance->displayErrorMessage("Failed to collapse the two spheres");
+            
+            windowClassInstance->displayLogMessage("Current spheres: " + std::to_string(windowClassInstance->sm->sphere.size()));
         }
         
         if (key == GLFW_KEY_A && action == GLFW_RELEASE && windowClassInstance->pickedMeshes.size() > 1)
@@ -281,14 +438,14 @@ namespace Renderer {
                                                                 windowClassInstance->pickedMeshes[i - 2]->getID());
                 
                 if (!result)
-                    std::cerr << "Failed to collapse the two spheres: (" << i << ", " << i + 1 << ")" << std::endl;
+                    windowClassInstance->displayErrorMessage("Failed to collapse the two spheres: (" + std::to_string(i) + ", " + std::to_string(i + 1) + ")");
                 i -= 2;
             }
             
             windowClassInstance->pickedMeshes.clear();
             windowClassInstance->pickedMesh = nullptr;
             
-            // TODO: Print in gui the total number of spheres
+            windowClassInstance->displayLogMessage("Current spheres: " + std::to_string(windowClassInstance->sm->sphere.size()));
         }
         
         if (key == GLFW_KEY_R && action == GLFW_RELEASE && windowClassInstance->pickedMeshes.size() > 0)
@@ -366,6 +523,319 @@ namespace Renderer {
                 windowClassInstance->pickedMeshes.clear();
             }
         }
+    }
+
+    void Window::renderMenu() {
+        if (ImGui::BeginMenu("File")) {
+            if (ImGui::MenuItem((std::string(ICON_FA_SAVE) + " Cache Sphere Mesh").c_str(), "Ctrl+Shift+S")) {
+                sm->saveYAML(".", ".cache");
+            }
+            
+            ImGui::Separator();
+            
+            if (ImGui::MenuItem((std::string(STORE_ICON) + " Save YAML Sphere Mesh To...").c_str(), "Ctrl+Shift+Y")) {
+                const char *defaultDescription = "Yaml files";
+                const char *defaultExtension = ".yaml";
+                const char *filterPatterns[1] = { "*.yaml" };
+
+                const char *selectedSavePath = tinyfd_saveFileDialog("Save sphere mesh as *.yaml file", "", 1, filterPatterns, defaultDescription);
+
+                if (selectedSavePath) {
+                    std::string savePath(selectedSavePath);
+
+                    // Extracting file name from path
+                    std::filesystem::path pathObj(savePath);
+                    std::string fileNameStr = pathObj.filename().string();
+                    if (fileNameStr.size() <= 5 || fileNameStr.substr(fileNameStr.size() - 5) != ".yaml")
+                        fileNameStr += ".yaml";
+                    
+                    std::cout << "Selected save path: " << pathObj.parent_path().string() << std::endl;
+
+                    sm->saveYAML(pathObj.parent_path().string() + "/", fileNameStr);
+                } else {
+                    displayErrorMessage("No path selected for saving!");
+                }
+            }
+            
+            if (ImGui::MenuItem((std::string(STORE_TEXT_ICON) + " Save TXT Sphere Mesh To...").c_str(), "Ctrl+Shift+T")) {
+                const char *defaultDescription = "Txt files";
+                const char *defaultExtension = ".txt";
+                const char *filterPatterns[1] = { "*.txt" };
+
+                const char *selectedSavePath = tinyfd_saveFileDialog("Save sphere mesh as *.txt file", "", 1, filterPatterns, defaultDescription);
+
+                if (selectedSavePath) {
+                    std::string savePath(selectedSavePath);
+
+                    // Extracting file name from path
+                    std::filesystem::path pathObj(savePath);
+                    std::string fileNameStr = pathObj.filename().string();
+                    if (fileNameStr.size() <= 5 || fileNameStr.substr(fileNameStr.size() - 5) != ".txt")
+                        fileNameStr += ".txt";
+                    
+                    std::cout << "Selected save path: " << pathObj.parent_path().string() << std::endl;
+
+                    sm->saveTXT(pathObj.parent_path().string() + "/", fileNameStr);
+                } else {
+                    displayErrorMessage("No path selected for saving!");
+                }
+            }
+            
+            ImGui::Separator();
+            
+            if (ImGui::MenuItem((std::string(UPLOAD_ICON) + " Load YAML Sphere Mesh...").c_str(), "Ctrl+Shift+L")) {
+                const char *filters[0] = { };
+                const char *selectedFilePath = tinyfd_openFileDialog("Select a sphere mesh *.yaml file", "", 0, filters, "Yaml files", 0);
+
+                if (selectedFilePath) {
+                    std::string filePath(selectedFilePath);
+                    std::cout << "Selected file path: " << filePath << std::endl;
+                    
+                    delete mesh;
+                    delete sm;
+                    
+                    std::string referenceMeshPath = getYAMLRenderableMeshPath(filePath);
+                    
+                    mesh = new RenderableMesh(referenceMeshPath, mainShader);
+                    sm = new Renderer::SphereMesh(mesh, sphereShader);
+                    
+                    sm->loadFromYaml(filePath);
+                } else {
+                    displayWarningMessage("No file selected!");
+                }
+                
+                if (sm->getRenderType() == RenderType::SPHERES)
+                    *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
+                else
+                    *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.frag");
+            }
+            
+            ImGui::Separator();
+            
+            if (ImGui::MenuItem((std::string(FILE_UPLOAD_ICON) + " Load new mesh...").c_str(), "Ctrl+M")) {
+                const char *filters[2] = { "*.obj", "*.OBJ" };
+                const char *selectedFilePath = tinyfd_openFileDialog("Select a mesh *.obj file", "", 2, filters, "Object files", 0);
+
+                if (selectedFilePath) {
+                    std::string filePath(selectedFilePath);
+                    std::cout << "Selected file path: " << filePath << std::endl;
+                    
+                    delete mesh;
+                    delete sm;
+                    
+                    mesh = new RenderableMesh(filePath, mainShader);
+                    sm = new Renderer::SphereMesh(mesh, sphereShader);
+                    
+                    mainCamera->resetRotation();
+                    mainCamera->resetTranslation();
+                    
+                    mainCamera->setTarget(mesh->getCentroid());
+                } else {
+                    displayWarningMessage("No file selected!");
+                }
+            }
+            
+            ImGui::EndMenu();
+        }
+        
+        if (ImGui::BeginMenu("Actions")) {
+            if (ImGui::MenuItem("Collapse Two Sphere", "C")) {
+                if (pickedMesh != nullptr && pickedMeshes.size() > 1) {
+                    addSphereVectorToBuffer(sm->sphere);
+                    for (auto& m : pickedMeshes)
+                        m->color = Math::Vector3(1, 0, 0);
+                    
+                    auto result = sm->collapse(pickedMeshes[pickedMeshes.size() - 1]->getID(), pickedMeshes[pickedMeshes.size() - 2]->getID());
+                    pickedMeshes.clear();
+                    pickedMesh = nullptr;
+                    
+                    if (!result)
+                        displayErrorMessage("Failed to collapse the two spheres");
+                } else {
+                    displayErrorMessage("Not enough spheres selected");
+                }
+            }
+            
+            if (ImGui::MenuItem("Collapse All Spheres", "A")) {
+                if (pickedMeshes.size() > 1) {
+                    addSphereVectorToBuffer(sm->sphere);
+                    for (auto& m : pickedMeshes)
+                        m->color = Math::Vector3(1, 0, 0);
+                    
+                    int i = pickedMeshes.size();
+                    while (i - 1 > 0) {
+                        auto result = sm->collapse(pickedMeshes[i - 1]->getID(),
+                                                                        pickedMeshes[i - 2]->getID());
+                        
+                        if (!result)
+                            displayErrorMessage("Failed to collapse the two spheres: (" + std::to_string(i) + ", " + std::to_string(i + 1) + ")");
+                        i -= 2;
+                    }
+                    
+                    pickedMeshes.clear();
+                    pickedMesh = nullptr;
+                }
+            }
+            
+            if (ImGui::MenuItem("Reset Selection", "R")) {
+                for (auto& m : pickedMeshes)
+                    m->color = Math::Vector3(1, 0, 0);
+                
+                pickedMesh = nullptr;
+                pickedMeshes.clear();
+            }
+            
+            if (ImGui::MenuItem("Toggle selected Spheres Vertices", "V")) {
+                renderVertices = !renderVertices;
+            }
+            
+            if (ImGui::MenuItem("Add edge Sphere", "N")) {
+                if (pickedMesh != nullptr){
+                    sm->addEdge(pickedMesh->getID());
+                    pickedMesh->color = Math::Vector3(1, 0, 0);
+                    pickedMesh = nullptr;
+                }
+            }
+            
+            if (ImGui::MenuItem("Add triangle Sphere", "T")) {
+                if (pickedMesh != nullptr && pickedMeshes.size() > 1){
+                    sm->addTriangle(pickedMesh->getID(), pickedMeshes[pickedMeshes.size() - 2]->getID());
+                    pickedMesh->color = Math::Vector3(1, 0, 0);
+                    pickedMesh = nullptr;
+                    pickedMeshes.pop_back();
+                    pickedMeshes[pickedMeshes.size() - 1]->color = Math::Vector3(1, 0, 0);
+                    pickedMeshes.pop_back();
+                }
+            }
+            
+            if (ImGui::MenuItem("Delete Sphere", "D")) {
+                if (pickedMesh != nullptr) {
+                    sm->removeSphere(pickedMesh->getID());
+                    pickedMesh = nullptr;
+                    pickedMeshes.clear();
+                }
+            }
+            
+            if (ImGui::MenuItem("Reset Sphere Mesh", "E")) {
+               addSphereVectorToBuffer(sm->sphere);
+               pickedMeshes.clear();
+               sm->reset();
+            }
+            
+            if (ImGui::MenuItem("UNDO", "Z")) {
+                if (sphereBuffer.size() > 0) {
+                    sm->sphere = sphereBuffer[sphereBuffer.size() - 1];
+                    removeLastSphereVectorFromBuffer();
+                    
+                    if (pickedMesh != nullptr)
+                        pickedMesh->color = Math::Vector3(1, 0, 0);
+                    
+                    pickedMesh = nullptr;
+                }
+            }
+            
+            ImGui::EndMenu();
+        }
+        
+        if (ImGui::BeginMenu("Rendering")) {
+            if (ImGui::MenuItem("Toggle camera mode", "P"))
+                isCameraPerspective = !isCameraPerspective;
+            
+            if (ImGui::MenuItem("Toggle rendering mode", "B")) {
+                if (sm->getRenderType() == RenderType::SPHERES) {
+                    sm->setRenderType(RenderType::BILLBOARDS);
+                    *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.frag");
+                } else {
+                    sm->setRenderType(RenderType::SPHERES);
+                    *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
+                }
+            }
+            
+            ImGui::EndMenu();
+        }
+        
+        if (ImGui::BeginMenu("?")) {
+            ImGui::Text("Left click over a sphere in order to select it");
+            ImGui::Text("Right click over a sphere in order to scale it");
+            ImGui::Text("Hold LEFT SHIFT while dragging your mouse in order to translate a sphere over the XY plane");
+            ImGui::Text("Hold RIGHT SHIFT while dragging your mouse in order to translate a sphere over the Z axis");
+            ImGui::Text("Hold TAB to toggle on and off the core mesh");
+            ImGui::Text("Press 'P' to switch camera from projection to perspective");
+            ImGui::Text("Press 'C' to collapse the last two spheres selected");
+            ImGui::Text("Press 'A' to collapse all the spheres selected");
+            ImGui::Text("Press 'V' to visualize the vertices of the selected spheres");
+            ImGui::Text("Press 'R' to reset the selection");
+            ImGui::Text("Press 'E' to reset the Sphere Mesh to the original Sphere Mesh");
+            ImGui::Text("Press 'W' to increase zoom percentage");
+            ImGui::Text("Press 'S' to increase zoom percentage");
+            ImGui::Text("Press 'Z' to undo up to 50 actions!");
+            ImGui::Text("Press 'B' to toggle between billboards and concrete spheres");
+            ImGui::Text("Press 'N' after selecting a sphere to create an edge with a new sphere");
+            ImGui::Text("Press 'T' after selecting two spheres to create a triangle with a new mid point sphere");
+            ImGui::Text("Press 'D' to delete a sphere (NOT UNDOABLE)");
+            ImGui::EndMenu();
+        }
+        
+        if (ImGui::BeginMenu(std::string(SETTINGS_ICON).c_str())) {
+            static float color[3] = { 1.0f, 1.0f, 1.0f };
+
+            ImVec4 col = ImVec4(color[0], color[1], color[2], 1.0f);
+            if (ImGui::ColorButton("Mesh Color##3c", col, ImGuiColorEditFlags_NoTooltip)) {
+                ImGui::OpenPopup("Mesh Color##3c");
+            }
+            ImGui::SameLine();
+            ImGui::Text("Mesh Color");
+
+            if (ImGui::BeginPopup("Mesh Color##3c")) {
+                if (ImGui::ColorPicker3("Mesh Color##3c", color)) {
+                    mesh->setUniformColor(Math::Vector3(color[0], color[1], color[2]));
+                }
+                ImGui::EndPopup();
+            }
+            
+            static float wireframeColor[3] = { 1.0f, 1.0f, 1.0f };
+            ImVec4 c = ImVec4(wireframeColor[0], wireframeColor[1], wireframeColor[2], 1.0f);
+            if (ImGui::ColorButton("Wireframe Color##3c", c, ImGuiColorEditFlags_NoTooltip)) {
+                ImGui::OpenPopup("Wireframe Color##3c");
+            }
+            ImGui::SameLine();
+            ImGui::Text("Wireframe Color");
+
+            if (ImGui::BeginPopup("Wireframe Color##3c")) {
+                if (ImGui::ColorPicker3("Wireframe Color##3c", wireframeColor)) {
+                    mesh->setWireframeColor(Math::Vector3(wireframeColor[0], wireframeColor[1], wireframeColor[2]));
+                }
+                ImGui::EndPopup();
+            }
+
+            ImGui::Separator();
+            
+            static float scroll = 1.0f;
+            ImGui::SliderFloat("Scroll Speed", &scroll, 0.0f, 10.0f);
+            scrollSpeed = scroll;
+            
+            
+            static float rotationSpeed = 0.3f;
+            ImGui::SliderFloat("Rotation Speed", &rotationSpeed, 0.0f, 1.0f);
+            rotationSensitivity = rotationSpeed;
+            
+            ImGui::EndMenu();
+        }
+    }
+
+    void Window::displayErrorMessage(const std::string& message) {
+        ImVec4 redColor = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
+        console.AddLog(message, redColor);
+    }
+
+    void Window::displayWarningMessage(const std::string& message) {
+        ImVec4 yellowColor = ImVec4(1.0f, 1.0f, 0.0f, 1.0f);
+        console.AddLog(message, yellowColor);
+    }
+
+    void Window::displayLogMessage(const std::string& message) {
+        ImVec4 whiteColor = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+        console.AddLog(message, whiteColor);
     }
 
     void Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -545,51 +1015,19 @@ namespace Renderer {
     }
 
     void Window::renderImGUI() {
-        static float color[3] = { 1.0f, 1.0f, 1.0f };
-
-        ImVec4 col = ImVec4(color[0], color[1], color[2], 1.0f);
-        if (ImGui::ColorButton("Mesh Color##3c", col, ImGuiColorEditFlags_NoTooltip)) {
-            ImGui::OpenPopup("Mesh Color##3c");
-        }
-        ImGui::SameLine();
-        ImGui::Text("Mesh Color");
-
-        if (ImGui::BeginPopup("Mesh Color##3c")) {
-            if (ImGui::ColorPicker3("Mesh Color##3c", color)) {
-                mesh->setUniformColor(Math::Vector3(color[0], color[1], color[2]));
-            }
-            ImGui::EndPopup();
-        }
-        
-        static float wireframeColor[3] = { 1.0f, 1.0f, 1.0f };
-        ImVec4 c = ImVec4(wireframeColor[0], wireframeColor[1], wireframeColor[2], 1.0f);
-        if (ImGui::ColorButton("Wireframe Color##3c", c, ImGuiColorEditFlags_NoTooltip)) {
-            ImGui::OpenPopup("Wireframe Color##3c");
-        }
-        ImGui::SameLine();
-        ImGui::Text("Wireframe Color");
-
-        if (ImGui::BeginPopup("Wireframe Color##3c")) {
-            if (ImGui::ColorPicker3("Wireframe Color##3c", wireframeColor)) {
-                mesh->setWireframeColor(Math::Vector3(wireframeColor[0], wireframeColor[1], wireframeColor[2]));
-            }
-            ImGui::EndPopup();
-        }
-
-        ImGui::Separator();
-        
         static bool blended = true;
         static bool filled = false;
         static bool wireframe = false;
         
-        if (ImGui::Checkbox("Wireframe", &wireframe)) {
-            mesh->setWireframe(wireframe);
-            
-            if (wireframe) {
-                filled = false;
-                blended = false;
+        if (sm->getRenderType() != RenderType::BILLBOARDS)
+            if (ImGui::Checkbox("Wireframe", &wireframe)) {
+                mesh->setWireframe(wireframe);
+                
+                if (wireframe) {
+                    filled = false;
+                    blended = false;
+                }
             }
-        }
         
         if (ImGui::Checkbox("Filled", &filled)) {
             mesh->setFilled(filled);
@@ -611,58 +1049,46 @@ namespace Renderer {
         
         ImGui::Separator();
         
-        static float scroll = 1.0f;
-        ImGui::SliderFloat("Scroll Speed", &scroll, 0.0f, 10.0f);
-        scrollSpeed = scroll;
-        
-        ImGui::Separator();
-        
-        static float rotationSpeed = 0.3f;
-        ImGui::SliderFloat("Rotation Speed", &rotationSpeed, 0.0f, 1.0f);
-        rotationSensitivity = rotationSpeed;
-        
-        if (ImGui::Button("Collapse Best BF Sphere Mesh Edge"))
+        if (ImGui::Button("Collapse Edge"))
         {
             auto result = sm->collapseSphereMesh();
             
-            // TODO: Display this in the GUI
             if (!result)
-                std::cerr << "Could not find any good sphere to collapse" << std::endl;
+                displayErrorMessage("Could not find any good sphere to collapse");
             
             sm->renderSpheresOnly();
         }
         
         static int j = 0;
         ImGui::PushItemWidth(120);
-        ImGui::InputInt("Number Of Spheres to Reach After Collapse", &j);
+        ImGui::InputInt("n Spheres to Reach", &j);
         ImGui::PopItemWidth();
         
         ImGui::SameLine();
         
-        if (ImGui::Button("Render Sphere BF Mesh Vetices Collapsed"))
+        if (ImGui::Button("Collapse"))
         {
             int initialSpheres = sm->sphere.size();
             auto result = sm->collapseSphereMesh(j);
             
-            // TODO: Display this in the GUI
             if (!result)
-                std::cerr << "Could not find any good sphere to collapse, spheres collapsed: " << initialSpheres - sm->sphere.size() << std::endl;
+                displayErrorMessage("Could not find any good sphere to collapse,\nspheres collapsed: " + std::to_string(initialSpheres - sm->sphere.size()));
             
             sm->renderSpheresOnly();
         }
         
         static int k = 0;
         ImGui::PushItemWidth(120);
-        ImGui::InputInt("Number Of Spheres to Collapse", &k);
+        ImGui::InputInt("n Spheres to Collapse", &k);
         ImGui::PopItemWidth();
         
         ImGui::SameLine();
         
-        if (ImGui::Button("Render BF Sphere Mesh Vetices"))
+        if (ImGui::Button(("Collapse " + std::to_string(k)).c_str()))
         {
             for (int i = 0; i < k; i++)
                 if (!sm->collapseSphereMesh()) {
-                    std::cerr << "Could not find any good sphere to collapse, spheres collapsed: " << i << std::endl;
+                    std::cerr << "Could not find any good sphere to collapse,\nspheres collapsed: " << i << std::endl;
                     break;
                 }
             sm->renderSpheresOnly();
@@ -675,30 +1101,29 @@ namespace Renderer {
         
         ImGui::Separator();
         
-        if (ImGui::Button("Collapse Best Fast Sphere Mesh Edge"))
+        if (ImGui::Button("Collapse Edge FAST"))
         {
             auto result = sm->collapseSphereMeshFast();
-            
-            // TODO: Display this in the GUI
+
             if (!result)
-                std::cerr << "Could not find any good sphere to collapse" << std::endl;
+                displayErrorMessage("Could not find any good sphere to collapse");
             
             sm->renderSpheresOnly();
         }
         
         static int f = 0;
         ImGui::PushItemWidth(120);
-        ImGui::InputInt("Number Of Fast Spheres to Collapse", &f);
+        ImGui::InputInt("n Spheres to Collapse FAST", &f);
         ImGui::PopItemWidth();
         
         ImGui::SameLine();
         
-        if (ImGui::Button("Render Fast Sphere Mesh Vetices"))
+        if (ImGui::Button("Collapse FAST"))
         {
             for (int i = 0; i < f; i++)
                 if (!sm->collapseSphereMeshFast())
                 {
-                    std::cerr << "Could not find any good sphere to collapse, spheres collapsed: " << i << std::endl;
+                    std::cerr << "Could not find any good sphere to collapse,\nspheres collapsed: " << i << std::endl;
                     break;
                 }
             sm->renderSpheresOnly();
@@ -706,19 +1131,18 @@ namespace Renderer {
         
         static int d = 0;
         ImGui::PushItemWidth(120);
-        ImGui::InputInt("Number Of Fast Spheres to Reach After Collapse", &d);
+        ImGui::InputInt("n Spheres to Reach FAST", &d);
         ImGui::PopItemWidth();
         
         ImGui::SameLine();
         
-        if (ImGui::Button("Render Fast Sphere Mesh Vetices Collapsed"))
+        if (ImGui::Button(("Collapse " + std::to_string(d) + " FAST").c_str()))
         {
             int initialSpheres = sm->sphere.size();
             auto result = sm->collapseSphereMeshFast(d);
             
-            // TODO: Display this in the GUI
             if (!result)
-                std::cerr << "Could not find any good sphere to collapse, spheres collapsed: " << initialSpheres - sm->sphere.size() << std::endl;
+                displayErrorMessage("Could not find any good sphere to collapse,\nspheres collapsed: " + std::to_string(initialSpheres - sm->sphere.size()));
             sm->renderSpheresOnly();
         }
         
@@ -731,7 +1155,7 @@ namespace Renderer {
         
         static int n = 1;
         ImGui::PushItemWidth(120);
-        ImGui::InputInt("Spheres Per Edge", &n);
+        ImGui::InputInt("Spheres x Edge", &n);
         ImGui::PopItemWidth();
         
         Math::Math::clamp(1, 50, n);
@@ -739,14 +1163,14 @@ namespace Renderer {
         ImGui::SameLine();
         static float sphereSizes = 1.0f;
         ImGui::PushItemWidth(80);
-        ImGui::SliderFloat("Sphere Size", &sphereSizes, 0.f, 1.0f, "%.4f");
+        ImGui::SliderFloat("Size", &sphereSizes, 0.f, 1.0f, "%.4f");
         ImGui::PopItemWidth();
         ImGui::SameLine();
         
         if (sphereSize != sphereSizes)
             sphereSize = sphereSizes;
         
-        if (ImGui::Button("Render N Full Sphere Mesh"))
+        if (ImGui::Button("Render"))
         {
             sm->renderWithNSpherePerEdge(n, sphereSizes);
             renderFullSMWithNSpheres = n;
@@ -765,108 +1189,5 @@ namespace Renderer {
         {
             renderFullSMWithNSpheres = 0;
         }
-        
-        ImGui::Separator();
-        
-        static char fileName[128] = "";
-        static std::string fileNameStr = "";
-        ImGui::PushItemWidth(120);
-        if (ImGui::InputText("Save File As", fileName, sizeof(fileName)))
-            fileNameStr = fileName;
-        ImGui::PopItemWidth();
-        
-        if (ImGui::Button("Save Sphere Mesh To YAML"))
-        {
-            if(fileNameStr == "")
-                sm->saveYAML();
-            else
-                sm->saveYAML(".", fileNameStr);
-        }
-        
-        if (ImGui::Button("Save Sphere Mesh To TXT"))
-        {
-            if(fileNameStr == "")
-                sm->saveTXT(".", fileNameStr);
-            else
-                sm->saveTXT();
-        }
-        
-        ImGui::Separator();
-        
-        if (ImGui::Button("Cache Sphere Mesh"))
-        {
-            sm->saveYAML(".", ".cache");
-        }
-        
-        ImGui::Separator();
-        
-        if (ImGui::Button("Load Sphere Mesh"))
-        {
-            const char *filters[0] = { };
-            const char *selectedFilePath = tinyfd_openFileDialog("Select a sphere mesh *.yaml file", "", 0, filters, "Yaml files", 0);
-
-            if (selectedFilePath) {
-                std::string filePath(selectedFilePath);
-                std::cout << "Selected file path: " << filePath << std::endl;
-                
-                delete mesh;
-                delete sm;
-                delete sphereShader;
-                
-                std::string referenceMeshPath = getYAMLRenderableMeshPath(filePath);
-                
-                mesh = new RenderableMesh(referenceMeshPath, mainShader);
-                sm = new Renderer::SphereMesh(mesh, sphereShader);
-                
-                sm->loadFromYaml(filePath);
-            } else {
-                std::cout << "No file selected!" << std::endl;
-            }
-        }
-        
-        if (ImGui::Button("Load new Mesh from OBJ file"))
-        {
-            const char *filters[2] = { "*.obj", "*.OBJ" };
-            const char *selectedFilePath = tinyfd_openFileDialog("Select a mesh *.obj file", "", 2, filters, "Object files", 0);
-
-            if (selectedFilePath) {
-                std::string filePath(selectedFilePath);
-                std::cout << "Selected file path: " << filePath << std::endl;
-                
-                delete mesh;
-                delete sm;
-                
-                mesh = new RenderableMesh(filePath, mainShader);
-                sm = new Renderer::SphereMesh(mesh, sphereShader);
-                
-                mainCamera->resetRotation();
-                mainCamera->resetTranslation();
-                
-                mainCamera->setTarget(mesh->getCentroid());
-            } else {
-                std::cout << "No file selected!" << std::endl;
-            }
-        }
-        
-        ImGui::Separator();
-        
-        ImGui::Text("Left click over a sphere in order to select it");
-        ImGui::Text("Right click over a sphere in order to scale it");
-        ImGui::Text("Hold LEFT SHIFT while dragging your mouse in order to translate a sphere over the XY plane");
-        ImGui::Text("Hold RIGHT SHIFT while dragging your mouse in order to translate a sphere over the Z axis");
-        ImGui::Text("Hold TAB to toggle on and off the core mesh");
-        ImGui::Text("Press 'P' to switch camera from projection to perspective");
-        ImGui::Text("Press 'C' to collapse the last two spheres selected");
-        ImGui::Text("Press 'A' to collapse all the spheres selected");
-        ImGui::Text("Press 'V' to visualize the vertices of the selected spheres");
-        ImGui::Text("Press 'R' to reset the selection");
-        ImGui::Text("Press 'E' to reset the Sphere Mesh to the original Sphere Mesh");
-        ImGui::Text("Press 'W' to increase zoom percentage");
-        ImGui::Text("Press 'S' to increase zoom percentage");
-        ImGui::Text("Press 'Z' to undo up to 50 actions!");
-        ImGui::Text("Press 'B' to toggle between billboards and concrete spheres");
-        ImGui::Text("Press 'N' after selecting a sphere to create an edge with a new sphere");
-        ImGui::Text("Press 'T' after selecting two spheres to create a triangle with a new mid point sphere");
-        ImGui::Text("Press 'D' to delete a sphere (NOT UNDOABLE)");
     }
 }

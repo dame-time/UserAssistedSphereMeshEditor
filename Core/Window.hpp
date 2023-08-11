@@ -18,6 +18,55 @@
 #include <iostream>
 
 namespace Renderer {
+    struct Console
+    {
+        char InputBuf[256];
+        struct LogItem {
+            std::string Text;
+            ImVec4 Color;
+            LogItem(const std::string& text, const ImVec4& color) : Text(text), Color(color) {}
+        };
+        std::vector<LogItem> Items;
+
+        Console()
+        {
+            ClearLog();
+        }
+
+        void ClearLog()
+        {
+            Items.clear();
+        }
+
+        void AddLog(const std::string& log, ImVec4 color = ImVec4(1.0f, 1.0f, 1.0f, 1.0f))
+        {
+            Items.push_back(LogItem(log, color));
+        }
+
+        void Draw(const char* title, bool* p_open)
+        {
+            ImGui::Begin(title, p_open);
+            if (ImGui::Button("Clear")) ClearLog();
+            ImGui::SameLine();
+            bool copy = ImGui::Button("Copy");
+            ImGui::Separator();
+            
+            ImGui::BeginChild("scrolling", ImVec2(0,0), false, ImGuiWindowFlags_HorizontalScrollbar);
+            if (copy) ImGui::LogToClipboard();
+
+            for (int i = 0; i < Items.size(); i++) {
+                ImGui::PushStyleColor(ImGuiCol_Text, Items[i].Color);
+                ImGui::TextUnformatted(Items[i].Text.c_str());
+                ImGui::PopStyleColor();
+            }
+
+            ImGui::SetScrollHereY(1.0f);
+            ImGui::EndChild();
+
+            ImGui::End();
+        }
+    };
+
     class Window {
         public:
             static constexpr Math::Scalar UNKNOWN = -666;
@@ -43,6 +92,8 @@ namespace Renderer {
             void render();
             
         private:
+            Console console;
+        
             unsigned int SCR_WIDTH;
             unsigned int SCR_HEIGHT;
             Renderer::Shader* mainShader;
@@ -71,10 +122,15 @@ namespace Renderer {
             void processInput();
         
             void renderImGUI();
+            void renderMenu();
             void renderSphereMesh(const Math::Matrix4& perspective);
         
             void addSphereVectorToBuffer(const std::vector<Sphere>& spheres);
             void removeLastSphereVectorFromBuffer();
+        
+            void displayErrorMessage(const std::string& message);
+            void displayWarningMessage(const std::string& message);
+            void displayLogMessage(const std::string& message);
 
             static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
             static void mouse_callback(GLFWwindow* window, double xpos, double ypos);

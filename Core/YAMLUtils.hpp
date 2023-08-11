@@ -17,11 +17,6 @@
 
 #include <string>
 
-struct ShaderPath {
-    std::string vertexShaderPath;
-    std::string fragmentShaderPath;
-};
-
 inline void YAMLSerializeVector3(YAML::Emitter& out, const Math::Vector3& vector) {
     out << YAML::BeginMap;
     out << YAML::Key << "X" << YAML::Value << vector.coordinates.x;

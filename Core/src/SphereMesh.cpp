@@ -1103,7 +1103,7 @@ namespace Renderer {
             folderPath = path;
 
         std::ofstream fout(folderPath + filePath);
-        std::cout << "File location: " << cwd << std::endl;
+        std::cout << "File location: " << folderPath + filePath << std::endl;
         fout << out.c_str();
         fout.close();
     }
@@ -1193,12 +1193,10 @@ namespace Renderer {
         std::string filePath = fn;
         std::string folderPath = "." + separator;
         if (path != ".")
-        {
             folderPath = path;
-        }
         
         std::ofstream fout(folderPath + filePath);
-        std::cout << "File location: " << cwd << std::endl;
+        std::cout << "File location: " << folderPath + filePath << std::endl;
         fout << fileContent.c_str();
         fout.close();
     }
