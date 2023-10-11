@@ -14,7 +14,7 @@ namespace Renderer {
         phi = 0;
         theta = 0;
         
-        orthographicScale = 1;
+        orthographicScale = 0.005;
     }
 
     void Camera::setTarget(const Math::Vector3& target) {
@@ -45,11 +45,11 @@ namespace Renderer {
     }
 
     void Camera::scale(Math::Scalar scale) {
-        orthographicScale += scale;
+        orthographicScale += scale * 0.01;
     }
 
     void Camera::resetScale() {
-        orthographicScale = 1;
+        orthographicScale = 0;
     }
 
     Math::Matrix4 Camera::getViewMatrix() {
@@ -72,7 +72,7 @@ namespace Renderer {
         return originTranslation * xRotation * yRotation * targetTranslation;
     }
 
-    Math::Matrix4 Camera::getPerspectiveMatrix(Math::Scalar fov, Math::Scalar aspect, Math::Scalar near, Math::Scalar far) {
+    Math::Matrix4 Camera::getPerspectiveMatrix(Math::Scalar fov, Math::Scalar aspect, Math::Scalar near, Math::Scalar far) const {
         Math::Matrix4 perspectiveMatrix = Math::Matrix4();
         
         Math::Scalar tanHalfFOV = std::tan(Math::Math::degreeToRandiansAngle(fov / 2.0));
@@ -86,7 +86,7 @@ namespace Renderer {
         return perspectiveMatrix;
     }
 
-    Math::Matrix4 Camera::getOrthographicMatrix(Math::Scalar width, Math::Scalar height, Math::Scalar near, Math::Scalar far) {
+    Math::Matrix4 Camera::getOrthographicMatrix(Math::Scalar width, Math::Scalar height, Math::Scalar near, Math::Scalar far) const {
         width *= Math::Math::clamp(0.0, 10000000.0, orthographicScale);
         height *= Math::Math::clamp(0.0, 10000000.0, orthographicScale);
         

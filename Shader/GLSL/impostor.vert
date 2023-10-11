@@ -18,13 +18,16 @@ void main()
     
     worldPos = view * vec4(center, 1.0) + vec4(aPos * radius, 0.0, 1.0);
     
-    vec4 projectedCenter = projection * view * vec4(center, 1.0);
-    vec4 projectedTip = projection * view * vec4(center + vec3(0, 0, radius), 1.0);
+//    vec4 projectedCenter = projection * view * vec4(center, 1.0);
+//    vec4 projectedTip = projection * view * vec4(center + vec3(0, 0, radius), 1.0);
     
-    projectedCenter /= projectedCenter.w;
-    projectedTip /= projectedTip.w;
+//    projectedCenter /= projectedCenter.w;
+//    projectedTip /= projectedTip.w;
     
-    radiusClip = abs(projectedCenter.z - projectedTip.z) / 2;
+//    radiusClip = abs(projectedCenter.z - projectedTip.z) / 2;
+    
+    radiusClip = radius * projection[2][2] * 0.5;
     
     gl_Position = projection * vec4(worldPos.xyz, 1.0);
+    gl_Position.w = 1;
 }

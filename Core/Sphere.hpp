@@ -45,7 +45,12 @@ namespace Renderer {
             void addFace(const Math::Vector3& centroid, const Math::Vector3& normal, Math::Scalar weight = 1.0);
             void addQuadric(const Quadric& q);
         
+            bool checkSphereOverPlanarRegion();
+            void approximateSphereOverPlanarRegion(const Math::Vector3& edge0, const Math::Vector3& edge1);
+        
             void addVertex(const Vertex& vertex);
+        
+            void constrainSphere(const Math::Scalar& constrainRadius);
         
             void operator = (const Sphere& s)
             {

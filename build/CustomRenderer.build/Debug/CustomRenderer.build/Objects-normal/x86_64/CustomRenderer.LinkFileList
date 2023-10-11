@@ -8,6 +8,7 @@
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/SphereMesh.o
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/Window.o
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/Matrix2.o
+/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/Quadric2.o
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/Matrix3.o
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/Matrix4.o
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/Point2.o
@@ -23,6 +24,7 @@
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/Shader.o
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/imgui.o
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/imgui_demo.o
+/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/Quadric3.o
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/imgui_draw.o
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/imgui_impl_glfw.o
 /Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/CustomRenderer.build/Debug/CustomRenderer.build/Objects-normal/x86_64/imgui_impl_opengl3.o

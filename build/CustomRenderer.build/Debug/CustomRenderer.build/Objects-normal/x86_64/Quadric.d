@@ -24,4 +24,6 @@ dependencies: \
   /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/glad/glad.h \
   /Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/KHR/khrplatform.h \
   /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/Matrix2.hpp \
-  /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/../Vector/Vector2.hpp
+  /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix/../Vector/Vector2.hpp \
+  /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Quadric3.hpp \
+  /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Quadric2.hpp

@@ -76,21 +76,37 @@ namespace Renderer {
         auto result = quadric.minimizer();
         this->center = result.toQuaternion().immaginary;
         this->radius = result.coordinates.w;
-
-         if (this->radius > this->region.directionalWidth)
-             this->radius = this->region.directionalWidth;
     }
 
     void Sphere::addQuadric(const Quadric& q)
     {
         this->quadric += q;
-
+        
         auto result = quadric.minimizer();
         this->center = result.toQuaternion().immaginary;
         this->radius = result.coordinates.w;
+    }
 
-         if (this->radius > this->region.directionalWidth)
-             this->radius = this->region.directionalWidth;
+    void Sphere::constrainSphere(const Math::Scalar& constrainRadius)
+    {
+        if (this->radius <= constrainRadius)
+            return;
+        
+        auto result = this->quadric.constrainR(constrainRadius);
+        this->center = result.toQuaternion().immaginary;
+        this->radius = result.coordinates.w;
+    }
+
+    bool Sphere::checkSphereOverPlanarRegion()
+    {
+        return this->center == Math::Vector3(-1, -1, -1) && this->radius == 0;
+    }
+
+    void Sphere::approximateSphereOverPlanarRegion(const Math::Vector3& edge0, const Math::Vector3& edge1)
+    {
+        auto result = this->quadric.constrainIntoVector(edge0, edge1, region.directionalWidth);
+        this->center = result.toQuaternion().immaginary;
+        this->radius = result.coordinates.w;
     }
 
     void Sphere::addVertex(const Vertex& vertex)

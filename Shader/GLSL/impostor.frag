@@ -64,5 +64,5 @@ void main()
     vec3 result = ambient + diffuse + specular;
     FragColor = vec4(result, 1.0);
     
-    gl_FragDepth = gl_FragCoord.z - normalZ * radiusClip;
+    gl_FragDepth = gl_FragCoord.z + normalZ * radiusClip;
 }

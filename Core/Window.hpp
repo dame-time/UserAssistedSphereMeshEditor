@@ -94,6 +94,9 @@ namespace Renderer {
         private:
             Console console;
         
+            static int viewportH;
+            static int viewportW;
+        
             unsigned int SCR_WIDTH;
             unsigned int SCR_HEIGHT;
             Renderer::Shader* mainShader;
@@ -103,6 +106,9 @@ namespace Renderer {
             Renderer::Camera* mainCamera;
             bool commandPressed;
             float lastX, lastY;
+        
+            bool renderSM;
+            bool renderWFmesh;
         
             bool isCameraPerspective;
         
@@ -131,6 +137,8 @@ namespace Renderer {
             void displayErrorMessage(const std::string& message);
             void displayWarningMessage(const std::string& message);
             void displayLogMessage(const std::string& message);
+        
+            Math::Matrix4 getProjectionMatrix() const;
 
             static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
             static void mouse_callback(GLFWwindow* window, double xpos, double ypos);

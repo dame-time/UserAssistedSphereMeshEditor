@@ -284,6 +284,9 @@ CustomRenderer_SOURCE_DIR:STATIC=/Users/davidepaollilo/Workspaces/C++/CustomRend
 //Maximum time allowed before CTest will kill the test.
 DART_TESTING_TIMEOUT:STRING=1500
 
+//Compile Eigen with MPL2 code only
+EIGEN_MPL2_ONLY:BOOL=OFF
+
 //Directory under which to collect all populated content
 FETCHCONTENT_BASE_DIR:PATH=/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps
 
@@ -295,8 +298,16 @@ FETCHCONTENT_FULLY_DISCONNECTED:BOOL=OFF
 FETCHCONTENT_QUIET:BOOL=ON
 
 //When not empty, overrides where to find pre-populated content
+// for eigen
+FETCHCONTENT_SOURCE_DIR_EIGEN:PATH=
+
+//When not empty, overrides where to find pre-populated content
 // for imgui
 FETCHCONTENT_SOURCE_DIR_IMGUI:PATH=
+
+//When not empty, overrides where to find pre-populated content
+// for libigl
+FETCHCONTENT_SOURCE_DIR_LIBIGL:PATH=
 
 //When not empty, overrides where to find pre-populated content
 // for yaml_cpp
@@ -305,8 +316,14 @@ FETCHCONTENT_SOURCE_DIR_YAML_CPP:PATH=
 //Enables UPDATE_DISCONNECTED behavior for all content population
 FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=OFF
 
+//Enables UPDATE_DISCONNECTED behavior just for population of eigen
+FETCHCONTENT_UPDATES_DISCONNECTED_EIGEN:BOOL=OFF
+
 //Enables UPDATE_DISCONNECTED behavior just for population of imgui
 FETCHCONTENT_UPDATES_DISCONNECTED_IMGUI:BOOL=OFF
+
+//Enables UPDATE_DISCONNECTED behavior just for population of libigl
+FETCHCONTENT_UPDATES_DISCONNECTED_LIBIGL:BOOL=OFF
 
 //Enables UPDATE_DISCONNECTED behavior just for population of yaml_cpp
 FETCHCONTENT_UPDATES_DISCONNECTED_YAML_CPP:BOOL=OFF
@@ -316,6 +333,75 @@ GITCOMMAND:FILEPATH=/usr/local/bin/git
 
 //Git command line client
 GIT_EXECUTABLE:FILEPATH=/usr/local/bin/git
+
+//Enable Hunter package manager support
+HUNTER_ENABLED:BOOL=OFF
+
+//Build libigl unit test
+LIBIGL_BUILD_TESTS:BOOL=OFF
+
+//Build libigl tutorial
+LIBIGL_BUILD_TUTORIALS:BOOL=OFF
+
+//Build target igl_copyleft::cgal
+LIBIGL_COPYLEFT_CGAL:BOOL=OFF
+
+//Build target igl_copyleft::comiso
+LIBIGL_COPYLEFT_COMISO:BOOL=OFF
+
+//Build target igl_copyleft::core
+LIBIGL_COPYLEFT_CORE:BOOL=OFF
+
+//Build target igl_copyleft::tetgen
+LIBIGL_COPYLEFT_TETGEN:BOOL=OFF
+
+//Build target igl::embree
+LIBIGL_EMBREE:BOOL=OFF
+
+//Build target igl::glfw
+LIBIGL_GLFW:BOOL=OFF
+
+//Build igl::glfw tests
+LIBIGL_GLFW_TESTS:BOOL=OFF
+
+//Build target igl::imgui
+LIBIGL_IMGUI:BOOL=OFF
+
+//Enable installation of libigl targets
+LIBIGL_INSTALL:BOOL=OFF
+
+//Build target igl::opengl
+LIBIGL_OPENGL:BOOL=OFF
+
+//Build target igl::png
+LIBIGL_PNG:BOOL=OFF
+
+//Build target igl::predicates
+LIBIGL_PREDICATES:BOOL=OFF
+
+//Build target igl_restricted::matlab
+LIBIGL_RESTRICTED_MATLAB:BOOL=OFF
+
+//Build target igl_restricted::mosek
+LIBIGL_RESTRICTED_MOSEK:BOOL=OFF
+
+//Build target igl_restricted::triangle
+LIBIGL_RESTRICTED_TRIANGLE:BOOL=OFF
+
+//Build target igl::spectra
+LIBIGL_SPECTRA:BOOL=OFF
+
+//Build target igl::stb
+LIBIGL_STB:BOOL=OFF
+
+//Use libigl as static library
+LIBIGL_USE_STATIC_LIBRARY:BOOL=OFF
+
+//Turn on many warnings and treat as errors
+LIBIGL_WARNINGS_AS_ERRORS:BOOL=OFF
+
+//Build target igl::xml
+LIBIGL_XML:BOOL=OFF
 
 //Command to build the project
 MAKECOMMAND:STRING=/usr/local/Cellar/cmake/3.22.3/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
@@ -352,6 +438,15 @@ YAML_CPP_SOURCE_DIR:STATIC=/Users/davidepaollilo/Workspaces/C++/CustomRenderer/b
 
 //The directory containing a CMake configuration file for glfw3.
 glfw3_DIR:PATH=/usr/local/lib/cmake/glfw3
+
+//Value Computed by CMake
+libigl_BINARY_DIR:STATIC=/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/external/libigl-2.5.0
+
+//Value Computed by CMake
+libigl_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+libigl_SOURCE_DIR:STATIC=/Users/davidepaollilo/Workspaces/C++/CustomRenderer/external/libigl-2.5.0
 
 //The directory containing a CMake configuration file for yaml-cpp.
 yaml-cpp_DIR:PATH=/usr/local/lib/cmake/yaml-cpp
@@ -425,6 +520,10 @@ CMAKE_GENERATOR_INSTANCE:INTERNAL=
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
+//Test CMAKE_HAVE_LIBC_PTHREAD
+CMAKE_HAVE_LIBC_PTHREAD:INTERNAL=1
+//Have include pthread.h
+CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/Users/davidepaollilo/Workspaces/C++/CustomRenderer
@@ -536,6 +635,8 @@ CustomRenderer_GUID_CMAKE:INTERNAL=1349EAF6832E413F9E1BA8C2
 DART_TESTING_TIMEOUT-ADVANCED:INTERNAL=1
 //Stored Xcode object GUID
 Experimental_GUID_CMAKE:INTERNAL=6D56E4B46C63456880B73CAD
+//Details about finding Threads
+FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //ADVANCED property for variable: GITCOMMAND
 GITCOMMAND-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GIT_EXECUTABLE

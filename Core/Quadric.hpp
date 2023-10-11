@@ -60,9 +60,11 @@ namespace Renderer
             void operator += (const Quadric& quadric);
             void operator *= (const Math::Scalar& multiplier);
 
-            Math::Scalar evaluateSQEM (const Math::Vector4& sphere);
-
-            Math::Vector4 minimizer ();
+            Math::Scalar evaluateSQEM (const Math::Vector4& sphere) const;
+            Math::Vector4 minimizer () const;
+            
+            Math::Vector4 constrainIntoVector(const Math::Vector3& start, const Math::Vector3& end, const Math::Scalar& radius);
+            Math::Vector4 constrainR(const Math::Scalar& radius);
         
             void addQuadricToTargetRadius(const Math::Scalar& t);
 

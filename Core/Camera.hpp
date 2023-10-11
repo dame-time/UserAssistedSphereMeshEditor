@@ -7,12 +7,6 @@
 namespace Renderer {
     class Camera {
     private:
-        Math::Scalar phi;
-        Math::Scalar theta;
-        Math::Scalar ro;
-        
-        Math::Scalar orthographicScale;
-        
         Math::Matrix4 yRotation;
         Math::Matrix4 xRotation;
         Math::Matrix4 originTranslation;
@@ -20,6 +14,12 @@ namespace Renderer {
         Math::Matrix4 targetTranslation;
     
     public:
+        Math::Scalar phi;
+        Math::Scalar theta;
+        Math::Scalar ro;
+        
+        Math::Scalar orthographicScale;
+        
         Camera();
         
         void setTarget(const Math::Vector3& target);
@@ -35,8 +35,8 @@ namespace Renderer {
         void resetScale();
         
         Math::Matrix4 getViewMatrix();
-        Math::Matrix4 getPerspectiveMatrix(Math::Scalar fov, Math::Scalar aspect, Math::Scalar near, Math::Scalar far);
-        Math::Matrix4 getOrthographicMatrix(Math::Scalar width, Math::Scalar heigh, Math::Scalar near, Math::Scalar far);
+        Math::Matrix4 getPerspectiveMatrix(Math::Scalar fov, Math::Scalar aspect, Math::Scalar near, Math::Scalar far) const;
+        Math::Matrix4 getOrthographicMatrix(Math::Scalar width, Math::Scalar heigh, Math::Scalar near, Math::Scalar far) const;
     };
 }
 

@@ -195,7 +195,8 @@ namespace Renderer {
 
     CollapsableEdge SphereMesh::getBestCollapseBruteForce()
     {
-        const Math::Scalar EPSILON = 0.05 * BDDSize;
+//        const Math::Scalar EPSILON = 0.0275 * BDDSize;
+        const Math::Scalar EPSILON = 0.1 * BDDSize;
         
         if (sphere.size() <= 1)
             return CollapsableEdge();
@@ -385,7 +386,7 @@ namespace Renderer {
         edge.clear();
     }
 
-    void SphereMesh::drawSpheresOverEdge(const Edge &e, int ns, Math::Scalar rescaleRadii)
+    void SphereMesh::drawSpheresOverEdge(const Edge &e, int ns, Math::Scalar rescaleRadii, Math::Scalar minRadiiScale)
     {
         int nSpheres = ns;
 
@@ -394,14 +395,14 @@ namespace Renderer {
         for (int i = 1; i < nSpheres - 1; i++)
             renderSphere(Math::lerp(sphere[e.i].center, sphere[e.j].center, i * 1.0 / (nSpheres - 1)),
                             Math::lerp(
-                                       0.3,
+                                       0.085,
                                        Math::lerp(sphere[e.i].radius, sphere[e.j].radius, i * 1.0 / (nSpheres - 1)),
                                        rescaleRadii
                                        ),
                             color);
     }
 
-    void SphereMesh::drawSpheresOverTriangle(const Triangle& e, int ns, Math::Scalar size)
+    void SphereMesh::drawSpheresOverTriangle(const Triangle& e, int ns, Math::Scalar size, Math::Scalar minRadiiScale)
     {
         Math::Vector3 color = Math::Vector3(0.7f, 0.1f, 1);
 
@@ -419,7 +420,7 @@ namespace Renderer {
                 Math::Scalar ck = k * 1.0 / (nSpheres - 1);
                 
                 Math::Vector3 origin = Math::Vector3(sphere[e.i].center * ci + sphere[e.j].center * cj + sphere[e.k].center * ck);
-                Math::Scalar radius = Math::lerp(0.3, sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck, size);
+                Math::Scalar radius = Math::lerp(0.085, sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck, size);
                 
                 renderSphere(origin, radius, color);
             }
@@ -486,13 +487,13 @@ namespace Renderer {
             this->drawSpheresOverEdge(edge[i]);
     }
 
-    void SphereMesh::renderWithNSpherePerEdge(int n, Math::Scalar rescaleRadii)
+    void SphereMesh::renderWithNSpherePerEdge(int n, Math::Scalar rescaleRadii, Math::Scalar minRadiiScale)
     {
         for (int i = 0; i < triangle.size(); i++)
-            this->drawSpheresOverTriangle(triangle[i], n, rescaleRadii);
+            this->drawSpheresOverTriangle(triangle[i], n, rescaleRadii, minRadiiScale);
 
         for (int i = 0; i < edge.size(); i++)
-            this->drawSpheresOverEdge(edge[i], n, rescaleRadii);
+            this->drawSpheresOverEdge(edge[i], n, rescaleRadii, minRadiiScale);
     }
 
     void SphereMesh::renderOneBillboardSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color)
@@ -702,8 +703,25 @@ namespace Renderer {
                 continue;
             }
             
-            renderSphere(sphere[i].center, sphere[i].radius, sphere[i].color);
+            auto r = sphere[i].radius;
+            
+            renderSphere(sphere[i].center, r, sphere[i].color);
         }
+    }
+
+    Math::Scalar SphereMesh::getContainedRadiusOfSphere(const Sphere& s)
+    {
+        auto center = s.center;
+        Math::Scalar minDistance = DBL_MAX;
+        
+        for (int i = 0; i < referenceMesh->vertices.size(); i++)
+        {
+            auto distance = (center - referenceMesh->vertices[i].position).squareMagnitude();
+            distance = std::sqrt(distance);
+            minDistance = distance < minDistance ? distance : minDistance;
+        }
+        
+        return minDistance;
     }
 
     void SphereMesh::renderSelectedSpheresOnly()
@@ -715,8 +733,6 @@ namespace Renderer {
         if (e.i.radius > 0)
         {
             auto r = e.i.radius;
-            if (r > e.i.region.directionalWidth)
-                r = e.i.region.directionalWidth;
             
             renderSphere(e.i.center, r + 0.01f, e.i.color);
         }
@@ -724,8 +740,6 @@ namespace Renderer {
         if (e.j.radius > 0)
         {
             auto r = e.j.radius;
-            if (r > e.j.region.directionalWidth)
-                r = e.j.region.directionalWidth;
             
             renderSphere(e.j.center, r + 0.01f, e.j.color);
         }
@@ -742,8 +756,6 @@ namespace Renderer {
         if (e.i.radius > 0)
         {
             auto r = e.i.radius;
-            if (r > e.i.region.directionalWidth)
-                r = e.i.region.directionalWidth;
             
             renderSphere(e.i.center, r + 0.01f, e.i.color);
         }
@@ -751,8 +763,6 @@ namespace Renderer {
         if (e.j.radius > 0)
         {
             auto r = e.j.radius;
-            if (r > e.j.region.directionalWidth)
-                r = e.j.region.directionalWidth;
             
             renderSphere(e.j.center, r + 0.01f, e.j.color);
         }
@@ -778,8 +788,18 @@ namespace Renderer {
         Sphere collapsedSphereB = sphere[j];
         
         Sphere newSphere = Sphere();
+        
+        newSphere.region.join(collapsedSphereA.region);
+        newSphere.region.join(collapsedSphereB.region);
+        
         newSphere.addQuadric(collapsedSphereA.getSphereQuadric());
         newSphere.addQuadric(collapsedSphereB.getSphereQuadric());
+        
+        if (newSphere.checkSphereOverPlanarRegion())
+            newSphere.approximateSphereOverPlanarRegion(collapsedSphereA.center, collapsedSphereB.center);
+        
+        newSphere.constrainSphere(newSphere.region.directionalWidth);
+//        newSphere.constrainSphere(getContainedRadiusOfSphere(newSphere));
         
 //      FIXME: This is done only for rendering
         for (int k = 0; k < sphere[i].vertices.size(); k++)
@@ -788,9 +808,6 @@ namespace Renderer {
         for (int k = 0; k < sphere[j].vertices.size(); k++)
             newSphere.addVertex(sphere[j].vertices[k]);
 //
-        
-        newSphere.region.join(collapsedSphereA.region);
-        newSphere.region.join(collapsedSphereB.region);
         
         return newSphere;
     }

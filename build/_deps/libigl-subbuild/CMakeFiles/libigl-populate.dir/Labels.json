@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/CMakeFiles/libigl-populate"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/CMakeFiles/libigl-populate.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/CMakeFiles/CMakeFiles/libigl-populate-complete.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/libigl-populate-prefix/src/libigl-populate-stamp/CMakeFiles/libigl-populate-build.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/libigl-populate-prefix/src/libigl-populate-stamp/CMakeFiles/libigl-populate-configure.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/libigl-populate-prefix/src/libigl-populate-stamp/CMakeFiles/libigl-populate-download.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/libigl-populate-prefix/src/libigl-populate-stamp/CMakeFiles/libigl-populate-install.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/libigl-populate-prefix/src/libigl-populate-stamp/CMakeFiles/libigl-populate-mkdir.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/libigl-populate-prefix/src/libigl-populate-stamp/CMakeFiles/libigl-populate-patch.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/libigl-populate-prefix/src/libigl-populate-stamp/CMakeFiles/libigl-populate-test.rule"
+		},
+		{
+			"file" : "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/libigl-populate-prefix/src/libigl-populate-stamp/CMakeFiles/libigl-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"libigl-populate"
+		],
+		"name" : "libigl-populate"
+	}
+}

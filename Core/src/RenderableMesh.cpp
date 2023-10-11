@@ -14,7 +14,14 @@
 #include <Vector4.hpp>
 #include <Matrix4.hpp>
 
+#include <Eigen/Dense>
+#include <Eigen/Core>
+#include <Eigen/SparseCore>
+
+#include <igl/principal_curvature.h>
+
 #include <random>
+#include <unordered_map>
 
 namespace Renderer {
     RenderableMesh::RenderableMesh(const std::string& pathToLoadFrom, Shader* s) :  shader(s) {
@@ -42,6 +49,8 @@ namespace Renderer {
         
         setup();
         
+        computeVerticesCurvatureIGL();
+        
         generateUUID();
         updateBBOX();
         
@@ -51,13 +60,259 @@ namespace Renderer {
     RenderableMesh::RenderableMesh(const std::vector<Vertex>& vertices, const std::vector<Face>& faces, Shader* s) : shader(s) {
         this->vertices = vertices;
         this->faces = faces;
-
+        
         setup();
+        
+        computeVerticesCurvatureIGL();
         
         generateUUID();
         updateBBOX();
         
         this->setBlended(true);
+    }
+
+    void RenderableMesh::computeVerticesCurvatureIGL()
+    {
+        Eigen::MatrixXd v(vertices.size(), 3);
+        Eigen::MatrixXi f(faces.size(), 3);
+
+        for (int i = 0; i < vertices.size(); ++i) {
+            v(i, 0) = vertices[i].position.coordinates.x;
+            v(i, 1) = vertices[i].position.coordinates.y;
+            v(i, 2) = vertices[i].position.coordinates.z;
+        }
+
+        for (int i = 0; i < faces.size(); ++i) {
+            f(i, 0) = faces[i].i;
+            f(i, 1) = faces[i].j;
+            f(i, 2) = faces[i].k;
+        }
+        
+        Eigen::MatrixXd PD1, PD2;
+        Eigen::VectorXd PV1, PV2;
+        
+        std::vector<int> bad_vertices;
+        
+        igl::principal_curvature(v, f, PD1, PD2, PV1, PV2, bad_vertices);
+        
+        for (int i = 0; i < this->vertices.size(); i++)
+            vertices[i].curvature = Math::Vector2(PV1(i, 0), PV2(i, 0));
+    }
+
+    void RenderableMesh::computeVerticesCurvature()
+    {
+        for (int v = 0; v < this->vertices.size(); v++)
+        {
+            Math::Scalar angleSum = 0;
+            Math::Scalar meanCurvature = 0;
+            
+            std::vector<Face> adjacentFaces = getVertexAdjacentFaces(v);
+            std::vector<Vertex> adjacentVertices = getAdjacentVertices(v);
+            
+            for (const auto& face : adjacentFaces)
+                angleSum += getAngleOfVertexAtFace(face, vertices[v]);
+            
+            for(const auto& adjVertex : adjacentVertices)
+            {
+                Math::Scalar cotAlpha;
+                Math::Scalar cotBeta;
+                
+                try {
+                    cotAlpha = getCotAlpha(vertices[v], adjVertex);  // Compute cotangent of the angle alpha opposite to the edge v-adjVertex
+                    cotBeta = getCotBeta(vertices[v], adjVertex);    // Compute cotangent of the angle beta opposite to the edge v-adjVertex
+                } catch (const std::exception& e) {
+                    cotAlpha = 0;
+                    cotBeta = 0;
+                }
+                
+                auto edgeLength = distance(vertices[v].position, adjVertex.position);  // Compute distance between v and adjVertex
+                
+                meanCurvature += (cotAlpha + cotBeta) * edgeLength;
+            }
+            
+            auto gaussianCurvature = 2 * M_PI - angleSum;
+            meanCurvature *= 0.25;
+            
+            auto k1 = meanCurvature + std::sqrt(meanCurvature * meanCurvature - gaussianCurvature);
+            auto k2 = meanCurvature - std::sqrt(meanCurvature * meanCurvature - gaussianCurvature);
+
+            vertices[v].curvature = Math::Vector2(k1, k2);
+        }
+    }
+
+    Math::Scalar RenderableMesh::distance(const Math::Vector3& p0, const Math::Vector3& p1)
+    {
+        return std::sqrt(
+                             std::pow(p1.coordinates.x - p0.coordinates.x, 2) +
+                             std::pow(p1.coordinates.y - p0.coordinates.y, 2) +
+                             std::pow(p1.coordinates.z - p0.coordinates.z, 2)
+                         );
+    }
+
+    Math::Scalar RenderableMesh::getAngleOfVertexAtFace(const Face& f, const Vertex& v)
+    {
+        Math::Vector3 v1 = vertices[f.i].position;
+        Math::Vector3 v2 = vertices[f.j].position;
+        Math::Vector3 v3 = vertices[f.k].position;
+      
+        Math::Vector3 edge1, edge2;
+      
+        if (v.position.coordinates.x == v1.coordinates.x &&
+            v.position.coordinates.y == v1.coordinates.y &&
+            v.position.coordinates.z == v1.coordinates.z)
+        {
+            edge1 = Math::Vector3(v2.coordinates.x - v1.coordinates.x,
+                                  v2.coordinates.y - v1.coordinates.y,
+                                  v2.coordinates.z - v1.coordinates.z);
+            edge2 = Math::Vector3(v3.coordinates.x - v1.coordinates.x,
+                                  v3.coordinates.y - v1.coordinates.y,
+                                  v3.coordinates.z - v1.coordinates.z);
+        }
+        else if (v.position.coordinates.x == v2.coordinates.x &&
+                   v.position.coordinates.y == v2.coordinates.y &&
+                   v.position.coordinates.z == v2.coordinates.z)
+        {
+            edge1 = Math::Vector3(v1.coordinates.x - v2.coordinates.x,
+                                  v1.coordinates.x - v2.coordinates.y,
+                                  v1.coordinates.z - v2.coordinates.z);
+            edge2 = Math::Vector3(v3.coordinates.x - v2.coordinates.x,
+                                  v3.coordinates.y - v2.coordinates.y,
+                                  v3.coordinates.z - v2.coordinates.z);
+        }
+        else
+        {
+            edge1 = Math::Vector3(v1.coordinates.x - v3.coordinates.x,
+                                  v1.coordinates.y - v3.coordinates.y,
+                                  v1.coordinates.z - v3.coordinates.z);
+            edge2 = Math::Vector3(v2.coordinates.x - v3.coordinates.x,
+                                  v2.coordinates.y - v3.coordinates.y,
+                                  v2.coordinates.z - v3.coordinates.z);
+        }
+      
+        float dotProduct = edge1.dot(edge2);
+        float magnitude1 = edge1.magnitude();
+        float magnitude2 = edge2.magnitude();
+      
+        return std::acos(dotProduct / (magnitude1 * magnitude2));
+    }
+
+    Math::Scalar RenderableMesh::getCotAlpha(Vertex v, Vertex adjVertex)
+    {
+        std::vector<Face> sharingFaces;
+        // Find the two faces sharing the edge (v, adjVertex)
+        for (const auto& face : faces)
+            if (
+                    (vertices[face.i].position == v.position &&
+                    (vertices[face.j].position == adjVertex.position || vertices[face.k].position == adjVertex.position)) ||
+                    (vertices[face.j].position == v.position &&
+                    (vertices[face.i].position == adjVertex.position || vertices[face.k].position == adjVertex.position)) ||
+                    (vertices[face.k].position == v.position &&
+                    (vertices[face.i].position == adjVertex.position || vertices[face.j].position == adjVertex.position))
+                )
+                sharingFaces.push_back(face);
+        
+        if (sharingFaces.size() < 2)
+            throw std::invalid_argument("Cannot find two face sharing the two vertices v and his adjacent");
+        
+        Vertex thirdVertex;
+        if (vertices[sharingFaces[0].i].position == v.position)
+            thirdVertex = vertices[sharingFaces[0].j].position == adjVertex.position ? vertices[sharingFaces[0].k] : vertices[sharingFaces[0].j];
+        else if (vertices[sharingFaces[0].j].position == v.position)
+            thirdVertex = vertices[sharingFaces[0].i].position == adjVertex.position ? vertices[sharingFaces[0].k] : vertices[sharingFaces[0].i];
+        else
+            thirdVertex = vertices[sharingFaces[0].i].position == adjVertex.position ? vertices[sharingFaces[0].j] : vertices[sharingFaces[0].i];
+
+        Math::Vector3 vec1 = thirdVertex.position - v.position;
+        Math::Vector3 vec2 = adjVertex.position - v.position;
+
+        Math::Scalar dotProduct = vec1.dot(vec2);
+        Math::Scalar magnitudeVec1 = vec1.magnitude();
+        Math::Scalar magnitudeVec2 = vec2.magnitude();
+
+        Math::Scalar alpha = std::acos(dotProduct / (magnitudeVec1 * magnitudeVec2));
+        return 1 / std::tan(alpha);
+    }
+
+    Math::Scalar RenderableMesh::getCotBeta(Vertex v, Vertex adjVertex)
+    {
+        std::vector<Face> sharingFaces;
+        // Find the two faces sharing the edge (v, adjVertex)
+        for (const auto& face : faces)
+            if (
+                (vertices[face.i].position == v.position &&
+                (vertices[face.j].position == adjVertex.position || vertices[face.k].position == adjVertex.position)) ||
+                (vertices[face.j].position == v.position &&
+                (vertices[face.i].position == adjVertex.position || vertices[face.k].position == adjVertex.position)) ||
+                (vertices[face.k].position == v.position &&
+                (vertices[face.i].position == adjVertex.position || vertices[face.j].position == adjVertex.position))
+            )
+                sharingFaces.push_back(face);
+
+        if (sharingFaces.size() < 2)
+            throw std::invalid_argument("Cannot find two faces sharing the two vertices v and his adjacent");
+
+        Vertex thirdVertex;
+        if (vertices[sharingFaces[1].i].position == adjVertex.position)
+            thirdVertex = vertices[sharingFaces[1].j].position == v.position ? vertices[sharingFaces[1].k] : vertices[sharingFaces[1].j];
+        else if (vertices[sharingFaces[1].j].position == adjVertex.position)
+            thirdVertex = vertices[sharingFaces[1].i].position == v.position ? vertices[sharingFaces[1].k] : vertices[sharingFaces[1].i];
+        else
+            thirdVertex = vertices[sharingFaces[1].i].position == v.position ? vertices[sharingFaces[1].j] : vertices[sharingFaces[1].i];
+
+        // Create vectors for calculating beta
+        Math::Vector3 vec1 = thirdVertex.position - adjVertex.position;
+        Math::Vector3 vec2 = v.position - adjVertex.position;
+
+        Math::Scalar dotProduct = vec1.dot(vec2);
+        Math::Scalar magnitudeVec1 = vec1.magnitude();
+        Math::Scalar magnitudeVec2 = vec2.magnitude();
+
+        Math::Scalar beta = std::acos(dotProduct / (magnitudeVec1 * magnitudeVec2));
+        
+        return 1 / std::tan(beta);
+    }
+
+    std::vector<Face> RenderableMesh::getVertexAdjacentFaces(int vertexIndex)
+    {
+        std::vector<Face> adjacentFaces;
+
+        for (const auto& face : faces)
+            if (face.i == vertexIndex || face.j == vertexIndex || face.k == vertexIndex)
+                adjacentFaces.push_back(face);
+        
+        return adjacentFaces;
+    }
+
+    std::vector<Vertex> RenderableMesh::getAdjacentVertices(int vertexIndex)
+    {
+        std::vector<Vertex> adjacentVertices;
+        std::unordered_map<int, bool> addedIndices;
+        
+        for (const auto& face : faces)
+        {
+            if (face.i == vertexIndex || face.j == vertexIndex || face.k == vertexIndex)
+            {
+                if (face.i != vertexIndex && addedIndices.find(face.i) == addedIndices.end())
+                {
+                    adjacentVertices.push_back(vertices[face.i]);
+                    addedIndices[face.i] = true;
+                }
+
+                if (face.j != vertexIndex && addedIndices.find(face.j) == addedIndices.end())
+                {
+                    adjacentVertices.push_back(vertices[face.j]);
+                    addedIndices[face.j] = true;
+                }
+
+                if (face.k != vertexIndex && addedIndices.find(face.k) == addedIndices.end())
+                {
+                    adjacentVertices.push_back(vertices[face.k]);
+                    addedIndices[face.k] = true;
+                }
+            }
+        }
+
+        return adjacentVertices;
     }
 
     int RenderableMesh::getID() {

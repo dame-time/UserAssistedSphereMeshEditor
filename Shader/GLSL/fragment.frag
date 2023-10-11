@@ -27,7 +27,7 @@ uniform Light light;
 void main()
 {
     // ambient
-    vec3 ambient = light.ambient * material.ambient;
+    vec3 ambient = light.ambient * material.ambient * 1.5;
 
     // diffuse
     vec3 norm = normalize(Normal);

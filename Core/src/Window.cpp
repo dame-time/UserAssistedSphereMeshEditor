@@ -18,6 +18,10 @@
 #define SETTINGS_ICON "\xEF\x80\x93"
 
 namespace Renderer {
+
+    int Window::viewportH = 0;
+    int Window::viewportW = 0;
+
     Window::Window(unsigned int SCR_WIDTH, unsigned int SCR_HEIGHT, const std::string& title, Camera* mainCamera)
         : SCR_WIDTH(SCR_WIDTH), SCR_HEIGHT(SCR_HEIGHT),
           commandPressed(false), lastX(0), lastY(0), mainCamera(mainCamera)
@@ -98,6 +102,8 @@ namespace Renderer {
         }
 
         io.Fonts->Build();
+        renderSM = true;
+        renderWFmesh = false;
     }
 
     Window::~Window() {
@@ -129,8 +135,7 @@ namespace Renderer {
 
         while (!glfwWindowShouldClose(window))
         {
-            Math::Matrix4 perspective = isCameraPerspective ? mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0) :
-            mainCamera->getOrthographicMatrix(SCR_WIDTH, SCR_HEIGHT, 0.1, 100000.0);
+            Math::Matrix4 perspective = getProjectionMatrix();
             
             ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;
             
@@ -178,7 +183,7 @@ namespace Renderer {
             
             processInput();
 
-            glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             
             mainShader->use();
@@ -189,9 +194,21 @@ namespace Renderer {
             mainShader->setVec3("light.ambient", Math::Vector3(.5, .5, .5));
             mainShader->setVec3("light.diffuse", Math::Vector3(0.3, 0.3, 0.3));
             mainShader->setVec3("light.specular", Math::Vector3(0.3, 0.3, 0.3));
-
-            renderSphereMesh(perspective);
-            mesh->render();
+            
+            if (renderSM)
+                renderSphereMesh(perspective);
+            
+            if (renderWFmesh)
+            {
+                mesh->setFilled(true);
+                mesh->render();
+                mesh->setWireframe(true);
+                mesh->setWireframeColor(Math::Vector3(0, 0, 0));
+                mesh->render();
+            }
+            else
+                mesh->render();
+            
             
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -366,8 +383,7 @@ namespace Renderer {
         model.setColumnVector(3, Math::Vector4(translation, 1));
         
         Math::Matrix4 view = mainCamera->getViewMatrix();
-        Math::Matrix4 projection = isCameraPerspective ? mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0) :
-        mainCamera->getOrthographicMatrix(SCR_WIDTH, SCR_HEIGHT, 0.1, 100000.0);
+        Math::Matrix4 projection = getProjectionMatrix();
 
         Math::Vector4 clipPos = projection * view * model * Math::Vector4(worldPos, 1.0f);
 
@@ -628,6 +644,7 @@ namespace Renderer {
                     
                     mainCamera->resetRotation();
                     mainCamera->resetTranslation();
+                    mainCamera->resetScale();
                     
                     mainCamera->setTarget(mesh->getCentroid());
                 } else {
@@ -840,6 +857,9 @@ namespace Renderer {
 
     void Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)
     {
+        viewportH = height;
+        viewportW = width;
+        
         glViewport(0, 0, width, height);
     }
 
@@ -866,12 +886,29 @@ namespace Renderer {
 
         // Unproject this point back into the world
         Math::Matrix4 view = mainCamera->getViewMatrix();
-        Math::Matrix4 projection = isCameraPerspective ? mainCamera->getPerspectiveMatrix(90.0, 16.0 / 9.0, 0.1, 100000.0) :
-        mainCamera->getOrthographicMatrix(SCR_WIDTH, SCR_HEIGHT, 0.1, 100000.0);
+        Math::Matrix4 projection = getProjectionMatrix();
         Math::Vector3 wincoord = Math::Vector3(scaled_mouse_x, viewport[3] - scaled_mouse_y, mouse.coordinates.z);
         Math::Vector3 objcoord = Math::Vector3::unProject(wincoord, view, projection, Math::Vector4(viewport[0], viewport[1], viewport[2], viewport[3]));
 
         return Math::Vector3(objcoord.coordinates.x, objcoord.coordinates.y, objcoord.coordinates.z);
+    }
+
+    Math::Matrix4 Window::getProjectionMatrix() const
+    {
+//        if (isCameraPerspective)
+//            std::cout << "Perspective" << std::endl;
+//        else
+//            std::cout << "Orthogonal" << std::endl;
+        
+        if (viewportW == 0 || viewportH == 0)
+        {
+            viewportW = this->SCR_WIDTH;
+            viewportH = this->SCR_HEIGHT;
+        }
+        
+//        std::cout << "Viewport: " << viewportW << "x" << viewportH << std::endl;
+        return isCameraPerspective ? mainCamera->getPerspectiveMatrix(90.0, Math::Scalar(viewportW) / viewportH, 0.1, 1000.0) :
+        mainCamera->getOrthographicMatrix(viewportW, viewportH, 0.1, 1000.0);
     }
 
     void Window::mouse_callback(GLFWwindow* window, double xpos, double ypos)
@@ -1172,7 +1209,7 @@ namespace Renderer {
         
         if (ImGui::Button("Render"))
         {
-            sm->renderWithNSpherePerEdge(n, sphereSizes);
+            sm->renderWithNSpherePerEdge(n, sphereSizes, 0.05);
             renderFullSMWithNSpheres = n;
         }
         
@@ -1188,6 +1225,21 @@ namespace Renderer {
         if (ImGui::Button("Clear Sphere Mesh"))
         {
             renderFullSMWithNSpheres = 0;
+        }
+        
+        if (ImGui::Button("Toggle Sphere Mesh"))
+        {
+            renderSM = !renderSM;
+        }
+        
+        if (ImGui::Button("Render Wireframe Filled Mesh"))
+        {
+            renderWFmesh = !renderWFmesh;
+            if (!renderWFmesh)
+            {
+                mesh->setWireframe(false);
+                mesh->setBlended(true);
+            }
         }
     }
 }

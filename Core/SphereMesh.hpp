@@ -122,8 +122,8 @@ namespace Renderer
             void updateTrianglessAfterCollapse(int i, int j);
             void removeDegenerates();
             
-            void drawSpheresOverEdge(const Edge &e, int nSpheres = 4, Math::Scalar rescaleRadii = 1.0);
-            void drawSpheresOverTriangle(const Triangle& t, int nSpheres = 4, Math::Scalar size = 1.0);
+            void drawSpheresOverEdge(const Edge &e, int nSpheres = 4, Math::Scalar rescaleRadii = 1.0, Math::Scalar minRadiiScale = 0.3);
+            void drawSpheresOverTriangle(const Triangle& t, int nSpheres = 4, Math::Scalar size = 1.0, Math::Scalar minRadiiScale = 0.3);
             
             Math::Vector3 getTriangleCentroid(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
             Math::Vector3 getTriangleNormal(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
@@ -142,6 +142,8 @@ namespace Renderer
             void clearEdges();
             void clearTriangles();
             void clearSphereMesh();
+        
+            Math::Scalar getContainedRadiusOfSphere(const Sphere& s);
         
             void renderSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
         
@@ -168,7 +170,7 @@ namespace Renderer
             void renderSelectedSpheresOnly();
             void renderFastSelectedSpheresOnly();
             void render();
-            void renderWithNSpherePerEdge(int n, Math::Scalar rescaleRadii = 1.0);
+            void renderWithNSpherePerEdge(int n, Math::Scalar rescaleRadii = 1.0, Math::Scalar minRadiiScale = 0.3);
             void renderSpheresOnly();
             void renderConnectivity();
             void renderConnectivity(int spheresPerEdge, Math::Scalar sphereSize);

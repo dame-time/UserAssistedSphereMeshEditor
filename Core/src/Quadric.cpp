@@ -2,6 +2,9 @@
 
 #include <Matrix3.hpp>
 
+#include <Quadric3.hpp>
+#include <Quadric2.hpp>
+
 namespace Renderer
 {
     Quadric::Quadric ()
@@ -60,12 +63,12 @@ namespace Renderer
         this->c = this->c * multiplier;
     }
 
-    Math::Scalar Quadric::evaluateSQEM (const Math::Vector4 &s)
+    Math::Scalar Quadric::evaluateSQEM (const Math::Vector4 &s) const
     {
         return s.dot(A * s) + b.dot(s) + c;
     }
 
-    Math::Vector4 Quadric::minimizer()
+    Math::Vector4 Quadric::minimizer() const
     {
         Math::Vector4 result;
         
@@ -78,28 +81,57 @@ namespace Renderer
         catch (const std::exception& e)
         {
             std::cerr << "Matrix has determinat 0 for this quadric" << std::endl;
+            return Math::Vector4(-1, -1, -1, 0);
         }
         
+        // TODO: Check if the new method works well
         if (result.coordinates.w <= 0)
         {
             std::cout << "IMPOSING NEW RADIUS" << std::endl;
-            const int newQuadricWeight = 1000;
-
-            Quadric q = Quadric();
-
-            q.A = Math::Matrix4(0, 0, 0, 0,
-                                0, 0, 0, 0,
-                                0, 0, 0, 0,
-                                0, 0, 0, 1);
-            q.b = Math::Vector4(0, 0, 0, -minRadius * 2);
-            q.c = minRadius;
-
-            auto newQ = *this + (q * newQuadricWeight);
-
-            result = newQ.A.inverse() * (-newQ.b/2);
+            Quadric3 q3 = Quadric3(*this, minRadius);
+            auto newOrigin = q3.minimizer();
+            result = Math::Vector4(newOrigin, minRadius);
+//            const int newQuadricWeight = 1000;
+//
+//            Quadric q = Quadric();
+//
+//            q.A = Math::Matrix4(0, 0, 0, 0,
+//                                0, 0, 0, 0,
+//                                0, 0, 0, 0,
+//                                0, 0, 0, 1);
+//            q.b = Math::Vector4(0, 0, 0, -minRadius * 2);
+//            q.c = minRadius;
+//
+//            auto newQ = *this + (q * newQuadricWeight);
+//
+//            result = newQ.A.inverse() * (-newQ.b/2);
         }
 
         return result;
+    }
+
+    Math::Vector4 Quadric::constrainIntoVector(const Math::Vector3& u, const Math::Vector3& v, const Math::Scalar& radius)
+    {
+        Quadric2 q2 = Quadric2(*this, u, v);
+        auto minimizer = q2.minimizer();
+        
+        if (minimizer.coordinates.y > radius)
+            minimizer = q2.constrainR(radius);
+        
+        auto mu = u - v;
+        auto newOrigin = u + (minimizer.coordinates.x * mu);
+        auto newRadius = minimizer.coordinates.y;
+        
+        return Math::Vector4(newOrigin, newRadius);
+    }
+
+    Math::Vector4 Quadric::constrainR(const Math::Scalar& radius)
+    {
+        // Using Quadric3 to find the new center
+        Quadric3 q3 = Quadric3(*this, radius);
+        auto newOrigin = q3.minimizer();
+        
+        return Math::Vector4(newOrigin, radius);
     }
 
     void Quadric::addQuadricToTargetRadius(const Math::Scalar& t)

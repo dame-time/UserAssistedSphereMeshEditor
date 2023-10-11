@@ -83,6 +83,18 @@ namespace Renderer {
         
             Math::Scalar getMeshRadius();
         
+            std::vector<Face> getVertexAdjacentFaces(int vertexIndex);
+            std::vector<Vertex> getAdjacentVertices(int vertexIndex);
+        
+            Math::Scalar distance(const Math::Vector3& p0, const Math::Vector3& p1);
+            Math::Scalar getAngleOfVertexAtFace(const Face& f, const Vertex& v);
+            Math::Scalar getCotAlpha(Vertex v, Vertex adjVertex);
+            Math::Scalar getCotBeta(Vertex v, Vertex adjVertex);
+        
+            void computeVerticesCurvatureIGL();
+        
+            void computeVerticesCurvature();
+        
         public:
             AABB bbox;
             std::string path;
