@@ -8,6 +8,10 @@
 #include <Quadric.hpp>
 #include <Region.hpp>
 #include <Sphere.hpp>
+#include <CollapsableEdge.hpp>
+
+//#include <UpdatableFibonacciPQ.hpp>
+#include <UpdatablePQ.hpp>
 
 #include <vector>
 #include <string>
@@ -35,48 +39,6 @@ namespace Renderer
         }
     };
 
-    struct CollapsableEdge
-    {
-        Sphere i, j;
-        
-        int idxI, idxJ;
-        
-        Math::Scalar error;
-        
-        CollapsableEdge()
-        {
-            updateEdge(Sphere(), Sphere(), -1, -1);
-        }
-        
-        CollapsableEdge(const Sphere& _i, const Sphere& _j, int _idxI, int _idxJ)
-        {
-            updateEdge(_i, _j, _idxI, _idxJ);
-        }
-        
-        void updateEdge(const Sphere& _i, const Sphere& _j, int _idxI, int _idxJ)
-        {
-            i = _i;
-            j = _j;
-            idxI = _idxI;
-            idxJ = _idxJ;
-            
-            updateError();
-        }
-        
-        bool containsIndex(int a)
-        {
-            return a == idxI || a == idxJ;
-        }
-        
-        void updateError()
-        {            
-            error = 0;
-            
-            error += i.getSphereQuadric().evaluateSQEM(Math::Vector4(i.center, i.radius));
-            error += j.getSphereQuadric().evaluateSQEM(Math::Vector4(j.center, j.radius));
-        }
-    };
-
     enum RenderType {
         SPHERES,
         BILLBOARDS
@@ -85,7 +47,10 @@ namespace Renderer
     class SphereMesh
     {
         private:
+            Math::Scalar EPSILON;
+        
             std::vector<Sphere> initialSpheres;
+            UpdatablePQ edgeQueue;
             
             std::vector<Triangle> triangle;
             std::vector<Edge> edge;
@@ -103,17 +68,21 @@ namespace Renderer
             
             std::vector<std::vector<bool>> edgeConnectivity;
             std::vector<std::vector<std::vector<bool>>> triangleConnectivity;
+        
+            void initializeEPSILON();
             
             void initializeSphereMeshTriangles(const std::vector<Face>& Faces);
             void initializeSpheres(const std::vector<Vertex>& vertices, Math::Scalar initialRadius);
             
             void computeSpheresProperties(const std::vector<Vertex>& vertices);
             void updateSpheres();
+            void initializeEdgeQueue();
         
             void updateCollapseCosts(const Sphere& newSphere, int i, int j);
             void recalculateCollapseCosts(int edgeIndexToErase, const Sphere& newSphere, int i, int j);
         
             CollapsableEdge getBestCollapseBruteForce();
+            CollapsableEdge getBestCollapseFast();
             CollapsableEdge getBestCollapseInConnectivity();
         
             Sphere collapseEdgeIntoSphere(const CollapsableEdge& edgeToCollapse);
@@ -121,6 +90,7 @@ namespace Renderer
             void updateEdgesAfterCollapse(int i, int j);
             void updateTrianglessAfterCollapse(int i, int j);
             void removeDegenerates();
+            void updateEdgeQueue(const CollapsableEdge& collapsedEdge);
             
             void drawSpheresOverEdge(const Edge &e, int nSpheres = 4, Math::Scalar rescaleRadii = 1.0, Math::Scalar minRadiiScale = 0.3);
             void drawSpheresOverTriangle(const Triangle& t, int nSpheres = 4, Math::Scalar size = 1.0, Math::Scalar minRadiiScale = 0.3);

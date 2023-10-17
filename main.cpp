@@ -26,8 +26,6 @@ bool loadCachedResult() {
         sm->loadFromYaml(filePath);
         
         return true;
-    } else {
-        std::cout << "No file selected!" << std::endl;
     }
     
     return false;
@@ -42,7 +40,7 @@ int main()
     sphereShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
     
     if (!loadCachedResult()) {
-        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/foot-500.obj", mainShader);
+        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/camel-poses/camel-reference-600.obj", mainShader);
         sm = new Renderer::SphereMesh(mesh, sphereShader);
     }
     

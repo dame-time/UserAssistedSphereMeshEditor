@@ -20,6 +20,18 @@ namespace Renderer {
         generateUUID();
     }
 
+    Sphere::Sphere(const Sphere& other)
+    {
+        this->renderedMeshID = other.renderedMeshID;
+        this->vertices = other.vertices;
+        this->quadricWeights = other.quadricWeights;
+        this->quadric = other.quadric;
+        this->region = other.region;
+        this->center = other.center;
+        this->radius = other.radius;
+        this->color = other.color;
+    }
+
     Sphere::Sphere(const Vertex& vertex, Math::Scalar k)
     {
         quadric = Quadric::initializeQuadricFromVertex(vertex, k) * 1e-6;
@@ -59,7 +71,7 @@ namespace Renderer {
         this->renderedMeshID = random_number;
     }
 
-    int Sphere::getID()
+    int Sphere::getID() const
     {
         return this->renderedMeshID;
     }

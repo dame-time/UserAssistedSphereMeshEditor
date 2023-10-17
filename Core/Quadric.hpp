@@ -22,6 +22,12 @@ namespace Renderer
             
             Quadric();
             Quadric(const Math::Vector3& faceOrigin, const Math::Vector3& faceNormal);
+            Quadric(const Quadric& other)
+            {
+                this->A = other.A;
+                this->b = other.b;
+                this->c = other.c;
+            }
 
             static Quadric initializeQuadricFromVertex(const Vertex& vertex, Math::Scalar targetSphereRadius = 1.0f)
             {
@@ -61,7 +67,7 @@ namespace Renderer
             void operator *= (const Math::Scalar& multiplier);
 
             Math::Scalar evaluateSQEM (const Math::Vector4& sphere) const;
-            Math::Vector4 minimizer () const;
+            Math::Vector4 minimizer ();
             
             Math::Vector4 constrainIntoVector(const Math::Vector3& start, const Math::Vector3& end, const Math::Scalar& radius);
             Math::Vector4 constrainR(const Math::Scalar& radius);

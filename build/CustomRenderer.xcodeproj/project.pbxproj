@@ -44,6 +44,9 @@
 		3D73F36BD69D4D3798D1B906 /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8629FDEC17CB4DABA0C0F0F1 /* imgui_widgets.cpp */; };
 		432A67FC2AD55E2300A042B5 /* Quadric2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432A67FB2AD55E2300A042B5 /* Quadric2.cpp */; };
 		4331D2482ACEB48900FAE2CA /* Quadric3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4331D2472ACEB48900FAE2CA /* Quadric3.cpp */; };
+		437CECD02AD721E600C7BAA4 /* UpdatableFibonacciPQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 437CECCF2AD721E600C7BAA4 /* UpdatableFibonacciPQ.cpp */; };
+		437CECD32AD7245E00C7BAA4 /* CollapsableEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 437CECD22AD7245E00C7BAA4 /* CollapsableEdge.cpp */; };
+		43DAF4F62AD6FA970013D9C6 /* UpdatablePQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DAF4F52AD6FA970013D9C6 /* UpdatablePQ.cpp */; };
 		45555688A29747C4B14AC929 /* imgui_impl_opengl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC8385A860042E78DEB78EA /* imgui_impl_opengl3.cpp */; };
 		499534AF0A9F41FAAC27D53E /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 681AB8A4B9AD48BCAC535C64 /* imgui.cpp */; };
 		4B0BAD58460A48779CFDDFA7 /* Vector4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39AC08B6C133465BA0CF5F51 /* Vector4.cpp */; };
@@ -164,6 +167,12 @@
 		432A67FD2AD55E2D00A042B5 /* Quadric2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Quadric2.hpp; path = Core/Quadric2.hpp; sourceTree = "<group>"; };
 		4331D2472ACEB48900FAE2CA /* Quadric3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Quadric3.cpp; path = Core/src/Quadric3.cpp; sourceTree = "<group>"; };
 		4331D2492ACEB49D00FAE2CA /* Quadric3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Quadric3.hpp; path = Core/Quadric3.hpp; sourceTree = "<group>"; };
+		437CECCE2AD721DD00C7BAA4 /* UpdatableFibonacciPQ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UpdatableFibonacciPQ.hpp; path = Core/UpdatableFibonacciPQ.hpp; sourceTree = "<group>"; };
+		437CECCF2AD721E600C7BAA4 /* UpdatableFibonacciPQ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdatableFibonacciPQ.cpp; path = Core/src/UpdatableFibonacciPQ.cpp; sourceTree = "<group>"; };
+		437CECD12AD7244E00C7BAA4 /* CollapsableEdge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CollapsableEdge.hpp; path = Core/CollapsableEdge.hpp; sourceTree = "<group>"; };
+		437CECD22AD7245E00C7BAA4 /* CollapsableEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollapsableEdge.cpp; path = Core/src/CollapsableEdge.cpp; sourceTree = "<group>"; };
+		43DAF4F42AD6FA880013D9C6 /* UpdatablePQ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UpdatablePQ.hpp; path = Core/UpdatablePQ.hpp; sourceTree = "<group>"; };
+		43DAF4F52AD6FA970013D9C6 /* UpdatablePQ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdatablePQ.cpp; path = Core/src/UpdatablePQ.cpp; sourceTree = "<group>"; };
 		4A9462FD64ED42209AFFC36B /* Vector2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector2.cpp; path = Math/Vector/src/Vector2.cpp; sourceTree = SOURCE_ROOT; };
 		53E8875C78234EDE90FE01DC /* Region.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Region.hpp; path = Core/Region.hpp; sourceTree = SOURCE_ROOT; };
 		5C51934CF00C4AB59628086B /* Versor4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor4.hpp; path = Math/Versor/Versor4.hpp; sourceTree = SOURCE_ROOT; };
@@ -255,6 +264,8 @@
 		2331F7382F3E479BA80741B6 /* Header Files */ = {
 			isa = PBXGroup;
 			children = (
+				437CECCE2AD721DD00C7BAA4 /* UpdatableFibonacciPQ.hpp */,
+				43DAF4F42AD6FA880013D9C6 /* UpdatablePQ.hpp */,
 				83DC94ADD23545149BF860A6 /* Camera.hpp */,
 				FFEC44DA7C1C4AE8B62FF4B1 /* ObjLoader.hpp */,
 				F9EA7C88C56441FDB98C08FE /* Quadric.hpp */,
@@ -265,6 +276,7 @@
 				E037651272574A74A200A92A /* RenderableSphere.hpp */,
 				AD2AFFE8965D427182B051B0 /* Sphere.hpp */,
 				42D5A1503BB44910A05EE25F /* SphereMesh.hpp */,
+				437CECD12AD7244E00C7BAA4 /* CollapsableEdge.hpp */,
 				10CA38F7D8564488852C4205 /* Window.hpp */,
 				8AEC319D65804DBDA2694FD1 /* YAMLUtils.hpp */,
 				938C2C68B7AE4EC0AF7BE95F /* Math.hpp */,
@@ -354,6 +366,8 @@
 		E16138061A684DB1AFAC201C /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
+				437CECCF2AD721E600C7BAA4 /* UpdatableFibonacciPQ.cpp */,
+				43DAF4F52AD6FA970013D9C6 /* UpdatablePQ.cpp */,
 				DB88CA53190C466E84980803 /* Camera.cpp */,
 				DDD9EAB54A0A419999C9A882 /* ObjLoader.cpp */,
 				8A2FA810E0E34444AD907319 /* Quadric.cpp */,
@@ -364,6 +378,7 @@
 				E788D457530B455698F31443 /* RenderableSphere.cpp */,
 				C7C2189DFA604F81A20B7F02 /* Sphere.cpp */,
 				BE687E993DE64877A686AEF1 /* SphereMesh.cpp */,
+				437CECD22AD7245E00C7BAA4 /* CollapsableEdge.cpp */,
 				11702156D1F54EAC84A37FE1 /* Window.cpp */,
 				CD99374CD3D243CAA66756D7 /* Matrix2.cpp */,
 				B783C283A0E949118D66B9AB /* Matrix3.cpp */,
@@ -547,16 +562,19 @@
 				85D0F49130FD43888CD39DE4 /* Window.cpp in Sources */,
 				22562C14B10644E28442BE84 /* Matrix2.cpp in Sources */,
 				432A67FC2AD55E2300A042B5 /* Quadric2.cpp in Sources */,
+				437CECD32AD7245E00C7BAA4 /* CollapsableEdge.cpp in Sources */,
 				D23B8C4FEBA146238FCECBEB /* Matrix3.cpp in Sources */,
 				83027BF99100407293A4287E /* Matrix4.cpp in Sources */,
 				08ECC7D6FBEE4E5BAECBA204 /* Point2.cpp in Sources */,
 				5B2B3E93C1ED446AB5DBE061 /* Point3.cpp in Sources */,
 				94E8029CBBB5439E9E45DBA9 /* Point4.cpp in Sources */,
+				437CECD02AD721E600C7BAA4 /* UpdatableFibonacciPQ.cpp in Sources */,
 				698C391C99354C6E9906D738 /* Quaternion.cpp in Sources */,
 				ECD002E39DD7416CAD0F0438 /* Vector2.cpp in Sources */,
 				D6D1F6A2415B4105B52B6658 /* Vector3.cpp in Sources */,
 				4B0BAD58460A48779CFDDFA7 /* Vector4.cpp in Sources */,
 				75B5A538A4634CDAB9CE5BA8 /* Versor2.cpp in Sources */,
+				43DAF4F62AD6FA970013D9C6 /* UpdatablePQ.cpp in Sources */,
 				773F7E10149347D48F2218DC /* Versor3.cpp in Sources */,
 				8B8F2F1DEACD45CBA1FC8D21 /* Versor4.cpp in Sources */,
 				56E42DB820C84A108DF6467D /* Shader.cpp in Sources */,

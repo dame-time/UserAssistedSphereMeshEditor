@@ -28,4 +28,6 @@ dependencies: \
   /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Quadric.hpp \
   /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Region.hpp \
   /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Sphere.hpp \
+  /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/CollapsableEdge.hpp \
+  /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/UpdatablePQ.hpp \
   /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/YAMLUtils.hpp

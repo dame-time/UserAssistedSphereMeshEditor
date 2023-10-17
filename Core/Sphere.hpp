@@ -19,7 +19,6 @@ namespace Renderer {
     class Sphere
     {
         private:
-            std::vector<int> renderedSpheres;
             int renderedMeshID;
         
             void generateUUID();
@@ -37,6 +36,7 @@ namespace Renderer {
             Math::Vector3 color;
 
             Sphere();
+            Sphere(const Sphere& sphere);
             Sphere(const Vertex& vertex, Math::Scalar targetSphereRadius);
             Sphere(const Math::Vector3& center, Math::Scalar radius);
 
@@ -52,17 +52,7 @@ namespace Renderer {
         
             void constrainSphere(const Math::Scalar& constrainRadius);
         
-            void operator = (const Sphere& s)
-            {
-                this->quadric = s.quadric;
-                this->region = s.region;
-                
-                this->center = s.center;
-                this->radius = s.radius;
-                this->vertices = s.vertices;
-            }
-        
-            int getID();
+            int getID() const;
 
             Sphere lerp(const Sphere &s, Math::Scalar t);
     };

@@ -20,14 +20,13 @@ namespace Renderer {
     {
         private:
             static std::vector<Math::Vector3> directions;
-            
-            std::vector<Math::Vector2> intervals;
 
             std::vector<Math::Vector3> unitSphereSampler(int numberOfDirections);
         
             void initializeIntervals();
 
         public:
+            std::vector<Math::Vector2> intervals;
             Math::Scalar directionalWidth;
 
             Region()
@@ -61,6 +60,12 @@ namespace Renderer {
 
                 initializeIntervals();
                 addVertex(initialVertex);
+            }
+        
+            Region(const Region& other)
+            {
+                this->intervals = other.intervals;
+                this->directionalWidth = other.directionalWidth;
             }
 
             void computeIntervals();

@@ -14,6 +14,7 @@ namespace Renderer {
     SphereMesh::SphereMesh(const SphereMesh& sm) : referenceMesh(sm.referenceMesh)
     {
         BDDSize = sm.BDDSize;
+        initializeEPSILON();
         
         sphere = sm.sphere;
         initialSpheres = sm.initialSpheres;
@@ -25,6 +26,7 @@ namespace Renderer {
         renderType = RenderType::SPHERES;
         
         clearSphereMesh();
+        initializeEdgeQueue();
     }
 
     SphereMesh::SphereMesh(RenderableMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius) : referenceMesh(mesh)
@@ -36,6 +38,7 @@ namespace Renderer {
         renderType = RenderType::SPHERES;
         
         BDDSize = mesh->bbox.BDD().magnitude();
+        initializeEPSILON();
 
         initializeSphereMeshTriangles(faces);
         initializeSpheres(vertices, 0.01f * BDDSize);
@@ -46,6 +49,13 @@ namespace Renderer {
         initialSpheres = sphere;
         
         clearSphereMesh();
+        initializeEdgeQueue();
+    }
+
+    void SphereMesh::initializeEPSILON()
+    {
+//       EPSILON = 0.0275 * BDDSize;
+        EPSILON = 0.05 * BDDSize;
     }
 
     int SphereMesh::getPerSphereVertexCount() {
@@ -81,6 +91,8 @@ namespace Renderer {
         edgeConnectivity = sm.edgeConnectivity;
         triangleConnectivity = sm.triangleConnectivity;
         
+        EPSILON = sm.EPSILON;
+        
         return *this;
     }
 
@@ -94,6 +106,84 @@ namespace Renderer {
     {
         for (int i = 0; i < vertices.size(); i++)
             sphere.push_back(Sphere(vertices[i], initialRadius));
+    }
+
+    void SphereMesh::initializeEdgeQueue()
+    {
+        for (int i = 0; i < sphere.size(); ++i) {
+            for (int j = i + 1; j < sphere.size(); ++j) {
+                if (i == j || (sphere[i].center - sphere[j].center).squareMagnitude() > EPSILON * EPSILON)
+                    continue;
+
+                CollapsableEdge edge(sphere[i], sphere[j], i, j);
+                edge.updateError();
+                
+                edge.queueIdI = 0;
+                edge.queueIdJ = 0;
+                
+                if (edge.idxI > edge.idxJ)
+                    edge.updateEdge(edge.j, edge.i, edge.idxJ, edge.idxI);
+                
+                edgeQueue.push(edge);
+            }
+        }
+    }
+
+    void SphereMesh::updateEdgeQueue(const CollapsableEdge& collapsedEdge)
+    {
+        auto edgeI = collapsedEdge.idxI;
+        auto edgeJ = collapsedEdge.idxJ;
+        
+        for (int i = 0; i < sphere.size(); i++)
+        {
+            if (i != edgeI && (sphere[i].center - sphere[edgeI].center).squareMagnitude() <= EPSILON * EPSILON)
+            {
+                CollapsableEdge newEdge = CollapsableEdge(sphere[i], sphere[edgeI], i, edgeI);
+                
+                newEdge.queueIdI = 0;
+                if (i == edgeJ)
+                    newEdge.queueIdI = collapsedEdge.queueIdJ + 1;
+                
+                newEdge.queueIdJ = collapsedEdge.queueIdJ + 1;
+                
+                if (newEdge.idxI > newEdge.idxJ)
+                {
+                    newEdge.updateEdge(sphere[edgeI], sphere[i], newEdge.idxJ, newEdge.idxI);
+                    
+                    newEdge.queueIdJ = 0;
+                    if (i == edgeJ)
+                        newEdge.queueIdJ = collapsedEdge.queueIdJ + 1;
+                    
+                    newEdge.queueIdI = collapsedEdge.queueIdI + 1;
+                }
+                
+                edgeQueue.push(newEdge);
+            }
+            
+            if (i != edgeJ && (sphere[i].center - sphere[edgeJ].center).squareMagnitude() <= EPSILON * EPSILON)
+            {
+                CollapsableEdge newEdge = CollapsableEdge(sphere[i], sphere[edgeJ], i, edgeJ);
+                
+                newEdge.queueIdI = 0;
+                if (i == edgeI)
+                    newEdge.queueIdI = collapsedEdge.queueIdI + 1;
+                
+                newEdge.queueIdJ = collapsedEdge.queueIdJ + 1;
+                
+                if (newEdge.idxI > newEdge.idxJ)
+                {
+                    newEdge.updateEdge(sphere[edgeJ], sphere[i], newEdge.idxJ, newEdge.idxI);
+                    
+                    newEdge.queueIdJ = 0;
+                    if (i == edgeI)
+                        newEdge.queueIdJ = collapsedEdge.queueIdI + 1;
+                    
+                    newEdge.queueIdI = collapsedEdge.queueIdJ + 1;
+                }
+                
+                edgeQueue.push(newEdge);
+            }
+        }
     }
 
     RenderType SphereMesh::getRenderType() {
@@ -193,11 +283,26 @@ namespace Renderer {
             renderOneBillboardSphere(center, radius, color);
     }
 
+    CollapsableEdge SphereMesh::getBestCollapseFast()
+    {
+        if (edgeQueue.size() < 1)
+            return CollapsableEdge();
+        
+        CollapsableEdge topEdge = edgeQueue.top((int)sphere.size());
+        
+        if (topEdge.idxI == -1 || topEdge.idxJ == -1)
+            return CollapsableEdge();
+        
+        edgeQueue.pop();
+        
+        if (topEdge.i.region.intervals.size() == 0 || topEdge.j.region.intervals.size() == 0)
+            std::cerr << "Selected sphere has an invalid region!" << std::endl;
+        
+        return topEdge;
+    }
+
     CollapsableEdge SphereMesh::getBestCollapseBruteForce()
     {
-//        const Math::Scalar EPSILON = 0.0275 * BDDSize;
-        const Math::Scalar EPSILON = 0.1 * BDDSize;
-        
         if (sphere.size() <= 1)
             return CollapsableEdge();
         
@@ -205,34 +310,33 @@ namespace Renderer {
         CollapsableEdge bestEdge = CollapsableEdge(sphere[0], sphere[1], -1, -1);
         
         for (int i = 0; i < sphere.size(); i++)
-        {
             for (int j = i + 1; j < sphere.size(); j++)
             {
-                if (i == j || (sphere[i].center - sphere[j].center).magnitude() > EPSILON)
+                if (i == j || (sphere[i].center - sphere[j].center).squareMagnitude() > EPSILON * EPSILON)
                     continue;
                 
                 CollapsableEdge candidateEdge = CollapsableEdge(sphere[i], sphere[j], i, j);
+                
+                if (candidateEdge.idxI > candidateEdge.idxJ)
+                    candidateEdge.updateEdge(candidateEdge.j, candidateEdge.i, candidateEdge.idxJ, candidateEdge.idxI);
+                
+                candidateEdge.updateError();
+                
                 if (candidateEdge.error < minErorr)
                 {
-                    bestEdge = CollapsableEdge(sphere[i], sphere[j], i, j);
+                    bestEdge = candidateEdge;
                     minErorr = candidateEdge.error;
                 }
             }
-        }
         
         if (bestEdge.idxI == -1 || bestEdge.idxJ == -1)
             return CollapsableEdge();
-        
-        if (bestEdge.idxI > bestEdge.idxJ)
-            bestEdge.updateEdge(bestEdge.j, bestEdge.i, bestEdge.idxJ, bestEdge.idxI);
         
         return bestEdge;
     }
 
     CollapsableEdge SphereMesh::getBestCollapseInConnectivity()
     {
-        const Math::Scalar EPSILON = DBL_MAX;
-        
         if (triangle.size() < 1 && edge.size() < 1)
             return CollapsableEdge();
         
@@ -726,7 +830,13 @@ namespace Renderer {
 
     void SphereMesh::renderSelectedSpheresOnly()
     {
-        CollapsableEdge e = getBestCollapseBruteForce();
+        if (edgeQueue.isQueueDirty())
+        {
+            edgeQueue.clear();
+            initializeEdgeQueue();
+        }
+        
+        CollapsableEdge e = getBestCollapseFast();
         if (e.idxI == -1 || e.idxJ == -1)
             return;
         
@@ -781,11 +891,8 @@ namespace Renderer {
 
     Sphere SphereMesh::collapseEdgeIntoSphere(const CollapsableEdge& edgeToCollapse)
     {
-        int i = edgeToCollapse.idxI;
-        int j = edgeToCollapse.idxJ;
-        
-        Sphere collapsedSphereA = sphere[i];
-        Sphere collapsedSphereB = sphere[j];
+        Sphere collapsedSphereA = sphere[edgeToCollapse.idxI];
+        Sphere collapsedSphereB = sphere[edgeToCollapse.idxJ];
         
         Sphere newSphere = Sphere();
         
@@ -802,11 +909,11 @@ namespace Renderer {
 //        newSphere.constrainSphere(getContainedRadiusOfSphere(newSphere));
         
 //      FIXME: This is done only for rendering
-        for (int k = 0; k < sphere[i].vertices.size(); k++)
-            newSphere.addVertex(sphere[i].vertices[k]);
+        for (int k = 0; k < collapsedSphereA.vertices.size(); k++)
+            newSphere.addVertex(collapsedSphereA.vertices[k]);
         
-        for (int k = 0; k < sphere[j].vertices.size(); k++)
-            newSphere.addVertex(sphere[j].vertices[k]);
+        for (int k = 0; k < collapsedSphereB.vertices.size(); k++)
+            newSphere.addVertex(collapsedSphereB.vertices[k]);
 //
         
         return newSphere;
@@ -814,7 +921,14 @@ namespace Renderer {
 
     bool SphereMesh::collapseSphereMesh()
     {
-        CollapsableEdge e = getBestCollapseBruteForce();
+        if (edgeQueue.isQueueDirty())
+        {
+            edgeQueue.clear();
+            initializeEdgeQueue();
+        }
+            
+        CollapsableEdge e = getBestCollapseFast();
+        
         if (e.idxI == -1 || e.idxJ == -1)
             return false;
         
@@ -831,7 +945,9 @@ namespace Renderer {
         updateTrianglessAfterCollapse(e.idxI, e.idxJ);
 
         removeDegenerates();
-        clearSphereMesh();
+//        clearSphereMesh();
+//        std::cout << "Cleared Sphere Mesh" << std::endl;
+        updateEdgeQueue(e);
         
         return true;
     }
@@ -925,6 +1041,8 @@ namespace Renderer {
 
         if (i > j)
             std::swap(i, j);
+        
+        edgeQueue.setQueueDirty();
         
         Sphere newSphere = Sphere();
         newSphere.addQuadric(sphere[i].getSphereQuadric());

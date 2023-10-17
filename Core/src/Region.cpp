@@ -90,7 +90,7 @@ namespace Renderer {
 
     void Region::computeIntervals()
     {
-        directionalWidth = FLT_MAX;
+        directionalWidth = DBL_MAX;
 
         for (int i = 0; i < intervals.size(); i++)
             directionalWidth = std::min(directionalWidth, std::fabs(intervals[i].coordinates.y - intervals[i].coordinates.x));
@@ -100,7 +100,7 @@ namespace Renderer {
 
     void Region::join(Region& region)
     {
-        directionalWidth = FLT_MAX;
+        directionalWidth = DBL_MAX;
         for (int i = 0; i < intervals.size(); i++)
             intervals[i] = Math::Vector2(std::min(intervals[i].coordinates.x, region.intervals[i].coordinates.x),
                                          std::max(intervals[i].coordinates.y, region.intervals[i].coordinates.y));
