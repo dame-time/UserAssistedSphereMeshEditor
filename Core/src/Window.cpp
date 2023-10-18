@@ -10,6 +10,10 @@
 
 #include <YAMLUtils.hpp>
 
+#include <chrono>
+
+#define DEBUG_CHRONO 1
+
 #define ICON_FA_SAVE "\xEF\x83\x87"
 #define STORE_ICON "\xEF\x88\xB3"
 #define STORE_TEXT_ICON "\xEF\x80\x8B"
@@ -1086,6 +1090,24 @@ namespace Renderer {
         
         ImGui::Separator();
         
+        static float epsilon = 0.04f;
+        ImGui::PushItemWidth(80);
+        ImGui::SliderFloat("Slider", &epsilon, 0.0001f, 1.0f, "%.4f");
+        ImGui::PopItemWidth();
+        ImGui::SameLine();
+        ImGui::PushItemWidth(120);
+        ImGui::InputFloat("Input", &epsilon, 0.0001f, 1.0f, "%.4f");
+        ImGui::PopItemWidth();
+        ImGui::SameLine();
+        
+        epsilon = Math::Math::clamp01(epsilon);
+
+        if (ImGui::Button("Set EPSILON"))
+            sm->setEpsilon(static_cast<Math::Scalar>(epsilon));
+
+        
+        ImGui::Separator();
+        
         if (ImGui::Button("Collapse Edge"))
         {
             auto result = sm->collapseSphereMesh();
@@ -1106,7 +1128,18 @@ namespace Renderer {
         if (ImGui::Button("Collapse"))
         {
             int initialSpheres = sm->sphere.size();
+#if DEBUG_CHRONO == 1
+            auto start = std::chrono::high_resolution_clock::now();
+#endif
+            
             auto result = sm->collapseSphereMesh(j);
+            
+#if DEBUG_CHRONO == 1
+            auto stop = std::chrono::high_resolution_clock::now();
+            auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+            
+            displayLogMessage("Duration: " + std::to_string(duration.count() / 1e6));
+#endif
             
             if (!result)
                 displayErrorMessage("Could not find any good sphere to collapse,\nspheres collapsed: " + std::to_string(initialSpheres - sm->sphere.size()));

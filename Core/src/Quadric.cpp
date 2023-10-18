@@ -71,8 +71,6 @@ namespace Renderer
     Math::Vector4 Quadric::minimizer()
     {
         Math::Vector4 result;
-        
-        const Math::Scalar minRadius = 0.01;
 
         try
         {
@@ -85,7 +83,7 @@ namespace Renderer
         }
         
         // TODO: MARCO Check if the new method works well
-        if (result.coordinates.w <= 0)
+        if (result.coordinates.w < minRadius)
         {
 //            std::cout << "IMPOSING NEW RADIUS" << std::endl;
 //            Quadric3 q3 = Quadric3(*this, minRadius);
@@ -112,11 +110,16 @@ namespace Renderer
 
     Math::Vector4 Quadric::constrainIntoVector(const Math::Vector3& u, const Math::Vector3& v, const Math::Scalar& radius)
     {
+        auto r = radius;
+        
+//        if (radius < minRadius)
+//            r = minRadius;
+        
         Quadric2 q2 = Quadric2(*this, u, v);
         auto minimizer = q2.minimizer();
         
-        if (minimizer.coordinates.y > radius)
-            minimizer = q2.constrainR(radius);
+        if (minimizer.coordinates.y > r)
+            minimizer = q2.constrainR(r);
         
         auto mu = u - v;
         auto newOrigin = u + (minimizer.coordinates.x * mu);
@@ -127,8 +130,13 @@ namespace Renderer
 
     Math::Vector4 Quadric::constrainR(const Math::Scalar& radius)
     {
+        auto r = radius;
+        
+//        if (radius < minRadius)
+//            r = minRadius;
+        
         // Using Quadric3 to find the new center
-        Quadric3 q3 = Quadric3(*this, radius);
+        Quadric3 q3 = Quadric3(*this, r);
         auto newOrigin = q3.minimizer();
         
         return Math::Vector4(newOrigin, radius);

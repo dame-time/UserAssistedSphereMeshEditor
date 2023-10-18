@@ -15,6 +15,9 @@ namespace Renderer
 {
     class Quadric
     {
+        private:
+            Math::Scalar minRadius = 0.001;
+        
         public:
             Math::Matrix4 A;
             Math::Vector4 b;

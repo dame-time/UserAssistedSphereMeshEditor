@@ -55,7 +55,15 @@ namespace Renderer {
     void SphereMesh::initializeEPSILON()
     {
 //       EPSILON = 0.0275 * BDDSize;
-        EPSILON = 0.05 * BDDSize;
+//        EPSILON = 0.04 * BDDSize; // CAMEL & FOOT
+        EPSILON = 0.095 * BDDSize; // BUNNY
+//        EPSILON = 0.035 * BDDSize; // HAND
+    }
+
+    void SphereMesh::setEpsilon(const Math::Scalar& e)
+    {
+        auto newEPSILON = Math::Math::clamp01(e);
+        EPSILON = newEPSILON * BDDSize;
     }
 
     int SphereMesh::getPerSphereVertexCount() {
@@ -499,7 +507,7 @@ namespace Renderer {
         for (int i = 1; i < nSpheres - 1; i++)
             renderSphere(Math::lerp(sphere[e.i].center, sphere[e.j].center, i * 1.0 / (nSpheres - 1)),
                             Math::lerp(
-                                       0.085,
+                                       0.001,
                                        Math::lerp(sphere[e.i].radius, sphere[e.j].radius, i * 1.0 / (nSpheres - 1)),
                                        rescaleRadii
                                        ),
@@ -524,7 +532,7 @@ namespace Renderer {
                 Math::Scalar ck = k * 1.0 / (nSpheres - 1);
                 
                 Math::Vector3 origin = Math::Vector3(sphere[e.i].center * ci + sphere[e.j].center * cj + sphere[e.k].center * ck);
-                Math::Scalar radius = Math::lerp(0.085, sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck, size);
+                Math::Scalar radius = Math::lerp(0.001, sphere[e.i].radius * ci + sphere[e.j].radius * cj + sphere[e.k].radius * ck, size);
                 
                 renderSphere(origin, radius, color);
             }
@@ -896,6 +904,8 @@ namespace Renderer {
         
         Sphere newSphere = Sphere();
         
+        newSphere.color = Math::Vector3(1, 0, 0);
+        
         newSphere.region.join(collapsedSphereA.region);
         newSphere.region.join(collapsedSphereB.region);
         
@@ -1045,6 +1055,7 @@ namespace Renderer {
         edgeQueue.setQueueDirty();
         
         Sphere newSphere = Sphere();
+        newSphere.color = Math::Vector3(1, 0, 0);
         newSphere.addQuadric(sphere[i].getSphereQuadric());
         newSphere.addQuadric(sphere[j].getSphereQuadric());
         

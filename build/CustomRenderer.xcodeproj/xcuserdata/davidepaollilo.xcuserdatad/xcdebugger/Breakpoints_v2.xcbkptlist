@@ -14,8 +14,8 @@
             filePath = "Core/src/SphereMesh.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "898"
-            endingLineNumber = "898"
+            startingLineNumber = "908"
+            endingLineNumber = "908"
             landmarkName = "SphereMesh::collapseEdgeIntoSphere(edgeToCollapse)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "Core/src/SphereMesh.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "SphereMesh::updateEdgeQueue(collapsedEdge)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "Core/src/SphereMesh.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "930"
-            endingLineNumber = "930"
+            startingLineNumber = "940"
+            endingLineNumber = "940"
             landmarkName = "SphereMesh::collapseSphereMesh()"
             landmarkType = "7">
             <Locations>
@@ -221,8 +221,8 @@
             filePath = "Core/src/SphereMesh.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
             landmarkName = "SphereMesh::getBestCollapseBruteForce()"
             landmarkType = "7">
             <Locations>

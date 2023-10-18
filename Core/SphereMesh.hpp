@@ -125,6 +125,8 @@ namespace Renderer
         
             SphereMesh& operator = (const SphereMesh& sm);
         
+            void setEpsilon(const Math::Scalar& e);
+        
             int getPerSphereVertexCount();
             int getRenderCalls();
             int getTriangleSize();
