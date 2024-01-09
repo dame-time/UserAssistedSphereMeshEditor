@@ -8,6 +8,7 @@ namespace Renderer
         queueIdJ = 0;
         
         updateEdge(Sphere(), Sphere(), -1, -1);
+        isErrorCorrectionQuadricSet = false;
     }
 
     CollapsableEdge::CollapsableEdge(const Sphere& _i, const Sphere& _j, int _idxI, int _idxJ)
@@ -16,6 +17,7 @@ namespace Renderer
         queueIdJ = 0;
         
         updateEdge(_i, _j, _idxI, _idxJ);
+        isErrorCorrectionQuadricSet = false;
     }
 
     bool CollapsableEdge::operator < (const CollapsableEdge& rhs) const {
@@ -45,12 +47,23 @@ namespace Renderer
         return a == idxI || a == idxJ;
     }
 
+    void CollapsableEdge::updateCorrectionErrorQuadric(const Quadric& q)
+    {
+        isErrorCorrectionQuadricSet = true;
+        this->errorCorrectionQuadric += q;
+    }
+
     void CollapsableEdge::updateError()
     {
         error = 0;
         
-        error += i.getSphereQuadric().evaluateSQEM(Math::Vector4(i.center, i.radius));
-        error += j.getSphereQuadric().evaluateSQEM(Math::Vector4(j.center, j.radius));
+        if (!isErrorCorrectionQuadricSet)
+            error = (i.getSphereQuadric() + j.getSphereQuadric()).minimum();
+        else
+            error = (i.getSphereQuadric() + j.getSphereQuadric() + errorCorrectionQuadric).minimum();
+        
+//        error += i.getSphereQuadric().evaluateSQEM(Math::Vector4(i.center, i.radius));
+//        error += j.getSphereQuadric().evaluateSQEM(Math::Vector4(j.center, j.radius));
     }
 
     std::ostream& operator<<(std::ostream& os, const CollapsableEdge& edge)

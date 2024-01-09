@@ -4,6 +4,9 @@
 #include <Math.hpp>
 
 #include <YAMLUtils.hpp>
+#include <ScopeTimer.hpp>
+
+#include <omp.h>
 
 #include <filesystem>
 #include <algorithm>
@@ -46,6 +49,7 @@ namespace Renderer {
         computeSpheresProperties(vertices);
         updateSpheres();
 
+        initialSpheres.reserve(sphere.size());
         initialSpheres = sphere;
         
         clearSphereMesh();
@@ -55,15 +59,14 @@ namespace Renderer {
     void SphereMesh::initializeEPSILON()
     {
 //       EPSILON = 0.0275 * BDDSize;
-//        EPSILON = 0.04 * BDDSize; // CAMEL & FOOT
-        EPSILON = 0.095 * BDDSize; // BUNNY
+        EPSILON = 0.04 * BDDSize; // CAMEL & FOOT
+//        EPSILON = 0.095 * BDDSize; // BUNNY
 //        EPSILON = 0.035 * BDDSize; // HAND
     }
 
     void SphereMesh::setEpsilon(const Math::Scalar& e)
     {
-        auto newEPSILON = Math::Math::clamp01(e);
-        EPSILON = newEPSILON * BDDSize;
+        EPSILON = e * BDDSize;
     }
 
     int SphereMesh::getPerSphereVertexCount() {
@@ -79,11 +82,11 @@ namespace Renderer {
     }
 
     int SphereMesh::getTriangleSize() {
-        return triangle.size();
+        return (int)triangle.size();
     }
 
     int SphereMesh::getEdgeSize() {
-        return edge.size();
+        return (int)edge.size();
     }
 
     SphereMesh& SphereMesh::operator = (const SphereMesh& sm)
@@ -106,91 +109,130 @@ namespace Renderer {
 
     void SphereMesh::initializeSphereMeshTriangles(const std::vector<Face>& faces)
     {
+        triangle.reserve(faces.size());
+        
         for (int i = 0; i < faces.size(); i++)
             triangle.push_back(Triangle(faces[i].i, faces[i].j, faces[i].k));
     }
 
     void SphereMesh::initializeSpheres(const std::vector<Vertex>& vertices, Math::Scalar initialRadius)
     {
-        for (int i = 0; i < vertices.size(); i++)
-            sphere.push_back(Sphere(vertices[i], initialRadius));
+        sphere.reserve(vertices.size());
+
+        std::transform(vertices.begin(), vertices.end(), std::back_inserter(sphere),
+                       [initialRadius](const auto& vertex) {
+                           return Sphere(vertex, initialRadius);
+                       });
     }
 
     void SphereMesh::initializeEdgeQueue()
     {
-        for (int i = 0; i < sphere.size(); ++i) {
-            for (int j = i + 1; j < sphere.size(); ++j) {
-                if (i == j || (sphere[i].center - sphere[j].center).squareMagnitude() > EPSILON * EPSILON)
-                    continue;
+        int sphereSize = (int)sphere.size();
+        std::queue<CollapsableEdge> localQueues[omp_get_max_threads()];
 
-                CollapsableEdge edge(sphere[i], sphere[j], i, j);
-                edge.updateError();
-                
-                edge.queueIdI = 0;
-                edge.queueIdJ = 0;
-                
-                if (edge.idxI > edge.idxJ)
-                    edge.updateEdge(edge.j, edge.i, edge.idxJ, edge.idxI);
-                
-                edgeQueue.push(edge);
+        #pragma omp parallel
+        {
+            int tid = omp_get_thread_num();
+
+            #pragma omp for schedule(dynamic, 64)
+            for (int i = 0; i < sphereSize; ++i) {
+                for (int j = i + 1; j < sphereSize; ++j) {
+                    if ((sphere[i].center - sphere[j].center).squareMagnitude() <= EPSILON * EPSILON) {
+                        CollapsableEdge edge(sphere[i], sphere[j], i, j);
+                        edge.updateError();
+                        edge.queueIdI = 0;
+                        edge.queueIdJ = 0;
+
+                        if (edge.idxI > edge.idxJ) {
+                            std::cout << "Non succede" << std::endl;
+                            edge.updateEdge(edge.j, edge.i, edge.idxJ, edge.idxI);
+                        }
+
+                        localQueues[tid].push(edge);
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < omp_get_max_threads(); ++i) {
+            while (!localQueues[i].empty()) {
+                edgeQueue.push(localQueues[i].front());
+                localQueues[i].pop();
             }
         }
     }
 
     void SphereMesh::updateEdgeQueue(const CollapsableEdge& collapsedEdge)
     {
-        auto edgeI = collapsedEdge.idxI;
-        auto edgeJ = collapsedEdge.idxJ;
+        auto& edgeI = collapsedEdge.idxI;
+        auto& edgeJ = collapsedEdge.idxJ;
         
-        for (int i = 0; i < sphere.size(); i++)
-        {
-            if (i != edgeI && (sphere[i].center - sphere[edgeI].center).squareMagnitude() <= EPSILON * EPSILON)
-            {
-                CollapsableEdge newEdge = CollapsableEdge(sphere[i], sphere[edgeI], i, edgeI);
-                
+        const auto epsilonSquared = EPSILON * EPSILON;
+        const auto size = sphere.size();
+
+        auto updateEdges = [&](int i, int edgeIdx, int queueIdOffset) {
+            if (i != edgeIdx && (sphere[i].center - sphere[edgeIdx].center).squareMagnitude() <= epsilonSquared) {
+                CollapsableEdge newEdge = CollapsableEdge(sphere[i], sphere[edgeIdx], i, edgeIdx);
+
                 newEdge.queueIdI = 0;
-                if (i == edgeJ)
-                    newEdge.queueIdI = collapsedEdge.queueIdJ + 1;
-                
-                newEdge.queueIdJ = collapsedEdge.queueIdJ + 1;
-                
-                if (newEdge.idxI > newEdge.idxJ)
-                {
-                    newEdge.updateEdge(sphere[edgeI], sphere[i], newEdge.idxJ, newEdge.idxI);
-                    
-                    newEdge.queueIdJ = 0;
-                    if (i == edgeJ)
-                        newEdge.queueIdJ = collapsedEdge.queueIdJ + 1;
-                    
-                    newEdge.queueIdI = collapsedEdge.queueIdI + 1;
+                newEdge.queueIdJ = queueIdOffset;
+
+                if (newEdge.idxI > newEdge.idxJ) {
+                    std::swap(newEdge.idxI, newEdge.idxJ);
+                    std::swap(newEdge.queueIdI, newEdge.queueIdJ);
                 }
                 
+                // TODO: Add to the edge the quadric of the eventually included "non contained" vertex
+                Sphere newSphere = Sphere();
+                newSphere.color = Math::Vector3(1, 0, 0);
+                newSphere.addQuadric(sphere[newEdge.idxI].getSphereQuadric());
+                newSphere.addQuadric(sphere[newEdge.idxJ].getSphereQuadric());
+                
+                newSphere.region = sphere[newEdge.idxI].region;
+                newSphere.region.join(sphere[newEdge.idxJ].region);
+                
+                Quadric errorQuadric = Quadric();
+                for (auto& vertex : referenceMesh->vertices)
+                    if (newSphere.intersectsVertex(vertex.position))
+                    {
+                        bool isAlreadyContained = false;
+                        for (auto& ownVertex : sphere[newEdge.idxI].vertices)
+                        {
+                            if (ownVertex.position == vertex.position)
+                            {
+                                isAlreadyContained = true;
+                                break;
+                            }
+                        }
+                        
+                        if (isAlreadyContained)
+                            break;
+                        
+                        for (auto& ownVertex : sphere[newEdge.idxJ].vertices)
+                        {
+                            if (ownVertex.position == vertex.position)
+                            {
+                                isAlreadyContained = true;
+                                break;
+                            }
+                        }
+                        
+                        if (isAlreadyContained)
+                            break;
+                        
+                        newEdge.updateCorrectionErrorQuadric(Quadric::initializeQuadricFromVertex(vertex, 0.1 * BDDSize));
+//                        auto q = Quadric::initializeQuadricFromVertex(vertex, 0.1 * BDDSize) * 1e-6;
+//                        newSphere.addQuadric(q);
+                    }
+                
+                newEdge.updateError();
                 edgeQueue.push(newEdge);
             }
-            
-            if (i != edgeJ && (sphere[i].center - sphere[edgeJ].center).squareMagnitude() <= EPSILON * EPSILON)
-            {
-                CollapsableEdge newEdge = CollapsableEdge(sphere[i], sphere[edgeJ], i, edgeJ);
-                
-                newEdge.queueIdI = 0;
-                if (i == edgeI)
-                    newEdge.queueIdI = collapsedEdge.queueIdI + 1;
-                
-                newEdge.queueIdJ = collapsedEdge.queueIdJ + 1;
-                
-                if (newEdge.idxI > newEdge.idxJ)
-                {
-                    newEdge.updateEdge(sphere[edgeJ], sphere[i], newEdge.idxJ, newEdge.idxI);
-                    
-                    newEdge.queueIdJ = 0;
-                    if (i == edgeI)
-                        newEdge.queueIdJ = collapsedEdge.queueIdI + 1;
-                    
-                    newEdge.queueIdI = collapsedEdge.queueIdJ + 1;
-                }
-                
-                edgeQueue.push(newEdge);
-            }
+        };
+
+        for (int i = 0; i < size; ++i) {
+            updateEdges(i, edgeI, collapsedEdge.queueIdJ + 1);
+            updateEdges(i, edgeJ, collapsedEdge.queueIdI + 1);
         }
     }
 
@@ -203,76 +245,97 @@ namespace Renderer {
     }
 
     void SphereMesh::buildEdgeConnectivity() {
+        size_t size = sphere.size();
         edgeConnectivity.clear();
-        
-        for (int i = 0; i < sphere.size(); i++) {
-            std::vector<bool> row;
-            for (int j = 0; j < sphere.size(); j++)
-                row.push_back(false);
+        edgeConnectivity.reserve(size);
 
+        std::vector<bool> row(size, false);
+
+        for (size_t i = 0; i < size; ++i) {
             edgeConnectivity.push_back(row);
         }
     }
 
     void SphereMesh::buildTriangleConnectivity() {
+        size_t size = sphere.size();
         triangleConnectivity.clear();
-        
-        for (int i = 0; i < sphere.size(); i++) {
-            std::vector<std::vector<bool>> x;
-            for (int j = 0; j < sphere.size(); j++) {
-                std::vector<bool> y;
-                
-                for (int k = 0; k < sphere.size(); k++)
-                    y.push_back(false);
-                
-                x.push_back(y);
-            }
+        triangleConnectivity.reserve(size);
 
-            triangleConnectivity.push_back(x);
+        std::vector<bool> innerRow(size, false);
+        std::vector<std::vector<bool>> innerMatrix(size, innerRow);
+
+        for (size_t i = 0; i < size; ++i) {
+            triangleConnectivity.push_back(innerMatrix);
         }
     }
 
     void SphereMesh::clearEdges() {
-        for (int i = 0; i < edge.size(); i++)
+        // Loop to swap and set edgeConnectivity
+        for (size_t i = 0; i < edge.size(); ++i) {
             if (edge[i].i > edge[i].j) {
-                int tmp = edge[i].i;
-                edge[i].i = edge[i].j;
-                edge[i].j = tmp;
+                std::swap(edge[i].i, edge[i].j); // In-place swap
             }
-        
-        for (int i = 0; i < edge.size(); i++)
             edgeConnectivity[edge[i].i][edge[i].j] = true;
-        
+        }
+
         edge.clear();
-        for (int i = 0; i < edgeConnectivity.size(); i++)
-            for (int j = 0; j < edgeConnectivity[i].size(); j++)
-                if (edgeConnectivity[i][j])
-                    edge.push_back(Edge(i, j));
+        size_t eSize = edgeConnectivity.size();
+        for (size_t i = 0; i < eSize; ++i) {
+            for (size_t j = 0; j < edgeConnectivity[i].size(); ++j) {
+                if (edgeConnectivity[i][j]) {
+                    edge.emplace_back(Edge(i, j));
+                }
+            }
+        }
     }
 
     void SphereMesh::clearTriangles() {
-        for (int i = 0; i < triangle.size(); i++) {
-            int min = std::min(triangle[i].i, std::min(triangle[i].j, triangle[i].k));
-            int max = std::max(triangle[i].i, std::max(triangle[i].j, triangle[i].k));
+        // Precompute sizes
+        int triangleSize = (int)triangle.size();
+        int connectivitySize = (int)triangleConnectivity.size();
+
+        // First loop
+        #pragma omp parallel for
+        for (int i = 0; i < triangleSize; ++i) {
+            auto& tri = triangle[i];
+            int min = std::min({tri.i, tri.j, tri.k});
+            int max = std::max({tri.i, tri.j, tri.k});
             
-            if (triangle[i].i != min && triangle[i].i != max) triangle[i] = Triangle(min, triangle[i].i, max);
-            if (triangle[i].j != min && triangle[i].j != max) triangle[i] = Triangle(min, triangle[i].j, max);
-            if (triangle[i].k != min && triangle[i].k != max) triangle[i] = Triangle(min, triangle[i].k, max);
+            if (tri.i != min && tri.i != max) tri = Triangle(min, tri.i, max);
+            if (tri.j != min && tri.j != max) tri = Triangle(min, tri.j, max);
+            if (tri.k != min && tri.k != max) tri = Triangle(min, tri.k, max);
         }
-        
-        for (int i = 0; i < triangle.size(); i++) {
-            edgeConnectivity[triangle[i].i][triangle[i].j] = false;
-            edgeConnectivity[triangle[i].i][triangle[i].k] = false;
-            edgeConnectivity[triangle[i].j][triangle[i].k] = false;
-            triangleConnectivity[triangle[i].i][triangle[i].j][triangle[i].k] = true;
+
+        // Second loop
+        #pragma omp parallel for
+        for (int i = 0; i < triangleSize; ++i) {
+            auto& tri = triangle[i];
+            edgeConnectivity[tri.i][tri.j] = false;
+            edgeConnectivity[tri.i][tri.k] = false;
+            edgeConnectivity[tri.j][tri.k] = false;
+            triangleConnectivity[tri.i][tri.j][tri.k] = true;
         }
-        
+
+        // Clear existing triangles
         triangle.clear();
-        for (int i = 0; i < triangleConnectivity.size(); i++)
-            for (int j = 0; j < triangleConnectivity[i].size(); j++)
-                for (int k = 0; k < triangleConnectivity[i][j].size(); k++)
-                    if (triangleConnectivity[i][j][k])
-                        triangle.push_back(Triangle(i, j, k));
+
+        // Third loop
+        #pragma omp parallel
+        {
+            std::vector<Triangle> local_triangle;
+            #pragma omp for nowait
+            for (int i = 0; i < connectivitySize; ++i) {
+                for (int j = 0; j < connectivitySize; ++j) {
+                    for (int k = 0; k < connectivitySize; ++k) {
+                        if (triangleConnectivity[i][j][k]) {
+                            local_triangle.push_back(Triangle(i, j, k));
+                        }
+                    }
+                }
+            }
+            #pragma omp critical
+            triangle.insert(triangle.end(), local_triangle.begin(), local_triangle.end());
+        }
     }
 
     void SphereMesh::clearSphereMesh() {
@@ -453,7 +516,7 @@ namespace Renderer {
         {
             sphere[i].quadric *= (1/sphere[i].quadricWeights);
 
-            auto result = sphere[i].quadric.minimizer();
+            Math::Vector4 result = sphere[i].quadric.minimizer();
             sphere[i].center = result.toQuaternion().immaginary;
             sphere[i].radius = result.coordinates.w;
         }
@@ -629,7 +692,7 @@ namespace Renderer {
                 2, 3, 0
             };
             
-            vertexCount = vertices.size();
+            vertexCount = (int)vertices.size();
 
             glGenVertexArrays(1, &VAO);
             glBindVertexArray(VAO);
@@ -665,7 +728,7 @@ namespace Renderer {
         glEnable(GL_DEPTH_TEST);
 
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, (int)indices.size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
         glUseProgram(0);
     }
@@ -750,7 +813,7 @@ namespace Renderer {
                         midpoint[2] /= length;
                         // Add the midpoint to the vertices and store the index in mid[edge]
                         vertices.insert(vertices.end(), midpoint, midpoint + 3);
-                        mid[edge] = vertices.size() / 3 - 1;
+                        mid[edge] = (int)vertices.size() / 3 - 1;
                     }
                     // Create the four new faces
                     newFaces.insert(newFaces.end(), {
@@ -762,7 +825,7 @@ namespace Renderer {
                 }
 
                 faces.swap(newFaces);
-                vertexCount = vertices.size();
+                vertexCount = (int)vertices.size();
             }
 
             glGenVertexArrays(1, &VAO);
@@ -797,7 +860,7 @@ namespace Renderer {
 //        glEnable(GL_BLEND);
 //        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, faces.size(), GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, (int)faces.size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
         glUseProgram(0);
 //        glDisable(GL_BLEND);
@@ -824,16 +887,15 @@ namespace Renderer {
     Math::Scalar SphereMesh::getContainedRadiusOfSphere(const Sphere& s)
     {
         auto center = s.center;
-        Math::Scalar minDistance = DBL_MAX;
+        Math::Scalar minDistance2 = DBL_MAX;
         
         for (int i = 0; i < referenceMesh->vertices.size(); i++)
         {
-            auto distance = (center - referenceMesh->vertices[i].position).squareMagnitude();
-            distance = std::sqrt(distance);
-            minDistance = distance < minDistance ? distance : minDistance;
+            auto distance2 = (center - referenceMesh->vertices[i].position).squareMagnitude();
+            minDistance2 = std::min(distance2, minDistance2);
         }
         
-        return minDistance;
+        return std::sqrt(minDistance2);
     }
 
     void SphereMesh::renderSelectedSpheresOnly()
@@ -899,8 +961,8 @@ namespace Renderer {
 
     Sphere SphereMesh::collapseEdgeIntoSphere(const CollapsableEdge& edgeToCollapse)
     {
-        Sphere collapsedSphereA = sphere[edgeToCollapse.idxI];
-        Sphere collapsedSphereB = sphere[edgeToCollapse.idxJ];
+        Sphere& collapsedSphereA = sphere[edgeToCollapse.idxI];
+        Sphere& collapsedSphereB = sphere[edgeToCollapse.idxJ];
         
         Sphere newSphere = Sphere();
         
@@ -919,11 +981,13 @@ namespace Renderer {
 //        newSphere.constrainSphere(getContainedRadiusOfSphere(newSphere));
         
 //      FIXME: This is done only for rendering
-        for (int k = 0; k < collapsedSphereA.vertices.size(); k++)
-            newSphere.addVertex(collapsedSphereA.vertices[k]);
-        
-        for (int k = 0; k < collapsedSphereB.vertices.size(); k++)
-            newSphere.addVertex(collapsedSphereB.vertices[k]);
+        newSphere.vertices.reserve(collapsedSphereA.vertices.size() + collapsedSphereB.vertices.size());
+
+        for (const auto& vertex : collapsedSphereA.vertices)
+            newSphere.addVertex(vertex);
+
+        for (const auto& vertex : collapsedSphereB.vertices)
+            newSphere.addVertex(vertex);
 //
         
         return newSphere;
@@ -977,8 +1041,6 @@ namespace Renderer {
 
         updateEdgesAfterCollapse(e.idxI, e.idxJ);
         updateTrianglessAfterCollapse(e.idxI, e.idxJ);
-        
-        std::cout << sphere.size() << std::endl;
 
         removeDegenerates();
         clearSphereMesh();
@@ -988,7 +1050,7 @@ namespace Renderer {
 
     void SphereMesh::updateEdgesAfterCollapse(int i, int j)
     {
-        int last = sphere.size();
+        int last = (int)sphere.size();
         
         for (Edge& e : edge) {
             if (e.i == j) e.i = i;
@@ -1000,7 +1062,7 @@ namespace Renderer {
 
     void SphereMesh::updateTrianglessAfterCollapse(int i, int j)
     {
-        int last = sphere.size();
+        int last = (int)sphere.size();
         
         for (Triangle& t : triangle) {
             if (t.i == j) t.i = i;
@@ -1311,39 +1373,47 @@ namespace Renderer {
 
     void SphereMesh::saveTXT(const std::string& path, const std::string& fn)
     {
-        std::string fileContent = "#Sphere Mesh TXT \n";
+        std::ostringstream fileContent;
         
-        for (int i = 0; i < sphere.size(); i++)
-        {
-            Math::Vector4 s = Math::Vector4(sphere[i].center[0], sphere[i].center[1], sphere[i].center[2], sphere[i].radius);
-            fileContent += "( " + std::to_string(s[0]) + ", " + std::to_string(s[1]) + ", " + std::to_string(s[2]) + ", " + std::to_string(s[3]) + " )\n";
-        }
+        // Stating the count for each type: spheres, triangles, and edges
+        fileContent << "Sphere Mesh 1.0" << std::endl;
+        fileContent << sphere.size();
+        fileContent << " " << triangle.size();
+        fileContent << " " << edge.size() << std::endl;
+        fileContent << "====================" << std::endl;
         
-        for (int i = 0; i < triangle.size(); i++)
+        // Saving sphere details
+        for (const auto& s : sphere)
         {
-            fileContent += "( " + std::to_string(triangle[i].i) + ", " + std::to_string(triangle[i].j) + ", " + std::to_string(triangle[i].k) + " )\n";
+            fileContent << s.center[0] << " " << s.center[1] << " " << s.center[2] << " " << s.radius << std::endl;
         }
 
-        for (int i = 0; i < edge.size(); i++)
+        // Saving triangle details
+        for (const auto& t : triangle)
         {
-            fileContent += "( " + std::to_string(edge[i].i) + ", " + std::to_string(edge[i].j) + " )\n";
+            fileContent << t.i << " " << t.j << " " << t.k << std::endl;
         }
-        fileContent += " ==================== \n";
-        
+
+        // Saving edge details
+        for (const auto& e : edge)
+        {
+            fileContent << e.i << " " << e.j << std::endl;
+        }
+
         namespace fs = std::__fs::filesystem;
-        
+
         fs::path cwd = fs::current_path();
-        
+
         std::string separator = std::string(1, fs::path::preferred_separator);
-        
+
         std::string filePath = fn;
         std::string folderPath = "." + separator;
         if (path != ".")
             folderPath = path;
-        
+
         std::ofstream fout(folderPath + filePath);
         std::cout << "File location: " << folderPath + filePath << std::endl;
-        fout << fileContent.c_str();
+        fout << fileContent.str();
         fout.close();
     }
 
@@ -1370,7 +1440,7 @@ namespace Renderer {
         sphereCopy.center += Math::Vector3(0.05, 0.05, 0) * BDDSize;
         
         sphere.push_back(sphereCopy);
-        edge.push_back(Edge(selectedSphereIndex, sphere.size() - 1));
+        edge.push_back(Edge(selectedSphereIndex, (int)sphere.size() - 1));
         
         clearSphereMesh();
     }
@@ -1396,7 +1466,7 @@ namespace Renderer {
         sphereCopy.center += Math::Vector3(0.05, 0.05, 0) * BDDSize;
         
         sphere.push_back(sphereCopy);
-        triangle.push_back(Triangle(idxA, idxB, sphere.size() - 1));
+        triangle.push_back(Triangle(idxA, idxB, (int)sphere.size() - 1));
         
         clearSphereMesh();
     }

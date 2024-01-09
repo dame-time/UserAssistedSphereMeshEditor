@@ -135,4 +135,9 @@ namespace Renderer {
 
         return Sphere(result.toQuaternion().immaginary, result.coordinates.w);
     }
+
+    bool Sphere::intersectsVertex(const Math::Vector3& vertex)
+    {
+        return std::pow(center[0] - vertex[0], 2) + std::pow(center[1] - vertex[1], 2) + std::pow(center[2] - vertex[2], 2) <= (radius * radius);
+    }
 }

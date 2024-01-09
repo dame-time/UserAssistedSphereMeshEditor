@@ -55,6 +55,7 @@ namespace Renderer {
             int getID() const;
 
             Sphere lerp(const Sphere &s, Math::Scalar t);
+            bool intersectsVertex(const Math::Vector3& vertex);
     };
 }
 

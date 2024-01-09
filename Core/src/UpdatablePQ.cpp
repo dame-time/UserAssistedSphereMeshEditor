@@ -22,52 +22,51 @@ namespace Renderer
         q.push(edgeToAdd);
     }
 
-    CollapsableEdge UpdatablePQ::top(int sphereSize)
-    {
-        auto topElement = q.top();
-        auto topElementIdI = topElement.queueIdI;
-        auto topElementIdJ = topElement.queueIdJ;
-        auto topElementIndexI = topElement.idxI;
-        auto topElementIndexJ = topElement.idxJ;
+    CollapsableEdge UpdatablePQ::top(int sphereSize) {
+        if (q.empty()) {
+            return CollapsableEdge(); // Early return if queue is empty
+        }
+
+        CollapsableEdge topElement = q.top();
         
+        // Use iterators to store the results of find operations
+        auto itI = currentPoppableIndex.find(topElement.idxI);
+        auto itJ = currentPoppableIndex.find(topElement.idxJ);
+
+        // Check if the top element can be returned directly
         if (
-                ((currentPoppableIndex.find(topElementIndexI) == currentPoppableIndex.end() || currentPoppableIndex[topElementIndexI] == topElementIdI) &&
-                (currentPoppableIndex.find(topElementIndexJ) == currentPoppableIndex.end() || currentPoppableIndex[topElementIndexJ] == topElementIdJ)) &&
-                (topElementIndexI < sphereSize &&
-                topElementIndexJ < sphereSize)
-            )
-        {
+            (itI == currentPoppableIndex.end() || itI->second == topElement.queueIdI) &&
+            (itJ == currentPoppableIndex.end() || itJ->second == topElement.queueIdJ) &&
+            topElement.idxI < sphereSize && topElement.idxJ < sphereSize
+        ) {
             return topElement;
         }
-            
-        
-        while (
-                   ((currentPoppableIndex.find(topElementIndexI) != currentPoppableIndex.end() &&
-                     currentPoppableIndex[topElementIndexI] != topElementIdI) ||
-                   (currentPoppableIndex.find(topElementIndexJ) != currentPoppableIndex.end() &&
-                   currentPoppableIndex[topElementIndexJ] != topElementIdJ)) ||
-                   topElementIndexI >= sphereSize ||
-                   topElementIndexJ >= sphereSize
-               )
-        {
-            if (size() < 1)
-                return CollapsableEdge();
-            
+
+        // If the above check fails, enter the loop to find a suitable element
+        while (true) {
             q.pop();
+            if (q.empty()) {
+                return CollapsableEdge(); // Return a default-constructed object if queue becomes empty
+            }
+
             topElement = q.top();
-            topElementIdI = topElement.queueIdI;
-            topElementIdJ = topElement.queueIdJ;
-            topElementIndexI = topElement.idxI;
-            topElementIndexJ = topElement.idxJ;
+            
+            itI = currentPoppableIndex.find(topElement.idxI);
+            itJ = currentPoppableIndex.find(topElement.idxJ);
+
+            if (
+                (itI == currentPoppableIndex.end() || itI->second == topElement.queueIdI) &&
+                (itJ == currentPoppableIndex.end() || itJ->second == topElement.queueIdJ) &&
+                topElement.idxI < sphereSize && topElement.idxJ < sphereSize
+            ) {
+                return topElement;
+            }
         }
-        
-        return topElement;
     }
 
     void UpdatablePQ::pop()
     {
-        if (q.size() < 1)
-            return;
+        if (q.empty()) return;
         
         auto topElement = q.top();
         auto topElementIdI = topElement.queueIdI;
@@ -93,7 +92,8 @@ namespace Renderer
 
     bool UpdatablePQ::clear()
     {
-        q.empty();
+        while (!q.empty())
+            q.pop();
         
         return q.size() == 0;
     }

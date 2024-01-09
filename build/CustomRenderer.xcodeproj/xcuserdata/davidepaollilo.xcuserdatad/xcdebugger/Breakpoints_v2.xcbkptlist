@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "03CCEAE4-1D7C-42E4-AF24-48F9ED82C02D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Core/src/SphereMesh.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "908"
-            endingLineNumber = "908"
-            landmarkName = "SphereMesh::collapseEdgeIntoSphere(edgeToCollapse)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "D6305D0F-D98C-4539-8DED-F5C0CE106250"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -30,58 +14,10 @@
             filePath = "Core/src/SphereMesh.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "SphereMesh::updateEdgeQueue(collapsedEdge)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "472A56EA-1D84-4EFD-9906-578C9D7ABD91"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Core/src/SphereMesh.cpp"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "940"
-            endingLineNumber = "940"
-            landmarkName = "SphereMesh::collapseSphereMesh()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "472A56EA-1D84-4EFD-9906-578C9D7ABD91 - 8b751d47fb54f82f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Renderer::SphereMesh::collapseSphereMesh()"
-                  moduleName = "CustomRenderer"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "890"
-                  endingLineNumber = "890"
-                  offsetFromSymbolStart = "53">
-               </Location>
-               <Location
-                  uuid = "472A56EA-1D84-4EFD-9906-578C9D7ABD91 - 8b751d47fb54f80c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Renderer::SphereMesh::collapseSphereMesh()"
-                  moduleName = "CustomRenderer"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/src/SphereMesh.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "889"
-                  endingLineNumber = "889"
-                  offsetFromSymbolStart = "45">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -221,8 +157,8 @@
             filePath = "Core/src/SphereMesh.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
             landmarkName = "SphereMesh::getBestCollapseBruteForce()"
             landmarkType = "7">
             <Locations>

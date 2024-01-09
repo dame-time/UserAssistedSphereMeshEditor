@@ -27,7 +27,7 @@ namespace Renderer
         c = faceNormal.dot(faceOrigin) * faceNormal.dot(faceOrigin);
     }
 
-    Quadric Quadric::operator + (const Quadric &quadric)
+    Quadric Quadric::operator + (const Quadric &quadric) const
     {
         Quadric result;
 
@@ -68,7 +68,12 @@ namespace Renderer
         return s.dot(A * s) + b.dot(s) + c;
     }
 
-    Math::Vector4 Quadric::minimizer()
+    Math::Scalar Quadric::minimum() const
+    {
+        return evaluateSQEM(minimizer());
+    }
+
+    Math::Vector4 Quadric::minimizer() const
     {
         Math::Vector4 result;
 
@@ -82,27 +87,26 @@ namespace Renderer
             return Math::Vector4(-1, -1, -1, 0);
         }
         
-        // TODO: MARCO Check if the new method works well
         if (result.coordinates.w < minRadius)
         {
 //            std::cout << "IMPOSING NEW RADIUS" << std::endl;
-//            Quadric3 q3 = Quadric3(*this, minRadius);
-//            auto newOrigin = q3.minimizer();
-//            result = Math::Vector4(newOrigin, minRadius);
-            const int newQuadricWeight = 1000;
-
-            Quadric q = Quadric();
-
-            q.A = Math::Matrix4(0, 0, 0, 0,
-                                0, 0, 0, 0,
-                                0, 0, 0, 0,
-                                0, 0, 0, 1);
-            q.b = Math::Vector4(0, 0, 0, -minRadius * 2);
-            q.c = minRadius;
-
-            auto newQ = *this + (q * newQuadricWeight);
-
-            result = newQ.A.inverse() * (-newQ.b/2);
+            Quadric3 q3 = Quadric3(*this, minRadius);
+            auto newOrigin = q3.minimizer();
+            result = Math::Vector4(newOrigin, minRadius);
+//            const int newQuadricWeight = 1000;
+//
+//            Quadric q = Quadric();
+//
+//            q.A = Math::Matrix4(0, 0, 0, 0,
+//                                0, 0, 0, 0,
+//                                0, 0, 0, 0,
+//                                0, 0, 0, 1);
+//            q.b = Math::Vector4(0, 0, 0, -minRadius * 2);
+//            q.c = minRadius;
+//
+//            auto newQ = *this + (q * newQuadricWeight);
+//
+//            result = newQ.A.inverse() * (-newQ.b/2);
         }
 
         return result;

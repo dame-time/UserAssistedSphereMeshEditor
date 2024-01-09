@@ -13,6 +13,12 @@ list(PREPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 # Find yaml-cpp package
 find_package(yaml-cpp REQUIRED)
 
+set(OpenMP_CXX_FLAGS "-Xpreprocessor -fopenmp -I/usr/local/opt/libomp/include")
+set(OpenMP_CXX_LIB_NAMES "omp")
+set(OpenMP_omp_LIBRARY "/usr/local/opt/libomp/lib/libomp.dylib")
+
+find_package(OpenMP COMPONENTS CXX)
+
 include_directories(Math Math/Vector/ Math/Versor/ Math/Rotation/ Math/Point/ Math/Matrix/ Shader Core include/imgui)
 
 find_package(glfw3 3.3 REQUIRED)
@@ -57,6 +63,6 @@ endforeach()
 link_directories(/usr/local/lib)
 
 add_executable(${PROJECT_NAME} ${SOURCES} main.cpp)
-target_compile_options(${PROJECT_NAME} PUBLIC -g -O2 -std=c++17)
+target_compile_options(${PROJECT_NAME} PUBLIC -g -O3 -march=native -flto -funroll-loops -std=c++17)
 #target_include_directories(${PROJECT_NAME} PUBLIC ${includes})
-target_link_libraries(${PROJECT_NAME} glfw GLAD ${CMAKE_DL_LIBS} yaml-cpp tinyfiledialogs igl::core)
+target_link_libraries(${PROJECT_NAME} glfw GLAD ${CMAKE_DL_LIBS} yaml-cpp tinyfiledialogs OpenMP::OpenMP_CXX)

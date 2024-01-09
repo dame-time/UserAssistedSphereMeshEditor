@@ -1127,7 +1127,7 @@ namespace Renderer {
         
         if (ImGui::Button("Collapse"))
         {
-            int initialSpheres = sm->sphere.size();
+            int initialSpheres = (int)sm->sphere.size();
 #if DEBUG_CHRONO == 1
             auto start = std::chrono::high_resolution_clock::now();
 #endif

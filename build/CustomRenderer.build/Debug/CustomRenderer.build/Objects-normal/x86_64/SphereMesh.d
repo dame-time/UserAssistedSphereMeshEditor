@@ -30,4 +30,6 @@ dependencies: \
   /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/Sphere.hpp \
   /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/CollapsableEdge.hpp \
   /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/UpdatablePQ.hpp \
-  /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/YAMLUtils.hpp
+  /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/YAMLUtils.hpp \
+  /Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core/ScopeTimer.hpp \
+  /usr/local/opt/libomp/include/omp.h

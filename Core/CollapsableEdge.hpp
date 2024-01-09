@@ -21,6 +21,9 @@ namespace Renderer
             
             int queueIdI;
             int queueIdJ;
+        
+            Quadric errorCorrectionQuadric;
+            bool isErrorCorrectionQuadricSet;
             
             CollapsableEdge();
             CollapsableEdge(const Sphere& _i, const Sphere& _j, int _idxI, int _idxJ);
@@ -36,12 +39,15 @@ namespace Renderer
                 
                 queueIdI = other.queueIdI;
                 queueIdJ = other.queueIdJ;
+                
+                isErrorCorrectionQuadricSet = false;
             }
             
             bool operator < (const CollapsableEdge& rhs) const;
             bool operator > (const CollapsableEdge& rhs) const;
             bool operator == (const CollapsableEdge& rhs) const;
             
+            void updateCorrectionErrorQuadric(const Quadric& q);
             void updateEdge(const Sphere& _i, const Sphere& _j, int _idxI, int _idxJ);
             
             bool containsIndex(int a);

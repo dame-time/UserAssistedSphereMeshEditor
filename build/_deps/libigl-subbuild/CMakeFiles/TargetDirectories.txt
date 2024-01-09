@@ -1,3 +1,0 @@
-/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/CMakeFiles/libigl-populate.dir
-/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/CMakeFiles/ALL_BUILD.dir
-/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/_deps/libigl-subbuild/CMakeFiles/ZERO_CHECK.dir

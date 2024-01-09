@@ -412,6 +412,18 @@ MEMORYCHECK_COMMAND:FILEPATH=/usr/local/bin/valgrind
 //File that contains suppressions for the memory checker
 MEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=
 
+//CXX compiler flags for OpenMP parallelization
+OpenMP_CXX_FLAGS:STRING=NOTFOUND
+
+//CXX compiler libraries for OpenMP parallelization
+OpenMP_CXX_LIB_NAMES:STRING=NOTFOUND
+
+//C compiler flags for OpenMP parallelization
+OpenMP_C_FLAGS:STRING=NOTFOUND
+
+//C compiler libraries for OpenMP parallelization
+OpenMP_C_LIB_NAMES:STRING=NOTFOUND
+
 //Name of the computer/site where compile is being run
 SITE:STRING=MBP-di-Davide.lan
 
@@ -635,6 +647,10 @@ CustomRenderer_GUID_CMAKE:INTERNAL=1349EAF6832E413F9E1BA8C2
 DART_TESTING_TIMEOUT-ADVANCED:INTERNAL=1
 //Stored Xcode object GUID
 Experimental_GUID_CMAKE:INTERNAL=6D56E4B46C63456880B73CAD
+//Details about finding OpenMP
+FIND_PACKAGE_MESSAGE_DETAILS_OpenMP:INTERNAL=[TRUE][cfound components: CXX ][v5.0()]
+//Details about finding OpenMP_CXX
+FIND_PACKAGE_MESSAGE_DETAILS_OpenMP_CXX:INTERNAL=[-Xpreprocessor -fopenmp -I/usr/local/opt/libomp/include][/usr/local/opt/libomp/lib/libomp.dylib][v5.0()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //ADVANCED property for variable: GITCOMMAND
@@ -653,6 +669,34 @@ MEMORYCHECK_SUPPRESSIONS_FILE-ADVANCED:INTERNAL=1
 NightlyMemoryCheck_GUID_CMAKE:INTERNAL=BDA5BAB2B64E4C879E30126E
 //Stored Xcode object GUID
 Nightly_GUID_CMAKE:INTERNAL=DD24269FF69B4907A06F4900
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_CXX_ :INTERNAL=FALSE
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_CXX_fopenmp:INTERNAL=FALSE
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_CXX_mp:INTERNAL=FALSE
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_CXX_openmp:INTERNAL=FALSE
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_C_ :INTERNAL=FALSE
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_C_fopenmp:INTERNAL=FALSE
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_C_mp:INTERNAL=FALSE
+//Result of TRY_COMPILE
+OpenMP_COMPILE_RESULT_C_openmp:INTERNAL=FALSE
+//ADVANCED property for variable: OpenMP_CXX_FLAGS
+OpenMP_CXX_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OpenMP_CXX_LIB_NAMES
+OpenMP_CXX_LIB_NAMES-ADVANCED:INTERNAL=1
+//CXX compiler's OpenMP specification date
+OpenMP_CXX_SPEC_DATE:INTERNAL=201811
+//ADVANCED property for variable: OpenMP_C_FLAGS
+OpenMP_C_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OpenMP_C_LIB_NAMES
+OpenMP_C_LIB_NAMES-ADVANCED:INTERNAL=1
+//Result of TRY_COMPILE
+OpenMP_SPECTEST_CXX_:INTERNAL=TRUE
 //Stored Xcode object GUID
 PROJECT_CustomRenderer_GUID_CMAKE:INTERNAL=1A53B2CCB54B48B78CAB2E50
 //Stored Xcode object GUID

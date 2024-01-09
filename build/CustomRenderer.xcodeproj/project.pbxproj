@@ -9,7 +9,7 @@
 /* Begin PBXAggregateTarget section */
 		50C429161736424691CED79C /* ZERO_CHECK */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 3BCB29D63D5F4B699B4E70C3 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildConfigurationList = 4694A92695BE412DB98632DD /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
 			buildPhases = (
 				F3E6B42683D64750C9B0C1AA /* Generate CMakeFiles/ZERO_CHECK */,
 			);
@@ -20,15 +20,15 @@
 		};
 		F80A51CD4EFA4F72AE752170 /* ALL_BUILD */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 5FF5A7C1C3294B2B83E9102E /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildConfigurationList = 0E8EB80272BC4BA7A9634159 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
 			buildPhases = (
 				EABE96275A8180B70B970F81 /* Generate CMakeFiles/ALL_BUILD */,
 			);
 			dependencies = (
-				BFE0A7FDBBBB4D16AD964DAF /* PBXTargetDependency */,
-				EA724B151979495D8200536F /* PBXTargetDependency */,
-				8EE625DB886A466196C0224B /* PBXTargetDependency */,
-				795661000A46486B92A807D4 /* PBXTargetDependency */,
+				92E5205FD8CF438F876DD77F /* PBXTargetDependency */,
+				EE11B3D73A3A4A0CA2877EB1 /* PBXTargetDependency */,
+				563D8FF815614210B48CE512 /* PBXTargetDependency */,
+				BC7418F9DB8842D398E0B955 /* PBXTargetDependency */,
 			);
 			name = ALL_BUILD;
 			productName = ALL_BUILD;
@@ -36,207 +36,210 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		08ECC7D6FBEE4E5BAECBA204 /* Point2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3AC1C3B19A974715BF640119 /* Point2.cpp */; };
-		0E54AE886EE04BAF9A4EE261 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 0C7DB330FB744C35AAB181AE /* glad.c */; };
-		22562C14B10644E28442BE84 /* Matrix2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD99374CD3D243CAA66756D7 /* Matrix2.cpp */; };
-		2D63C94FDA5F4B6CB81CC20B /* RenderableSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E788D457530B455698F31443 /* RenderableSphere.cpp */; };
-		32D3D2ECB5F64FADBE2C2DF2 /* Quadric.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2FA810E0E34444AD907319 /* Quadric.cpp */; };
-		3D73F36BD69D4D3798D1B906 /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8629FDEC17CB4DABA0C0F0F1 /* imgui_widgets.cpp */; };
-		432A67FC2AD55E2300A042B5 /* Quadric2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432A67FB2AD55E2300A042B5 /* Quadric2.cpp */; };
-		4331D2482ACEB48900FAE2CA /* Quadric3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4331D2472ACEB48900FAE2CA /* Quadric3.cpp */; };
-		437CECD02AD721E600C7BAA4 /* UpdatableFibonacciPQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 437CECCF2AD721E600C7BAA4 /* UpdatableFibonacciPQ.cpp */; };
-		437CECD32AD7245E00C7BAA4 /* CollapsableEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 437CECD22AD7245E00C7BAA4 /* CollapsableEdge.cpp */; };
-		43DAF4F62AD6FA970013D9C6 /* UpdatablePQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43DAF4F52AD6FA970013D9C6 /* UpdatablePQ.cpp */; };
-		45555688A29747C4B14AC929 /* imgui_impl_opengl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC8385A860042E78DEB78EA /* imgui_impl_opengl3.cpp */; };
-		499534AF0A9F41FAAC27D53E /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 681AB8A4B9AD48BCAC535C64 /* imgui.cpp */; };
-		4B0BAD58460A48779CFDDFA7 /* Vector4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39AC08B6C133465BA0CF5F51 /* Vector4.cpp */; };
-		56E42DB820C84A108DF6467D /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 608234313DF14859B069AA46 /* Shader.cpp */; };
-		5B2B3E93C1ED446AB5DBE061 /* Point3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB11EBD009184984B36C5B76 /* Point3.cpp */; };
-		698C391C99354C6E9906D738 /* Quaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1655EC70DEA740629ACB1D10 /* Quaternion.cpp */; };
-		6E29EF1DD9A04C9BA8C1FD32 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A962FD03B3E4785B637CC61 /* imgui_demo.cpp */; };
-		75B5A538A4634CDAB9CE5BA8 /* Versor2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ACF2DB05D57448049BACFA13 /* Versor2.cpp */; };
-		773F7E10149347D48F2218DC /* Versor3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB43C4EC550743E78C4A6253 /* Versor3.cpp */; };
-		83027BF99100407293A4287E /* Matrix4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED13E3A91D2448F0A0FB4050 /* Matrix4.cpp */; };
-		85D0F49130FD43888CD39DE4 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11702156D1F54EAC84A37FE1 /* Window.cpp */; };
-		8B8F2F1DEACD45CBA1FC8D21 /* Versor4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D5B35F7943445578A74135D /* Versor4.cpp */; };
-		94E8029CBBB5439E9E45DBA9 /* Point4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17A514168D2B4A019A24E019 /* Point4.cpp */; };
-		9AF18D6EDB944231809F9191 /* SphereMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE687E993DE64877A686AEF1 /* SphereMesh.cpp */; };
-		9FB0D09087D74EF79CCCE821 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 82EDFC9E1072480EBD174D21 /* imgui_draw.cpp */; };
-		A822364635BD48B5B42437D0 /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C7C2189DFA604F81A20B7F02 /* Sphere.cpp */; };
-		BA601A2A5D054CF4AB3B8915 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB88CA53190C466E84980803 /* Camera.cpp */; };
-		BB3C09A81DC249B98B761152 /* imgui_impl_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 99E101F8C2484DE59A62F153 /* imgui_impl_glfw.cpp */; };
-		C2A30164D9EE4640B8644EC9 /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F3F928B1C86F424F8F3BDC99 /* imgui_tables.cpp */; };
-		C6775D43A27A4DF1B563B018 /* RenderableMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD17D7E3C8394B9589108F3D /* RenderableMesh.cpp */; };
-		D23B8C4FEBA146238FCECBEB /* Matrix3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B783C283A0E949118D66B9AB /* Matrix3.cpp */; };
-		D6D1F6A2415B4105B52B6658 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 11CEB4EFCE6347BC9FC0E7B4 /* Vector3.cpp */; };
-		E857DDE5B3B74767B5D2A7C7 /* Region.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F89828D50347461BAE4FC2B5 /* Region.cpp */; };
-		E962A49D666546E7896FBDB3 /* tinyfiledialogs.c in Sources */ = {isa = PBXBuildFile; fileRef = B36DFBCA5417492E85346F67 /* tinyfiledialogs.c */; };
-		EC345ED247774AABA74DDDB4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 163DA3CAC78E4BC7B6D79758 /* main.cpp */; };
-		ECD002E39DD7416CAD0F0438 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A9462FD64ED42209AFFC36B /* Vector2.cpp */; };
-		F7282E929E68427CB4F690B3 /* ObjLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDD9EAB54A0A419999C9A882 /* ObjLoader.cpp */; };
+		018942BC25A54CAF89956529 /* UpdatablePQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8816F97F9BC04D9288C2747D /* UpdatablePQ.cpp */; };
+		0210129780E749A8879BFD26 /* Matrix2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4585BE2C19E84119846495F2 /* Matrix2.cpp */; };
+		05B1F8C2E8E0451F948C4086 /* Matrix4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 33E5A73DDC9B48DBB8880CB9 /* Matrix4.cpp */; };
+		0FFBB5F7234C42808334BD2D /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F61BAB9A41044A1D8B7F56ED /* Camera.cpp */; };
+		1602550ED0D84C689EAEE411 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB19AEB8579B4594AF3E9E9B /* main.cpp */; };
+		23D68E5081074613A063BD7F /* RenderableSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3FF146C3202445E92BEFA00 /* RenderableSphere.cpp */; };
+		2B53ABDC5FBE4AF09EE7304A /* Quaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E58B1626F3C3401594D80D36 /* Quaternion.cpp */; };
+		30B02322EA75441D847AE91E /* Vector4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D4FDB860831C4C569A3AA535 /* Vector4.cpp */; };
+		38FB399363B346C385EB111F /* Point3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 650CCE78948649B7BE701CFC /* Point3.cpp */; };
+		3FF99E013C4D47CD8A24BED0 /* imgui_impl_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BA9C1A8869AC4999AD680374 /* imgui_impl_glfw.cpp */; };
+		40C9B0AEDF66498F9E866962 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A8B951583C594F18B82D2891 /* imgui_draw.cpp */; };
+		43259DC72AE12D87008F3028 /* ScopeTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43259DC62AE12D87008F3028 /* ScopeTimer.cpp */; };
+		4CF9E2F20C2646089569E45C /* CollapsableEdge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D471643EF1ED4959A6331C62 /* CollapsableEdge.cpp */; };
+		4E846C3E5ADA46D187A6360C /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6431B5E949D34E44AAB4E2B4 /* imgui_tables.cpp */; };
+		5063039B97C94963B6B5615C /* Quadric.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 99C9ECC3156F43FABAA14A43 /* Quadric.cpp */; };
+		54F8A3E07EEE4991BA743EB3 /* tinyfiledialogs.c in Sources */ = {isa = PBXBuildFile; fileRef = DA52155C1ED54A5A9C6B0E93 /* tinyfiledialogs.c */; };
+		5CA5F17E8C11429EBFCA5E3B /* Versor4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1666D8501B947B7B46FE612 /* Versor4.cpp */; };
+		5F90BA38258B4C48BEBEF293 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B40E47AB866745719D79C8CC /* Vector2.cpp */; };
+		646F9DDED3A940DD9D58AA87 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83ABD2B4026F4C74BF84F525 /* Shader.cpp */; };
+		6CE77C60A9C74081B0E5907B /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = 4EF628408A85467AB4F97641 /* glad.c */; };
+		80A1CBB1A0D84ECE805E19BD /* imgui_impl_opengl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2034C8B393CB4E369598B24A /* imgui_impl_opengl3.cpp */; };
+		89CB7358F6034FD1AD633AD8 /* SphereMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E82251D8D9D48339D8AA45A /* SphereMesh.cpp */; };
+		8F9538CD62344B1A812E5C37 /* Point4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4BCE04F1E0F6404991683B92 /* Point4.cpp */; };
+		99AF98F3F38545F1AC4C3C57 /* Region.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D67065AB8DB4434A850D32C9 /* Region.cpp */; };
+		B157CFE208114002A295A5E9 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CCC9C14109654C788A78373F /* imgui_demo.cpp */; };
+		BA0D03765C3C4D7CB9BCD675 /* ObjLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67A9843C61D741E1A20D6E72 /* ObjLoader.cpp */; };
+		BBBE2E6CD2B14587B9FE20DD /* Quadric3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2906586146748EB935175FF /* Quadric3.cpp */; };
+		C3721F38852E4DB197DA00BF /* RenderableMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02FD91918C284B7B9DBDFD47 /* RenderableMesh.cpp */; };
+		C59DBAF415794706AA195FE4 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4FD2766B10847AAA33F6E60 /* imgui.cpp */; };
+		D0595130C5A74F5C9C77D88B /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 974236995BF943E092F57667 /* Vector3.cpp */; };
+		D239975D2F604FF99344F383 /* Sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B5D24EB4FD6B4A15B94B7F3C /* Sphere.cpp */; };
+		D52DEF2533BC484EBEB7C9F1 /* Versor2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 290A7D45B4ED47329B1574E8 /* Versor2.cpp */; };
+		D572A27842CC424CBE46BE22 /* Versor3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0FB1FCE31714B67AF894EBA /* Versor3.cpp */; };
+		DF547F1BEC214D799D600B19 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 19CF4D978C3B4B519FB57FF3 /* Window.cpp */; };
+		E6F104180A504B75A9073EE4 /* Quadric2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CADE78954B41779DF8EC4A /* Quadric2.cpp */; };
+		E91E6CD4F97A4B4985865D2B /* UpdatableFibonacciPQ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 68753646558F455C92F79ED4 /* UpdatableFibonacciPQ.cpp */; };
+		F058EE8F63E24A9398338FCE /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E669021560784E5E89F28035 /* imgui_widgets.cpp */; };
+		F81F6628AD4D4AB291A3B63E /* Matrix3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4CB476DDC7F44E6A53364A6 /* Matrix3.cpp */; };
+		FE5058023803402EA4C5069D /* Point2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C009A36CF8745BEB85D1001 /* Point2.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0D6B199B9C4843129771C4EA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BE294BFB6B3F4C458ACC4BB5;
-			remoteInfo = GLAD;
-		};
-		0E3B28C10D804F078DDD88F8 /* PBXContainerItemProxy */ = {
+		1FFDB1F6BC8F475B932C07D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1349EAF6832E413F9E1BA8C2;
 			remoteInfo = CustomRenderer;
 		};
-		497149DC3AA349A4916C7196 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 50C429161736424691CED79C;
-			remoteInfo = ZERO_CHECK;
-		};
-		70F904E485C04839A6AD8B55 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 50C429161736424691CED79C;
-			remoteInfo = ZERO_CHECK;
-		};
-		B84306EC9C0448A69C0AB537 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 50C429161736424691CED79C;
-			remoteInfo = ZERO_CHECK;
-		};
-		CC62E404427C4159AF184A08 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6674EADF10574ADC880AB7AB;
-			remoteInfo = tinyfiledialogs;
-		};
-		CC63E5C49D4B4785901D6DB3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 50C429161736424691CED79C;
-			remoteInfo = ZERO_CHECK;
-		};
-		D880E8B8FB6C4E4694525090 /* PBXContainerItemProxy */ = {
+		25B51A6A9596438BACED0019 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = BE294BFB6B3F4C458ACC4BB5;
 			remoteInfo = GLAD;
 		};
-		EBCBA2530E414B2A844D1070 /* PBXContainerItemProxy */ = {
+		78528215F4AF4AEF83847E63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50C429161736424691CED79C;
+			remoteInfo = ZERO_CHECK;
+		};
+		7A17CE42E19948839FF34D26 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6674EADF10574ADC880AB7AB;
 			remoteInfo = tinyfiledialogs;
 		};
+		90C1532C0AD2439F946E009C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50C429161736424691CED79C;
+			remoteInfo = ZERO_CHECK;
+		};
+		94329357A2AF4151837AB69F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6674EADF10574ADC880AB7AB;
+			remoteInfo = tinyfiledialogs;
+		};
+		CC4B06A578B24447A84CEC5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50C429161736424691CED79C;
+			remoteInfo = ZERO_CHECK;
+		};
+		F6A366948CC84462B0FF4BE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50C429161736424691CED79C;
+			remoteInfo = ZERO_CHECK;
+		};
+		FDB10E238FB84209A6DF212D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1A53B2CCB54B48B78CAB2E50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE294BFB6B3F4C458ACC4BB5;
+			remoteInfo = GLAD;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		063AF2DE26A045B48324AE36 /* Point2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point2.hpp; path = Math/Point/Point2.hpp; sourceTree = SOURCE_ROOT; };
-		08FF36123EFD43EBB5A9F71D /* Shader.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Shader.hpp; path = Shader/Shader.hpp; sourceTree = SOURCE_ROOT; };
-		0AA32BBC2592449CADD54AD8 /* libGLAD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGLAD.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C7DB330FB744C35AAB181AE /* glad.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = glad.c; path = include/glad.c; sourceTree = SOURCE_ROOT; };
-		0F6E12D9D3C34B159A302864 /* Matrix2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix2.hpp; path = Math/Matrix/Matrix2.hpp; sourceTree = SOURCE_ROOT; };
-		0F88FEA5D9684B3CA1AD341C /* Point3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point3.hpp; path = Math/Point/Point3.hpp; sourceTree = SOURCE_ROOT; };
-		10CA38F7D8564488852C4205 /* Window.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Window.hpp; path = Core/Window.hpp; sourceTree = SOURCE_ROOT; };
-		11702156D1F54EAC84A37FE1 /* Window.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Window.cpp; path = Core/src/Window.cpp; sourceTree = SOURCE_ROOT; };
-		11CEB4EFCE6347BC9FC0E7B4 /* Vector3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector3.cpp; path = Math/Vector/src/Vector3.cpp; sourceTree = SOURCE_ROOT; };
-		14FF31D859F044109B11DF64 /* Vector2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector2.hpp; path = Math/Vector/Vector2.hpp; sourceTree = SOURCE_ROOT; };
-		163DA3CAC78E4BC7B6D79758 /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = main.cpp; sourceTree = SOURCE_ROOT; };
-		1655EC70DEA740629ACB1D10 /* Quaternion.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Quaternion.cpp; path = Math/Rotation/src/Quaternion.cpp; sourceTree = SOURCE_ROOT; };
-		17A514168D2B4A019A24E019 /* Point4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point4.cpp; path = Math/Point/src/Point4.cpp; sourceTree = SOURCE_ROOT; };
-		19ABB0FC6EA641C98F5DD398 /* Vector4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector4.hpp; path = Math/Vector/Vector4.hpp; sourceTree = SOURCE_ROOT; };
-		1A962FD03B3E4785B637CC61 /* imgui_demo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_demo.cpp; path = include/imgui/imgui_demo.cpp; sourceTree = SOURCE_ROOT; };
-		28B1DD10590E4E0CBF47CA90 /* Quaternion.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Quaternion.hpp; path = Math/Rotation/Quaternion.hpp; sourceTree = SOURCE_ROOT; };
-		39AC08B6C133465BA0CF5F51 /* Vector4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector4.cpp; path = Math/Vector/src/Vector4.cpp; sourceTree = SOURCE_ROOT; };
-		3AC1C3B19A974715BF640119 /* Point2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point2.cpp; path = Math/Point/src/Point2.cpp; sourceTree = SOURCE_ROOT; };
-		3D5B35F7943445578A74135D /* Versor4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor4.cpp; path = Math/Versor/src/Versor4.cpp; sourceTree = SOURCE_ROOT; };
-		42D5A1503BB44910A05EE25F /* SphereMesh.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = SphereMesh.hpp; path = Core/SphereMesh.hpp; sourceTree = SOURCE_ROOT; };
-		432A67FB2AD55E2300A042B5 /* Quadric2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Quadric2.cpp; path = Core/src/Quadric2.cpp; sourceTree = "<group>"; };
-		432A67FD2AD55E2D00A042B5 /* Quadric2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Quadric2.hpp; path = Core/Quadric2.hpp; sourceTree = "<group>"; };
-		4331D2472ACEB48900FAE2CA /* Quadric3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Quadric3.cpp; path = Core/src/Quadric3.cpp; sourceTree = "<group>"; };
-		4331D2492ACEB49D00FAE2CA /* Quadric3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Quadric3.hpp; path = Core/Quadric3.hpp; sourceTree = "<group>"; };
-		437CECCE2AD721DD00C7BAA4 /* UpdatableFibonacciPQ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UpdatableFibonacciPQ.hpp; path = Core/UpdatableFibonacciPQ.hpp; sourceTree = "<group>"; };
-		437CECCF2AD721E600C7BAA4 /* UpdatableFibonacciPQ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdatableFibonacciPQ.cpp; path = Core/src/UpdatableFibonacciPQ.cpp; sourceTree = "<group>"; };
-		437CECD12AD7244E00C7BAA4 /* CollapsableEdge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CollapsableEdge.hpp; path = Core/CollapsableEdge.hpp; sourceTree = "<group>"; };
-		437CECD22AD7245E00C7BAA4 /* CollapsableEdge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CollapsableEdge.cpp; path = Core/src/CollapsableEdge.cpp; sourceTree = "<group>"; };
-		43DAF4F42AD6FA880013D9C6 /* UpdatablePQ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UpdatablePQ.hpp; path = Core/UpdatablePQ.hpp; sourceTree = "<group>"; };
-		43DAF4F52AD6FA970013D9C6 /* UpdatablePQ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UpdatablePQ.cpp; path = Core/src/UpdatablePQ.cpp; sourceTree = "<group>"; };
-		4A9462FD64ED42209AFFC36B /* Vector2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector2.cpp; path = Math/Vector/src/Vector2.cpp; sourceTree = SOURCE_ROOT; };
-		53E8875C78234EDE90FE01DC /* Region.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Region.hpp; path = Core/Region.hpp; sourceTree = SOURCE_ROOT; };
-		5C51934CF00C4AB59628086B /* Versor4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor4.hpp; path = Math/Versor/Versor4.hpp; sourceTree = SOURCE_ROOT; };
-		608234313DF14859B069AA46 /* Shader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Shader.cpp; path = Shader/src/Shader.cpp; sourceTree = SOURCE_ROOT; };
-		681AB8A4B9AD48BCAC535C64 /* imgui.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui.cpp; path = include/imgui/imgui.cpp; sourceTree = SOURCE_ROOT; };
-		82445E60904D49098E988821 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
-		82EDFC9E1072480EBD174D21 /* imgui_draw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_draw.cpp; path = include/imgui/imgui_draw.cpp; sourceTree = SOURCE_ROOT; };
-		83DC94ADD23545149BF860A6 /* Camera.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Camera.hpp; path = Core/Camera.hpp; sourceTree = SOURCE_ROOT; };
-		8629FDEC17CB4DABA0C0F0F1 /* imgui_widgets.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_widgets.cpp; path = include/imgui/imgui_widgets.cpp; sourceTree = SOURCE_ROOT; };
-		8A2FA810E0E34444AD907319 /* Quadric.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Quadric.cpp; path = Core/src/Quadric.cpp; sourceTree = SOURCE_ROOT; };
-		8AEC319D65804DBDA2694FD1 /* YAMLUtils.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = YAMLUtils.hpp; path = Core/YAMLUtils.hpp; sourceTree = SOURCE_ROOT; };
-		8B23FED550F5431F95C542C2 /* libtinyfiledialogs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libtinyfiledialogs.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C0677B06CE8425793DC9AB6 /* RenderableMesh.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = RenderableMesh.hpp; path = Core/RenderableMesh.hpp; sourceTree = SOURCE_ROOT; };
-		8F901DD0A4024CD4B915EE78 /* Versor3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor3.hpp; path = Math/Versor/Versor3.hpp; sourceTree = SOURCE_ROOT; };
-		938C2C68B7AE4EC0AF7BE95F /* Math.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Math.hpp; path = Math/Math.hpp; sourceTree = SOURCE_ROOT; };
-		99E101F8C2484DE59A62F153 /* imgui_impl_glfw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_impl_glfw.cpp; path = include/imgui/imgui_impl_glfw.cpp; sourceTree = SOURCE_ROOT; };
-		9B61AC70B2F74C7596311E2D /* CustomRenderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = CustomRenderer; sourceTree = BUILT_PRODUCTS_DIR; };
-		AAC8385A860042E78DEB78EA /* imgui_impl_opengl3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_impl_opengl3.cpp; path = include/imgui/imgui_impl_opengl3.cpp; sourceTree = SOURCE_ROOT; };
-		AB43C4EC550743E78C4A6253 /* Versor3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor3.cpp; path = Math/Versor/src/Versor3.cpp; sourceTree = SOURCE_ROOT; };
-		ACF2DB05D57448049BACFA13 /* Versor2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor2.cpp; path = Math/Versor/src/Versor2.cpp; sourceTree = SOURCE_ROOT; };
-		AD2AFFE8965D427182B051B0 /* Sphere.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Sphere.hpp; path = Core/Sphere.hpp; sourceTree = SOURCE_ROOT; };
-		B36DFBCA5417492E85346F67 /* tinyfiledialogs.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = tinyfiledialogs.c; path = Core/tinyfiledialogs.c; sourceTree = SOURCE_ROOT; };
-		B783C283A0E949118D66B9AB /* Matrix3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix3.cpp; path = Math/Matrix/src/Matrix3.cpp; sourceTree = SOURCE_ROOT; };
-		BE687E993DE64877A686AEF1 /* SphereMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SphereMesh.cpp; path = Core/src/SphereMesh.cpp; sourceTree = SOURCE_ROOT; };
-		C10A9C065101467C98AE060A /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
-		C666321E8F75458B81DAD1C9 /* Matrix3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix3.hpp; path = Math/Matrix/Matrix3.hpp; sourceTree = SOURCE_ROOT; };
-		C7C2189DFA604F81A20B7F02 /* Sphere.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Sphere.cpp; path = Core/src/Sphere.cpp; sourceTree = SOURCE_ROOT; };
-		CD99374CD3D243CAA66756D7 /* Matrix2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix2.cpp; path = Math/Matrix/src/Matrix2.cpp; sourceTree = SOURCE_ROOT; };
-		D1F5A2F1C2BD4F0E9506540B /* Vector3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector3.hpp; path = Math/Vector/Vector3.hpp; sourceTree = SOURCE_ROOT; };
-		DB88CA53190C466E84980803 /* Camera.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Camera.cpp; path = Core/src/Camera.cpp; sourceTree = SOURCE_ROOT; };
-		DD17D7E3C8394B9589108F3D /* RenderableMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = RenderableMesh.cpp; path = Core/src/RenderableMesh.cpp; sourceTree = SOURCE_ROOT; };
-		DDD9EAB54A0A419999C9A882 /* ObjLoader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ObjLoader.cpp; path = Core/src/ObjLoader.cpp; sourceTree = SOURCE_ROOT; };
-		E037651272574A74A200A92A /* RenderableSphere.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = RenderableSphere.hpp; path = Core/RenderableSphere.hpp; sourceTree = SOURCE_ROOT; };
-		E202BECF27FD45E9A2578E7B /* Point4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point4.hpp; path = Math/Point/Point4.hpp; sourceTree = SOURCE_ROOT; };
-		E788D457530B455698F31443 /* RenderableSphere.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = RenderableSphere.cpp; path = Core/src/RenderableSphere.cpp; sourceTree = SOURCE_ROOT; };
-		E9CEFF49271243C391C83B4B /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
-		EB11EBD009184984B36C5B76 /* Point3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point3.cpp; path = Math/Point/src/Point3.cpp; sourceTree = SOURCE_ROOT; };
-		ED13E3A91D2448F0A0FB4050 /* Matrix4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix4.cpp; path = Math/Matrix/src/Matrix4.cpp; sourceTree = SOURCE_ROOT; };
-		EE82B00D8DA540F3B18E9494 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
-		F319DF96A94A4CFC870DE77E /* Versor2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor2.hpp; path = Math/Versor/Versor2.hpp; sourceTree = SOURCE_ROOT; };
-		F3F928B1C86F424F8F3BDC99 /* imgui_tables.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_tables.cpp; path = include/imgui/imgui_tables.cpp; sourceTree = SOURCE_ROOT; };
-		F770995F1EC14C8A9EF20A9C /* Scalar.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Scalar.hpp; path = Math/Scalar.hpp; sourceTree = SOURCE_ROOT; };
-		F7B1D038BC774E4D9D45CB7E /* Matrix4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix4.hpp; path = Math/Matrix/Matrix4.hpp; sourceTree = SOURCE_ROOT; };
-		F89828D50347461BAE4FC2B5 /* Region.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Region.cpp; path = Core/src/Region.cpp; sourceTree = SOURCE_ROOT; };
-		F9EA7C88C56441FDB98C08FE /* Quadric.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Quadric.hpp; path = Core/Quadric.hpp; sourceTree = SOURCE_ROOT; };
-		FFEC44DA7C1C4AE8B62FF4B1 /* ObjLoader.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ObjLoader.hpp; path = Core/ObjLoader.hpp; sourceTree = SOURCE_ROOT; };
+		004A266B34D444B9870247F8 /* Versor2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor2.hpp; path = Math/Versor/Versor2.hpp; sourceTree = SOURCE_ROOT; };
+		02FD91918C284B7B9DBDFD47 /* RenderableMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = RenderableMesh.cpp; path = Core/src/RenderableMesh.cpp; sourceTree = SOURCE_ROOT; };
+		097EAE2CE7794F7384A418D7 /* UpdatableFibonacciPQ.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = UpdatableFibonacciPQ.hpp; path = Core/UpdatableFibonacciPQ.hpp; sourceTree = SOURCE_ROOT; };
+		18CADE78954B41779DF8EC4A /* Quadric2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Quadric2.cpp; path = Core/src/Quadric2.cpp; sourceTree = SOURCE_ROOT; };
+		19CF4D978C3B4B519FB57FF3 /* Window.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Window.cpp; path = Core/src/Window.cpp; sourceTree = SOURCE_ROOT; };
+		1A29E98987964F7DA5825676 /* Math.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Math.hpp; path = Math/Math.hpp; sourceTree = SOURCE_ROOT; };
+		2034C8B393CB4E369598B24A /* imgui_impl_opengl3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_impl_opengl3.cpp; path = include/imgui/imgui_impl_opengl3.cpp; sourceTree = SOURCE_ROOT; };
+		2145A9BAA3544EA9AEC57685 /* Point3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point3.hpp; path = Math/Point/Point3.hpp; sourceTree = SOURCE_ROOT; };
+		290A7D45B4ED47329B1574E8 /* Versor2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor2.cpp; path = Math/Versor/src/Versor2.cpp; sourceTree = SOURCE_ROOT; };
+		2E82251D8D9D48339D8AA45A /* SphereMesh.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SphereMesh.cpp; path = Core/src/SphereMesh.cpp; sourceTree = SOURCE_ROOT; };
+		338ABF48E45C4BB092B5F34A /* libtinyfiledialogs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libtinyfiledialogs.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		33E5A73DDC9B48DBB8880CB9 /* Matrix4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix4.cpp; path = Math/Matrix/src/Matrix4.cpp; sourceTree = SOURCE_ROOT; };
+		3D60BBBBCAFD4420B4B7E58C /* Point4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point4.hpp; path = Math/Point/Point4.hpp; sourceTree = SOURCE_ROOT; };
+		43259DC52AE12D79008F3028 /* ScopeTimer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ScopeTimer.hpp; path = Core/ScopeTimer.hpp; sourceTree = "<group>"; };
+		43259DC62AE12D87008F3028 /* ScopeTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScopeTimer.cpp; path = Core/src/ScopeTimer.cpp; sourceTree = "<group>"; };
+		4585BE2C19E84119846495F2 /* Matrix2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix2.cpp; path = Math/Matrix/src/Matrix2.cpp; sourceTree = SOURCE_ROOT; };
+		4BCE04F1E0F6404991683B92 /* Point4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point4.cpp; path = Math/Point/src/Point4.cpp; sourceTree = SOURCE_ROOT; };
+		4EF628408A85467AB4F97641 /* glad.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = glad.c; path = include/glad.c; sourceTree = SOURCE_ROOT; };
+		52777181393E48FEB626964D /* Vector2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector2.hpp; path = Math/Vector/Vector2.hpp; sourceTree = SOURCE_ROOT; };
+		59CF0CBEDFE84EF08716E2B8 /* CollapsableEdge.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = CollapsableEdge.hpp; path = Core/CollapsableEdge.hpp; sourceTree = SOURCE_ROOT; };
+		5FC5291AE7194ECEA49B0E3B /* Shader.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Shader.hpp; path = Shader/Shader.hpp; sourceTree = SOURCE_ROOT; };
+		605605757E3D4510B84F998F /* ObjLoader.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = ObjLoader.hpp; path = Core/ObjLoader.hpp; sourceTree = SOURCE_ROOT; };
+		6431B5E949D34E44AAB4E2B4 /* imgui_tables.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_tables.cpp; path = include/imgui/imgui_tables.cpp; sourceTree = SOURCE_ROOT; };
+		650CCE78948649B7BE701CFC /* Point3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point3.cpp; path = Math/Point/src/Point3.cpp; sourceTree = SOURCE_ROOT; };
+		651E33F2895648AC844C6B2E /* Camera.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Camera.hpp; path = Core/Camera.hpp; sourceTree = SOURCE_ROOT; };
+		67A9843C61D741E1A20D6E72 /* ObjLoader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ObjLoader.cpp; path = Core/src/ObjLoader.cpp; sourceTree = SOURCE_ROOT; };
+		68753646558F455C92F79ED4 /* UpdatableFibonacciPQ.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = UpdatableFibonacciPQ.cpp; path = Core/src/UpdatableFibonacciPQ.cpp; sourceTree = SOURCE_ROOT; };
+		6A37CD63711A441F860E6AFD /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		6C009A36CF8745BEB85D1001 /* Point2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Point2.cpp; path = Math/Point/src/Point2.cpp; sourceTree = SOURCE_ROOT; };
+		76BFC5E6FC5D4C79AC81287C /* Region.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Region.hpp; path = Core/Region.hpp; sourceTree = SOURCE_ROOT; };
+		7B7880C88E464FBCA5F10D24 /* Vector3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector3.hpp; path = Math/Vector/Vector3.hpp; sourceTree = SOURCE_ROOT; };
+		83ABD2B4026F4C74BF84F525 /* Shader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Shader.cpp; path = Shader/src/Shader.cpp; sourceTree = SOURCE_ROOT; };
+		848F1C4F81E64778B0A37720 /* Matrix3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix3.hpp; path = Math/Matrix/Matrix3.hpp; sourceTree = SOURCE_ROOT; };
+		84F70983E07F40CE9A79077E /* Window.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Window.hpp; path = Core/Window.hpp; sourceTree = SOURCE_ROOT; };
+		8816F97F9BC04D9288C2747D /* UpdatablePQ.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = UpdatablePQ.cpp; path = Core/src/UpdatablePQ.cpp; sourceTree = SOURCE_ROOT; };
+		8B7AC08CE6CF457ABC067622 /* RenderableMesh.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = RenderableMesh.hpp; path = Core/RenderableMesh.hpp; sourceTree = SOURCE_ROOT; };
+		974236995BF943E092F57667 /* Vector3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector3.cpp; path = Math/Vector/src/Vector3.cpp; sourceTree = SOURCE_ROOT; };
+		996CB3BD5C3A4BB0820C611D /* libGLAD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGLAD.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		99C9ECC3156F43FABAA14A43 /* Quadric.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Quadric.cpp; path = Core/src/Quadric.cpp; sourceTree = SOURCE_ROOT; };
+		9AAB7AA492D1429FA3609634 /* Scalar.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Scalar.hpp; path = Math/Scalar.hpp; sourceTree = SOURCE_ROOT; };
+		A0EEC6899A1E45A1AD571553 /* Quadric2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Quadric2.hpp; path = Core/Quadric2.hpp; sourceTree = SOURCE_ROOT; };
+		A37F90AB6FB44279855A974C /* Matrix4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix4.hpp; path = Math/Matrix/Matrix4.hpp; sourceTree = SOURCE_ROOT; };
+		A8B951583C594F18B82D2891 /* imgui_draw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_draw.cpp; path = include/imgui/imgui_draw.cpp; sourceTree = SOURCE_ROOT; };
+		B0FB1FCE31714B67AF894EBA /* Versor3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor3.cpp; path = Math/Versor/src/Versor3.cpp; sourceTree = SOURCE_ROOT; };
+		B2906586146748EB935175FF /* Quadric3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Quadric3.cpp; path = Core/src/Quadric3.cpp; sourceTree = SOURCE_ROOT; };
+		B3FF146C3202445E92BEFA00 /* RenderableSphere.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = RenderableSphere.cpp; path = Core/src/RenderableSphere.cpp; sourceTree = SOURCE_ROOT; };
+		B40E47AB866745719D79C8CC /* Vector2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector2.cpp; path = Math/Vector/src/Vector2.cpp; sourceTree = SOURCE_ROOT; };
+		B45196F75B0842D0BC590BA1 /* Matrix2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Matrix2.hpp; path = Math/Matrix/Matrix2.hpp; sourceTree = SOURCE_ROOT; };
+		B4CB476DDC7F44E6A53364A6 /* Matrix3.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Matrix3.cpp; path = Math/Matrix/src/Matrix3.cpp; sourceTree = SOURCE_ROOT; };
+		B539845B1A28464186D356C0 /* RenderableSphere.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = RenderableSphere.hpp; path = Core/RenderableSphere.hpp; sourceTree = SOURCE_ROOT; };
+		B5D24EB4FD6B4A15B94B7F3C /* Sphere.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Sphere.cpp; path = Core/src/Sphere.cpp; sourceTree = SOURCE_ROOT; };
+		B71CE4418B3849799997867C /* Quadric.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Quadric.hpp; path = Core/Quadric.hpp; sourceTree = SOURCE_ROOT; };
+		BA9C1A8869AC4999AD680374 /* imgui_impl_glfw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_impl_glfw.cpp; path = include/imgui/imgui_impl_glfw.cpp; sourceTree = SOURCE_ROOT; };
+		C1666D8501B947B7B46FE612 /* Versor4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Versor4.cpp; path = Math/Versor/src/Versor4.cpp; sourceTree = SOURCE_ROOT; };
+		C210A0F4AF8F473FAECBB4F2 /* UpdatablePQ.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = UpdatablePQ.hpp; path = Core/UpdatablePQ.hpp; sourceTree = SOURCE_ROOT; };
+		C229459290CD4622AF250CAB /* Sphere.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Sphere.hpp; path = Core/Sphere.hpp; sourceTree = SOURCE_ROOT; };
+		C528DB40661041A999142AB5 /* Point2.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Point2.hpp; path = Math/Point/Point2.hpp; sourceTree = SOURCE_ROOT; };
+		C73D58F6707F477DB34AD7BC /* SphereMesh.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = SphereMesh.hpp; path = Core/SphereMesh.hpp; sourceTree = SOURCE_ROOT; };
+		C89AE7DC28BE4BC999C03C0C /* CustomRenderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = CustomRenderer; sourceTree = BUILT_PRODUCTS_DIR; };
+		C994DBD882914B8CB1446377 /* Versor4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor4.hpp; path = Math/Versor/Versor4.hpp; sourceTree = SOURCE_ROOT; };
+		CB19AEB8579B4594AF3E9E9B /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		CCC9C14109654C788A78373F /* imgui_demo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_demo.cpp; path = include/imgui/imgui_demo.cpp; sourceTree = SOURCE_ROOT; };
+		D1B3BC09B41E41B7A72DC36E /* Quadric3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Quadric3.hpp; path = Core/Quadric3.hpp; sourceTree = SOURCE_ROOT; };
+		D471643EF1ED4959A6331C62 /* CollapsableEdge.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = CollapsableEdge.cpp; path = Core/src/CollapsableEdge.cpp; sourceTree = SOURCE_ROOT; };
+		D49259B9E13845A6A0953190 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		D4FDB860831C4C569A3AA535 /* Vector4.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Vector4.cpp; path = Math/Vector/src/Vector4.cpp; sourceTree = SOURCE_ROOT; };
+		D67065AB8DB4434A850D32C9 /* Region.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Region.cpp; path = Core/src/Region.cpp; sourceTree = SOURCE_ROOT; };
+		D69ABB3D80F7436B86731631 /* Vector4.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Vector4.hpp; path = Math/Vector/Vector4.hpp; sourceTree = SOURCE_ROOT; };
+		DA08639DC6C24D41BED6C5F2 /* Versor3.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Versor3.hpp; path = Math/Versor/Versor3.hpp; sourceTree = SOURCE_ROOT; };
+		DA52155C1ED54A5A9C6B0E93 /* tinyfiledialogs.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = tinyfiledialogs.c; path = Core/tinyfiledialogs.c; sourceTree = SOURCE_ROOT; };
+		E282BBB59F8646B2AB9E46DC /* Quaternion.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = Quaternion.hpp; path = Math/Rotation/Quaternion.hpp; sourceTree = SOURCE_ROOT; };
+		E58B1626F3C3401594D80D36 /* Quaternion.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Quaternion.cpp; path = Math/Rotation/src/Quaternion.cpp; sourceTree = SOURCE_ROOT; };
+		E669021560784E5E89F28035 /* imgui_widgets.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui_widgets.cpp; path = include/imgui/imgui_widgets.cpp; sourceTree = SOURCE_ROOT; };
+		E7E76C738B84484DA093EEE8 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		F4FD2766B10847AAA33F6E60 /* imgui.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = imgui.cpp; path = include/imgui/imgui.cpp; sourceTree = SOURCE_ROOT; };
+		F61BAB9A41044A1D8B7F56ED /* Camera.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = Camera.cpp; path = Core/src/Camera.cpp; sourceTree = SOURCE_ROOT; };
+		F6A9C35EC74544A78163220E /* YAMLUtils.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = YAMLUtils.hpp; path = Core/YAMLUtils.hpp; sourceTree = SOURCE_ROOT; };
+		FEB5EE9FD6724F7F977C9B58 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		11AF0402A8154166A3AB3E3C /* Frameworks */ = {
+		860B573F78204CFE9094DBF7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2EA2133EDA67413F9419043A /* Frameworks */ = {
+		8ABCA85E19344D158792F975 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FD9EE2F2F25F4446A079CF65 /* Frameworks */ = {
+		EC1FA8C4D1734AB1A57C3368 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -246,174 +249,176 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B98A9FD35C24A708D6A144A /* CMake Rules */ = {
+		19F22A6AB4FB4714BBDB346D /* tinyfiledialogs */ = {
+			isa = PBXGroup;
+			children = (
+				F71D22A5A8D84FAA909B0992 /* Source Files */,
+				D49259B9E13845A6A0953190 /* CMakeLists.txt */,
+			);
+			name = tinyfiledialogs;
+			sourceTree = "<group>";
+		};
+		2AB6A17BFC8F4EEBB9EA3843 /* CustomRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				4E3C5A3391074C4B83ACCE84 /* Header Files */,
+				B26F0D4F9EE048489013ECE2 /* Source Files */,
+				6A37CD63711A441F860E6AFD /* CMakeLists.txt */,
+			);
+			name = CustomRenderer;
+			sourceTree = "<group>";
+		};
+		3D6E7298A79A41CAAE632578 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				4EF628408A85467AB4F97641 /* glad.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		406F46E012A5479C8A77ADDC /* CMake Rules */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = "CMake Rules";
 			sourceTree = "<group>";
 		};
-		221770075D0446A59F790AB3 /* Source Files */ = {
+		4E3C5A3391074C4B83ACCE84 /* Header Files */ = {
 			isa = PBXGroup;
 			children = (
-				B36DFBCA5417492E85346F67 /* tinyfiledialogs.c */,
-			);
-			name = "Source Files";
-			sourceTree = "<group>";
-		};
-		2331F7382F3E479BA80741B6 /* Header Files */ = {
-			isa = PBXGroup;
-			children = (
-				437CECCE2AD721DD00C7BAA4 /* UpdatableFibonacciPQ.hpp */,
-				43DAF4F42AD6FA880013D9C6 /* UpdatablePQ.hpp */,
-				83DC94ADD23545149BF860A6 /* Camera.hpp */,
-				FFEC44DA7C1C4AE8B62FF4B1 /* ObjLoader.hpp */,
-				F9EA7C88C56441FDB98C08FE /* Quadric.hpp */,
-				4331D2492ACEB49D00FAE2CA /* Quadric3.hpp */,
-				432A67FD2AD55E2D00A042B5 /* Quadric2.hpp */,
-				53E8875C78234EDE90FE01DC /* Region.hpp */,
-				8C0677B06CE8425793DC9AB6 /* RenderableMesh.hpp */,
-				E037651272574A74A200A92A /* RenderableSphere.hpp */,
-				AD2AFFE8965D427182B051B0 /* Sphere.hpp */,
-				42D5A1503BB44910A05EE25F /* SphereMesh.hpp */,
-				437CECD12AD7244E00C7BAA4 /* CollapsableEdge.hpp */,
-				10CA38F7D8564488852C4205 /* Window.hpp */,
-				8AEC319D65804DBDA2694FD1 /* YAMLUtils.hpp */,
-				938C2C68B7AE4EC0AF7BE95F /* Math.hpp */,
-				0F6E12D9D3C34B159A302864 /* Matrix2.hpp */,
-				C666321E8F75458B81DAD1C9 /* Matrix3.hpp */,
-				F7B1D038BC774E4D9D45CB7E /* Matrix4.hpp */,
-				063AF2DE26A045B48324AE36 /* Point2.hpp */,
-				0F88FEA5D9684B3CA1AD341C /* Point3.hpp */,
-				E202BECF27FD45E9A2578E7B /* Point4.hpp */,
-				28B1DD10590E4E0CBF47CA90 /* Quaternion.hpp */,
-				F770995F1EC14C8A9EF20A9C /* Scalar.hpp */,
-				14FF31D859F044109B11DF64 /* Vector2.hpp */,
-				D1F5A2F1C2BD4F0E9506540B /* Vector3.hpp */,
-				19ABB0FC6EA641C98F5DD398 /* Vector4.hpp */,
-				F319DF96A94A4CFC870DE77E /* Versor2.hpp */,
-				8F901DD0A4024CD4B915EE78 /* Versor3.hpp */,
-				5C51934CF00C4AB59628086B /* Versor4.hpp */,
-				08FF36123EFD43EBB5A9F71D /* Shader.hpp */,
+				651E33F2895648AC844C6B2E /* Camera.hpp */,
+				59CF0CBEDFE84EF08716E2B8 /* CollapsableEdge.hpp */,
+				605605757E3D4510B84F998F /* ObjLoader.hpp */,
+				B71CE4418B3849799997867C /* Quadric.hpp */,
+				A0EEC6899A1E45A1AD571553 /* Quadric2.hpp */,
+				D1B3BC09B41E41B7A72DC36E /* Quadric3.hpp */,
+				76BFC5E6FC5D4C79AC81287C /* Region.hpp */,
+				8B7AC08CE6CF457ABC067622 /* RenderableMesh.hpp */,
+				B539845B1A28464186D356C0 /* RenderableSphere.hpp */,
+				C229459290CD4622AF250CAB /* Sphere.hpp */,
+				C73D58F6707F477DB34AD7BC /* SphereMesh.hpp */,
+				097EAE2CE7794F7384A418D7 /* UpdatableFibonacciPQ.hpp */,
+				C210A0F4AF8F473FAECBB4F2 /* UpdatablePQ.hpp */,
+				84F70983E07F40CE9A79077E /* Window.hpp */,
+				F6A9C35EC74544A78163220E /* YAMLUtils.hpp */,
+				1A29E98987964F7DA5825676 /* Math.hpp */,
+				B45196F75B0842D0BC590BA1 /* Matrix2.hpp */,
+				848F1C4F81E64778B0A37720 /* Matrix3.hpp */,
+				A37F90AB6FB44279855A974C /* Matrix4.hpp */,
+				C528DB40661041A999142AB5 /* Point2.hpp */,
+				2145A9BAA3544EA9AEC57685 /* Point3.hpp */,
+				3D60BBBBCAFD4420B4B7E58C /* Point4.hpp */,
+				E282BBB59F8646B2AB9E46DC /* Quaternion.hpp */,
+				9AAB7AA492D1429FA3609634 /* Scalar.hpp */,
+				52777181393E48FEB626964D /* Vector2.hpp */,
+				7B7880C88E464FBCA5F10D24 /* Vector3.hpp */,
+				D69ABB3D80F7436B86731631 /* Vector4.hpp */,
+				004A266B34D444B9870247F8 /* Versor2.hpp */,
+				DA08639DC6C24D41BED6C5F2 /* Versor3.hpp */,
+				C994DBD882914B8CB1446377 /* Versor4.hpp */,
+				5FC5291AE7194ECEA49B0E3B /* Shader.hpp */,
+				43259DC52AE12D79008F3028 /* ScopeTimer.hpp */,
 			);
 			name = "Header Files";
 			sourceTree = "<group>";
 		};
-		2C0E2193EF1B46E787571E1A /* ALL_BUILD */ = {
+		88DCFEC5589E4145A6582027 = {
 			isa = PBXGroup;
 			children = (
-				0B98A9FD35C24A708D6A144A /* CMake Rules */,
-				E9CEFF49271243C391C83B4B /* CMakeLists.txt */,
+				C22500EED40B4E4C9D42C7A9 /* GLAD */,
+				19F22A6AB4FB4714BBDB346D /* tinyfiledialogs */,
+				2AB6A17BFC8F4EEBB9EA3843 /* CustomRenderer */,
+				FAC4712A33A042A49D23A97A /* ALL_BUILD */,
+				B237F29E4ADB451DA39D709A /* Products */,
+				AF26D9628E0047AC963005D1 /* Frameworks */,
 			);
-			name = ALL_BUILD;
 			sourceTree = "<group>";
 		};
-		3ED33EB0731445E6BF9AE741 /* tinyfiledialogs */ = {
-			isa = PBXGroup;
-			children = (
-				221770075D0446A59F790AB3 /* Source Files */,
-				82445E60904D49098E988821 /* CMakeLists.txt */,
-			);
-			name = tinyfiledialogs;
-			sourceTree = "<group>";
-		};
-		B68C9F2B5EC94FBB88BC32AB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9B61AC70B2F74C7596311E2D /* CustomRenderer */,
-				0AA32BBC2592449CADD54AD8 /* libGLAD.a */,
-				8B23FED550F5431F95C542C2 /* libtinyfiledialogs.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		C612B66AB5AB4EA6B5B98543 /* Source Files */ = {
-			isa = PBXGroup;
-			children = (
-				0C7DB330FB744C35AAB181AE /* glad.c */,
-			);
-			name = "Source Files";
-			sourceTree = "<group>";
-		};
-		CF8CD1217ED24F0BB693C685 /* Frameworks */ = {
+		AF26D9628E0047AC963005D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D65CD229C07441159B409204 /* GLAD */ = {
+		B237F29E4ADB451DA39D709A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C612B66AB5AB4EA6B5B98543 /* Source Files */,
-				C10A9C065101467C98AE060A /* CMakeLists.txt */,
+				C89AE7DC28BE4BC999C03C0C /* CustomRenderer */,
+				996CB3BD5C3A4BB0820C611D /* libGLAD.a */,
+				338ABF48E45C4BB092B5F34A /* libtinyfiledialogs.a */,
 			);
-			name = GLAD;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		E0EEE2B9DDFF4BBD944EDF3A = {
+		B26F0D4F9EE048489013ECE2 /* Source Files */ = {
 			isa = PBXGroup;
 			children = (
-				D65CD229C07441159B409204 /* GLAD */,
-				3ED33EB0731445E6BF9AE741 /* tinyfiledialogs */,
-				E989C2CFCEB54FD9BB0480EC /* CustomRenderer */,
-				2C0E2193EF1B46E787571E1A /* ALL_BUILD */,
-				B68C9F2B5EC94FBB88BC32AB /* Products */,
-				CF8CD1217ED24F0BB693C685 /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		E16138061A684DB1AFAC201C /* Source Files */ = {
-			isa = PBXGroup;
-			children = (
-				437CECCF2AD721E600C7BAA4 /* UpdatableFibonacciPQ.cpp */,
-				43DAF4F52AD6FA970013D9C6 /* UpdatablePQ.cpp */,
-				DB88CA53190C466E84980803 /* Camera.cpp */,
-				DDD9EAB54A0A419999C9A882 /* ObjLoader.cpp */,
-				8A2FA810E0E34444AD907319 /* Quadric.cpp */,
-				4331D2472ACEB48900FAE2CA /* Quadric3.cpp */,
-				432A67FB2AD55E2300A042B5 /* Quadric2.cpp */,
-				F89828D50347461BAE4FC2B5 /* Region.cpp */,
-				DD17D7E3C8394B9589108F3D /* RenderableMesh.cpp */,
-				E788D457530B455698F31443 /* RenderableSphere.cpp */,
-				C7C2189DFA604F81A20B7F02 /* Sphere.cpp */,
-				BE687E993DE64877A686AEF1 /* SphereMesh.cpp */,
-				437CECD22AD7245E00C7BAA4 /* CollapsableEdge.cpp */,
-				11702156D1F54EAC84A37FE1 /* Window.cpp */,
-				CD99374CD3D243CAA66756D7 /* Matrix2.cpp */,
-				B783C283A0E949118D66B9AB /* Matrix3.cpp */,
-				ED13E3A91D2448F0A0FB4050 /* Matrix4.cpp */,
-				3AC1C3B19A974715BF640119 /* Point2.cpp */,
-				EB11EBD009184984B36C5B76 /* Point3.cpp */,
-				17A514168D2B4A019A24E019 /* Point4.cpp */,
-				1655EC70DEA740629ACB1D10 /* Quaternion.cpp */,
-				4A9462FD64ED42209AFFC36B /* Vector2.cpp */,
-				11CEB4EFCE6347BC9FC0E7B4 /* Vector3.cpp */,
-				39AC08B6C133465BA0CF5F51 /* Vector4.cpp */,
-				ACF2DB05D57448049BACFA13 /* Versor2.cpp */,
-				AB43C4EC550743E78C4A6253 /* Versor3.cpp */,
-				3D5B35F7943445578A74135D /* Versor4.cpp */,
-				608234313DF14859B069AA46 /* Shader.cpp */,
-				681AB8A4B9AD48BCAC535C64 /* imgui.cpp */,
-				1A962FD03B3E4785B637CC61 /* imgui_demo.cpp */,
-				82EDFC9E1072480EBD174D21 /* imgui_draw.cpp */,
-				99E101F8C2484DE59A62F153 /* imgui_impl_glfw.cpp */,
-				AAC8385A860042E78DEB78EA /* imgui_impl_opengl3.cpp */,
-				F3F928B1C86F424F8F3BDC99 /* imgui_tables.cpp */,
-				8629FDEC17CB4DABA0C0F0F1 /* imgui_widgets.cpp */,
-				163DA3CAC78E4BC7B6D79758 /* main.cpp */,
+				F61BAB9A41044A1D8B7F56ED /* Camera.cpp */,
+				D471643EF1ED4959A6331C62 /* CollapsableEdge.cpp */,
+				67A9843C61D741E1A20D6E72 /* ObjLoader.cpp */,
+				99C9ECC3156F43FABAA14A43 /* Quadric.cpp */,
+				18CADE78954B41779DF8EC4A /* Quadric2.cpp */,
+				B2906586146748EB935175FF /* Quadric3.cpp */,
+				D67065AB8DB4434A850D32C9 /* Region.cpp */,
+				02FD91918C284B7B9DBDFD47 /* RenderableMesh.cpp */,
+				B3FF146C3202445E92BEFA00 /* RenderableSphere.cpp */,
+				B5D24EB4FD6B4A15B94B7F3C /* Sphere.cpp */,
+				2E82251D8D9D48339D8AA45A /* SphereMesh.cpp */,
+				68753646558F455C92F79ED4 /* UpdatableFibonacciPQ.cpp */,
+				8816F97F9BC04D9288C2747D /* UpdatablePQ.cpp */,
+				19CF4D978C3B4B519FB57FF3 /* Window.cpp */,
+				4585BE2C19E84119846495F2 /* Matrix2.cpp */,
+				B4CB476DDC7F44E6A53364A6 /* Matrix3.cpp */,
+				33E5A73DDC9B48DBB8880CB9 /* Matrix4.cpp */,
+				6C009A36CF8745BEB85D1001 /* Point2.cpp */,
+				650CCE78948649B7BE701CFC /* Point3.cpp */,
+				4BCE04F1E0F6404991683B92 /* Point4.cpp */,
+				E58B1626F3C3401594D80D36 /* Quaternion.cpp */,
+				B40E47AB866745719D79C8CC /* Vector2.cpp */,
+				974236995BF943E092F57667 /* Vector3.cpp */,
+				D4FDB860831C4C569A3AA535 /* Vector4.cpp */,
+				290A7D45B4ED47329B1574E8 /* Versor2.cpp */,
+				B0FB1FCE31714B67AF894EBA /* Versor3.cpp */,
+				C1666D8501B947B7B46FE612 /* Versor4.cpp */,
+				83ABD2B4026F4C74BF84F525 /* Shader.cpp */,
+				F4FD2766B10847AAA33F6E60 /* imgui.cpp */,
+				CCC9C14109654C788A78373F /* imgui_demo.cpp */,
+				A8B951583C594F18B82D2891 /* imgui_draw.cpp */,
+				BA9C1A8869AC4999AD680374 /* imgui_impl_glfw.cpp */,
+				2034C8B393CB4E369598B24A /* imgui_impl_opengl3.cpp */,
+				6431B5E949D34E44AAB4E2B4 /* imgui_tables.cpp */,
+				E669021560784E5E89F28035 /* imgui_widgets.cpp */,
+				43259DC62AE12D87008F3028 /* ScopeTimer.cpp */,
+				CB19AEB8579B4594AF3E9E9B /* main.cpp */,
 			);
 			name = "Source Files";
 			sourceTree = "<group>";
 		};
-		E989C2CFCEB54FD9BB0480EC /* CustomRenderer */ = {
+		C22500EED40B4E4C9D42C7A9 /* GLAD */ = {
 			isa = PBXGroup;
 			children = (
-				2331F7382F3E479BA80741B6 /* Header Files */,
-				E16138061A684DB1AFAC201C /* Source Files */,
-				EE82B00D8DA540F3B18E9494 /* CMakeLists.txt */,
+				3D6E7298A79A41CAAE632578 /* Source Files */,
+				E7E76C738B84484DA093EEE8 /* CMakeLists.txt */,
 			);
-			name = CustomRenderer;
+			name = GLAD;
+			sourceTree = "<group>";
+		};
+		F71D22A5A8D84FAA909B0992 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA52155C1ED54A5A9C6B0E93 /* tinyfiledialogs.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		FAC4712A33A042A49D23A97A /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				406F46E012A5479C8A77ADDC /* CMake Rules */,
+				FEB5EE9FD6724F7F977C9B58 /* CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,55 +426,55 @@
 /* Begin PBXNativeTarget section */
 		1349EAF6832E413F9E1BA8C2 /* CustomRenderer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5FAEAB4CBC6A421AB38699DE /* Build configuration list for PBXNativeTarget "CustomRenderer" */;
+			buildConfigurationList = 04238DAE0F244FE9A4667EF4 /* Build configuration list for PBXNativeTarget "CustomRenderer" */;
 			buildPhases = (
-				F4AC415EC3294F30A5CBBAE9 /* Sources */,
-				2EA2133EDA67413F9419043A /* Frameworks */,
+				62CFBC4284514AD4ACE84E43 /* Sources */,
+				8ABCA85E19344D158792F975 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7111AECD0E0C4137A1C7C0FF /* PBXTargetDependency */,
-				F84C54E568E3412CBC6768BF /* PBXTargetDependency */,
-				B2EF6539F58442F3B1D0F280 /* PBXTargetDependency */,
+				28C7319D0A784608BD121136 /* PBXTargetDependency */,
+				2EECA751B10E49E5A4985B19 /* PBXTargetDependency */,
+				A473EA7416994681A43D6A44 /* PBXTargetDependency */,
 			);
 			name = CustomRenderer;
 			productName = CustomRenderer;
-			productReference = 9B61AC70B2F74C7596311E2D /* CustomRenderer */;
+			productReference = C89AE7DC28BE4BC999C03C0C /* CustomRenderer */;
 			productType = "com.apple.product-type.tool";
 		};
 		6674EADF10574ADC880AB7AB /* tinyfiledialogs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A6A5F45F2064429A93999B24 /* Build configuration list for PBXNativeTarget "tinyfiledialogs" */;
+			buildConfigurationList = 22D8560A946349A0BABAC1B0 /* Build configuration list for PBXNativeTarget "tinyfiledialogs" */;
 			buildPhases = (
-				AAE7216B589B4B4DB510320A /* Sources */,
-				11AF0402A8154166A3AB3E3C /* Frameworks */,
+				15A46ECB32B84D82BC7386FB /* Sources */,
+				EC1FA8C4D1734AB1A57C3368 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				529A617F6DC446C1BA4EE567 /* PBXTargetDependency */,
+				833B71551B754B3FA8AA84B4 /* PBXTargetDependency */,
 			);
 			name = tinyfiledialogs;
 			productName = tinyfiledialogs;
-			productReference = 8B23FED550F5431F95C542C2 /* libtinyfiledialogs.a */;
+			productReference = 338ABF48E45C4BB092B5F34A /* libtinyfiledialogs.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		BE294BFB6B3F4C458ACC4BB5 /* GLAD */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5B69A10B24374C5EA6AB8B04 /* Build configuration list for PBXNativeTarget "GLAD" */;
+			buildConfigurationList = C17D4BE496A54DD5A1F0A0BA /* Build configuration list for PBXNativeTarget "GLAD" */;
 			buildPhases = (
-				FFD7DE68B78E49E195EB90DD /* Sources */,
-				FD9EE2F2F25F4446A079CF65 /* Frameworks */,
+				022BC550A1924C9B89590F58 /* Sources */,
+				860B573F78204CFE9094DBF7 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				259FA3F840C04749A2F6027C /* PBXTargetDependency */,
+				E5F28EF3F08B464ABCA2B7C9 /* PBXTargetDependency */,
 			);
 			name = GLAD;
 			productName = GLAD;
-			productReference = 0AA32BBC2592449CADD54AD8 /* libGLAD.a */;
+			productReference = 996CB3BD5C3A4BB0820C611D /* libGLAD.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -480,7 +485,7 @@
 			attributes = {
 				LastUpgradeCheck = 1430;
 			};
-			buildConfigurationList = 096AF645372840B3B33F631E /* Build configuration list for PBXProject "CustomRenderer" */;
+			buildConfigurationList = E0D1E7D5B68E43E6815A6E25 /* Build configuration list for PBXProject "CustomRenderer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -488,7 +493,7 @@
 				en,
 				Base,
 			);
-			mainGroup = E0EEE2B9DDFF4BBD944EDF3A;
+			mainGroup = 88DCFEC5589E4145A6582027;
 			projectDirPath = ../;
 			projectRoot = "";
 			targets = (
@@ -539,386 +544,118 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		AAE7216B589B4B4DB510320A /* Sources */ = {
+		022BC550A1924C9B89590F58 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E962A49D666546E7896FBDB3 /* tinyfiledialogs.c in Sources */,
+				6CE77C60A9C74081B0E5907B /* glad.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F4AC415EC3294F30A5CBBAE9 /* Sources */ = {
+		15A46ECB32B84D82BC7386FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA601A2A5D054CF4AB3B8915 /* Camera.cpp in Sources */,
-				F7282E929E68427CB4F690B3 /* ObjLoader.cpp in Sources */,
-				32D3D2ECB5F64FADBE2C2DF2 /* Quadric.cpp in Sources */,
-				E857DDE5B3B74767B5D2A7C7 /* Region.cpp in Sources */,
-				C6775D43A27A4DF1B563B018 /* RenderableMesh.cpp in Sources */,
-				2D63C94FDA5F4B6CB81CC20B /* RenderableSphere.cpp in Sources */,
-				A822364635BD48B5B42437D0 /* Sphere.cpp in Sources */,
-				9AF18D6EDB944231809F9191 /* SphereMesh.cpp in Sources */,
-				85D0F49130FD43888CD39DE4 /* Window.cpp in Sources */,
-				22562C14B10644E28442BE84 /* Matrix2.cpp in Sources */,
-				432A67FC2AD55E2300A042B5 /* Quadric2.cpp in Sources */,
-				437CECD32AD7245E00C7BAA4 /* CollapsableEdge.cpp in Sources */,
-				D23B8C4FEBA146238FCECBEB /* Matrix3.cpp in Sources */,
-				83027BF99100407293A4287E /* Matrix4.cpp in Sources */,
-				08ECC7D6FBEE4E5BAECBA204 /* Point2.cpp in Sources */,
-				5B2B3E93C1ED446AB5DBE061 /* Point3.cpp in Sources */,
-				94E8029CBBB5439E9E45DBA9 /* Point4.cpp in Sources */,
-				437CECD02AD721E600C7BAA4 /* UpdatableFibonacciPQ.cpp in Sources */,
-				698C391C99354C6E9906D738 /* Quaternion.cpp in Sources */,
-				ECD002E39DD7416CAD0F0438 /* Vector2.cpp in Sources */,
-				D6D1F6A2415B4105B52B6658 /* Vector3.cpp in Sources */,
-				4B0BAD58460A48779CFDDFA7 /* Vector4.cpp in Sources */,
-				75B5A538A4634CDAB9CE5BA8 /* Versor2.cpp in Sources */,
-				43DAF4F62AD6FA970013D9C6 /* UpdatablePQ.cpp in Sources */,
-				773F7E10149347D48F2218DC /* Versor3.cpp in Sources */,
-				8B8F2F1DEACD45CBA1FC8D21 /* Versor4.cpp in Sources */,
-				56E42DB820C84A108DF6467D /* Shader.cpp in Sources */,
-				499534AF0A9F41FAAC27D53E /* imgui.cpp in Sources */,
-				6E29EF1DD9A04C9BA8C1FD32 /* imgui_demo.cpp in Sources */,
-				4331D2482ACEB48900FAE2CA /* Quadric3.cpp in Sources */,
-				9FB0D09087D74EF79CCCE821 /* imgui_draw.cpp in Sources */,
-				BB3C09A81DC249B98B761152 /* imgui_impl_glfw.cpp in Sources */,
-				45555688A29747C4B14AC929 /* imgui_impl_opengl3.cpp in Sources */,
-				C2A30164D9EE4640B8644EC9 /* imgui_tables.cpp in Sources */,
-				3D73F36BD69D4D3798D1B906 /* imgui_widgets.cpp in Sources */,
-				EC345ED247774AABA74DDDB4 /* main.cpp in Sources */,
+				54F8A3E07EEE4991BA743EB3 /* tinyfiledialogs.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FFD7DE68B78E49E195EB90DD /* Sources */ = {
+		62CFBC4284514AD4ACE84E43 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E54AE886EE04BAF9A4EE261 /* glad.c in Sources */,
+				0FFBB5F7234C42808334BD2D /* Camera.cpp in Sources */,
+				4CF9E2F20C2646089569E45C /* CollapsableEdge.cpp in Sources */,
+				BA0D03765C3C4D7CB9BCD675 /* ObjLoader.cpp in Sources */,
+				5063039B97C94963B6B5615C /* Quadric.cpp in Sources */,
+				E6F104180A504B75A9073EE4 /* Quadric2.cpp in Sources */,
+				BBBE2E6CD2B14587B9FE20DD /* Quadric3.cpp in Sources */,
+				99AF98F3F38545F1AC4C3C57 /* Region.cpp in Sources */,
+				43259DC72AE12D87008F3028 /* ScopeTimer.cpp in Sources */,
+				C3721F38852E4DB197DA00BF /* RenderableMesh.cpp in Sources */,
+				23D68E5081074613A063BD7F /* RenderableSphere.cpp in Sources */,
+				D239975D2F604FF99344F383 /* Sphere.cpp in Sources */,
+				89CB7358F6034FD1AD633AD8 /* SphereMesh.cpp in Sources */,
+				E91E6CD4F97A4B4985865D2B /* UpdatableFibonacciPQ.cpp in Sources */,
+				018942BC25A54CAF89956529 /* UpdatablePQ.cpp in Sources */,
+				DF547F1BEC214D799D600B19 /* Window.cpp in Sources */,
+				0210129780E749A8879BFD26 /* Matrix2.cpp in Sources */,
+				F81F6628AD4D4AB291A3B63E /* Matrix3.cpp in Sources */,
+				05B1F8C2E8E0451F948C4086 /* Matrix4.cpp in Sources */,
+				FE5058023803402EA4C5069D /* Point2.cpp in Sources */,
+				38FB399363B346C385EB111F /* Point3.cpp in Sources */,
+				8F9538CD62344B1A812E5C37 /* Point4.cpp in Sources */,
+				2B53ABDC5FBE4AF09EE7304A /* Quaternion.cpp in Sources */,
+				5F90BA38258B4C48BEBEF293 /* Vector2.cpp in Sources */,
+				D0595130C5A74F5C9C77D88B /* Vector3.cpp in Sources */,
+				30B02322EA75441D847AE91E /* Vector4.cpp in Sources */,
+				D52DEF2533BC484EBEB7C9F1 /* Versor2.cpp in Sources */,
+				D572A27842CC424CBE46BE22 /* Versor3.cpp in Sources */,
+				5CA5F17E8C11429EBFCA5E3B /* Versor4.cpp in Sources */,
+				646F9DDED3A940DD9D58AA87 /* Shader.cpp in Sources */,
+				C59DBAF415794706AA195FE4 /* imgui.cpp in Sources */,
+				B157CFE208114002A295A5E9 /* imgui_demo.cpp in Sources */,
+				40C9B0AEDF66498F9E866962 /* imgui_draw.cpp in Sources */,
+				3FF99E013C4D47CD8A24BED0 /* imgui_impl_glfw.cpp in Sources */,
+				80A1CBB1A0D84ECE805E19BD /* imgui_impl_opengl3.cpp in Sources */,
+				4E846C3E5ADA46D187A6360C /* imgui_tables.cpp in Sources */,
+				F058EE8F63E24A9398338FCE /* imgui_widgets.cpp in Sources */,
+				1602550ED0D84C689EAEE411 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		259FA3F840C04749A2F6027C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 50C429161736424691CED79C /* ZERO_CHECK */;
-			targetProxy = 70F904E485C04839A6AD8B55 /* PBXContainerItemProxy */;
-		};
-		529A617F6DC446C1BA4EE567 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 50C429161736424691CED79C /* ZERO_CHECK */;
-			targetProxy = CC63E5C49D4B4785901D6DB3 /* PBXContainerItemProxy */;
-		};
-		7111AECD0E0C4137A1C7C0FF /* PBXTargetDependency */ = {
+		28C7319D0A784608BD121136 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BE294BFB6B3F4C458ACC4BB5 /* GLAD */;
-			targetProxy = 0D6B199B9C4843129771C4EA /* PBXContainerItemProxy */;
+			targetProxy = 25B51A6A9596438BACED0019 /* PBXContainerItemProxy */;
 		};
-		795661000A46486B92A807D4 /* PBXTargetDependency */ = {
+		2EECA751B10E49E5A4985B19 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 50C429161736424691CED79C /* ZERO_CHECK */;
-			targetProxy = B84306EC9C0448A69C0AB537 /* PBXContainerItemProxy */;
+			target = 6674EADF10574ADC880AB7AB /* tinyfiledialogs */;
+			targetProxy = 94329357A2AF4151837AB69F /* PBXContainerItemProxy */;
 		};
-		8EE625DB886A466196C0224B /* PBXTargetDependency */ = {
+		563D8FF815614210B48CE512 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1349EAF6832E413F9E1BA8C2 /* CustomRenderer */;
-			targetProxy = 0E3B28C10D804F078DDD88F8 /* PBXContainerItemProxy */;
+			targetProxy = 1FFDB1F6BC8F475B932C07D5 /* PBXContainerItemProxy */;
 		};
-		B2EF6539F58442F3B1D0F280 /* PBXTargetDependency */ = {
+		833B71551B754B3FA8AA84B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 50C429161736424691CED79C /* ZERO_CHECK */;
-			targetProxy = 497149DC3AA349A4916C7196 /* PBXContainerItemProxy */;
+			targetProxy = CC4B06A578B24447A84CEC5A /* PBXContainerItemProxy */;
 		};
-		BFE0A7FDBBBB4D16AD964DAF /* PBXTargetDependency */ = {
+		92E5205FD8CF438F876DD77F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BE294BFB6B3F4C458ACC4BB5 /* GLAD */;
-			targetProxy = D880E8B8FB6C4E4694525090 /* PBXContainerItemProxy */;
+			targetProxy = FDB10E238FB84209A6DF212D /* PBXContainerItemProxy */;
 		};
-		EA724B151979495D8200536F /* PBXTargetDependency */ = {
+		A473EA7416994681A43D6A44 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50C429161736424691CED79C /* ZERO_CHECK */;
+			targetProxy = 90C1532C0AD2439F946E009C /* PBXContainerItemProxy */;
+		};
+		BC7418F9DB8842D398E0B955 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50C429161736424691CED79C /* ZERO_CHECK */;
+			targetProxy = 78528215F4AF4AEF83847E63 /* PBXContainerItemProxy */;
+		};
+		E5F28EF3F08B464ABCA2B7C9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50C429161736424691CED79C /* ZERO_CHECK */;
+			targetProxy = F6A366948CC84462B0FF4BE4 /* PBXContainerItemProxy */;
+		};
+		EE11B3D73A3A4A0CA2877EB1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6674EADF10574ADC880AB7AB /* tinyfiledialogs */;
-			targetProxy = CC62E404427C4159AF184A08 /* PBXContainerItemProxy */;
-		};
-		F84C54E568E3412CBC6768BF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6674EADF10574ADC880AB7AB /* tinyfiledialogs */;
-			targetProxy = EBCBA2530E414B2A844D1070 /* PBXContainerItemProxy */;
+			targetProxy = 7A17CE42E19948839FF34D26 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0475FB6C6C214F2283B64CBE /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " $(inherited)";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = RelWithDebInfo;
-		};
-		09932816E13B4C5493BD49EE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = "";
-				EXECUTABLE_SUFFIX = "";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
-					"$(inherited)",
-				);
-				INSTALL_PATH = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					/usr/local/lib,
-					"$(inherited)",
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
-					/usr/local/lib,
-					"$(inherited)",
-				);
-				OTHER_CPLUSPLUSFLAGS = "       '-std=c++17' ";
-				OTHER_LDFLAGS = (
-					"-Wl,-search_paths_first",
-					"-Wl,-headerpad_max_install_names",
-					/usr/local/lib/libglfw.3.3.dylib,
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Debug/libGLAD.a",
-					"-lyaml-cpp",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Debug/libtinyfiledialogs.a",
-					"$(inherited)",
-				);
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = CustomRenderer;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/include,
-					"$(inherited)",
-				);
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = Debug;
-		};
-		09A54A79A36E4EF2BBC2DAF3 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " $(inherited)";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = MinSizeRel;
-		};
-		1062B2B985DC43448B120A5F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = lib;
-				EXECUTABLE_SUFFIX = .a;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
-					"$(inherited)",
-				);
-				INSTALL_PATH = "";
-				LIBRARY_STYLE = STATIC;
-				OTHER_CFLAGS = "  $(inherited)";
-				OTHER_LIBTOOLFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = tinyfiledialogs;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = Release;
-		};
-		24527C3C87FA488DA458CE9D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " $(inherited)";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = Release;
-		};
-		24F8B8C2D000444F8FC9A17E /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = lib;
-				EXECUTABLE_SUFFIX = .a;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
-					"$(inherited)",
-				);
-				INSTALL_PATH = "";
-				LIBRARY_STYLE = STATIC;
-				OTHER_CFLAGS = "  $(inherited)";
-				OTHER_LIBTOOLFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = tinyfiledialogs;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = RelWithDebInfo;
-		};
-		289025AC779D4E6F8DDB7A09 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = "";
-				EXECUTABLE_SUFFIX = "";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
-					"$(inherited)",
-				);
-				INSTALL_PATH = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					/usr/local/lib,
-					"$(inherited)",
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
-					/usr/local/lib,
-					"$(inherited)",
-				);
-				OTHER_CPLUSPLUSFLAGS = "       '-std=c++17' ";
-				OTHER_LDFLAGS = (
-					"-Wl,-search_paths_first",
-					"-Wl,-headerpad_max_install_names",
-					/usr/local/lib/libglfw.3.3.dylib,
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Release/libGLAD.a",
-					"-lyaml-cpp",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Release/libtinyfiledialogs.a",
-					"$(inherited)",
-				);
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = CustomRenderer;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				SYSTEM_HEADER_SEARCH_PATHS = (
-					/usr/local/include,
-					"$(inherited)",
-				);
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = Release;
-		};
-		3036A3F0D89343F98583252C /* RelWithDebInfo */ = {
+		0052640443B641C08F773CDA /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
@@ -926,9 +663,32 @@
 				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
 			};
-			name = RelWithDebInfo;
+			name = MinSizeRel;
 		};
-		361F6050BE284E4B90DD8B8F /* MinSizeRel */ = {
+		029F8EC43D2140D9874F4F5A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Debug;
+		};
+		126E027F7AB541FBADC2AE13 /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -949,9 +709,32 @@
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
 			};
+			name = RelWithDebInfo;
+		};
+		14A0274EC6C84C85A1608E30 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
 			name = MinSizeRel;
 		};
-		522FF4A12B0D48C595EC954D /* RelWithDebInfo */ = {
+		254269A727194C489F291190 /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -959,7 +742,7 @@
 				EXECUTABLE_SUFFIX = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
 					"$(inherited)",
@@ -988,7 +771,15 @@
 					/usr/local/lib,
 					"$(inherited)",
 				);
-				OTHER_CPLUSPLUSFLAGS = "       '-std=c++17' ";
+				OTHER_CPLUSPLUSFLAGS = (
+					"'-march=native'",
+					"-flto",
+					"-funroll-loops",
+					"'-std=c++17'",
+					"-Xpreprocessor",
+					"-fopenmp",
+					"-I/usr/local/opt/libomp/include",
+				);
 				OTHER_LDFLAGS = (
 					"-Wl,-search_paths_first",
 					"-Wl,-headerpad_max_install_names",
@@ -996,6 +787,7 @@
 					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/RelWithDebInfo/libGLAD.a",
 					"-lyaml-cpp",
 					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/RelWithDebInfo/libtinyfiledialogs.a",
+					/usr/local/opt/libomp/lib/libomp.dylib,
 					"$(inherited)",
 				);
 				OTHER_REZFLAGS = "";
@@ -1011,249 +803,7 @@
 			};
 			name = RelWithDebInfo;
 		};
-		58A386217A15471D859C9AB4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = lib;
-				EXECUTABLE_SUFFIX = .a;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
-					"$(inherited)",
-				);
-				INSTALL_PATH = "";
-				LIBRARY_STYLE = STATIC;
-				OTHER_CFLAGS = "  $(inherited)";
-				OTHER_LIBTOOLFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = GLAD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = Debug;
-		};
-		7F5B564E5A844BA1BE33D7FA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " $(inherited)";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = Debug;
-		};
-		817F3A4E4F4F471C916A1F5E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " $(inherited)";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = Release;
-		};
-		81EB353FB1FC473698E4D3E3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " $(inherited)";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = Debug;
-		};
-		83F36E03427B44619FC82C0A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
-			};
-			name = Release;
-		};
-		8438F2B715864ED59C0E33A3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = lib;
-				EXECUTABLE_SUFFIX = .a;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
-					"$(inherited)",
-				);
-				INSTALL_PATH = "";
-				LIBRARY_STYLE = STATIC;
-				OTHER_CFLAGS = "  $(inherited)";
-				OTHER_LIBTOOLFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = GLAD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = Release;
-		};
-		87F27C48BD034EA3AEE9A1F6 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
-			};
-			name = MinSizeRel;
-		};
-		8F371F9D4E744B218E559E56 /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INSTALL_PATH = "";
-				OTHER_LDFLAGS = " $(inherited)";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = RelWithDebInfo;
-		};
-		9A43A5D735704200AB3BB5BE /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = lib;
-				EXECUTABLE_SUFFIX = .a;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
-					"$(inherited)",
-				);
-				INSTALL_PATH = "";
-				LIBRARY_STYLE = STATIC;
-				OTHER_CFLAGS = "  $(inherited)";
-				OTHER_LIBTOOLFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = GLAD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = "$(inherited)";
-			};
-			name = RelWithDebInfo;
-		};
-		AB5258FE160F4DEC815DA8E9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
-				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
-			};
-			name = Debug;
-		};
-		C778C452854C4B21A7E17A2C /* MinSizeRel */ = {
+		2D6B921CF2934DA9A5C543B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1291,9 +841,9 @@
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
 			};
-			name = MinSizeRel;
+			name = Debug;
 		};
-		CBD0917444624BAE9693B8D0 /* MinSizeRel */ = {
+		3943E4DBC5E34488AEED0360 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1325,15 +875,15 @@
 				OTHER_CFLAGS = "  $(inherited)";
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = GLAD;
+				PRODUCT_NAME = tinyfiledialogs;
 				SECTORDER_FLAGS = "";
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
 			};
-			name = MinSizeRel;
+			name = Release;
 		};
-		DAC9B09B7CD9491A81B7DAFA /* MinSizeRel */ = {
+		4F24E18C61024FDDBAC6373A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1341,7 +891,7 @@
 				EXECUTABLE_SUFFIX = "";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
 					"$(inherited)",
@@ -1370,14 +920,23 @@
 					/usr/local/lib,
 					"$(inherited)",
 				);
-				OTHER_CPLUSPLUSFLAGS = "       '-std=c++17' ";
+				OTHER_CPLUSPLUSFLAGS = (
+					"'-march=native'",
+					"-flto",
+					"-funroll-loops",
+					"'-std=c++17'",
+					"-Xpreprocessor",
+					"-fopenmp",
+					"-I/usr/local/opt/libomp/include",
+				);
 				OTHER_LDFLAGS = (
 					"-Wl,-search_paths_first",
 					"-Wl,-headerpad_max_install_names",
 					/usr/local/lib/libglfw.3.3.dylib,
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/MinSizeRel/libGLAD.a",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Debug/libGLAD.a",
 					"-lyaml-cpp",
-					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/MinSizeRel/libtinyfiledialogs.a",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Debug/libtinyfiledialogs.a",
+					/usr/local/opt/libomp/lib/libomp.dylib,
 					"$(inherited)",
 				);
 				OTHER_REZFLAGS = "";
@@ -1391,9 +950,155 @@
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
 			};
-			name = MinSizeRel;
+			name = Debug;
 		};
-		E0AA8B4E9A604A9CA084C1B9 /* Debug */ = {
+		51AB056215654FAF8C873836 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
+			};
+			name = RelWithDebInfo;
+		};
+		6CE09FD0B0F8437BA33958F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		6D80489829A941A5BEF88D37 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "  $(inherited)";
+				OTHER_LIBTOOLFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GLAD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = RelWithDebInfo;
+		};
+		7F776BE592AB415E9DE1E62A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Debug;
+		};
+		813965BFC4AD49B39A7835D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
+			};
+			name = Debug;
+		};
+		9E81D1E8E3E443CD99658FE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "  $(inherited)";
+				OTHER_LIBTOOLFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GLAD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Debug;
+		};
+		A075F95217BA42BBA5C43FE9 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1431,73 +1136,410 @@
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
 			};
-			name = Debug;
+			name = MinSizeRel;
+		};
+		A107012F6E7C4658B9101121 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/local/lib,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
+					/usr/local/lib,
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"'-march=native'",
+					"-flto",
+					"-funroll-loops",
+					"'-std=c++17'",
+					"-Xpreprocessor",
+					"-fopenmp",
+					"-I/usr/local/opt/libomp/include",
+				);
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					/usr/local/lib/libglfw.3.3.dylib,
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Release/libGLAD.a",
+					"-lyaml-cpp",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/Release/libtinyfiledialogs.a",
+					/usr/local/opt/libomp/lib/libomp.dylib,
+					"$(inherited)",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CustomRenderer;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					"$(inherited)",
+				);
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		ACF750C6F8644EFBA4CCEA3A /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "  $(inherited)";
+				OTHER_LIBTOOLFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = tinyfiledialogs;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = RelWithDebInfo;
+		};
+		AEC1D55119574109BBAE32D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk;
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/build";
+			};
+			name = Release;
+		};
+		B36203839BB942E8866DE487 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = MinSizeRel;
+		};
+		B71888EDA15D4C88AA132C92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "  $(inherited)";
+				OTHER_LIBTOOLFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GLAD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		CD593E69411E48F9996F9388 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/local/lib,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/lib/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)",
+					/usr/local/lib,
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"'-march=native'",
+					"-flto",
+					"-funroll-loops",
+					"'-std=c++17'",
+					"-Xpreprocessor",
+					"-fopenmp",
+					"-I/usr/local/opt/libomp/include",
+				);
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					/usr/local/lib/libglfw.3.3.dylib,
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/MinSizeRel/libGLAD.a",
+					"-lyaml-cpp",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build/MinSizeRel/libtinyfiledialogs.a",
+					/usr/local/opt/libomp/lib/libomp.dylib,
+					"$(inherited)",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CustomRenderer;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					"$(inherited)",
+				);
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = MinSizeRel;
+		};
+		E466EC770F834C65890E155C /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = RelWithDebInfo;
+		};
+		EF7C94A701424FE38CBB9228 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		F745C495D070421A91EF5445 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Vector",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Versor",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Rotation",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Point",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Math/Matrix",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Core",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include/imgui",
+					"/Users/davidepaollilo/Workspaces/C++/CustomRenderer/include",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "  $(inherited)";
+				OTHER_LIBTOOLFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = GLAD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = MinSizeRel;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		096AF645372840B3B33F631E /* Build configuration list for PBXProject "CustomRenderer" */ = {
+		04238DAE0F244FE9A4667EF4 /* Build configuration list for PBXNativeTarget "CustomRenderer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AB5258FE160F4DEC815DA8E9 /* Debug */,
-				83F36E03427B44619FC82C0A /* Release */,
-				87F27C48BD034EA3AEE9A1F6 /* MinSizeRel */,
-				3036A3F0D89343F98583252C /* RelWithDebInfo */,
+				4F24E18C61024FDDBAC6373A /* Debug */,
+				A107012F6E7C4658B9101121 /* Release */,
+				CD593E69411E48F9996F9388 /* MinSizeRel */,
+				254269A727194C489F291190 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		3BCB29D63D5F4B699B4E70C3 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+		0E8EB80272BC4BA7A9634159 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7F5B564E5A844BA1BE33D7FA /* Debug */,
-				24527C3C87FA488DA458CE9D /* Release */,
-				09A54A79A36E4EF2BBC2DAF3 /* MinSizeRel */,
-				8F371F9D4E744B218E559E56 /* RelWithDebInfo */,
+				7F776BE592AB415E9DE1E62A /* Debug */,
+				EF7C94A701424FE38CBB9228 /* Release */,
+				B36203839BB942E8866DE487 /* MinSizeRel */,
+				126E027F7AB541FBADC2AE13 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		5B69A10B24374C5EA6AB8B04 /* Build configuration list for PBXNativeTarget "GLAD" */ = {
+		22D8560A946349A0BABAC1B0 /* Build configuration list for PBXNativeTarget "tinyfiledialogs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				58A386217A15471D859C9AB4 /* Debug */,
-				8438F2B715864ED59C0E33A3 /* Release */,
-				CBD0917444624BAE9693B8D0 /* MinSizeRel */,
-				9A43A5D735704200AB3BB5BE /* RelWithDebInfo */,
+				2D6B921CF2934DA9A5C543B5 /* Debug */,
+				3943E4DBC5E34488AEED0360 /* Release */,
+				A075F95217BA42BBA5C43FE9 /* MinSizeRel */,
+				ACF750C6F8644EFBA4CCEA3A /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		5FAEAB4CBC6A421AB38699DE /* Build configuration list for PBXNativeTarget "CustomRenderer" */ = {
+		4694A92695BE412DB98632DD /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				09932816E13B4C5493BD49EE /* Debug */,
-				289025AC779D4E6F8DDB7A09 /* Release */,
-				DAC9B09B7CD9491A81B7DAFA /* MinSizeRel */,
-				522FF4A12B0D48C595EC954D /* RelWithDebInfo */,
+				029F8EC43D2140D9874F4F5A /* Debug */,
+				6CE09FD0B0F8437BA33958F1 /* Release */,
+				14A0274EC6C84C85A1608E30 /* MinSizeRel */,
+				E466EC770F834C65890E155C /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		5FF5A7C1C3294B2B83E9102E /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+		C17D4BE496A54DD5A1F0A0BA /* Build configuration list for PBXNativeTarget "GLAD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				81EB353FB1FC473698E4D3E3 /* Debug */,
-				817F3A4E4F4F471C916A1F5E /* Release */,
-				361F6050BE284E4B90DD8B8F /* MinSizeRel */,
-				0475FB6C6C214F2283B64CBE /* RelWithDebInfo */,
+				9E81D1E8E3E443CD99658FE3 /* Debug */,
+				B71888EDA15D4C88AA132C92 /* Release */,
+				F745C495D070421A91EF5445 /* MinSizeRel */,
+				6D80489829A941A5BEF88D37 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		A6A5F45F2064429A93999B24 /* Build configuration list for PBXNativeTarget "tinyfiledialogs" */ = {
+		E0D1E7D5B68E43E6815A6E25 /* Build configuration list for PBXProject "CustomRenderer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E0AA8B4E9A604A9CA084C1B9 /* Debug */,
-				1062B2B985DC43448B120A5F /* Release */,
-				C778C452854C4B21A7E17A2C /* MinSizeRel */,
-				24F8B8C2D000444F8FC9A17E /* RelWithDebInfo */,
+				813965BFC4AD49B39A7835D2 /* Debug */,
+				AEC1D55119574109BBAE32D4 /* Release */,
+				0052640443B641C08F773CDA /* MinSizeRel */,
+				51AB056215654FAF8C873836 /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
