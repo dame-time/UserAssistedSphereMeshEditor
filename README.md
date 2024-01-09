@@ -73,5 +73,5 @@ A huge thank to Marco Tarini, my professor, which guided me through every challe
 
 ---
 
-For more details about our research, please refer to our paper: (https://diglib.eg.org/handle/10.2312/stag20231303)[User-assisted Sphere-mesh Construction]
+For more details about our research, please refer to our paper: [User-assisted Sphere-mesh Construction](https://diglib.eg.org/handle/10.2312/stag20231303)
 
