@@ -40,7 +40,8 @@ namespace Renderer
                 queueIdI = other.queueIdI;
                 queueIdJ = other.queueIdJ;
                 
-                isErrorCorrectionQuadricSet = false;
+                isErrorCorrectionQuadricSet = other.isErrorCorrectionQuadricSet;
+                errorCorrectionQuadric = other.errorCorrectionQuadric;
             }
             
             bool operator < (const CollapsableEdge& rhs) const;

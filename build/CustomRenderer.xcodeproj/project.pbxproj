@@ -668,6 +668,7 @@
 		029F8EC43D2140D9874F4F5A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -681,7 +682,10 @@
 				OTHER_LDFLAGS = " $(inherited)";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = ZERO_CHECK;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -714,6 +718,7 @@
 		14A0274EC6C84C85A1608E30 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -727,7 +732,10 @@
 				OTHER_LDFLAGS = " $(inherited)";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = ZERO_CHECK;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -737,6 +745,7 @@
 		254269A727194C489F291190 /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = "";
 				EXECUTABLE_SUFFIX = "";
@@ -792,7 +801,10 @@
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = CustomRenderer;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				SYSTEM_HEADER_SEARCH_PATHS = (
 					/usr/local/include,
@@ -806,6 +818,7 @@
 		2D6B921CF2934DA9A5C543B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
@@ -836,7 +849,10 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = tinyfiledialogs;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -846,6 +862,7 @@
 		3943E4DBC5E34488AEED0360 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
@@ -876,7 +893,10 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = tinyfiledialogs;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -886,6 +906,7 @@
 		4F24E18C61024FDDBAC6373A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = "";
 				EXECUTABLE_SUFFIX = "";
@@ -941,7 +962,10 @@
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = CustomRenderer;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				SYSTEM_HEADER_SEARCH_PATHS = (
 					/usr/local/include,
@@ -965,6 +989,7 @@
 		6CE09FD0B0F8437BA33958F1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -978,7 +1003,10 @@
 				OTHER_LDFLAGS = " $(inherited)";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = ZERO_CHECK;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -988,6 +1016,7 @@
 		6D80489829A941A5BEF88D37 /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
@@ -1018,7 +1047,10 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = GLAD;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -1061,6 +1093,7 @@
 		9E81D1E8E3E443CD99658FE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
@@ -1091,7 +1124,10 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = GLAD;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -1101,6 +1137,7 @@
 		A075F95217BA42BBA5C43FE9 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
@@ -1131,7 +1168,10 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = tinyfiledialogs;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -1141,6 +1181,7 @@
 		A107012F6E7C4658B9101121 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = "";
 				EXECUTABLE_SUFFIX = "";
@@ -1196,7 +1237,10 @@
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = CustomRenderer;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				SYSTEM_HEADER_SEARCH_PATHS = (
 					/usr/local/include,
@@ -1210,6 +1254,7 @@
 		ACF750C6F8644EFBA4CCEA3A /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
@@ -1240,7 +1285,10 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = tinyfiledialogs;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -1283,6 +1331,7 @@
 		B71888EDA15D4C88AA132C92 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
@@ -1313,7 +1362,10 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = GLAD;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -1323,6 +1375,7 @@
 		CD593E69411E48F9996F9388 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = "";
 				EXECUTABLE_SUFFIX = "";
@@ -1378,7 +1431,10 @@
 				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = CustomRenderer;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				SYSTEM_HEADER_SEARCH_PATHS = (
 					/usr/local/include,
@@ -1392,6 +1448,7 @@
 		E466EC770F834C65890E155C /* RelWithDebInfo */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -1405,7 +1462,10 @@
 				OTHER_LDFLAGS = " $(inherited)";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = ZERO_CHECK;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";
@@ -1438,6 +1498,7 @@
 		F745C495D070421A91EF5445 /* MinSizeRel */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				EXECUTABLE_SUFFIX = .a;
@@ -1468,7 +1529,10 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = GLAD;
+				SDKROOT = macosx14.2;
 				SECTORDER_FLAGS = "";
+				SUPPORTED_PLATFORMS = "xrsimulator xros watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
+				SUPPORTS_MACCATALYST = YES;
 				SYMROOT = "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/build";
 				USE_HEADERMAP = NO;
 				WARNING_CFLAGS = "$(inherited)";

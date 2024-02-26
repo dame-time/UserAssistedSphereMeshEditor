@@ -182,49 +182,6 @@ namespace Renderer {
                     std::swap(newEdge.queueIdI, newEdge.queueIdJ);
                 }
                 
-                // TODO: Add to the edge the quadric of the eventually included "non contained" vertex
-                Sphere newSphere = Sphere();
-                newSphere.color = Math::Vector3(1, 0, 0);
-                newSphere.addQuadric(sphere[newEdge.idxI].getSphereQuadric());
-                newSphere.addQuadric(sphere[newEdge.idxJ].getSphereQuadric());
-                
-                newSphere.region = sphere[newEdge.idxI].region;
-                newSphere.region.join(sphere[newEdge.idxJ].region);
-                
-                Quadric errorQuadric = Quadric();
-                for (auto& vertex : referenceMesh->vertices)
-                    if (newSphere.intersectsVertex(vertex.position))
-                    {
-                        bool isAlreadyContained = false;
-                        for (auto& ownVertex : sphere[newEdge.idxI].vertices)
-                        {
-                            if (ownVertex.position == vertex.position)
-                            {
-                                isAlreadyContained = true;
-                                break;
-                            }
-                        }
-                        
-                        if (isAlreadyContained)
-                            break;
-                        
-                        for (auto& ownVertex : sphere[newEdge.idxJ].vertices)
-                        {
-                            if (ownVertex.position == vertex.position)
-                            {
-                                isAlreadyContained = true;
-                                break;
-                            }
-                        }
-                        
-                        if (isAlreadyContained)
-                            break;
-                        
-                        newEdge.updateCorrectionErrorQuadric(Quadric::initializeQuadricFromVertex(vertex, 0.1 * BDDSize));
-//                        auto q = Quadric::initializeQuadricFromVertex(vertex, 0.1 * BDDSize) * 1e-6;
-//                        newSphere.addQuadric(q);
-                    }
-                
                 newEdge.updateError();
                 edgeQueue.push(newEdge);
             }
@@ -360,14 +317,65 @@ namespace Renderer {
             return CollapsableEdge();
         
         CollapsableEdge topEdge = edgeQueue.top((int)sphere.size());
+        edgeQueue.pop();
         
         if (topEdge.idxI == -1 || topEdge.idxJ == -1)
             return CollapsableEdge();
         
-        edgeQueue.pop();
-        
-        if (topEdge.i.region.intervals.size() == 0 || topEdge.j.region.intervals.size() == 0)
-            std::cerr << "Selected sphere has an invalid region!" << std::endl;
+        while (!topEdge.isErrorCorrectionQuadricSet)
+        {
+            Sphere newSphere = Sphere();
+            newSphere.color = Math::Vector3(1, 0, 0);
+            newSphere.addQuadric(sphere[topEdge.idxI].getSphereQuadric());
+            newSphere.addQuadric(sphere[topEdge.idxJ].getSphereQuadric());
+            
+            newSphere.region = sphere[topEdge.idxI].region;
+            newSphere.region.join(sphere[topEdge.idxJ].region);
+            
+            auto startError = topEdge.error;
+            for (auto& vertex : referenceMesh->vertices)
+                if (newSphere.intersectsVertex(vertex.position))
+                {
+                    bool isAlreadyContained = false;
+                    for (auto& ownVertex : sphere[topEdge.idxI].vertices)
+                    {
+                        if (ownVertex.position == vertex.position)
+                        {
+                            isAlreadyContained = true;
+                            break;
+                        }
+                    }
+                    
+                    if (isAlreadyContained)
+                        break;
+                    
+                    for (auto& ownVertex : sphere[topEdge.idxJ].vertices)
+                        if (ownVertex.position == vertex.position)
+                        {
+                            isAlreadyContained = true;
+                            break;
+                        }
+                    
+                    if (isAlreadyContained)
+                        break;
+                    
+                    topEdge.updateCorrectionErrorQuadric(Quadric::initializeQuadricFromVertex(vertex, 0.1 * BDDSize));
+                }
+            topEdge.updateError();
+            topEdge.isErrorCorrectionQuadricSet = true;
+            
+            if (topEdge.error == startError)
+                return topEdge;
+            
+            edgeQueue.push(topEdge);
+//            std::cout << topEdge << std::endl;
+            topEdge = edgeQueue.top((int)sphere.size());
+//            std::cout << topEdge << std::endl;
+            edgeQueue.pop();
+            
+            if (topEdge.idxI == -1 || topEdge.idxJ == -1)
+                return CollapsableEdge();
+        }
         
         return topEdge;
     }
@@ -1008,7 +1016,7 @@ namespace Renderer {
         
         Sphere newSphere = collapseEdgeIntoSphere(e);
         
-        checkSphereIntersections(newSphere);
+//        checkSphereIntersections(newSphere);
         
         sphere[e.idxI] = newSphere;
         sphere[e.idxJ] = sphere.back();
@@ -1020,7 +1028,6 @@ namespace Renderer {
 
         removeDegenerates();
 //        clearSphereMesh();
-//        std::cout << "Cleared Sphere Mesh" << std::endl;
         updateEdgeQueue(e);
         
         return true;

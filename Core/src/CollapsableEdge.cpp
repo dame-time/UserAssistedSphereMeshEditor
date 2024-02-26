@@ -76,6 +76,7 @@ namespace Renderer
             << ", error: " << edge.error
             << ", queueIdI: " << edge.queueIdI
             << ", queueIdJ: " << edge.queueIdJ
+            << ", isErrorCorrectionQuadricSet: " << edge.isErrorCorrectionQuadricSet
             << " }";
         
         return os;

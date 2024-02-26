@@ -1,5 +1,7 @@
 #include <Quaternion.hpp>
 
+#include <assert.h>
+
 namespace Math {
     Quaternion::Quaternion() : immaginary(_immaginary), real(_real) {
         this->_immaginary = Vector3(0, 0, 0);
