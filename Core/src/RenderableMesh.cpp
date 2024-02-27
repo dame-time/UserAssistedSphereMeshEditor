@@ -316,7 +316,7 @@ namespace Renderer {
     }
 
     int RenderableMesh::getID() {
-        return this->_ID;
+        return this->ID;
     }
 
     Math::Scalar RenderableMesh::getMeshRadius() {
@@ -343,13 +343,13 @@ namespace Renderer {
         
         int random_number = distr(generator);
         
-        this->_ID = random_number;
+        this->ID = random_number;
     }
 
     void RenderableMesh::updateBBOX() {
         bbox = AABB();
-        for (int i = 0; i < vertices.size(); i++)
-            bbox.addPoint(vertices[i].position);
+        for (auto & vertex : vertices)
+            bbox.addPoint(vertex.position);
     }
 
     Math::Matrix4 RenderableMesh::getModel() {

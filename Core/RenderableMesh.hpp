@@ -54,7 +54,7 @@ namespace Renderer {
                     minCorner[i] = p[i];
         }
         
-        Math::Vector3 BDD() const
+        [[nodiscard]] Math::Vector3 BDD() const
         {
             return maxCorner - minCorner;
         }
@@ -62,7 +62,7 @@ namespace Renderer {
 
     class RenderableMesh {
         private:
-            int _ID;
+            int ID;
         
             bool isPickable;
         
@@ -120,9 +120,11 @@ namespace Renderer {
                 this->VBO = other.VBO;
                 this->EBO = other.EBO;
                 
-                this->_ID = other._ID;
+                this->ID = other.ID;
                 this->isWireframe = other.isWireframe;
                 this->bbox = other.bbox;
+				
+				return *this;
             }
         
             int getID();

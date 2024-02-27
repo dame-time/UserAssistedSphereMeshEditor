@@ -1,5 +1,5 @@
 /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles/GLAD.dir
 /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles/tinyfiledialogs.dir
-/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles/CustomRenderer.dir
+/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles/SphereMeshEditor.dir
 /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles/edit_cache.dir
 /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles/rebuild_cache.dir

@@ -47,7 +47,7 @@ namespace Renderer
     class SphereMesh
     {
         private:
-            Math::Scalar EPSILON;
+            Math::Scalar EPSILON{};
         
             std::vector<Sphere> initialSpheres;
             UpdatablePQ edgeQueue;
@@ -55,8 +55,8 @@ namespace Renderer
             std::vector<Triangle> triangle;
             std::vector<Edge> edge;
         
-            int perSphereVertices;
-            int renderCalls;
+            int perSphereVertices{};
+            int renderCalls{};
         
             RenderableMesh* referenceMesh;
         
@@ -88,15 +88,15 @@ namespace Renderer
             Sphere collapseEdgeIntoSphere(const CollapsableEdge& edgeToCollapse);
             
             void updateEdgesAfterCollapse(int i, int j);
-            void updateTrianglessAfterCollapse(int i, int j);
+            void updateTrianglesAfterCollapse(int i, int j);
             void removeDegenerates();
             void updateEdgeQueue(const CollapsableEdge& collapsedEdge);
             
             void drawSpheresOverEdge(const Edge &e, int nSpheres = 4, Math::Scalar rescaleRadii = 1.0, Math::Scalar minRadiiScale = 0.3);
             void drawSpheresOverTriangle(const Triangle& t, int nSpheres = 4, Math::Scalar size = 1.0, Math::Scalar minRadiiScale = 0.3);
-            
-            Math::Vector3 getTriangleCentroid(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
-            Math::Vector3 getTriangleNormal(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
+	    
+	    [[maybe_unused]] static Math::Vector3 getTriangleCentroid(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
+            static Math::Vector3 getTriangleNormal(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
         
             void checkSphereIntersections(Sphere& s);
         
@@ -127,8 +127,8 @@ namespace Renderer
         
             void setEpsilon(const Math::Scalar& e);
         
-            int getPerSphereVertexCount();
-            int getRenderCalls();
+            int getPerSphereVertexCount() const;
+            int getRenderCalls() const;
             int getTriangleSize();
             int getEdgeSize();
         

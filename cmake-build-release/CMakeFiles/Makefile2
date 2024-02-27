@@ -65,7 +65,7 @@ CMAKE_BINARY_DIR = /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-b
 # The main recursive "all" target.
 all: CMakeFiles/GLAD.dir/all
 all: CMakeFiles/tinyfiledialogs.dir/all
-all: CMakeFiles/CustomRenderer.dir/all
+all: CMakeFiles/SphereMeshEditor.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -75,7 +75,7 @@ preinstall:
 # The main recursive "clean" target.
 clean: CMakeFiles/GLAD.dir/clean
 clean: CMakeFiles/tinyfiledialogs.dir/clean
-clean: CMakeFiles/CustomRenderer.dir/clean
+clean: CMakeFiles/SphereMeshEditor.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -85,7 +85,7 @@ clean: CMakeFiles/CustomRenderer.dir/clean
 CMakeFiles/GLAD.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles --progress-num=39,40 "Built target GLAD"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles --progress-num=1,2 "Built target GLAD"
 .PHONY : CMakeFiles/GLAD.dir/all
 
 # Build rule for subdir invocation for target.
@@ -131,31 +131,31 @@ CMakeFiles/tinyfiledialogs.dir/clean:
 .PHONY : CMakeFiles/tinyfiledialogs.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/CustomRenderer.dir
+# Target rules for target CMakeFiles/SphereMeshEditor.dir
 
 # All Build rule for target.
-CMakeFiles/CustomRenderer.dir/all: CMakeFiles/GLAD.dir/all
-CMakeFiles/CustomRenderer.dir/all: CMakeFiles/tinyfiledialogs.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38 "Built target CustomRenderer"
-.PHONY : CMakeFiles/CustomRenderer.dir/all
+CMakeFiles/SphereMeshEditor.dir/all: CMakeFiles/GLAD.dir/all
+CMakeFiles/SphereMeshEditor.dir/all: CMakeFiles/tinyfiledialogs.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40 "Built target SphereMeshEditor"
+.PHONY : CMakeFiles/SphereMeshEditor.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/CustomRenderer.dir/rule: cmake_check_build_system
+CMakeFiles/SphereMeshEditor.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles 42
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/CustomRenderer.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/SphereMeshEditor.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles 0
-.PHONY : CMakeFiles/CustomRenderer.dir/rule
+.PHONY : CMakeFiles/SphereMeshEditor.dir/rule
 
 # Convenience name for target.
-CustomRenderer: CMakeFiles/CustomRenderer.dir/rule
-.PHONY : CustomRenderer
+SphereMeshEditor: CMakeFiles/SphereMeshEditor.dir/rule
+.PHONY : SphereMeshEditor
 
 # clean rule for target.
-CMakeFiles/CustomRenderer.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/clean
-.PHONY : CMakeFiles/CustomRenderer.dir/clean
+CMakeFiles/SphereMeshEditor.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/clean
+.PHONY : CMakeFiles/SphereMeshEditor.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

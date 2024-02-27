@@ -16,15 +16,16 @@
 #include "imgui_impl_glfw.h"
 
 #include <iostream>
+#include <utility>
 
 namespace Renderer {
     struct Console
     {
-        char InputBuf[256];
+        char InputBuf[256]{};
         struct LogItem {
             std::string Text;
             ImVec4 Color;
-            LogItem(const std::string& text, const ImVec4& color) : Text(text), Color(color) {}
+            LogItem(std::string text, const ImVec4& color) : Text(std::move(text)), Color(color) {}
         };
         std::vector<LogItem> Items;
 
@@ -40,7 +41,7 @@ namespace Renderer {
 
         void AddLog(const std::string& log, ImVec4 color = ImVec4(1.0f, 1.0f, 1.0f, 1.0f))
         {
-            Items.push_back(LogItem(log, color));
+            Items.emplace_back(log, color);
         }
 
         void Draw(const char* title, bool* p_open)
@@ -54,9 +55,9 @@ namespace Renderer {
             ImGui::BeginChild("scrolling", ImVec2(0,0), false, ImGuiWindowFlags_HorizontalScrollbar);
             if (copy) ImGui::LogToClipboard();
 
-            for (int i = 0; i < Items.size(); i++) {
-                ImGui::PushStyleColor(ImGuiCol_Text, Items[i].Color);
-                ImGui::TextUnformatted(Items[i].Text.c_str());
+            for (auto & Item : Items) {
+                ImGui::PushStyleColor(ImGuiCol_Text, Item.Color);
+                ImGui::TextUnformatted(Item.Text.c_str());
                 ImGui::PopStyleColor();
             }
 
@@ -72,7 +73,7 @@ namespace Renderer {
             static constexpr Math::Scalar UNKNOWN = -666;
             GLFWwindow* window;
         
-            Sphere* pickedMesh;
+            Sphere* pickedMesh{};
             std::vector<Sphere*> pickedMeshes;
         
             float rotationSensitivity;
@@ -99,31 +100,31 @@ namespace Renderer {
         
             unsigned int SCR_WIDTH;
             unsigned int SCR_HEIGHT;
-            Renderer::Shader* mainShader;
-            Renderer::Shader* sphereShader;
-            Renderer::RenderableMesh* mesh;
-            Renderer::SphereMesh* sm;
+            Renderer::Shader* mainShader{};
+            Renderer::Shader* sphereShader{};
+            Renderer::RenderableMesh* mesh{};
+            Renderer::SphereMesh* sm{};
             Renderer::Camera* mainCamera;
             bool commandPressed;
-            float lastX, lastY;
+            Math::Scalar lastX, lastY;
         
             bool renderSM;
             bool renderWFmesh;
         
             bool isCameraPerspective;
         
-            bool renderVertices;
+            bool renderVertices{};
             int renderFullSMWithNSpheres;
             bool renderConnectivity;
-            float sphereSize;
+            float sphereSize{};
         
             std::vector<std::vector<Sphere>> sphereBuffer;
             
             int connectivitySpheresPerEdge;
             Math::Scalar connectivitySpheresSize;
         
-            float deltaTime;
-            float lastFrame;
+            Math::Scalar deltaTime;
+            Math::Scalar lastFrame;
         
             void processInput();
         
@@ -138,7 +139,7 @@ namespace Renderer {
             void displayWarningMessage(const std::string& message);
             void displayLogMessage(const std::string& message);
         
-            Math::Matrix4 getProjectionMatrix() const;
+            [[nodiscard]] Math::Matrix4 getProjectionMatrix() const;
 
             static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
             static void mouse_callback(GLFWwindow* window, double xpos, double ypos);

@@ -1,18 +1,4 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Release -S /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor -B /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release
--- The C compiler identification is AppleClang 15.0.0.15000100
--- The CXX compiler identification is AppleClang 15.0.0.15000100
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc - skipped
--- Detecting C compile features
--- Detecting C compile features - done
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /usr/bin/clang++ - skipped
--- Detecting CXX compile features
--- Detecting CXX compile features - done
--- Found OpenMP_CXX: -Xpreprocessor -fopenmp -I/usr/local/opt/libomp/include (found version "5.0") 
--- Found OpenMP: TRUE (found version "5.0") found components: CXX 
 -- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Camera.hpp
 -- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/CollapsableEdge.hpp
 -- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/ObjLoader.hpp
@@ -81,6 +67,6 @@
 -- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui_impl_opengl3.cpp
 -- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui_tables.cpp
 -- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui_widgets.cpp
--- Configuring done (6.6s)
--- Generating done (0.0s)
+-- Configuring done (0.9s)
+-- Generating done (0.1s)
 -- Build files have been written to: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release

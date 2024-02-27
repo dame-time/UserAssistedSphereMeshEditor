@@ -21,6 +21,7 @@
 #define FILE_UPLOAD_ICON "\xEF\x87\x89"
 #define SETTINGS_ICON "\xEF\x80\x93"
 
+// TODO: Define
 namespace Renderer {
 
     int Window::viewportH = 0;
@@ -51,8 +52,8 @@ namespace Renderer {
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     #endif
 
-        window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title.c_str(), NULL, NULL);
-        if (window == NULL)
+        window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title.c_str(), nullptr, nullptr);
+        if (window == nullptr)
         {
             std::cout << "Failed to create GLFW window" << std::endl;
             glfwTerminate();
@@ -89,14 +90,14 @@ namespace Renderer {
         io.Fonts->AddFontDefault();
 
         // Load the FontAwesome icon font
-        static const ImWchar icons_ranges[] = { 0xf000, 0xf3ff, 0 }; // Will cover your icon characters
+        static const ImWchar icons_ranges[] = { 0xf000, 0xf3ff, 0 };
         ImFontConfig icons_config;
         icons_config.MergeMode = true;
         icons_config.PixelSnapH = true;
 
         std::filesystem::path currentPath = std::filesystem::current_path();
-        auto parentPath = currentPath.parent_path().parent_path();
-
+        auto parentPath = currentPath.parent_path();
+		
         std::string fontPath = (parentPath.string() + "/Assets/Fonts/fa-Solid-900.ttf");
 
         if (!std::filesystem::exists(fontPath)) {
@@ -235,8 +236,8 @@ namespace Renderer {
         
         sm->renderSpheresOnly();
         if (renderVertices)
-            for (int i = 0; i < pickedMeshes.size(); i++)
-                sm->renderSphereVertices(pickedMeshes[i]->getID());
+            for (auto & pm : pickedMeshes)
+                sm->renderSphereVertices(pm->getID());
         
         if (renderFullSMWithNSpheres > 0)
             sm->renderWithNSpherePerEdge(renderFullSMWithNSpheres, sphereSize);
@@ -253,17 +254,23 @@ namespace Renderer {
             glfwSetWindowShouldClose(window, true);
         
         Math::Scalar cameraSpeed = scrollSpeed;
-        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-            if (isCameraPerspective)
-                mainCamera->translate(Math::Math::scalarPow(2, -deltaTime));
-            else
-                mainCamera->scale(Math::Math::scalarPow(2, -deltaTime));
-        
-        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-            if (isCameraPerspective)
-                mainCamera->translate(Math::Math::scalarPow(2, deltaTime));
-            else
-                mainCamera->scale(Math::Math::scalarPow(2, deltaTime));
+	    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	    {
+		    if (isCameraPerspective)
+			    mainCamera->translate(Math::Math::scalarPow(2, -deltaTime));
+		    
+		    else
+			    mainCamera->scale(Math::Math::scalarPow(2, -deltaTime));
+		    
+	    }
+	    
+	    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	    {
+		    if (isCameraPerspective)
+			    mainCamera->translate(Math::Math::scalarPow(2, deltaTime));
+		    else
+			    mainCamera->scale(Math::Math::scalarPow(2, deltaTime));
+	    }
         
         if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
             && (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
@@ -393,7 +400,7 @@ namespace Renderer {
 
         clipPos /= clipPos.coordinates.w;
 
-        return Math::Vector3(clipPos.coordinates.x, clipPos.coordinates.y, clipPos.coordinates.z);
+        return {clipPos.coordinates.x, clipPos.coordinates.y, clipPos.coordinates.z};
     }
 
     void Window::addSphereVectorToBuffer(const std::vector<Sphere>& spheres) {
@@ -409,7 +416,7 @@ namespace Renderer {
 
     void Window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
     {
-        Window* windowClassInstance = static_cast<Window*>(glfwGetWindowUserPointer(window));
+        auto* windowClassInstance = static_cast<Window*>(glfwGetWindowUserPointer(window));
         
         static bool isFilled = false;
         static bool isBlended = false;
@@ -744,7 +751,7 @@ namespace Renderer {
             }
             
             if (ImGui::MenuItem("UNDO", "Z")) {
-                if (sphereBuffer.size() > 0) {
+                if (!sphereBuffer.empty()) {
                     sm->sphere = sphereBuffer[sphereBuffer.size() - 1];
                     removeLastSphereVectorFromBuffer();
                     
@@ -894,7 +901,7 @@ namespace Renderer {
         Math::Vector3 wincoord = Math::Vector3(scaled_mouse_x, viewport[3] - scaled_mouse_y, mouse.coordinates.z);
         Math::Vector3 objcoord = Math::Vector3::unProject(wincoord, view, projection, Math::Vector4(viewport[0], viewport[1], viewport[2], viewport[3]));
 
-        return Math::Vector3(objcoord.coordinates.x, objcoord.coordinates.y, objcoord.coordinates.z);
+        return {objcoord.coordinates.x, objcoord.coordinates.y, objcoord.coordinates.z};
     }
 
     Math::Matrix4 Window::getProjectionMatrix() const
@@ -906,8 +913,8 @@ namespace Renderer {
         
         if (viewportW == 0 || viewportH == 0)
         {
-            viewportW = this->SCR_WIDTH;
-            viewportH = this->SCR_HEIGHT;
+            viewportW = SCR_WIDTH;
+            viewportH = SCR_HEIGHT;
         }
         
 //        std::cout << "Viewport: " << viewportW << "x" << viewportH << std::endl;
@@ -917,7 +924,7 @@ namespace Renderer {
 
     void Window::mouse_callback(GLFWwindow* window, double xpos, double ypos)
     {
-        Window* windowClassInstance = static_cast<Window*>(glfwGetWindowUserPointer(window));
+        auto* windowClassInstance = static_cast<Window*>(glfwGetWindowUserPointer(window));
         static GLfloat depth;
         
         Math::Vector3 pickedPoint = Math::Vector3();

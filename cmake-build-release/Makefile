@@ -143,24 +143,24 @@ tinyfiledialogs/fast:
 .PHONY : tinyfiledialogs/fast
 
 #=============================================================================
-# Target rules for targets named CustomRenderer
+# Target rules for targets named SphereMeshEditor
 
 # Build rule for target.
-CustomRenderer: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CustomRenderer
-.PHONY : CustomRenderer
+SphereMeshEditor: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SphereMeshEditor
+.PHONY : SphereMeshEditor
 
 # fast build rule for target.
-CustomRenderer/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/build
-.PHONY : CustomRenderer/fast
+SphereMeshEditor/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/build
+.PHONY : SphereMeshEditor/fast
 
 Core/src/Camera.o: Core/src/Camera.cpp.o
 .PHONY : Core/src/Camera.o
 
 # target to build an object file
 Core/src/Camera.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Camera.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.o
 .PHONY : Core/src/Camera.cpp.o
 
 Core/src/Camera.i: Core/src/Camera.cpp.i
@@ -168,7 +168,7 @@ Core/src/Camera.i: Core/src/Camera.cpp.i
 
 # target to preprocess a source file
 Core/src/Camera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Camera.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.i
 .PHONY : Core/src/Camera.cpp.i
 
 Core/src/Camera.s: Core/src/Camera.cpp.s
@@ -176,7 +176,7 @@ Core/src/Camera.s: Core/src/Camera.cpp.s
 
 # target to generate assembly for a file
 Core/src/Camera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Camera.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.s
 .PHONY : Core/src/Camera.cpp.s
 
 Core/src/CollapsableEdge.o: Core/src/CollapsableEdge.cpp.o
@@ -184,7 +184,7 @@ Core/src/CollapsableEdge.o: Core/src/CollapsableEdge.cpp.o
 
 # target to build an object file
 Core/src/CollapsableEdge.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/CollapsableEdge.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o
 .PHONY : Core/src/CollapsableEdge.cpp.o
 
 Core/src/CollapsableEdge.i: Core/src/CollapsableEdge.cpp.i
@@ -192,7 +192,7 @@ Core/src/CollapsableEdge.i: Core/src/CollapsableEdge.cpp.i
 
 # target to preprocess a source file
 Core/src/CollapsableEdge.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/CollapsableEdge.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.i
 .PHONY : Core/src/CollapsableEdge.cpp.i
 
 Core/src/CollapsableEdge.s: Core/src/CollapsableEdge.cpp.s
@@ -200,7 +200,7 @@ Core/src/CollapsableEdge.s: Core/src/CollapsableEdge.cpp.s
 
 # target to generate assembly for a file
 Core/src/CollapsableEdge.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/CollapsableEdge.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.s
 .PHONY : Core/src/CollapsableEdge.cpp.s
 
 Core/src/ObjLoader.o: Core/src/ObjLoader.cpp.o
@@ -208,7 +208,7 @@ Core/src/ObjLoader.o: Core/src/ObjLoader.cpp.o
 
 # target to build an object file
 Core/src/ObjLoader.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/ObjLoader.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/ObjLoader.cpp.o
 .PHONY : Core/src/ObjLoader.cpp.o
 
 Core/src/ObjLoader.i: Core/src/ObjLoader.cpp.i
@@ -216,7 +216,7 @@ Core/src/ObjLoader.i: Core/src/ObjLoader.cpp.i
 
 # target to preprocess a source file
 Core/src/ObjLoader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/ObjLoader.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/ObjLoader.cpp.i
 .PHONY : Core/src/ObjLoader.cpp.i
 
 Core/src/ObjLoader.s: Core/src/ObjLoader.cpp.s
@@ -224,7 +224,7 @@ Core/src/ObjLoader.s: Core/src/ObjLoader.cpp.s
 
 # target to generate assembly for a file
 Core/src/ObjLoader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/ObjLoader.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/ObjLoader.cpp.s
 .PHONY : Core/src/ObjLoader.cpp.s
 
 Core/src/Quadric.o: Core/src/Quadric.cpp.o
@@ -232,7 +232,7 @@ Core/src/Quadric.o: Core/src/Quadric.cpp.o
 
 # target to build an object file
 Core/src/Quadric.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Quadric.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric.cpp.o
 .PHONY : Core/src/Quadric.cpp.o
 
 Core/src/Quadric.i: Core/src/Quadric.cpp.i
@@ -240,7 +240,7 @@ Core/src/Quadric.i: Core/src/Quadric.cpp.i
 
 # target to preprocess a source file
 Core/src/Quadric.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Quadric.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric.cpp.i
 .PHONY : Core/src/Quadric.cpp.i
 
 Core/src/Quadric.s: Core/src/Quadric.cpp.s
@@ -248,7 +248,7 @@ Core/src/Quadric.s: Core/src/Quadric.cpp.s
 
 # target to generate assembly for a file
 Core/src/Quadric.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Quadric.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric.cpp.s
 .PHONY : Core/src/Quadric.cpp.s
 
 Core/src/Quadric2.o: Core/src/Quadric2.cpp.o
@@ -256,7 +256,7 @@ Core/src/Quadric2.o: Core/src/Quadric2.cpp.o
 
 # target to build an object file
 Core/src/Quadric2.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Quadric2.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric2.cpp.o
 .PHONY : Core/src/Quadric2.cpp.o
 
 Core/src/Quadric2.i: Core/src/Quadric2.cpp.i
@@ -264,7 +264,7 @@ Core/src/Quadric2.i: Core/src/Quadric2.cpp.i
 
 # target to preprocess a source file
 Core/src/Quadric2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Quadric2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric2.cpp.i
 .PHONY : Core/src/Quadric2.cpp.i
 
 Core/src/Quadric2.s: Core/src/Quadric2.cpp.s
@@ -272,7 +272,7 @@ Core/src/Quadric2.s: Core/src/Quadric2.cpp.s
 
 # target to generate assembly for a file
 Core/src/Quadric2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Quadric2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric2.cpp.s
 .PHONY : Core/src/Quadric2.cpp.s
 
 Core/src/Quadric3.o: Core/src/Quadric3.cpp.o
@@ -280,7 +280,7 @@ Core/src/Quadric3.o: Core/src/Quadric3.cpp.o
 
 # target to build an object file
 Core/src/Quadric3.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Quadric3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric3.cpp.o
 .PHONY : Core/src/Quadric3.cpp.o
 
 Core/src/Quadric3.i: Core/src/Quadric3.cpp.i
@@ -288,7 +288,7 @@ Core/src/Quadric3.i: Core/src/Quadric3.cpp.i
 
 # target to preprocess a source file
 Core/src/Quadric3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Quadric3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric3.cpp.i
 .PHONY : Core/src/Quadric3.cpp.i
 
 Core/src/Quadric3.s: Core/src/Quadric3.cpp.s
@@ -296,7 +296,7 @@ Core/src/Quadric3.s: Core/src/Quadric3.cpp.s
 
 # target to generate assembly for a file
 Core/src/Quadric3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Quadric3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric3.cpp.s
 .PHONY : Core/src/Quadric3.cpp.s
 
 Core/src/Region.o: Core/src/Region.cpp.o
@@ -304,7 +304,7 @@ Core/src/Region.o: Core/src/Region.cpp.o
 
 # target to build an object file
 Core/src/Region.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Region.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Region.cpp.o
 .PHONY : Core/src/Region.cpp.o
 
 Core/src/Region.i: Core/src/Region.cpp.i
@@ -312,7 +312,7 @@ Core/src/Region.i: Core/src/Region.cpp.i
 
 # target to preprocess a source file
 Core/src/Region.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Region.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Region.cpp.i
 .PHONY : Core/src/Region.cpp.i
 
 Core/src/Region.s: Core/src/Region.cpp.s
@@ -320,7 +320,7 @@ Core/src/Region.s: Core/src/Region.cpp.s
 
 # target to generate assembly for a file
 Core/src/Region.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Region.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Region.cpp.s
 .PHONY : Core/src/Region.cpp.s
 
 Core/src/RenderableMesh.o: Core/src/RenderableMesh.cpp.o
@@ -328,7 +328,7 @@ Core/src/RenderableMesh.o: Core/src/RenderableMesh.cpp.o
 
 # target to build an object file
 Core/src/RenderableMesh.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/RenderableMesh.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/RenderableMesh.cpp.o
 .PHONY : Core/src/RenderableMesh.cpp.o
 
 Core/src/RenderableMesh.i: Core/src/RenderableMesh.cpp.i
@@ -336,7 +336,7 @@ Core/src/RenderableMesh.i: Core/src/RenderableMesh.cpp.i
 
 # target to preprocess a source file
 Core/src/RenderableMesh.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/RenderableMesh.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/RenderableMesh.cpp.i
 .PHONY : Core/src/RenderableMesh.cpp.i
 
 Core/src/RenderableMesh.s: Core/src/RenderableMesh.cpp.s
@@ -344,7 +344,7 @@ Core/src/RenderableMesh.s: Core/src/RenderableMesh.cpp.s
 
 # target to generate assembly for a file
 Core/src/RenderableMesh.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/RenderableMesh.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/RenderableMesh.cpp.s
 .PHONY : Core/src/RenderableMesh.cpp.s
 
 Core/src/RenderableSphere.o: Core/src/RenderableSphere.cpp.o
@@ -352,7 +352,7 @@ Core/src/RenderableSphere.o: Core/src/RenderableSphere.cpp.o
 
 # target to build an object file
 Core/src/RenderableSphere.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/RenderableSphere.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/RenderableSphere.cpp.o
 .PHONY : Core/src/RenderableSphere.cpp.o
 
 Core/src/RenderableSphere.i: Core/src/RenderableSphere.cpp.i
@@ -360,7 +360,7 @@ Core/src/RenderableSphere.i: Core/src/RenderableSphere.cpp.i
 
 # target to preprocess a source file
 Core/src/RenderableSphere.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/RenderableSphere.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/RenderableSphere.cpp.i
 .PHONY : Core/src/RenderableSphere.cpp.i
 
 Core/src/RenderableSphere.s: Core/src/RenderableSphere.cpp.s
@@ -368,7 +368,7 @@ Core/src/RenderableSphere.s: Core/src/RenderableSphere.cpp.s
 
 # target to generate assembly for a file
 Core/src/RenderableSphere.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/RenderableSphere.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/RenderableSphere.cpp.s
 .PHONY : Core/src/RenderableSphere.cpp.s
 
 Core/src/ScopeTimer.o: Core/src/ScopeTimer.cpp.o
@@ -376,7 +376,7 @@ Core/src/ScopeTimer.o: Core/src/ScopeTimer.cpp.o
 
 # target to build an object file
 Core/src/ScopeTimer.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/ScopeTimer.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/ScopeTimer.cpp.o
 .PHONY : Core/src/ScopeTimer.cpp.o
 
 Core/src/ScopeTimer.i: Core/src/ScopeTimer.cpp.i
@@ -384,7 +384,7 @@ Core/src/ScopeTimer.i: Core/src/ScopeTimer.cpp.i
 
 # target to preprocess a source file
 Core/src/ScopeTimer.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/ScopeTimer.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/ScopeTimer.cpp.i
 .PHONY : Core/src/ScopeTimer.cpp.i
 
 Core/src/ScopeTimer.s: Core/src/ScopeTimer.cpp.s
@@ -392,7 +392,7 @@ Core/src/ScopeTimer.s: Core/src/ScopeTimer.cpp.s
 
 # target to generate assembly for a file
 Core/src/ScopeTimer.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/ScopeTimer.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/ScopeTimer.cpp.s
 .PHONY : Core/src/ScopeTimer.cpp.s
 
 Core/src/Sphere.o: Core/src/Sphere.cpp.o
@@ -400,7 +400,7 @@ Core/src/Sphere.o: Core/src/Sphere.cpp.o
 
 # target to build an object file
 Core/src/Sphere.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Sphere.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Sphere.cpp.o
 .PHONY : Core/src/Sphere.cpp.o
 
 Core/src/Sphere.i: Core/src/Sphere.cpp.i
@@ -408,7 +408,7 @@ Core/src/Sphere.i: Core/src/Sphere.cpp.i
 
 # target to preprocess a source file
 Core/src/Sphere.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Sphere.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Sphere.cpp.i
 .PHONY : Core/src/Sphere.cpp.i
 
 Core/src/Sphere.s: Core/src/Sphere.cpp.s
@@ -416,7 +416,7 @@ Core/src/Sphere.s: Core/src/Sphere.cpp.s
 
 # target to generate assembly for a file
 Core/src/Sphere.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Sphere.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Sphere.cpp.s
 .PHONY : Core/src/Sphere.cpp.s
 
 Core/src/SphereMesh.o: Core/src/SphereMesh.cpp.o
@@ -424,7 +424,7 @@ Core/src/SphereMesh.o: Core/src/SphereMesh.cpp.o
 
 # target to build an object file
 Core/src/SphereMesh.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/SphereMesh.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/SphereMesh.cpp.o
 .PHONY : Core/src/SphereMesh.cpp.o
 
 Core/src/SphereMesh.i: Core/src/SphereMesh.cpp.i
@@ -432,7 +432,7 @@ Core/src/SphereMesh.i: Core/src/SphereMesh.cpp.i
 
 # target to preprocess a source file
 Core/src/SphereMesh.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/SphereMesh.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/SphereMesh.cpp.i
 .PHONY : Core/src/SphereMesh.cpp.i
 
 Core/src/SphereMesh.s: Core/src/SphereMesh.cpp.s
@@ -440,7 +440,7 @@ Core/src/SphereMesh.s: Core/src/SphereMesh.cpp.s
 
 # target to generate assembly for a file
 Core/src/SphereMesh.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/SphereMesh.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/SphereMesh.cpp.s
 .PHONY : Core/src/SphereMesh.cpp.s
 
 Core/src/UpdatableFibonacciPQ.o: Core/src/UpdatableFibonacciPQ.cpp.o
@@ -448,7 +448,7 @@ Core/src/UpdatableFibonacciPQ.o: Core/src/UpdatableFibonacciPQ.cpp.o
 
 # target to build an object file
 Core/src/UpdatableFibonacciPQ.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/UpdatableFibonacciPQ.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/UpdatableFibonacciPQ.cpp.o
 .PHONY : Core/src/UpdatableFibonacciPQ.cpp.o
 
 Core/src/UpdatableFibonacciPQ.i: Core/src/UpdatableFibonacciPQ.cpp.i
@@ -456,7 +456,7 @@ Core/src/UpdatableFibonacciPQ.i: Core/src/UpdatableFibonacciPQ.cpp.i
 
 # target to preprocess a source file
 Core/src/UpdatableFibonacciPQ.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/UpdatableFibonacciPQ.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/UpdatableFibonacciPQ.cpp.i
 .PHONY : Core/src/UpdatableFibonacciPQ.cpp.i
 
 Core/src/UpdatableFibonacciPQ.s: Core/src/UpdatableFibonacciPQ.cpp.s
@@ -464,7 +464,7 @@ Core/src/UpdatableFibonacciPQ.s: Core/src/UpdatableFibonacciPQ.cpp.s
 
 # target to generate assembly for a file
 Core/src/UpdatableFibonacciPQ.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/UpdatableFibonacciPQ.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/UpdatableFibonacciPQ.cpp.s
 .PHONY : Core/src/UpdatableFibonacciPQ.cpp.s
 
 Core/src/UpdatablePQ.o: Core/src/UpdatablePQ.cpp.o
@@ -472,7 +472,7 @@ Core/src/UpdatablePQ.o: Core/src/UpdatablePQ.cpp.o
 
 # target to build an object file
 Core/src/UpdatablePQ.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/UpdatablePQ.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/UpdatablePQ.cpp.o
 .PHONY : Core/src/UpdatablePQ.cpp.o
 
 Core/src/UpdatablePQ.i: Core/src/UpdatablePQ.cpp.i
@@ -480,7 +480,7 @@ Core/src/UpdatablePQ.i: Core/src/UpdatablePQ.cpp.i
 
 # target to preprocess a source file
 Core/src/UpdatablePQ.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/UpdatablePQ.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/UpdatablePQ.cpp.i
 .PHONY : Core/src/UpdatablePQ.cpp.i
 
 Core/src/UpdatablePQ.s: Core/src/UpdatablePQ.cpp.s
@@ -488,7 +488,7 @@ Core/src/UpdatablePQ.s: Core/src/UpdatablePQ.cpp.s
 
 # target to generate assembly for a file
 Core/src/UpdatablePQ.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/UpdatablePQ.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/UpdatablePQ.cpp.s
 .PHONY : Core/src/UpdatablePQ.cpp.s
 
 Core/src/Window.o: Core/src/Window.cpp.o
@@ -496,7 +496,7 @@ Core/src/Window.o: Core/src/Window.cpp.o
 
 # target to build an object file
 Core/src/Window.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Window.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Window.cpp.o
 .PHONY : Core/src/Window.cpp.o
 
 Core/src/Window.i: Core/src/Window.cpp.i
@@ -504,7 +504,7 @@ Core/src/Window.i: Core/src/Window.cpp.i
 
 # target to preprocess a source file
 Core/src/Window.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Window.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Window.cpp.i
 .PHONY : Core/src/Window.cpp.i
 
 Core/src/Window.s: Core/src/Window.cpp.s
@@ -512,7 +512,7 @@ Core/src/Window.s: Core/src/Window.cpp.s
 
 # target to generate assembly for a file
 Core/src/Window.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Core/src/Window.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Window.cpp.s
 .PHONY : Core/src/Window.cpp.s
 
 Core/tinyfiledialogs.o: Core/tinyfiledialogs.c.o
@@ -544,7 +544,7 @@ Math/Matrix/src/Matrix2.o: Math/Matrix/src/Matrix2.cpp.o
 
 # target to build an object file
 Math/Matrix/src/Matrix2.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Matrix/src/Matrix2.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Matrix/src/Matrix2.cpp.o
 .PHONY : Math/Matrix/src/Matrix2.cpp.o
 
 Math/Matrix/src/Matrix2.i: Math/Matrix/src/Matrix2.cpp.i
@@ -552,7 +552,7 @@ Math/Matrix/src/Matrix2.i: Math/Matrix/src/Matrix2.cpp.i
 
 # target to preprocess a source file
 Math/Matrix/src/Matrix2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Matrix/src/Matrix2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Matrix/src/Matrix2.cpp.i
 .PHONY : Math/Matrix/src/Matrix2.cpp.i
 
 Math/Matrix/src/Matrix2.s: Math/Matrix/src/Matrix2.cpp.s
@@ -560,7 +560,7 @@ Math/Matrix/src/Matrix2.s: Math/Matrix/src/Matrix2.cpp.s
 
 # target to generate assembly for a file
 Math/Matrix/src/Matrix2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Matrix/src/Matrix2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Matrix/src/Matrix2.cpp.s
 .PHONY : Math/Matrix/src/Matrix2.cpp.s
 
 Math/Matrix/src/Matrix3.o: Math/Matrix/src/Matrix3.cpp.o
@@ -568,7 +568,7 @@ Math/Matrix/src/Matrix3.o: Math/Matrix/src/Matrix3.cpp.o
 
 # target to build an object file
 Math/Matrix/src/Matrix3.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Matrix/src/Matrix3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Matrix/src/Matrix3.cpp.o
 .PHONY : Math/Matrix/src/Matrix3.cpp.o
 
 Math/Matrix/src/Matrix3.i: Math/Matrix/src/Matrix3.cpp.i
@@ -576,7 +576,7 @@ Math/Matrix/src/Matrix3.i: Math/Matrix/src/Matrix3.cpp.i
 
 # target to preprocess a source file
 Math/Matrix/src/Matrix3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Matrix/src/Matrix3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Matrix/src/Matrix3.cpp.i
 .PHONY : Math/Matrix/src/Matrix3.cpp.i
 
 Math/Matrix/src/Matrix3.s: Math/Matrix/src/Matrix3.cpp.s
@@ -584,7 +584,7 @@ Math/Matrix/src/Matrix3.s: Math/Matrix/src/Matrix3.cpp.s
 
 # target to generate assembly for a file
 Math/Matrix/src/Matrix3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Matrix/src/Matrix3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Matrix/src/Matrix3.cpp.s
 .PHONY : Math/Matrix/src/Matrix3.cpp.s
 
 Math/Matrix/src/Matrix4.o: Math/Matrix/src/Matrix4.cpp.o
@@ -592,7 +592,7 @@ Math/Matrix/src/Matrix4.o: Math/Matrix/src/Matrix4.cpp.o
 
 # target to build an object file
 Math/Matrix/src/Matrix4.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Matrix/src/Matrix4.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Matrix/src/Matrix4.cpp.o
 .PHONY : Math/Matrix/src/Matrix4.cpp.o
 
 Math/Matrix/src/Matrix4.i: Math/Matrix/src/Matrix4.cpp.i
@@ -600,7 +600,7 @@ Math/Matrix/src/Matrix4.i: Math/Matrix/src/Matrix4.cpp.i
 
 # target to preprocess a source file
 Math/Matrix/src/Matrix4.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Matrix/src/Matrix4.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Matrix/src/Matrix4.cpp.i
 .PHONY : Math/Matrix/src/Matrix4.cpp.i
 
 Math/Matrix/src/Matrix4.s: Math/Matrix/src/Matrix4.cpp.s
@@ -608,7 +608,7 @@ Math/Matrix/src/Matrix4.s: Math/Matrix/src/Matrix4.cpp.s
 
 # target to generate assembly for a file
 Math/Matrix/src/Matrix4.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Matrix/src/Matrix4.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Matrix/src/Matrix4.cpp.s
 .PHONY : Math/Matrix/src/Matrix4.cpp.s
 
 Math/Point/src/Point2.o: Math/Point/src/Point2.cpp.o
@@ -616,7 +616,7 @@ Math/Point/src/Point2.o: Math/Point/src/Point2.cpp.o
 
 # target to build an object file
 Math/Point/src/Point2.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Point/src/Point2.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Point/src/Point2.cpp.o
 .PHONY : Math/Point/src/Point2.cpp.o
 
 Math/Point/src/Point2.i: Math/Point/src/Point2.cpp.i
@@ -624,7 +624,7 @@ Math/Point/src/Point2.i: Math/Point/src/Point2.cpp.i
 
 # target to preprocess a source file
 Math/Point/src/Point2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Point/src/Point2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Point/src/Point2.cpp.i
 .PHONY : Math/Point/src/Point2.cpp.i
 
 Math/Point/src/Point2.s: Math/Point/src/Point2.cpp.s
@@ -632,7 +632,7 @@ Math/Point/src/Point2.s: Math/Point/src/Point2.cpp.s
 
 # target to generate assembly for a file
 Math/Point/src/Point2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Point/src/Point2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Point/src/Point2.cpp.s
 .PHONY : Math/Point/src/Point2.cpp.s
 
 Math/Point/src/Point3.o: Math/Point/src/Point3.cpp.o
@@ -640,7 +640,7 @@ Math/Point/src/Point3.o: Math/Point/src/Point3.cpp.o
 
 # target to build an object file
 Math/Point/src/Point3.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Point/src/Point3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Point/src/Point3.cpp.o
 .PHONY : Math/Point/src/Point3.cpp.o
 
 Math/Point/src/Point3.i: Math/Point/src/Point3.cpp.i
@@ -648,7 +648,7 @@ Math/Point/src/Point3.i: Math/Point/src/Point3.cpp.i
 
 # target to preprocess a source file
 Math/Point/src/Point3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Point/src/Point3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Point/src/Point3.cpp.i
 .PHONY : Math/Point/src/Point3.cpp.i
 
 Math/Point/src/Point3.s: Math/Point/src/Point3.cpp.s
@@ -656,7 +656,7 @@ Math/Point/src/Point3.s: Math/Point/src/Point3.cpp.s
 
 # target to generate assembly for a file
 Math/Point/src/Point3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Point/src/Point3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Point/src/Point3.cpp.s
 .PHONY : Math/Point/src/Point3.cpp.s
 
 Math/Point/src/Point4.o: Math/Point/src/Point4.cpp.o
@@ -664,7 +664,7 @@ Math/Point/src/Point4.o: Math/Point/src/Point4.cpp.o
 
 # target to build an object file
 Math/Point/src/Point4.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Point/src/Point4.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Point/src/Point4.cpp.o
 .PHONY : Math/Point/src/Point4.cpp.o
 
 Math/Point/src/Point4.i: Math/Point/src/Point4.cpp.i
@@ -672,7 +672,7 @@ Math/Point/src/Point4.i: Math/Point/src/Point4.cpp.i
 
 # target to preprocess a source file
 Math/Point/src/Point4.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Point/src/Point4.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Point/src/Point4.cpp.i
 .PHONY : Math/Point/src/Point4.cpp.i
 
 Math/Point/src/Point4.s: Math/Point/src/Point4.cpp.s
@@ -680,7 +680,7 @@ Math/Point/src/Point4.s: Math/Point/src/Point4.cpp.s
 
 # target to generate assembly for a file
 Math/Point/src/Point4.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Point/src/Point4.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Point/src/Point4.cpp.s
 .PHONY : Math/Point/src/Point4.cpp.s
 
 Math/Rotation/src/Quaternion.o: Math/Rotation/src/Quaternion.cpp.o
@@ -688,7 +688,7 @@ Math/Rotation/src/Quaternion.o: Math/Rotation/src/Quaternion.cpp.o
 
 # target to build an object file
 Math/Rotation/src/Quaternion.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Rotation/src/Quaternion.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Rotation/src/Quaternion.cpp.o
 .PHONY : Math/Rotation/src/Quaternion.cpp.o
 
 Math/Rotation/src/Quaternion.i: Math/Rotation/src/Quaternion.cpp.i
@@ -696,7 +696,7 @@ Math/Rotation/src/Quaternion.i: Math/Rotation/src/Quaternion.cpp.i
 
 # target to preprocess a source file
 Math/Rotation/src/Quaternion.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Rotation/src/Quaternion.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Rotation/src/Quaternion.cpp.i
 .PHONY : Math/Rotation/src/Quaternion.cpp.i
 
 Math/Rotation/src/Quaternion.s: Math/Rotation/src/Quaternion.cpp.s
@@ -704,7 +704,7 @@ Math/Rotation/src/Quaternion.s: Math/Rotation/src/Quaternion.cpp.s
 
 # target to generate assembly for a file
 Math/Rotation/src/Quaternion.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Rotation/src/Quaternion.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Rotation/src/Quaternion.cpp.s
 .PHONY : Math/Rotation/src/Quaternion.cpp.s
 
 Math/Vector/src/Vector2.o: Math/Vector/src/Vector2.cpp.o
@@ -712,7 +712,7 @@ Math/Vector/src/Vector2.o: Math/Vector/src/Vector2.cpp.o
 
 # target to build an object file
 Math/Vector/src/Vector2.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Vector/src/Vector2.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Vector/src/Vector2.cpp.o
 .PHONY : Math/Vector/src/Vector2.cpp.o
 
 Math/Vector/src/Vector2.i: Math/Vector/src/Vector2.cpp.i
@@ -720,7 +720,7 @@ Math/Vector/src/Vector2.i: Math/Vector/src/Vector2.cpp.i
 
 # target to preprocess a source file
 Math/Vector/src/Vector2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Vector/src/Vector2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Vector/src/Vector2.cpp.i
 .PHONY : Math/Vector/src/Vector2.cpp.i
 
 Math/Vector/src/Vector2.s: Math/Vector/src/Vector2.cpp.s
@@ -728,7 +728,7 @@ Math/Vector/src/Vector2.s: Math/Vector/src/Vector2.cpp.s
 
 # target to generate assembly for a file
 Math/Vector/src/Vector2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Vector/src/Vector2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Vector/src/Vector2.cpp.s
 .PHONY : Math/Vector/src/Vector2.cpp.s
 
 Math/Vector/src/Vector3.o: Math/Vector/src/Vector3.cpp.o
@@ -736,7 +736,7 @@ Math/Vector/src/Vector3.o: Math/Vector/src/Vector3.cpp.o
 
 # target to build an object file
 Math/Vector/src/Vector3.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Vector/src/Vector3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Vector/src/Vector3.cpp.o
 .PHONY : Math/Vector/src/Vector3.cpp.o
 
 Math/Vector/src/Vector3.i: Math/Vector/src/Vector3.cpp.i
@@ -744,7 +744,7 @@ Math/Vector/src/Vector3.i: Math/Vector/src/Vector3.cpp.i
 
 # target to preprocess a source file
 Math/Vector/src/Vector3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Vector/src/Vector3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Vector/src/Vector3.cpp.i
 .PHONY : Math/Vector/src/Vector3.cpp.i
 
 Math/Vector/src/Vector3.s: Math/Vector/src/Vector3.cpp.s
@@ -752,7 +752,7 @@ Math/Vector/src/Vector3.s: Math/Vector/src/Vector3.cpp.s
 
 # target to generate assembly for a file
 Math/Vector/src/Vector3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Vector/src/Vector3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Vector/src/Vector3.cpp.s
 .PHONY : Math/Vector/src/Vector3.cpp.s
 
 Math/Vector/src/Vector4.o: Math/Vector/src/Vector4.cpp.o
@@ -760,7 +760,7 @@ Math/Vector/src/Vector4.o: Math/Vector/src/Vector4.cpp.o
 
 # target to build an object file
 Math/Vector/src/Vector4.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Vector/src/Vector4.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Vector/src/Vector4.cpp.o
 .PHONY : Math/Vector/src/Vector4.cpp.o
 
 Math/Vector/src/Vector4.i: Math/Vector/src/Vector4.cpp.i
@@ -768,7 +768,7 @@ Math/Vector/src/Vector4.i: Math/Vector/src/Vector4.cpp.i
 
 # target to preprocess a source file
 Math/Vector/src/Vector4.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Vector/src/Vector4.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Vector/src/Vector4.cpp.i
 .PHONY : Math/Vector/src/Vector4.cpp.i
 
 Math/Vector/src/Vector4.s: Math/Vector/src/Vector4.cpp.s
@@ -776,7 +776,7 @@ Math/Vector/src/Vector4.s: Math/Vector/src/Vector4.cpp.s
 
 # target to generate assembly for a file
 Math/Vector/src/Vector4.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Vector/src/Vector4.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Vector/src/Vector4.cpp.s
 .PHONY : Math/Vector/src/Vector4.cpp.s
 
 Math/Versor/src/Versor2.o: Math/Versor/src/Versor2.cpp.o
@@ -784,7 +784,7 @@ Math/Versor/src/Versor2.o: Math/Versor/src/Versor2.cpp.o
 
 # target to build an object file
 Math/Versor/src/Versor2.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Versor/src/Versor2.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Versor/src/Versor2.cpp.o
 .PHONY : Math/Versor/src/Versor2.cpp.o
 
 Math/Versor/src/Versor2.i: Math/Versor/src/Versor2.cpp.i
@@ -792,7 +792,7 @@ Math/Versor/src/Versor2.i: Math/Versor/src/Versor2.cpp.i
 
 # target to preprocess a source file
 Math/Versor/src/Versor2.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Versor/src/Versor2.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Versor/src/Versor2.cpp.i
 .PHONY : Math/Versor/src/Versor2.cpp.i
 
 Math/Versor/src/Versor2.s: Math/Versor/src/Versor2.cpp.s
@@ -800,7 +800,7 @@ Math/Versor/src/Versor2.s: Math/Versor/src/Versor2.cpp.s
 
 # target to generate assembly for a file
 Math/Versor/src/Versor2.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Versor/src/Versor2.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Versor/src/Versor2.cpp.s
 .PHONY : Math/Versor/src/Versor2.cpp.s
 
 Math/Versor/src/Versor3.o: Math/Versor/src/Versor3.cpp.o
@@ -808,7 +808,7 @@ Math/Versor/src/Versor3.o: Math/Versor/src/Versor3.cpp.o
 
 # target to build an object file
 Math/Versor/src/Versor3.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Versor/src/Versor3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Versor/src/Versor3.cpp.o
 .PHONY : Math/Versor/src/Versor3.cpp.o
 
 Math/Versor/src/Versor3.i: Math/Versor/src/Versor3.cpp.i
@@ -816,7 +816,7 @@ Math/Versor/src/Versor3.i: Math/Versor/src/Versor3.cpp.i
 
 # target to preprocess a source file
 Math/Versor/src/Versor3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Versor/src/Versor3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Versor/src/Versor3.cpp.i
 .PHONY : Math/Versor/src/Versor3.cpp.i
 
 Math/Versor/src/Versor3.s: Math/Versor/src/Versor3.cpp.s
@@ -824,7 +824,7 @@ Math/Versor/src/Versor3.s: Math/Versor/src/Versor3.cpp.s
 
 # target to generate assembly for a file
 Math/Versor/src/Versor3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Versor/src/Versor3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Versor/src/Versor3.cpp.s
 .PHONY : Math/Versor/src/Versor3.cpp.s
 
 Math/Versor/src/Versor4.o: Math/Versor/src/Versor4.cpp.o
@@ -832,7 +832,7 @@ Math/Versor/src/Versor4.o: Math/Versor/src/Versor4.cpp.o
 
 # target to build an object file
 Math/Versor/src/Versor4.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Versor/src/Versor4.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Versor/src/Versor4.cpp.o
 .PHONY : Math/Versor/src/Versor4.cpp.o
 
 Math/Versor/src/Versor4.i: Math/Versor/src/Versor4.cpp.i
@@ -840,7 +840,7 @@ Math/Versor/src/Versor4.i: Math/Versor/src/Versor4.cpp.i
 
 # target to preprocess a source file
 Math/Versor/src/Versor4.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Versor/src/Versor4.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Versor/src/Versor4.cpp.i
 .PHONY : Math/Versor/src/Versor4.cpp.i
 
 Math/Versor/src/Versor4.s: Math/Versor/src/Versor4.cpp.s
@@ -848,7 +848,7 @@ Math/Versor/src/Versor4.s: Math/Versor/src/Versor4.cpp.s
 
 # target to generate assembly for a file
 Math/Versor/src/Versor4.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Math/Versor/src/Versor4.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Math/Versor/src/Versor4.cpp.s
 .PHONY : Math/Versor/src/Versor4.cpp.s
 
 Shader/src/Shader.o: Shader/src/Shader.cpp.o
@@ -856,7 +856,7 @@ Shader/src/Shader.o: Shader/src/Shader.cpp.o
 
 # target to build an object file
 Shader/src/Shader.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Shader/src/Shader.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Shader/src/Shader.cpp.o
 .PHONY : Shader/src/Shader.cpp.o
 
 Shader/src/Shader.i: Shader/src/Shader.cpp.i
@@ -864,7 +864,7 @@ Shader/src/Shader.i: Shader/src/Shader.cpp.i
 
 # target to preprocess a source file
 Shader/src/Shader.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Shader/src/Shader.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Shader/src/Shader.cpp.i
 .PHONY : Shader/src/Shader.cpp.i
 
 Shader/src/Shader.s: Shader/src/Shader.cpp.s
@@ -872,7 +872,7 @@ Shader/src/Shader.s: Shader/src/Shader.cpp.s
 
 # target to generate assembly for a file
 Shader/src/Shader.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/Shader/src/Shader.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Shader/src/Shader.cpp.s
 .PHONY : Shader/src/Shader.cpp.s
 
 include/glad.o: include/glad.c.o
@@ -904,7 +904,7 @@ include/imgui/imgui.o: include/imgui/imgui.cpp.o
 
 # target to build an object file
 include/imgui/imgui.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui.cpp.o
 .PHONY : include/imgui/imgui.cpp.o
 
 include/imgui/imgui.i: include/imgui/imgui.cpp.i
@@ -912,7 +912,7 @@ include/imgui/imgui.i: include/imgui/imgui.cpp.i
 
 # target to preprocess a source file
 include/imgui/imgui.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui.cpp.i
 .PHONY : include/imgui/imgui.cpp.i
 
 include/imgui/imgui.s: include/imgui/imgui.cpp.s
@@ -920,7 +920,7 @@ include/imgui/imgui.s: include/imgui/imgui.cpp.s
 
 # target to generate assembly for a file
 include/imgui/imgui.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui.cpp.s
 .PHONY : include/imgui/imgui.cpp.s
 
 include/imgui/imgui_demo.o: include/imgui/imgui_demo.cpp.o
@@ -928,7 +928,7 @@ include/imgui/imgui_demo.o: include/imgui/imgui_demo.cpp.o
 
 # target to build an object file
 include/imgui/imgui_demo.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_demo.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_demo.cpp.o
 .PHONY : include/imgui/imgui_demo.cpp.o
 
 include/imgui/imgui_demo.i: include/imgui/imgui_demo.cpp.i
@@ -936,7 +936,7 @@ include/imgui/imgui_demo.i: include/imgui/imgui_demo.cpp.i
 
 # target to preprocess a source file
 include/imgui/imgui_demo.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_demo.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_demo.cpp.i
 .PHONY : include/imgui/imgui_demo.cpp.i
 
 include/imgui/imgui_demo.s: include/imgui/imgui_demo.cpp.s
@@ -944,7 +944,7 @@ include/imgui/imgui_demo.s: include/imgui/imgui_demo.cpp.s
 
 # target to generate assembly for a file
 include/imgui/imgui_demo.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_demo.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_demo.cpp.s
 .PHONY : include/imgui/imgui_demo.cpp.s
 
 include/imgui/imgui_draw.o: include/imgui/imgui_draw.cpp.o
@@ -952,7 +952,7 @@ include/imgui/imgui_draw.o: include/imgui/imgui_draw.cpp.o
 
 # target to build an object file
 include/imgui/imgui_draw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_draw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_draw.cpp.o
 .PHONY : include/imgui/imgui_draw.cpp.o
 
 include/imgui/imgui_draw.i: include/imgui/imgui_draw.cpp.i
@@ -960,7 +960,7 @@ include/imgui/imgui_draw.i: include/imgui/imgui_draw.cpp.i
 
 # target to preprocess a source file
 include/imgui/imgui_draw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_draw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_draw.cpp.i
 .PHONY : include/imgui/imgui_draw.cpp.i
 
 include/imgui/imgui_draw.s: include/imgui/imgui_draw.cpp.s
@@ -968,7 +968,7 @@ include/imgui/imgui_draw.s: include/imgui/imgui_draw.cpp.s
 
 # target to generate assembly for a file
 include/imgui/imgui_draw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_draw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_draw.cpp.s
 .PHONY : include/imgui/imgui_draw.cpp.s
 
 include/imgui/imgui_impl_glfw.o: include/imgui/imgui_impl_glfw.cpp.o
@@ -976,7 +976,7 @@ include/imgui/imgui_impl_glfw.o: include/imgui/imgui_impl_glfw.cpp.o
 
 # target to build an object file
 include/imgui/imgui_impl_glfw.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_impl_glfw.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_impl_glfw.cpp.o
 .PHONY : include/imgui/imgui_impl_glfw.cpp.o
 
 include/imgui/imgui_impl_glfw.i: include/imgui/imgui_impl_glfw.cpp.i
@@ -984,7 +984,7 @@ include/imgui/imgui_impl_glfw.i: include/imgui/imgui_impl_glfw.cpp.i
 
 # target to preprocess a source file
 include/imgui/imgui_impl_glfw.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_impl_glfw.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_impl_glfw.cpp.i
 .PHONY : include/imgui/imgui_impl_glfw.cpp.i
 
 include/imgui/imgui_impl_glfw.s: include/imgui/imgui_impl_glfw.cpp.s
@@ -992,7 +992,7 @@ include/imgui/imgui_impl_glfw.s: include/imgui/imgui_impl_glfw.cpp.s
 
 # target to generate assembly for a file
 include/imgui/imgui_impl_glfw.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_impl_glfw.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_impl_glfw.cpp.s
 .PHONY : include/imgui/imgui_impl_glfw.cpp.s
 
 include/imgui/imgui_impl_opengl3.o: include/imgui/imgui_impl_opengl3.cpp.o
@@ -1000,7 +1000,7 @@ include/imgui/imgui_impl_opengl3.o: include/imgui/imgui_impl_opengl3.cpp.o
 
 # target to build an object file
 include/imgui/imgui_impl_opengl3.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_impl_opengl3.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_impl_opengl3.cpp.o
 .PHONY : include/imgui/imgui_impl_opengl3.cpp.o
 
 include/imgui/imgui_impl_opengl3.i: include/imgui/imgui_impl_opengl3.cpp.i
@@ -1008,7 +1008,7 @@ include/imgui/imgui_impl_opengl3.i: include/imgui/imgui_impl_opengl3.cpp.i
 
 # target to preprocess a source file
 include/imgui/imgui_impl_opengl3.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_impl_opengl3.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_impl_opengl3.cpp.i
 .PHONY : include/imgui/imgui_impl_opengl3.cpp.i
 
 include/imgui/imgui_impl_opengl3.s: include/imgui/imgui_impl_opengl3.cpp.s
@@ -1016,7 +1016,7 @@ include/imgui/imgui_impl_opengl3.s: include/imgui/imgui_impl_opengl3.cpp.s
 
 # target to generate assembly for a file
 include/imgui/imgui_impl_opengl3.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_impl_opengl3.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_impl_opengl3.cpp.s
 .PHONY : include/imgui/imgui_impl_opengl3.cpp.s
 
 include/imgui/imgui_tables.o: include/imgui/imgui_tables.cpp.o
@@ -1024,7 +1024,7 @@ include/imgui/imgui_tables.o: include/imgui/imgui_tables.cpp.o
 
 # target to build an object file
 include/imgui/imgui_tables.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_tables.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_tables.cpp.o
 .PHONY : include/imgui/imgui_tables.cpp.o
 
 include/imgui/imgui_tables.i: include/imgui/imgui_tables.cpp.i
@@ -1032,7 +1032,7 @@ include/imgui/imgui_tables.i: include/imgui/imgui_tables.cpp.i
 
 # target to preprocess a source file
 include/imgui/imgui_tables.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_tables.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_tables.cpp.i
 .PHONY : include/imgui/imgui_tables.cpp.i
 
 include/imgui/imgui_tables.s: include/imgui/imgui_tables.cpp.s
@@ -1040,7 +1040,7 @@ include/imgui/imgui_tables.s: include/imgui/imgui_tables.cpp.s
 
 # target to generate assembly for a file
 include/imgui/imgui_tables.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_tables.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_tables.cpp.s
 .PHONY : include/imgui/imgui_tables.cpp.s
 
 include/imgui/imgui_widgets.o: include/imgui/imgui_widgets.cpp.o
@@ -1048,7 +1048,7 @@ include/imgui/imgui_widgets.o: include/imgui/imgui_widgets.cpp.o
 
 # target to build an object file
 include/imgui/imgui_widgets.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_widgets.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_widgets.cpp.o
 .PHONY : include/imgui/imgui_widgets.cpp.o
 
 include/imgui/imgui_widgets.i: include/imgui/imgui_widgets.cpp.i
@@ -1056,7 +1056,7 @@ include/imgui/imgui_widgets.i: include/imgui/imgui_widgets.cpp.i
 
 # target to preprocess a source file
 include/imgui/imgui_widgets.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_widgets.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_widgets.cpp.i
 .PHONY : include/imgui/imgui_widgets.cpp.i
 
 include/imgui/imgui_widgets.s: include/imgui/imgui_widgets.cpp.s
@@ -1064,7 +1064,7 @@ include/imgui/imgui_widgets.s: include/imgui/imgui_widgets.cpp.s
 
 # target to generate assembly for a file
 include/imgui/imgui_widgets.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/include/imgui/imgui_widgets.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/include/imgui/imgui_widgets.cpp.s
 .PHONY : include/imgui/imgui_widgets.cpp.s
 
 main.o: main.cpp.o
@@ -1072,7 +1072,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -1080,7 +1080,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -1088,7 +1088,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CustomRenderer.dir/build.make CMakeFiles/CustomRenderer.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -1099,8 +1099,8 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... CustomRenderer"
 	@echo "... GLAD"
+	@echo "... SphereMeshEditor"
 	@echo "... tinyfiledialogs"
 	@echo "... Core/src/Camera.o"
 	@echo "... Core/src/Camera.i"

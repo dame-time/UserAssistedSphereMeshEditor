@@ -143,7 +143,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=CustomRenderer
+CMAKE_PROJECT_NAME:STATIC=SphereMeshEditor
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib
@@ -224,6 +224,15 @@ OpenMP_C_LIB_NAMES:STRING=NOTFOUND
 
 //Path to a library.
 OpenMP_libomp_LIBRARY:FILEPATH=OpenMP_libomp_LIBRARY-NOTFOUND
+
+//Value Computed by CMake
+SphereMeshEditor_BINARY_DIR:STATIC=/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release
+
+//Value Computed by CMake
+SphereMeshEditor_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+SphereMeshEditor_SOURCE_DIR:STATIC=/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor
 
 //The directory containing a CMake configuration file for glfw3.
 glfw3_DIR:PATH=/usr/local/lib/cmake/glfw3

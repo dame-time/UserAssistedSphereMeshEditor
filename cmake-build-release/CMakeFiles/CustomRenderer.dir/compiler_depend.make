@@ -11376,8 +11376,7 @@ CMakeFiles/CustomRenderer.dir/Core/src/UpdatablePQ.cpp.o: /Users/davidepaollilo/
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/float.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/float.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Quadric.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Region.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/SphereMesh.hpp
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Region.hpp
 
 CMakeFiles/CustomRenderer.dir/Core/src/Window.cpp.o: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Window.cpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Window.hpp \

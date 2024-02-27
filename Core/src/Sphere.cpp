@@ -76,7 +76,7 @@ namespace Renderer {
         return this->renderedMeshID;
     }
 
-    Quadric Sphere::getSphereQuadric()
+    Quadric Sphere::getSphereQuadric() const
     {
         return this->quadric;
     }
@@ -109,7 +109,7 @@ namespace Renderer {
         this->radius = result.coordinates.w;
     }
 
-    bool Sphere::checkSphereOverPlanarRegion()
+    bool Sphere::checkSphereOverPlanarRegion() const
     {
         return this->center == Math::Vector3(-1, -1, -1) && this->radius == 0;
     }
@@ -126,14 +126,14 @@ namespace Renderer {
         vertices.push_back(vertex);
     }
 
-    Sphere Sphere::lerp(const Sphere &s, Math::Scalar t)
+    Sphere Sphere::lerp(const Sphere &s, Math::Scalar t) const
     {
         Math::Vector4 origin(this->center, this->radius);
         Math::Vector4 destination(s.center, s.radius);
 
         auto result = origin.lerp(destination, t);
 
-        return Sphere(result.toQuaternion().immaginary, result.coordinates.w);
+        return {result.toQuaternion().immaginary, result.coordinates.w};
     }
 
     bool Sphere::intersectsVertex(const Math::Vector3& vertex)

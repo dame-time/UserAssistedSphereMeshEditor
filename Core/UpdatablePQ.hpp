@@ -28,7 +28,7 @@ namespace Renderer
             CollapsableEdge top(int sphereSize);
             void pop();
         
-            bool isQueueDirty();
+            bool isQueueDirty() const;
             void setQueueDirty();
         
             bool clear();

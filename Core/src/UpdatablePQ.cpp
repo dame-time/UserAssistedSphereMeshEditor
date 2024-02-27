@@ -1,6 +1,5 @@
 #include <UpdatablePQ.hpp>
 
-#include <SphereMesh.hpp>
 #include <CollapsableEdge.hpp>
 
 namespace Renderer
@@ -24,7 +23,7 @@ namespace Renderer
 
     CollapsableEdge UpdatablePQ::top(int sphereSize) {
         if (q.empty()) {
-            return CollapsableEdge(); // Early return if queue is empty
+            return {}; // Early return if queue is empty
         }
 
         CollapsableEdge topElement = q.top();
@@ -46,7 +45,7 @@ namespace Renderer
         while (true) {
             q.pop();
             if (q.empty()) {
-                return CollapsableEdge(); // Return a default-constructed object if queue becomes empty
+                return {}; // Return a default-constructed object if queue becomes empty
             }
 
             topElement = q.top();
@@ -80,7 +79,7 @@ namespace Renderer
         q.pop();
     }
 
-    bool UpdatablePQ::isQueueDirty()
+    bool UpdatablePQ::isQueueDirty() const
     {
         return isDirty;
     }
@@ -95,7 +94,7 @@ namespace Renderer
         while (!q.empty())
             q.pop();
         
-        return q.size() == 0;
+        return q.empty();
     }
 
     int UpdatablePQ::size()
