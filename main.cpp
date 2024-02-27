@@ -33,8 +33,8 @@ bool loadCachedResult() {
 
 int main()
 {
-    Renderer::Camera* mainCamera = new Renderer::Camera();
-    Renderer::Window* window = new Renderer::Window(1200, 1000, "Custom Renderer", mainCamera);
+    auto* mainCamera = new Renderer::Camera();
+    auto* window = new Renderer::Window(1200, 1000, "Custom Renderer", mainCamera);
     
     mainShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/vertex.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/fragment.frag");
     sphereShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");

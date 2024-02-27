@@ -368,9 +368,7 @@ namespace Renderer {
                 return topEdge;
             
             edgeQueue.push(topEdge);
-//            std::cout << topEdge << std::endl;
             topEdge = edgeQueue.top((int)sphere.size());
-//            std::cout << topEdge << std::endl;
             edgeQueue.pop();
             
             if (topEdge.idxI == -1 || topEdge.idxJ == -1)
@@ -982,10 +980,10 @@ namespace Renderer {
         newSphere.addQuadric(collapsedSphereA.getSphereQuadric());
         newSphere.addQuadric(collapsedSphereB.getSphereQuadric());
         
-        if (newSphere.checkSphereOverPlanarRegion())
-            newSphere.approximateSphereOverPlanarRegion(collapsedSphereA.center, collapsedSphereB.center);
+//        if (newSphere.checkSphereOverPlanarRegion())
+//            newSphere.approximateSphereOverPlanarRegion(collapsedSphereA.center, collapsedSphereB.center); // TODO: Uncomment this to enable region of a sphere
         
-        newSphere.constrainSphere(newSphere.region.directionalWidth);
+//        newSphere.constrainSphere(newSphere.region.directionalWidth); // TODO: Uncomment this to enable region of a sphere
 //        newSphere.constrainSphere(getContainedRadiusOfSphere(newSphere));
         
 //      FIXME: This is done only for rendering

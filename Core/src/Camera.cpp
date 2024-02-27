@@ -45,7 +45,7 @@ namespace Renderer {
     }
 
     void Camera::scale(Math::Scalar scale) {
-        orthographicScale += scale * 0.01;
+        orthographicScale *= scale;
     }
 
     void Camera::resetScale() {

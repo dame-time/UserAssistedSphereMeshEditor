@@ -1,0 +1,86 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Release -S /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor -B /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release
+-- The C compiler identification is AppleClang 15.0.0.15000100
+-- The CXX compiler identification is AppleClang 15.0.0.15000100
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found OpenMP_CXX: -Xpreprocessor -fopenmp -I/usr/local/opt/libomp/include (found version "5.0") 
+-- Found OpenMP: TRUE (found version "5.0") found components: CXX 
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Camera.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/CollapsableEdge.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/ObjLoader.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Quadric.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Quadric2.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Quadric3.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Region.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/RenderableMesh.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/RenderableSphere.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/ScopeTimer.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Sphere.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/SphereMesh.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/UpdatableFibonacciPQ.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/UpdatablePQ.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Window.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/YAMLUtils.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Camera.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/CollapsableEdge.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/ObjLoader.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Quadric.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Quadric2.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Quadric3.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Region.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/RenderableMesh.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/RenderableSphere.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/ScopeTimer.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Sphere.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/SphereMesh.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/UpdatableFibonacciPQ.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/UpdatablePQ.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Window.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Math.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Matrix/Matrix2.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Matrix/Matrix3.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Matrix/Matrix4.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Matrix/src/Matrix2.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Matrix/src/Matrix3.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Matrix/src/Matrix4.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Point/Point2.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Point/Point3.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Point/Point4.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Point/src/Point2.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Point/src/Point3.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Point/src/Point4.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Rotation/Quaternion.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Rotation/src/Quaternion.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Scalar.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Vector/Vector2.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Vector/Vector3.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Vector/Vector4.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Vector/src/Vector2.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Vector/src/Vector3.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Vector/src/Vector4.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Versor/Versor2.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Versor/Versor3.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Versor/Versor4.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Versor/src/Versor2.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Versor/src/Versor3.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Versor/src/Versor4.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Shader/Shader.hpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Shader/src/Shader.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui_demo.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui_draw.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui_impl_glfw.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui_impl_opengl3.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui_tables.cpp
+-- Source file: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui_widgets.cpp
+-- Configuring done (6.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release

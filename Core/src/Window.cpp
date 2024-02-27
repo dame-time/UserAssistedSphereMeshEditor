@@ -255,15 +255,15 @@ namespace Renderer {
         Math::Scalar cameraSpeed = scrollSpeed;
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
             if (isCameraPerspective)
-                mainCamera->translate(-cameraSpeed * deltaTime);
+                mainCamera->translate(Math::Math::scalarPow(2, -deltaTime));
             else
-                mainCamera->scale(-cameraSpeed/10 * deltaTime);
+                mainCamera->scale(Math::Math::scalarPow(2, -deltaTime));
         
         if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
             if (isCameraPerspective)
-                mainCamera->translate(cameraSpeed * deltaTime);
+                mainCamera->translate(Math::Math::scalarPow(2, deltaTime));
             else
-                mainCamera->scale(cameraSpeed/10 * deltaTime);
+                mainCamera->scale(Math::Math::scalarPow(2, deltaTime));
         
         if ((glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS)
             && (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
