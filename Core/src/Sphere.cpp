@@ -32,7 +32,7 @@ namespace Renderer {
         this->color = other.color;
     }
 
-    Sphere::Sphere(const Vertex& vertex, Math::Scalar k)
+    Sphere::Sphere(Vertex& vertex, Math::Scalar k)
     {
         quadric = Quadric::initializeQuadricFromVertex(vertex, k) * 1e-6;
         region = Region(vertex.position);
@@ -45,9 +45,10 @@ namespace Renderer {
         
         this->quadricWeights = 1e-6;
         
-        this->vertices.push_back(vertex);
-        
         generateUUID();
+		
+		vertex.referenceSphere = this->getID();
+		this->vertices.push_back(&vertex);
     }
 
     Sphere::Sphere(const Math::Vector3& center, Math::Scalar radius)
@@ -121,10 +122,30 @@ namespace Renderer {
         this->radius = result.coordinates.w;
     }
 
-    void Sphere::addVertex(const Vertex& vertex)
+    void Sphere::addVertex(Vertex& vertex)
     {
-        vertices.push_back(vertex);
+		vertex.referenceSphere = this->getID();
+        vertices.push_back(&vertex);
     }
+	
+	int Sphere::clearNotLinkedVertices()
+	{
+		auto referenceSphere = -1;
+		
+		for (auto it = vertices.begin(); it != vertices.end();)
+			if ((*it)->referenceSphere != this->getID())
+			{
+				if (vertices.size() == 1)
+					referenceSphere = (*it)->referenceSphere;
+				
+				it = vertices.erase(it);
+			}
+			else
+				++it;
+			
+		isDangling = vertices.empty();
+		return referenceSphere;
+	}
 
     Sphere Sphere::lerp(const Sphere &s, Math::Scalar t) const
     {

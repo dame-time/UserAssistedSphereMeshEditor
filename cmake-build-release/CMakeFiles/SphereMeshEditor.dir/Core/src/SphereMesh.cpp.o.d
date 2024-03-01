@@ -883,6 +883,4 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/SphereMesh.cpp.o: \
   /usr/local/include/yaml-cpp/node/parse.h \
   /usr/local/include/yaml-cpp/node/emit.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/ScopeTimer.hpp \
-  /usr/local/opt/libomp/include/omp.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/cassert \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/assert.h
+  /usr/local/opt/libomp/include/omp.h

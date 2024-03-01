@@ -10,11 +10,15 @@
 
 #include <filesystem>
 #include <algorithm>
-#include <cassert>
 #include <cmath>
 
 // TODO: Define a stop criteria for the collapsing of the sphere-mesh (error of the quadrics)
 // TODO: Define a way to avoid using the EPSILON/improve its usage
+// TODO: Implement a link function for the spheres, when clicking two spheres I can link them, also with three, in
+//  the first case I generate a new edge, in the second case I generate a new triangle, I need to discard the
+//  operations if the spheres are already connected, but I want to hande the transform of an edge into a triangle
+//  selecting a new sphere and I want to handle the split of a triangle into three edges
+// TODO: Implement the function to unlink two or three spheres
 namespace Renderer {
     SphereMesh::SphereMesh(const SphereMesh& sm) : referenceMesh(sm.referenceMesh)
     {
@@ -36,19 +40,16 @@ namespace Renderer {
 
     SphereMesh::SphereMesh(RenderableMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius) : referenceMesh(mesh)
     {
-        auto vertices = mesh->vertices;
-        auto faces = mesh->faces;
-        
         this->sphereShader = shader;
         renderType = RenderType::SPHERES;
         
         BDDSize = mesh->bbox.BDD().magnitude();
         initializeEPSILON();
 
-        initializeSphereMeshTriangles(faces);
-        initializeSpheres(vertices, 0.01f * BDDSize);
+        initializeSphereMeshTriangles(mesh->faces);
+        initializeSpheres(mesh->vertices, 0.01f * BDDSize);
         
-        computeSpheresProperties(vertices);
+        computeSpheresProperties(mesh->vertices);
         updateSpheres();
 
         initialSpheres.reserve(sphere.size());
@@ -90,25 +91,24 @@ namespace Renderer {
     int SphereMesh::getEdgeSize() {
         return (int)edge.size();
     }
-
-    SphereMesh& SphereMesh::operator = (const SphereMesh& sm) {
-        BDDSize = sm.BDDSize;
-        
-        sphere = sm.sphere;
-        initialSpheres = sm.initialSpheres;
-        
-        triangle = sm.triangle;
-        edge = sm.edge;
-        
-        edgeConnectivity = sm.edgeConnectivity;
-        triangleConnectivity = sm.triangleConnectivity;
-        
-        EPSILON = sm.EPSILON;
-        
-        return *this;
-    }
-
-    void SphereMesh::initializeSphereMeshTriangles(const std::vector<Face>& faces)
+	
+	SphereMesh& SphereMesh::operator = (const SphereMesh& sm) {
+		if (this == &sm)
+			return *this;
+		
+		BDDSize = sm.BDDSize;
+		sphere = sm.sphere;
+		initialSpheres = sm.initialSpheres;
+		triangle = sm.triangle;
+		edge = sm.edge;
+		edgeConnectivity = sm.edgeConnectivity;
+		triangleConnectivity = sm.triangleConnectivity;
+		EPSILON = sm.EPSILON;
+		
+		return *this;
+	}
+	
+	void SphereMesh::initializeSphereMeshTriangles(const std::vector<Face>& faces)
     {
         triangle.reserve(faces.size());
         
@@ -116,14 +116,12 @@ namespace Renderer {
             triangle.emplace_back(face.i, face.j, face.k);
     }
 
-    void SphereMesh::initializeSpheres(const std::vector<Vertex>& vertices, Math::Scalar initialRadius)
+    void SphereMesh::initializeSpheres(std::vector<Vertex>& vertices, Math::Scalar initialRadius)
     {
         sphere.reserve(vertices.size());
-
-        std::transform(vertices.begin(), vertices.end(), std::back_inserter(sphere),
-                       [initialRadius](const auto& vertex) {
-                           return Sphere(vertex, initialRadius);
-                       });
+	    
+	    for (auto& vertex : vertices)
+		    sphere.emplace_back(vertex, initialRadius);
     }
 
     void SphereMesh::initializeEdgeQueue()
@@ -131,25 +129,25 @@ namespace Renderer {
         int sphereSize = (int)sphere.size();
         std::queue<CollapsableEdge> localQueues[omp_get_max_threads()];
 
-        #pragma omp parallel
+        #pragma omp parallel default(none) shared(sphere, sphereSize, localQueues, edgeQueue)
         {
             int tid = omp_get_thread_num();
 
             #pragma omp for schedule(dynamic, 64)
             for (int i = 0; i < sphereSize; ++i) {
                 for (int j = i + 1; j < sphereSize; ++j) {
+					// FIXME: In here I don't want to exclude the collapses of the spheres that are linked by an edge
+					//  or by a triangle
                     if ((sphere[i].center - sphere[j].center).squareMagnitude() <= EPSILON * EPSILON) {
-                        CollapsableEdge edge(sphere[i], sphere[j], i, j);
-                        edge.updateError();
-                        edge.queueIdI = 0;
-                        edge.queueIdJ = 0;
+                        CollapsableEdge e(sphere[i], sphere[j], i, j);
+                        e.updateError();
+	                    e.queueIdI = 0;
+	                    e.queueIdJ = 0;
 
-                        if (edge.idxI > edge.idxJ) {
-                            std::cout << "Non succede" << std::endl;
-                            edge.updateEdge(edge.j, edge.i, edge.idxJ, edge.idxI);
-                        }
+                        if (e.idxI > e.idxJ)
+                            e.updateEdge(e.j, e.i, e.idxJ, e.idxI);
 
-                        localQueues[tid].push(edge);
+                        localQueues[tid].push(e);
                     }
                 }
             }
@@ -254,7 +252,7 @@ namespace Renderer {
         auto connectivitySize = (int)triangleConnectivity.size();
 
         // First loop
-        #pragma omp parallel for
+        #pragma omp parallel for schedule(dynamic, 64) default(none) shared(triangle, edgeConnectivity, triangleConnectivity, triangleSize, connectivitySize)
         for (int i = 0; i < triangleSize; ++i) {
             auto& tri = triangle[i];
             int min = std::min({tri.i, tri.j, tri.k});
@@ -266,7 +264,7 @@ namespace Renderer {
         }
 
         // Second loop
-        #pragma omp parallel for
+        #pragma omp parallel for schedule(dynamic, 64) default(none) shared(triangle, edgeConnectivity, triangleConnectivity, triangleSize, connectivitySize)
         for (int i = 0; i < triangleSize; ++i) {
             auto& tri = triangle[i];
             edgeConnectivity[tri.i][tri.j] = false;
@@ -279,7 +277,7 @@ namespace Renderer {
         triangle.clear();
 
         // Third loop
-        #pragma omp parallel
+        #pragma omp parallel default(none) shared(triangle, edgeConnectivity, triangleConnectivity, triangleSize, connectivitySize)
         {
             std::vector<Triangle> local_triangle;
             #pragma omp for nowait
@@ -330,9 +328,11 @@ namespace Renderer {
             newSphere.color = Math::Vector3(1, 0, 0);
             newSphere.addQuadric(sphere[topEdge.idxI].getSphereQuadric());
             newSphere.addQuadric(sphere[topEdge.idxJ].getSphereQuadric());
-            
+	        
+	        #ifdef ENABLE_REGION_BOUND
             newSphere.region = sphere[topEdge.idxI].region;
             newSphere.region.join(sphere[topEdge.idxJ].region);
+			#endif
             
             auto startError = topEdge.error;
             for (auto& vertex : referenceMesh->vertices)
@@ -341,7 +341,7 @@ namespace Renderer {
                     bool isAlreadyContained = false;
                     for (auto& ownVertex : sphere[topEdge.idxI].vertices)
                     {
-                        if (ownVertex.position == vertex.position)
+                        if (ownVertex->position == vertex.position)
                         {
                             isAlreadyContained = true;
                             break;
@@ -352,7 +352,7 @@ namespace Renderer {
                         break;
                     
                     for (auto& ownVertex : sphere[topEdge.idxJ].vertices)
-                        if (ownVertex.position == vertex.position)
+                        if (ownVertex->position == vertex.position)
                         {
                             isAlreadyContained = true;
                             break;
@@ -362,6 +362,7 @@ namespace Renderer {
                         break;
                     
                     topEdge.updateCorrectionErrorQuadric(Quadric::initializeQuadricFromVertex(vertex, 0.1 * BDDSize));
+					topEdge.incorporatedVertices.emplace_back(&vertex);
                 }
             topEdge.updateError();
             topEdge.isErrorCorrectionQuadricSet = true;
@@ -482,7 +483,6 @@ namespace Renderer {
             Math::Vector3 v0 = vertices[i0].position;
             Math::Vector3 v1 = vertices[i1].position;
             Math::Vector3 v2 = vertices[i2].position;
-//            Math::Vector3 centroid = getTriangleCentroid(v0, v1, v2);
             Math::Vector3 normal = getTriangleNormal(v0, v1, v2);
             
             Math::Scalar area = 0.5 * (v1 - v0).cross(v2 - v0).magnitude();
@@ -502,7 +502,8 @@ namespace Renderer {
             sphere[i0].quadricWeights += weight;
             sphere[i1].quadricWeights += weight;
             sphere[i2].quadricWeights += weight;
-
+	        
+	        #ifdef ENABLE_REGION_BOUND
             sphere[i0].region.addVertex(vertices[i0].position);
             sphere[i0].region.addVertex(vertices[i1].position);
             sphere[i0].region.addVertex(vertices[i2].position);
@@ -514,6 +515,7 @@ namespace Renderer {
             sphere[i2].region.addVertex(vertices[i0].position);
             sphere[i2].region.addVertex(vertices[i1].position);
             sphere[i2].region.addVertex(vertices[i2].position);
+	        #endif
         }
     }
 
@@ -722,13 +724,11 @@ namespace Renderer {
 
         sphereShader->use();
         sphereShader->setVec3("center", center);
-//        sphereShader->setFloat("radius", radius);
         sphereShader->setVec3("material.ambient", color);
         sphereShader->setVec3("material.diffuse", Math::Vector3(0.9, 0.9, 0.9));
         sphereShader->setVec3("material.specular", Math::Vector3(0, 0, 0));
         sphereShader->setFloat("material.shininess", 0);
         sphereShader->setFloat("radius", radius);
-//        sphereShader->setVec3("color", color);
 
         glDisable(GL_CULL_FACE);
         glDisable(GL_BLEND);
@@ -864,13 +864,10 @@ namespace Renderer {
         sphereShader->setFloat("radius", radius);
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-//        glEnable(GL_BLEND);
-//        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, (int)faces.size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
         glUseProgram(0);
-//        glDisable(GL_BLEND);
     }
 
     void SphereMesh::renderSpheresOnly()
@@ -960,10 +957,10 @@ namespace Renderer {
         for (auto & idx : sphere)
 	        if (idx.getID() == i)
 		        for (auto &vertex: idx.vertices)
-			        renderSphere(vertex.position, 0.02 * BDDSize, Math::Vector3(0, 1, 0));
+			        renderSphere(vertex->position, 0.02 * BDDSize, Math::Vector3(0, 1, 0));
     }
 
-    Sphere SphereMesh::collapseEdgeIntoSphere(const CollapsableEdge& edgeToCollapse)
+    Sphere SphereMesh::collapseEdgeIntoSphere(CollapsableEdge& edgeToCollapse)
     {
         Sphere& collapsedSphereA = sphere[edgeToCollapse.idxI];
         Sphere& collapsedSphereB = sphere[edgeToCollapse.idxJ];
@@ -971,28 +968,39 @@ namespace Renderer {
         Sphere newSphere = Sphere();
         
         newSphere.color = Math::Vector3(1, 0, 0);
-        
+	    
+	    #ifdef ENABLE_REGION_BOUND
         newSphere.region.join(collapsedSphereA.region);
         newSphere.region.join(collapsedSphereB.region);
+	    #endif
         
         newSphere.addQuadric(collapsedSphereA.getSphereQuadric());
         newSphere.addQuadric(collapsedSphereB.getSphereQuadric());
+		
+		if (edgeToCollapse.isErrorCorrectionQuadricSet)
+			newSphere.addQuadric(edgeToCollapse.errorCorrectionQuadric);
+	    
+	    #ifdef ENABLE_REGION_BOUND
+        if (newSphere.checkSphereOverPlanarRegion())
+            newSphere.approximateSphereOverPlanarRegion(collapsedSphereA.center, collapsedSphereB.center);
         
-//        if (newSphere.checkSphereOverPlanarRegion())
-//            newSphere.approximateSphereOverPlanarRegion(collapsedSphereA.center, collapsedSphereB.center); // TODO: Uncomment this to enable region of a sphere
-        
-//        newSphere.constrainSphere(newSphere.region.directionalWidth); // TODO: Uncomment this to enable region of a sphere
-//        newSphere.constrainSphere(getContainedRadiusOfSphere(newSphere));
-        
-//      FIXME: This is done only for rendering
-        newSphere.vertices.reserve(collapsedSphereA.vertices.size() + collapsedSphereB.vertices.size());
+        newSphere.constrainSphere(newSphere.region.directionalWidth);
+        newSphere.constrainSphere(getContainedRadiusOfSphere(newSphere));
+		#endif
+		
+        newSphere.vertices.reserve(collapsedSphereA.vertices.size() + collapsedSphereB.vertices.size() + edgeToCollapse.incorporatedVertices.size());
 
-        for (const auto& vertex : collapsedSphereA.vertices)
-            newSphere.addVertex(vertex);
+	    #ifndef DISABLE_VERTEX_INCLUSION_IN_SPHERES
+        for (auto& vertex : collapsedSphereA.vertices)
+            newSphere.addVertex(*vertex);
 
-        for (const auto& vertex : collapsedSphereB.vertices)
-            newSphere.addVertex(vertex);
-//
+        for (auto& vertex : collapsedSphereB.vertices)
+            newSphere.addVertex(*vertex);
+		
+		if (edgeToCollapse.isErrorCorrectionQuadricSet)
+			for (auto& vertex : edgeToCollapse.incorporatedVertices)
+				newSphere.addVertex(*vertex);
+		#endif
         
         return newSphere;
     }
@@ -1012,8 +1020,6 @@ namespace Renderer {
         
         Sphere newSphere = collapseEdgeIntoSphere(e);
         
-//        checkSphereIntersections(newSphere);
-        
         sphere[e.idxI] = newSphere;
         sphere[e.idxJ] = sphere.back();
 
@@ -1023,8 +1029,29 @@ namespace Renderer {
 	    updateTrianglesAfterCollapse(e.idxI, e.idxJ);
 
         removeDegenerates();
-//        clearSphereMesh();
         updateEdgeQueue(e);
+//		clearSphereMesh();
+
+		std::vector<Pair> toCollapse;
+	    for (auto& s : sphere)
+	    {
+			auto value = s.clearNotLinkedVertices();
+			if (value != -1)
+				toCollapse.emplace_back(value, s.getID());
+		}
+		
+//		for (auto& c : toCollapse)
+//		{
+//			std::cout << "Collapsing parentless sphere " << c.j << " into " << c.i << std::endl;
+//			collapse(c.j, c.i);
+//		}
+		
+//		for (auto it = sphere.begin(); it != sphere.end();)
+//		{
+//			auto indexToCollapse = it->clearNotLinkedVertices();
+//			if (indexToCollapse != -1)
+//				collapse(indexToCollapse, it->getID());
+//		}
         
         return true;
     }
@@ -1046,7 +1073,6 @@ namespace Renderer {
 	    updateTrianglesAfterCollapse(e.idxI, e.idxJ);
 
         removeDegenerates();
-        clearSphereMesh();
         
         return true;
     }
@@ -1123,17 +1149,23 @@ namespace Renderer {
         newSphere.color = Math::Vector3(1, 0, 0);
         newSphere.addQuadric(sphere[i].getSphereQuadric());
         newSphere.addQuadric(sphere[j].getSphereQuadric());
+	    
+	    #ifndef DISABLE_VERTEX_INCLUSION_IN_SPHERES
+        for (auto& vertex : sphere[i].vertices)
+            newSphere.addVertex(*vertex);
         
-//      FIXME: This is done only for rendering
-        for (const auto & vertex : sphere[i].vertices)
-            newSphere.addVertex(vertex);
-        
-        for (const auto & vertex : sphere[j].vertices)
-            newSphere.addVertex(vertex);
-//
-        
+        for (auto& vertex : sphere[j].vertices)
+            newSphere.addVertex(*vertex);
+	    
+//	    if (edgeToCollapse.isErrorCorrectionQuadricSet)
+//		    for (auto& vertex : edgeToCollapse.incorporatedVertices)
+//			    newSphere.addVertex(*vertex);
+		#endif
+	    
+	    #ifdef ENABLE_REGION_BOUND
         newSphere.region = sphere[i].region;
         newSphere.region.join(sphere[j].region);
+	    #endif
 
         sphere[i] = newSphere;
 

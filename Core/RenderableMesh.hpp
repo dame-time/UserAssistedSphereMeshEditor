@@ -33,9 +33,11 @@ namespace Renderer {
         Math::Vector3 color;
         
         Math::Vector2 curvature;
+		
+		int referenceSphere;
 
-        Vertex() : position(Math::Vector3()), normal(Math::Vector3(1, 0, 0)) {}
-        Vertex(const Math::Vector3& p, const Math::Vector3& n) : position(p), normal(n) {}
+        Vertex() : position(Math::Vector3()), normal(Math::Vector3(1, 0, 0)), referenceSphere(-1) {}
+        Vertex(const Math::Vector3& p, const Math::Vector3& n) : position(p), normal(n), referenceSphere(-1) {}
     };
 
     struct AABB

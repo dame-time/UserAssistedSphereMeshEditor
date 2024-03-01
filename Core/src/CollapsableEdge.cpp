@@ -61,9 +61,6 @@ namespace Renderer
             error = (i.getSphereQuadric() + j.getSphereQuadric()).minimum();
         else
             error = (i.getSphereQuadric() + j.getSphereQuadric() + errorCorrectionQuadric).minimum();
-        
-//        error += i.getSphereQuadric().evaluateSQEM(Math::Vector4(i.center, i.radius));
-//        error += j.getSphereQuadric().evaluateSQEM(Math::Vector4(j.center, j.radius));
     }
 
     std::ostream& operator<<(std::ostream& os, const CollapsableEdge& edge)

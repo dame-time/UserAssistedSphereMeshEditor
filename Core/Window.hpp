@@ -77,7 +77,6 @@ namespace Renderer {
             std::vector<Sphere*> pickedMeshes;
         
             float rotationSensitivity;
-            float scrollSpeed;
         
             Window(unsigned int width, unsigned int height, const std::string& title, Camera* mainCamera);
             ~Window();

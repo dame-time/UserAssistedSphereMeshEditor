@@ -19,6 +19,14 @@
 
 namespace Renderer
 {
+	struct Pair
+	{
+		int i, j;
+
+		Pair() : i(0), j(0) {}
+		Pair(int a, int b) : i(a), j(b) {}
+	};
+	
     struct Triangle
     {
         int i, j, k;
@@ -72,7 +80,7 @@ namespace Renderer
             void initializeEPSILON();
             
             void initializeSphereMeshTriangles(const std::vector<Face>& Faces);
-            void initializeSpheres(const std::vector<Vertex>& vertices, Math::Scalar initialRadius);
+            void initializeSpheres(std::vector<Vertex>& vertices, Math::Scalar initialRadius);
             
             void computeSpheresProperties(const std::vector<Vertex>& vertices);
             void updateSpheres();
@@ -85,7 +93,7 @@ namespace Renderer
             CollapsableEdge getBestCollapseFast();
             CollapsableEdge getBestCollapseInConnectivity();
         
-            Sphere collapseEdgeIntoSphere(const CollapsableEdge& edgeToCollapse);
+            Sphere collapseEdgeIntoSphere(CollapsableEdge& edgeToCollapse);
             
             void updateEdgesAfterCollapse(int i, int j);
             void updateTrianglesAfterCollapse(int i, int j);

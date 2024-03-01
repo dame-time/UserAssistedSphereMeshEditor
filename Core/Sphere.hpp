@@ -24,7 +24,9 @@ namespace Renderer {
             void generateUUID();
         
         public:
-            std::vector<Vertex> vertices;
+			bool isDangling{false};
+			
+            std::vector<Vertex*> vertices;
         
             Math::Scalar quadricWeights{};
         
@@ -37,24 +39,25 @@ namespace Renderer {
 
             Sphere();
             Sphere(const Sphere& sphere);
-            Sphere(const Vertex& vertex, Math::Scalar targetSphereRadius);
+            Sphere(Vertex& vertex, Math::Scalar targetSphereRadius);
             Sphere(const Math::Vector3& center, Math::Scalar radius);
 
-            Quadric getSphereQuadric() const;
+            [[nodiscard]] Quadric getSphereQuadric() const;
 
             void addFace(const Math::Vector3& centroid, const Math::Vector3& normal, Math::Scalar weight = 1.0);
             void addQuadric(const Quadric& q);
         
-            bool checkSphereOverPlanarRegion() const;
+            [[nodiscard]] bool checkSphereOverPlanarRegion() const;
             void approximateSphereOverPlanarRegion(const Math::Vector3& edge0, const Math::Vector3& edge1);
         
-            void addVertex(const Vertex& vertex);
+            void addVertex(Vertex& vertex);
+			int clearNotLinkedVertices();
         
             void constrainSphere(const Math::Scalar& constrainRadius);
         
-            int getID() const;
+            [[nodiscard]] int getID() const;
 
-            Sphere lerp(const Sphere &s, Math::Scalar t) const;
+            [[nodiscard]] Sphere lerp(const Sphere &s, Math::Scalar t) const;
             bool intersectsVertex(const Math::Vector3& vertex);
     };
 }

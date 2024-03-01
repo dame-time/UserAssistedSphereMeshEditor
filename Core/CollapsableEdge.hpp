@@ -24,6 +24,8 @@ namespace Renderer
         
             Quadric errorCorrectionQuadric;
             bool isErrorCorrectionQuadricSet;
+			
+			std::vector<Vertex*> incorporatedVertices {};
             
             CollapsableEdge();
             CollapsableEdge(const Sphere& _i, const Sphere& _j, int _idxI, int _idxJ);
@@ -42,6 +44,8 @@ namespace Renderer
                 
                 isErrorCorrectionQuadricSet = other.isErrorCorrectionQuadricSet;
                 errorCorrectionQuadric = other.errorCorrectionQuadric;
+				
+				incorporatedVertices = other.incorporatedVertices;
             }
             
             bool operator < (const CollapsableEdge& rhs) const;

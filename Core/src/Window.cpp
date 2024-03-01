@@ -21,7 +21,8 @@
 #define FILE_UPLOAD_ICON "\xEF\x87\x89"
 #define SETTINGS_ICON "\xEF\x80\x93"
 
-// TODO: Define
+// TODO: Same camera always (orthographic)
+// TODO: Remove scrollbar slider
 namespace Renderer {
 
     int Window::viewportH = 0;
@@ -35,7 +36,6 @@ namespace Renderer {
         lastFrame = 0.0f;
         
         rotationSensitivity = 0.3f;
-        scrollSpeed = 1.0f;
         
         renderFullSMWithNSpheres = 0;
         renderConnectivity = false;
@@ -252,13 +252,11 @@ namespace Renderer {
     {
         if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
             glfwSetWindowShouldClose(window, true);
-        
-        Math::Scalar cameraSpeed = scrollSpeed;
+		
 	    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	    {
 		    if (isCameraPerspective)
 			    mainCamera->translate(Math::Math::scalarPow(2, -deltaTime));
-		    
 		    else
 			    mainCamera->scale(Math::Math::scalarPow(2, -deltaTime));
 		    
@@ -837,12 +835,7 @@ namespace Renderer {
             }
 
             ImGui::Separator();
-            
-            static float scroll = 1.0f;
-            ImGui::SliderFloat("Scroll Speed", &scroll, 0.0f, 10.0f);
-            scrollSpeed = scroll;
-            
-            
+			
             static float rotationSpeed = 0.3f;
             ImGui::SliderFloat("Rotation Speed", &rotationSpeed, 0.0f, 1.0f);
             rotationSensitivity = rotationSpeed;
