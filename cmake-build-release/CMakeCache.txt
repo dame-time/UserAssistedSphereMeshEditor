@@ -207,15 +207,6 @@ CMAKE_STRIP:FILEPATH=/Applications/Xcode.app/Contents/Developer/Toolchains/Xcode
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//Value Computed by CMake
-CustomRenderer_BINARY_DIR:STATIC=/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release
-
-//Value Computed by CMake
-CustomRenderer_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-CustomRenderer_SOURCE_DIR:STATIC=/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor
-
 //C compiler flags for OpenMP parallelization
 OpenMP_C_FLAGS:STRING=NOTFOUND
 

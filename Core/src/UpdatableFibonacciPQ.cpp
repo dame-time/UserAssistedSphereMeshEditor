@@ -1,7 +1,7 @@
 #include <UpdatableFibonacciPQ.hpp>
 
 #include <SphereMesh.hpp>
-#include <CollapsableEdge.hpp>
+#include <EdgeCollapse.hpp>
 
 namespace Renderer
 {
@@ -10,7 +10,7 @@ namespace Renderer
         isDirty = false;
     }
 
-    void UpdatableFibonacciPQ::push(const CollapsableEdge& collapsableEdge)
+    void UpdatableFibonacciPQ::push(const EdgeCollapse& collapsableEdge)
     {
         auto edgeIndexI = collapsableEdge.idxI;
         auto edgeIndexJ = collapsableEdge.idxJ;
@@ -22,7 +22,7 @@ namespace Renderer
         q.push(edgeToAdd);
     }
 
-    CollapsableEdge UpdatableFibonacciPQ::top(int sphereSize)
+    EdgeCollapse UpdatableFibonacciPQ::top(int sphereSize)
     {
         auto topElement = q.top();
         auto topElementIdI = topElement.queueIdI;
@@ -51,7 +51,7 @@ namespace Renderer
                )
         {
             if (size() < 1)
-                return CollapsableEdge();
+                return EdgeCollapse();
             
             q.pop();
             topElement = q.top();

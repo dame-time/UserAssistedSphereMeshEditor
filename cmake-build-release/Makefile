@@ -179,29 +179,29 @@ Core/src/Camera.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.s
 .PHONY : Core/src/Camera.cpp.s
 
-Core/src/CollapsableEdge.o: Core/src/CollapsableEdge.cpp.o
-.PHONY : Core/src/CollapsableEdge.o
+Core/src/EdgeCollapse.o: Core/src/EdgeCollapse.cpp.o
+.PHONY : Core/src/EdgeCollapse.o
 
 # target to build an object file
-Core/src/CollapsableEdge.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o
-.PHONY : Core/src/CollapsableEdge.cpp.o
+Core/src/EdgeCollapse.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o
+.PHONY : Core/src/EdgeCollapse.cpp.o
 
-Core/src/CollapsableEdge.i: Core/src/CollapsableEdge.cpp.i
-.PHONY : Core/src/CollapsableEdge.i
+Core/src/EdgeCollapse.i: Core/src/EdgeCollapse.cpp.i
+.PHONY : Core/src/EdgeCollapse.i
 
 # target to preprocess a source file
-Core/src/CollapsableEdge.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.i
-.PHONY : Core/src/CollapsableEdge.cpp.i
+Core/src/EdgeCollapse.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.i
+.PHONY : Core/src/EdgeCollapse.cpp.i
 
-Core/src/CollapsableEdge.s: Core/src/CollapsableEdge.cpp.s
-.PHONY : Core/src/CollapsableEdge.s
+Core/src/EdgeCollapse.s: Core/src/EdgeCollapse.cpp.s
+.PHONY : Core/src/EdgeCollapse.s
 
 # target to generate assembly for a file
-Core/src/CollapsableEdge.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.s
-.PHONY : Core/src/CollapsableEdge.cpp.s
+Core/src/EdgeCollapse.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SphereMeshEditor.dir/build.make CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.s
+.PHONY : Core/src/EdgeCollapse.cpp.s
 
 Core/src/ObjLoader.o: Core/src/ObjLoader.cpp.o
 .PHONY : Core/src/ObjLoader.o
@@ -1105,9 +1105,9 @@ help:
 	@echo "... Core/src/Camera.o"
 	@echo "... Core/src/Camera.i"
 	@echo "... Core/src/Camera.s"
-	@echo "... Core/src/CollapsableEdge.o"
-	@echo "... Core/src/CollapsableEdge.i"
-	@echo "... Core/src/CollapsableEdge.s"
+	@echo "... Core/src/EdgeCollapse.o"
+	@echo "... Core/src/EdgeCollapse.i"
+	@echo "... Core/src/EdgeCollapse.s"
 	@echo "... Core/src/ObjLoader.o"
 	@echo "... Core/src/ObjLoader.i"
 	@echo "... Core/src/ObjLoader.s"

@@ -8,7 +8,7 @@
 #include <Quadric.hpp>
 #include <Region.hpp>
 #include <Sphere.hpp>
-#include <CollapsableEdge.hpp>
+#include <EdgeCollapse.hpp>
 
 //#include <UpdatableFibonacciPQ.hpp>
 #include <UpdatablePQ.hpp>
@@ -76,6 +76,8 @@ namespace Renderer
             
             std::vector<std::vector<bool>> edgeConnectivity;
             std::vector<std::vector<std::vector<bool>>> triangleConnectivity;
+	    
+	        std::unordered_map<int, int> sphereMapper;
         
             void initializeEPSILON();
             
@@ -89,16 +91,16 @@ namespace Renderer
             void updateCollapseCosts(const Sphere& newSphere, int i, int j);
             void recalculateCollapseCosts(int edgeIndexToErase, const Sphere& newSphere, int i, int j);
         
-            CollapsableEdge getBestCollapseBruteForce();
-            CollapsableEdge getBestCollapseFast();
-            CollapsableEdge getBestCollapseInConnectivity();
+            EdgeCollapse getBestCollapseBruteForce();
+            EdgeCollapse getBestCollapseFast();
+            EdgeCollapse getBestCollapseInConnectivity();
         
-            Sphere collapseEdgeIntoSphere(CollapsableEdge& edgeToCollapse);
+            Sphere collapseEdgeIntoSphere(EdgeCollapse& edgeToCollapse);
             
             void updateEdgesAfterCollapse(int i, int j);
             void updateTrianglesAfterCollapse(int i, int j);
             void removeDegenerates();
-            void updateEdgeQueue(const CollapsableEdge& collapsedEdge);
+            void updateEdgeQueue(const EdgeCollapse& collapsedEdge);
             
             void drawSpheresOverEdge(const Edge &e, int nSpheres = 4, Math::Scalar rescaleRadii = 1.0, Math::Scalar minRadiiScale = 0.3);
             void drawSpheresOverTriangle(const Triangle& t, int nSpheres = 4, Math::Scalar size = 1.0, Math::Scalar minRadiiScale = 0.3);
@@ -158,7 +160,7 @@ namespace Renderer
             void renderSphereVertices(int i);
             void clearRenderedSphereVertices();
             
-            bool collapse(int sphereIndexA, int sphereIndexB);
+            int collapse(int sphereIndexA, int sphereIndexB);
             
             bool collapseSphereMesh();
             bool collapseSphereMesh(int n);

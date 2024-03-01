@@ -83,19 +83,19 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Camera.cpp -o CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.s
 
-CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o: CMakeFiles/SphereMeshEditor.dir/flags.make
-CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/CollapsableEdge.cpp
-CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o: CMakeFiles/SphereMeshEditor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o -MF CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o.d -o CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o -c /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/CollapsableEdge.cpp
+CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o: CMakeFiles/SphereMeshEditor.dir/flags.make
+CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/EdgeCollapse.cpp
+CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o: CMakeFiles/SphereMeshEditor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o -MF CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o.d -o CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o -c /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/EdgeCollapse.cpp
 
-CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/CollapsableEdge.cpp > CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.i
+CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/EdgeCollapse.cpp > CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.i
 
-CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/CollapsableEdge.cpp -o CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.s
+CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/EdgeCollapse.cpp -o CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.s
 
 CMakeFiles/SphereMeshEditor.dir/Core/src/ObjLoader.cpp.o: CMakeFiles/SphereMeshEditor.dir/flags.make
 CMakeFiles/SphereMeshEditor.dir/Core/src/ObjLoader.cpp.o: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/ObjLoader.cpp
@@ -590,7 +590,7 @@ CMakeFiles/SphereMeshEditor.dir/main.cpp.s: cmake_force
 # Object files for target SphereMeshEditor
 SphereMeshEditor_OBJECTS = \
 "CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.o" \
-"CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o" \
+"CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o" \
 "CMakeFiles/SphereMeshEditor.dir/Core/src/ObjLoader.cpp.o" \
 "CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric.cpp.o" \
 "CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric2.cpp.o" \
@@ -631,7 +631,7 @@ SphereMeshEditor_OBJECTS = \
 SphereMeshEditor_EXTERNAL_OBJECTS =
 
 SphereMeshEditor: CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.o
-SphereMeshEditor: CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o
+SphereMeshEditor: CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o
 SphereMeshEditor: CMakeFiles/SphereMeshEditor.dir/Core/src/ObjLoader.cpp.o
 SphereMeshEditor: CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric.cpp.o
 SphereMeshEditor: CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric2.cpp.o

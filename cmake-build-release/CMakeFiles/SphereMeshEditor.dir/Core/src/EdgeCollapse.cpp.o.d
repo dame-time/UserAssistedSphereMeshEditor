@@ -1,48 +1,11 @@
-CMakeFiles/SphereMeshEditor.dir/Core/src/Window.cpp.o: \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Window.cpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Window.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/glad/glad.h \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/KHR/khrplatform.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/stdint.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__config \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__config_site \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/stdint.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/stdint.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_int8_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_int16_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_int32_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_int64_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_uint8_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_uint16_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_uint32_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_uint64_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/cdefs.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_symbol_aliasing.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_posix_availability.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/machine/_types.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/i386/_types.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_pthread/_pthread_types.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_intptr_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/machine/types.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/i386/types.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_u_int8_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_u_int16_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_u_int32_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_u_int64_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_uintptr_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_intmax_t.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_uintmax_t.h \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/GLFW/glfw3.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/stddef.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/stddef.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/__stddef_max_align_t.h \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Vector/Vector3.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Scalar.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Vector/Vector2.hpp \
+CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o: \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/EdgeCollapse.cpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/EdgeCollapse.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Math.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/cmath \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__assert \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__config \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__config_site \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__verbose_abort \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__availability \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__type_traits/enable_if.h \
@@ -58,6 +21,9 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/Window.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/version \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/math.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/math.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/cdefs.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_symbol_aliasing.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_posix_availability.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/Availability.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/AvailabilityVersions.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/AvailabilityInternal.h \
@@ -65,6 +31,9 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/Window.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__type_traits/promote.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__utility/declval.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/cstddef \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/stddef.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/stddef.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/__stddef_max_align_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/limits \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__type_traits/is_signed.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__undef_macros \
@@ -183,6 +152,31 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/Window.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__type_traits/result_of.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__type_traits/type_identity.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/cstdint \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/stdint.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/stdint.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/stdint.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_int8_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_int16_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_int32_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_int64_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_uint8_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_uint16_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_uint32_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_uint64_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/machine/_types.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/i386/_types.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_pthread/_pthread_types.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_intptr_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/machine/types.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/i386/types.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_u_int8_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_u_int16_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_u_int32_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_u_int64_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/sys/_types/_uintptr_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_intmax_t.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_uintmax_t.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/stdlib.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/stdlib.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types.h \
@@ -798,12 +792,13 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/Window.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/_types/_nl_item.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__bsd_locale_defaults.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/cstdarg \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Vector/Vector3.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Scalar.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Vector/Vector2.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Versor/Versor2.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Point/Point2.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Versor/Versor3.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Point/Point3.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/RenderableMesh.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Shader/Shader.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Vector/Vector4.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Versor/Versor4.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Matrix/Matrix4.hpp \
@@ -814,6 +809,11 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/Window.cpp.o: \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Rotation/Quaternion.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Rotation/../Matrix/Matrix4.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Point/Point4.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Sphere.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/RenderableMesh.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Shader/Shader.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/glad/glad.h \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/KHR/khrplatform.h \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Matrix/Matrix2.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Matrix/../Vector/Vector2.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/fstream \
@@ -840,55 +840,5 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/Window.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/float.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/float.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/float.h \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Camera.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/SphereMesh.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Quadric.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Region.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Sphere.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/EdgeCollapse.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/UpdatablePQ.hpp \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/queue \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/deque \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui.h \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imconfig.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/assert.h \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui_impl_opengl3.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/TargetConditionals.h \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/include/imgui/imgui_impl_glfw.h \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/tinyfiledialogs.h \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/YAMLUtils.hpp \
-  /usr/local/include/yaml-cpp/yaml.h \
-  /usr/local/include/yaml-cpp/parser.h /usr/local/include/yaml-cpp/dll.h \
-  /usr/local/include/yaml-cpp/emitter.h \
-  /usr/local/include/yaml-cpp/binary.h \
-  /usr/local/include/yaml-cpp/emitterdef.h \
-  /usr/local/include/yaml-cpp/emittermanip.h \
-  /usr/local/include/yaml-cpp/null.h \
-  /usr/local/include/yaml-cpp/ostream_wrapper.h \
-  /usr/local/include/yaml-cpp/emitterstyle.h \
-  /usr/local/include/yaml-cpp/stlemitter.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/list \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/set \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__tree \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/map \
-  /usr/local/include/yaml-cpp/exceptions.h \
-  /usr/local/include/yaml-cpp/mark.h \
-  /usr/local/include/yaml-cpp/noexcept.h \
-  /usr/local/include/yaml-cpp/traits.h \
-  /usr/local/include/yaml-cpp/node/node.h \
-  /usr/local/include/yaml-cpp/node/detail/iterator_fwd.h \
-  /usr/local/include/yaml-cpp/node/ptr.h \
-  /usr/local/include/yaml-cpp/node/type.h \
-  /usr/local/include/yaml-cpp/node/impl.h \
-  /usr/local/include/yaml-cpp/node/detail/memory.h \
-  /usr/local/include/yaml-cpp/node/detail/node.h \
-  /usr/local/include/yaml-cpp/node/detail/node_ref.h \
-  /usr/local/include/yaml-cpp/node/detail/node_data.h \
-  /usr/local/include/yaml-cpp/node/detail/node_iterator.h \
-  /usr/local/include/yaml-cpp/node/iterator.h \
-  /usr/local/include/yaml-cpp/node/detail/iterator.h \
-  /usr/local/include/yaml-cpp/node/convert.h \
-  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/valarray \
-  /usr/local/include/yaml-cpp/node/detail/impl.h \
-  /usr/local/include/yaml-cpp/node/parse.h \
-  /usr/local/include/yaml-cpp/node/emit.h
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Region.hpp

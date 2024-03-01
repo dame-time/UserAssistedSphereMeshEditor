@@ -733,7 +733,7 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/UpdatablePQ.cpp.o: \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__chrono/literals.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/queue \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/deque \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/CollapsableEdge.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/EdgeCollapse.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Math.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/ios \

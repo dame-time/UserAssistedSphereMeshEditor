@@ -6,16 +6,16 @@
 #include <functional>
 
 #include <unordered_map>
-#include <CollapsableEdge.hpp>
+#include <EdgeCollapse.hpp>
 
 namespace Renderer
 {
-    struct CollapsableEdge;
+    struct EdgeCollapse;
     
     class UpdatablePQ
     {
         private:
-            std::priority_queue<CollapsableEdge, std::vector<CollapsableEdge>, std::greater<CollapsableEdge>> q;
+            std::priority_queue<EdgeCollapse, std::vector<EdgeCollapse>, std::greater<>> q;
         
             std::unordered_map<int, int> currentPoppableIndex;
         
@@ -24,11 +24,11 @@ namespace Renderer
         public:
             UpdatablePQ();
         
-            void push(const CollapsableEdge& collapsableEdge);
-            CollapsableEdge top(int sphereSize);
+            void push(const EdgeCollapse& collapsableEdge);
+            EdgeCollapse top(int sphereSize);
             void pop();
         
-            bool isQueueDirty() const;
+            [[nodiscard]] bool isQueueDirty() const;
             void setQueueDirty();
         
             bool clear();

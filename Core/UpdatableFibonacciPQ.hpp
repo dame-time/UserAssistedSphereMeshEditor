@@ -6,7 +6,7 @@
 #include <functional>
 
 #include <unordered_map>
-#include <CollapsableEdge.hpp>
+#include <EdgeCollapse.hpp>
 
 namespace std {
     template<>
@@ -22,8 +22,8 @@ namespace std {
     };
 
     template <>
-    struct hash<Renderer::CollapsableEdge> {
-        std::size_t operator()(const Renderer::CollapsableEdge& edge) const {
+    struct hash<Renderer::EdgeCollapse> {
+        std::size_t operator()(const Renderer::EdgeCollapse& edge) const {
             std::size_t h1 = std::hash<Renderer::Sphere>()(edge.i);
             std::size_t h2 = std::hash<Renderer::Sphere>()(edge.j);
             std::size_t h3 = std::hash<int>()(edge.idxI);
@@ -41,12 +41,12 @@ namespace std {
 
 namespace Renderer
 {
-    struct CollapsableEdge;
+    struct EdgeCollapse;
     
     class UpdatableFibonacciPQ
     {
         private:
-            FibQueue<CollapsableEdge> q;
+            FibQueue<EdgeCollapse> q;
         
             std::unordered_map<int, int> currentPoppableIndex;
         
@@ -55,8 +55,8 @@ namespace Renderer
         public:
             UpdatableFibonacciPQ();
         
-            void push(const CollapsableEdge& collapsableEdge);
-            CollapsableEdge top(int sphereSize);
+            void push(const EdgeCollapse& collapsableEdge);
+            EdgeCollapse top(int sphereSize);
             void pop();
         
             bool isQueueDirty();

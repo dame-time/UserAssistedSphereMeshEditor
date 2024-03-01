@@ -83,7 +83,7 @@ namespace Renderer {
 
         ImGui::StyleColorsDark();
         
-        isCameraPerspective = true;
+        isCameraPerspective = false;
         
         ImGuiIO& io = ImGui::GetIO(); (void)io;
         
@@ -445,7 +445,7 @@ namespace Renderer {
             windowClassInstance->pickedMeshes.clear();
             windowClassInstance->pickedMesh = nullptr;
             
-            if (!result)
+            if (result == -1)
                 windowClassInstance->displayErrorMessage("Failed to collapse the two spheres");
             
             windowClassInstance->displayLogMessage("Current spheres: " + std::to_string(windowClassInstance->sm->sphere.size()));
@@ -462,7 +462,7 @@ namespace Renderer {
                 auto result = windowClassInstance->sm->collapse(windowClassInstance->pickedMeshes[i - 1]->getID(),
                                                                 windowClassInstance->pickedMeshes[i - 2]->getID());
                 
-                if (!result)
+                if (result == -1)
                     windowClassInstance->displayErrorMessage("Failed to collapse the two spheres: (" + std::to_string(i) + ", " + std::to_string(i + 1) + ")");
                 i -= 2;
             }
@@ -675,7 +675,7 @@ namespace Renderer {
                     pickedMeshes.clear();
                     pickedMesh = nullptr;
                     
-                    if (!result)
+                    if (result == -1)
                         displayErrorMessage("Failed to collapse the two spheres");
                 } else {
                     displayErrorMessage("Not enough spheres selected");
@@ -693,7 +693,7 @@ namespace Renderer {
                         auto result = sm->collapse(pickedMeshes[i - 1]->getID(),
                                                                         pickedMeshes[i - 2]->getID());
                         
-                        if (!result)
+                        if (result == -1)
                             displayErrorMessage("Failed to collapse the two spheres: (" + std::to_string(i) + ", " + std::to_string(i + 1) + ")");
                         i -= 2;
                     }

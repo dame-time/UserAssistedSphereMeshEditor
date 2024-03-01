@@ -121,13 +121,19 @@ namespace Renderer {
         sphere.reserve(vertices.size());
 	    
 	    for (auto& vertex : vertices)
-		    sphere.emplace_back(vertex, initialRadius);
+	    {
+			auto newSphere = Sphere(vertex, initialRadius);
+			
+		    sphere.emplace_back(newSphere);
+			
+			sphereMapper[newSphere.getID()] = static_cast<int>(sphere.size()) - 1;
+		}
     }
 
     void SphereMesh::initializeEdgeQueue()
     {
         int sphereSize = (int)sphere.size();
-        std::queue<CollapsableEdge> localQueues[omp_get_max_threads()];
+        std::queue<EdgeCollapse> localQueues[omp_get_max_threads()];
 
         #pragma omp parallel default(none) shared(sphere, sphereSize, localQueues, edgeQueue)
         {
@@ -139,7 +145,7 @@ namespace Renderer {
 					// FIXME: In here I don't want to exclude the collapses of the spheres that are linked by an edge
 					//  or by a triangle
                     if ((sphere[i].center - sphere[j].center).squareMagnitude() <= EPSILON * EPSILON) {
-                        CollapsableEdge e(sphere[i], sphere[j], i, j);
+                        EdgeCollapse e(sphere[i], sphere[j], i, j);
                         e.updateError();
 	                    e.queueIdI = 0;
 	                    e.queueIdJ = 0;
@@ -162,7 +168,7 @@ namespace Renderer {
 	    
     }
 
-    void SphereMesh::updateEdgeQueue(const CollapsableEdge& collapsedEdge)
+    void SphereMesh::updateEdgeQueue(const EdgeCollapse& collapsedEdge)
     {
         auto& edgeI = collapsedEdge.idxI;
         auto& edgeJ = collapsedEdge.idxJ;
@@ -172,7 +178,7 @@ namespace Renderer {
 
         auto updateEdges = [&](int i, int edgeIdx, int queueIdOffset) {
             if (i != edgeIdx && (sphere[i].center - sphere[edgeIdx].center).squareMagnitude() <= epsilonSquared) {
-                CollapsableEdge newEdge = CollapsableEdge(sphere[i], sphere[edgeIdx], i, edgeIdx);
+                EdgeCollapse newEdge = EdgeCollapse(sphere[i], sphere[edgeIdx], i, edgeIdx);
 
                 newEdge.queueIdI = 0;
                 newEdge.queueIdJ = queueIdOffset;
@@ -310,18 +316,56 @@ namespace Renderer {
         else
             renderOneBillboardSphere(center, radius, color);
     }
-
-    CollapsableEdge SphereMesh::getBestCollapseFast()
+	
+    EdgeCollapse SphereMesh::getBestCollapseFast()
     {
         if (edgeQueue.size() < 1)
             return {};
         
-        CollapsableEdge topEdge = edgeQueue.top((int)sphere.size());
+        EdgeCollapse topEdge = edgeQueue.top((int)sphere.size());
         edgeQueue.pop();
         
         if (topEdge.idxI == -1 || topEdge.idxJ == -1)
             return {};
-        
+	    
+		
+		while (!topEdge.isCheckedAgainstIncorporatedVertices)
+		{
+		    Sphere newSphere = Sphere();
+		    newSphere.color = Math::Vector3(1, 0, 0);
+		    newSphere.addQuadric(sphere[topEdge.idxI].getSphereQuadric());
+		    newSphere.addQuadric(sphere[topEdge.idxJ].getSphereQuadric());
+			
+			auto startError = topEdge.error;
+			
+			// TODO: Check this problem: when I do that maybe a sphere exist in this moment, but not in the future so
+			//  store in a separate map where all the old sphere collapse into, and then when I get an edge that has
+			//  already been checked against the incorporated vertices, I want to recheck if the spheres of the chain
+			//  still exists, if so then perfect, otherwise I want to recompute the error of the edge
+			for (auto& vertex : referenceMesh->vertices)
+				if (newSphere.intersectsVertex(vertex.position))
+				{
+					if (vertex.referenceSphere == topEdge.i.getID() || vertex.referenceSphere == topEdge.j.getID())
+						continue;
+					
+					topEdge.addSphereCollapseToChain(sphere[sphereMapper[vertex.referenceSphere]]);
+				}
+			
+			topEdge.isCheckedAgainstIncorporatedVertices = true;
+			topEdge.updateError();
+			
+			if (topEdge.error == startError)
+				return topEdge;
+			
+			edgeQueue.push(topEdge);
+			topEdge = edgeQueue.top((int)sphere.size());
+			edgeQueue.pop();
+			
+			if (topEdge.idxI == -1 || topEdge.idxJ == -1)
+				return {};
+		}
+	    
+	    #ifdef USE_THIEF_SPHERE_METHOD
         while (!topEdge.isErrorCorrectionQuadricSet)
         {
             Sphere newSphere = Sphere();
@@ -377,17 +421,18 @@ namespace Renderer {
             if (topEdge.idxI == -1 || topEdge.idxJ == -1)
                 return {};
         }
+	    #endif
         
         return topEdge;
     }
 
-    CollapsableEdge SphereMesh::getBestCollapseBruteForce()
+    EdgeCollapse SphereMesh::getBestCollapseBruteForce()
     {
         if (sphere.size() <= 1)
             return {};
         
         Math::Scalar minErorr = DBL_MAX;
-        CollapsableEdge bestEdge = CollapsableEdge(sphere[0], sphere[1], -1, -1);
+        EdgeCollapse bestEdge = EdgeCollapse(sphere[0], sphere[1], -1, -1);
         
         for (int i = 0; i < sphere.size(); i++)
             for (int j = i + 1; j < sphere.size(); j++)
@@ -395,7 +440,7 @@ namespace Renderer {
                 if (i == j || (sphere[i].center - sphere[j].center).squareMagnitude() > EPSILON * EPSILON)
                     continue;
                 
-                CollapsableEdge candidateEdge = CollapsableEdge(sphere[i], sphere[j], i, j);
+                EdgeCollapse candidateEdge = EdgeCollapse(sphere[i], sphere[j], i, j);
                 
                 if (candidateEdge.idxI > candidateEdge.idxJ)
                     candidateEdge.updateEdge(candidateEdge.j, candidateEdge.i, candidateEdge.idxJ, candidateEdge.idxI);
@@ -415,13 +460,13 @@ namespace Renderer {
         return bestEdge;
     }
 
-    CollapsableEdge SphereMesh::getBestCollapseInConnectivity()
+    EdgeCollapse SphereMesh::getBestCollapseInConnectivity()
     {
         if (triangle.empty() && edge.empty())
             return {};
         
         Math::Scalar minError = DBL_MAX;
-        CollapsableEdge bestEdge;
+        EdgeCollapse bestEdge;
         
         for (auto & i : triangle)
         {
@@ -429,11 +474,11 @@ namespace Renderer {
             int v2 = i.j;
             int v3 = i.k;
             
-            CollapsableEdge e1 = CollapsableEdge(sphere[v1], sphere[v2], v1, v2);
-            CollapsableEdge e2 = CollapsableEdge(sphere[v1], sphere[v3], v1, v3);
-            CollapsableEdge e3 = CollapsableEdge(sphere[v2], sphere[v3], v2, v3);
+            EdgeCollapse e1 = EdgeCollapse(sphere[v1], sphere[v2], v1, v2);
+            EdgeCollapse e2 = EdgeCollapse(sphere[v1], sphere[v3], v1, v3);
+            EdgeCollapse e3 = EdgeCollapse(sphere[v2], sphere[v3], v2, v3);
             
-            CollapsableEdge bestInTriangle;
+            EdgeCollapse bestInTriangle;
             if (e1.error <= e2.error && e1.error <= e3.error)
                 bestInTriangle = e1;
             else if (e2.error <= e1.error && e2.error <= e3.error)
@@ -453,7 +498,7 @@ namespace Renderer {
             int v1 = i.i;
             int v2 = i.j;
             
-            CollapsableEdge candidateEdge = CollapsableEdge(sphere[v1], sphere[v2], v1, v2);
+            EdgeCollapse candidateEdge = EdgeCollapse(sphere[v1], sphere[v2], v1, v2);
             if (candidateEdge.error < minError)
             {
                 bestEdge = candidateEdge;
@@ -712,9 +757,10 @@ namespace Renderer {
 
             glGenBuffers(1, &EBO);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data
+			(), GL_STATIC_DRAW);
 
-            glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+            glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr);
             glEnableVertexAttribArray(0);
 
             glBindVertexArray(0);
@@ -728,14 +774,14 @@ namespace Renderer {
         sphereShader->setVec3("material.diffuse", Math::Vector3(0.9, 0.9, 0.9));
         sphereShader->setVec3("material.specular", Math::Vector3(0, 0, 0));
         sphereShader->setFloat("material.shininess", 0);
-        sphereShader->setFloat("radius", radius);
+        sphereShader->setFloat("radius", static_cast<float>(radius));
 
         glDisable(GL_CULL_FACE);
         glDisable(GL_BLEND);
         glEnable(GL_DEPTH_TEST);
 
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, (int)indices.size(), GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, (int)indices.size(), GL_UNSIGNED_INT, nullptr);
         glBindVertexArray(0);
         glUseProgram(0);
     }
@@ -843,7 +889,7 @@ namespace Renderer {
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
 
             // position attribute
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
             glEnableVertexAttribArray(0);
 
             glGenBuffers(1, &EBO);
@@ -861,7 +907,7 @@ namespace Renderer {
         sphereShader->setVec3("material.diffuse", Math::Vector3(0.9, 0.9, 0.9));
         sphereShader->setVec3("material.specular", Math::Vector3(0, 0, 0));
         sphereShader->setFloat("material.shininess", 0);
-        sphereShader->setFloat("radius", radius);
+        sphereShader->setFloat("radius", static_cast<float>(radius));
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         glBindVertexArray(VAO);
@@ -910,7 +956,7 @@ namespace Renderer {
             initializeEdgeQueue();
         }
         
-        CollapsableEdge e = getBestCollapseFast();
+        EdgeCollapse e = getBestCollapseFast();
         if (e.idxI == -1 || e.idxJ == -1)
             return;
         
@@ -933,7 +979,7 @@ namespace Renderer {
     {
         Math::Vector3 color = Math::Vector3(0, 1, 0);
         
-        CollapsableEdge e = getBestCollapseInConnectivity();
+        EdgeCollapse e = getBestCollapseInConnectivity();
         if (e.idxI == -1 || e.idxJ == -1)
             return;
         
@@ -960,7 +1006,7 @@ namespace Renderer {
 			        renderSphere(vertex->position, 0.02 * BDDSize, Math::Vector3(0, 1, 0));
     }
 
-    Sphere SphereMesh::collapseEdgeIntoSphere(CollapsableEdge& edgeToCollapse)
+    Sphere SphereMesh::collapseEdgeIntoSphere(EdgeCollapse& edgeToCollapse)
     {
         Sphere& collapsedSphereA = sphere[edgeToCollapse.idxI];
         Sphere& collapsedSphereB = sphere[edgeToCollapse.idxJ];
@@ -976,9 +1022,11 @@ namespace Renderer {
         
         newSphere.addQuadric(collapsedSphereA.getSphereQuadric());
         newSphere.addQuadric(collapsedSphereB.getSphereQuadric());
-		
+	    
+	    #ifdef USE_THIEF_SPHERE_METHOD
 		if (edgeToCollapse.isErrorCorrectionQuadricSet)
 			newSphere.addQuadric(edgeToCollapse.errorCorrectionQuadric);
+	    #endif
 	    
 	    #ifdef ENABLE_REGION_BOUND
         if (newSphere.checkSphereOverPlanarRegion())
@@ -987,19 +1035,26 @@ namespace Renderer {
         newSphere.constrainSphere(newSphere.region.directionalWidth);
         newSphere.constrainSphere(getContainedRadiusOfSphere(newSphere));
 		#endif
-		
+	    
+	    #ifdef USE_THIEF_SPHERE_METHOD
         newSphere.vertices.reserve(collapsedSphereA.vertices.size() + collapsedSphereB.vertices.size() + edgeToCollapse.incorporatedVertices.size());
-
+		#else
+		newSphere.vertices.reserve(collapsedSphereA.vertices.size() + collapsedSphereB.vertices.size());
+		#endif
+		
 	    #ifndef DISABLE_VERTEX_INCLUSION_IN_SPHERES
         for (auto& vertex : collapsedSphereA.vertices)
             newSphere.addVertex(*vertex);
 
         for (auto& vertex : collapsedSphereB.vertices)
             newSphere.addVertex(*vertex);
-		
+	    
+	    #ifdef USE_THIEF_SPHERE_METHOD
 		if (edgeToCollapse.isErrorCorrectionQuadricSet)
 			for (auto& vertex : edgeToCollapse.incorporatedVertices)
 				newSphere.addVertex(*vertex);
+		#endif
+		
 		#endif
         
         return newSphere;
@@ -1013,7 +1068,7 @@ namespace Renderer {
             initializeEdgeQueue();
         }
             
-        CollapsableEdge e = getBestCollapseFast();
+        EdgeCollapse e = getBestCollapseFast();
         
         if (e.idxI == -1 || e.idxJ == -1)
             return false;
@@ -1022,16 +1077,31 @@ namespace Renderer {
         
         sphere[e.idxI] = newSphere;
         sphere[e.idxJ] = sphere.back();
-
+		
         sphere.pop_back();
+		
+		sphereMapper.erase(e.i.getID());
+		sphereMapper.erase(e.j.getID());
+		sphereMapper[sphere[e.idxJ].getID()] = e.idxJ;
+	    sphereMapper[newSphere.getID()] = e.idxI;
         
         updateEdgesAfterCollapse(e.idxI, e.idxJ);
 	    updateTrianglesAfterCollapse(e.idxI, e.idxJ);
+	    
+	    int result = e.idxI;
+	    for (auto& s : e.chainOfCollapse)
+	    {
+			if (sphereMapper.find(s->getID()) != sphereMapper.end())
+			{
+		        std::cout << "Chain collapsing sphere " << s->getID() << " into " << result << std::endl;
+		        result = collapse(result, sphereMapper[s->getID()]);
+			}
+	    }
 
         removeDegenerates();
         updateEdgeQueue(e);
-//		clearSphereMesh();
-
+	 
+#ifdef USE_THIEF_SPHERE_METHOD
 		std::vector<Pair> toCollapse;
 	    for (auto& s : sphere)
 	    {
@@ -1040,25 +1110,19 @@ namespace Renderer {
 				toCollapse.emplace_back(value, s.getID());
 		}
 		
-//		for (auto& c : toCollapse)
-//		{
-//			std::cout << "Collapsing parentless sphere " << c.j << " into " << c.i << std::endl;
-//			collapse(c.j, c.i);
-//		}
-		
-//		for (auto it = sphere.begin(); it != sphere.end();)
-//		{
-//			auto indexToCollapse = it->clearNotLinkedVertices();
-//			if (indexToCollapse != -1)
-//				collapse(indexToCollapse, it->getID());
-//		}
+		for (auto& c : toCollapse)
+		{
+			std::cout << "Collapsing parentless sphere " << c.j << " into " << c.i << std::endl;
+			collapse(c.j, c.i);
+		}
+#endif
         
         return true;
     }
 
     bool SphereMesh::collapseSphereMeshFast()
     {
-        CollapsableEdge e = getBestCollapseInConnectivity();
+        EdgeCollapse e = getBestCollapseInConnectivity();
         if (e.idxI == -1 || e.idxJ == -1)
             return false;
         
@@ -1121,8 +1185,17 @@ namespace Renderer {
         return true;
     }
 
-    bool SphereMesh::collapse(int i, int j)
+    int SphereMesh::collapse(int i, int j)
     {
+		auto idI = i;
+		auto idJ = j;
+	    
+#ifndef USE_NON_MAPPER
+		i = sphereMapper[i];
+		j = sphereMapper[j];
+#endif
+	    
+#ifdef USE_NON_MAPPER
         for (int idx = 0; idx < sphere.size(); idx++)
             if (sphere[idx].getID() == i)
             {
@@ -1136,9 +1209,10 @@ namespace Renderer {
                 j = idx;
                 break;
             }
+#endif
         
         if (i == j || i >= sphere.size() || j >= sphere.size())
-            return false;
+            return -1;
 
         if (i > j)
             std::swap(i, j);
@@ -1157,9 +1231,12 @@ namespace Renderer {
         for (auto& vertex : sphere[j].vertices)
             newSphere.addVertex(*vertex);
 	    
+	    #ifdef USE_THIEF_SPHERE_METHOD
 //	    if (edgeToCollapse.isErrorCorrectionQuadricSet)
 //		    for (auto& vertex : edgeToCollapse.incorporatedVertices)
 //			    newSphere.addVertex(*vertex);
+		#endif
+		
 		#endif
 	    
 	    #ifdef ENABLE_REGION_BOUND
@@ -1168,10 +1245,15 @@ namespace Renderer {
 	    #endif
 
         sphere[i] = newSphere;
-
         sphere[j] = sphere.back();
         
         sphere.pop_back();
+	    
+#ifndef USE_NON_MAPPER
+	    sphereMapper.erase(idI);
+	    sphereMapper.erase(idJ);
+	    sphereMapper[newSphere.getID()] = i;
+#endif
 
         updateEdgesAfterCollapse(i, j);
 	    updateTrianglesAfterCollapse(i, j);
@@ -1179,7 +1261,7 @@ namespace Renderer {
         removeDegenerates();
         clearSphereMesh();
         
-        return true;
+        return i;
     }
 
     void SphereMesh::removeDegenerates()

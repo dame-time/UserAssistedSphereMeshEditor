@@ -51,7 +51,9 @@ namespace Renderer {
             void approximateSphereOverPlanarRegion(const Math::Vector3& edge0, const Math::Vector3& edge1);
         
             void addVertex(Vertex& vertex);
+#ifdef USE_THIEF_SPHERE_METHOD
 			int clearNotLinkedVertices();
+#endif
         
             void constrainSphere(const Math::Scalar& constrainRadius);
         

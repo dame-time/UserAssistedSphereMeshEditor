@@ -812,8 +812,8 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.o: /Users/davidepaollilo/Wor
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Matrix/Matrix3.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Matrix/Matrix4.hpp
 
-CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/CollapsableEdge.cpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/CollapsableEdge.hpp \
+CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o: /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/EdgeCollapse.cpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/EdgeCollapse.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Math.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/cmath \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__assert \
@@ -9634,7 +9634,7 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/SphereMesh.cpp.o: /Users/davidepaollilo
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Quadric.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Region.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Sphere.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/CollapsableEdge.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/EdgeCollapse.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/UpdatablePQ.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/queue \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/deque \
@@ -10412,7 +10412,7 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/UpdatableFibonacciPQ.cpp.o: /Users/davi
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__chrono/literals.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/queue \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/deque \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/CollapsableEdge.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/EdgeCollapse.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Math.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/ios \
@@ -11263,7 +11263,7 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/UpdatablePQ.cpp.o: /Users/davidepaollil
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__chrono/literals.h \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/queue \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/deque \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/CollapsableEdge.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/EdgeCollapse.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Math/Math.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/iostream \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/ios \
@@ -12222,7 +12222,7 @@ CMakeFiles/SphereMeshEditor.dir/Core/src/Window.cpp.o: /Users/davidepaollilo/Wor
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Quadric.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Region.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Sphere.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/CollapsableEdge.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/EdgeCollapse.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/UpdatablePQ.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/queue \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/deque \
@@ -26912,7 +26912,7 @@ CMakeFiles/SphereMeshEditor.dir/main.cpp.o: /Users/davidepaollilo/Workspaces/C++
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Quadric.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Region.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/Sphere.hpp \
-  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/CollapsableEdge.hpp \
+  /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/EdgeCollapse.hpp \
   /Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/UpdatablePQ.hpp \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/queue \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/deque \
@@ -28455,8 +28455,6 @@ CMakeFiles/SphereMeshEditor.dir/main.cpp.o: /Users/davidepaollilo/Workspaces/C++
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/avx512bf16intrin.h:
 
-/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/CollapsableEdge.cpp:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__type_traits/remove_extent.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFFileDescriptor.h:
@@ -29541,8 +29539,6 @@ CMakeFiles/SphereMeshEditor.dir/main.cpp.o: /Users/davidepaollilo/Workspaces/C++
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__algorithm/ranges_find_if.h:
 
-/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/CollapsableEdge.hpp:
-
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__algorithm/copy_n.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__algorithm/ranges_includes.h:
@@ -30111,6 +30107,8 @@ CMakeFiles/SphereMeshEditor.dir/main.cpp.o: /Users/davidepaollilo/Workspaces/C++
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__concepts/same_as.h:
 
+/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/EdgeCollapse.cpp:
+
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__memory/allocate_at_least.h:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/15.0.0/include/tmmintrin.h:
@@ -30340,6 +30338,8 @@ CMakeFiles/SphereMeshEditor.dir/main.cpp.o: /Users/davidepaollilo/Workspaces/C++
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/__algorithm/ranges_stable_partition.h:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/mach/machine/processor_info.h:
+
+/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/EdgeCollapse.hpp:
 
 /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/usr/include/c++/v1/cstdint:
 

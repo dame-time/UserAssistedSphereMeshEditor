@@ -44,8 +44,8 @@ int main()
 //        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/bunny250NH.obj", mainShader);
         sm = new Renderer::SphereMesh(mesh, sphereShader);
     }
-    
-    window->setMeshShader(mainShader);
+	
+	window->setMeshShader(mainShader);
     window->setSphereMeshShader(sphereShader);
     
     window->setTargetMesh(mesh);

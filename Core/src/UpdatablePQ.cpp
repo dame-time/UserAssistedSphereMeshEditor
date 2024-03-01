@@ -1,6 +1,6 @@
 #include <UpdatablePQ.hpp>
 
-#include <CollapsableEdge.hpp>
+#include <EdgeCollapse.hpp>
 
 namespace Renderer
 {
@@ -9,7 +9,7 @@ namespace Renderer
         isDirty = false;
     }
 
-    void UpdatablePQ::push(const CollapsableEdge& collapsableEdge)
+    void UpdatablePQ::push(const EdgeCollapse& collapsableEdge)
     {
         auto edgeIndexI = collapsableEdge.idxI;
         auto edgeIndexJ = collapsableEdge.idxJ;
@@ -21,12 +21,12 @@ namespace Renderer
         q.push(edgeToAdd);
     }
 
-    CollapsableEdge UpdatablePQ::top(int sphereSize) {
+    EdgeCollapse UpdatablePQ::top(int sphereSize) {
         if (q.empty()) {
             return {}; // Early return if queue is empty
         }
 
-        CollapsableEdge topElement = q.top();
+        EdgeCollapse topElement = q.top();
         
         // Use iterators to store the results of find operations
         auto itI = currentPoppableIndex.find(topElement.idxI);

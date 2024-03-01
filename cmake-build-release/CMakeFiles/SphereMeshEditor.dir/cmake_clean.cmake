@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.o"
   "CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.o.d"
-  "CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o"
-  "CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o.d"
+  "CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o"
+  "CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o.d"
   "CMakeFiles/SphereMeshEditor.dir/Core/src/ObjLoader.cpp.o"
   "CMakeFiles/SphereMeshEditor.dir/Core/src/ObjLoader.cpp.o.d"
   "CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric.cpp.o"

@@ -9,7 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Camera.cpp" "CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.o" "gcc" "CMakeFiles/SphereMeshEditor.dir/Core/src/Camera.cpp.o.d"
-  "/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/CollapsableEdge.cpp" "CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o" "gcc" "CMakeFiles/SphereMeshEditor.dir/Core/src/CollapsableEdge.cpp.o.d"
+  "/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/EdgeCollapse.cpp" "CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o" "gcc" "CMakeFiles/SphereMeshEditor.dir/Core/src/EdgeCollapse.cpp.o.d"
   "/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/ObjLoader.cpp" "CMakeFiles/SphereMeshEditor.dir/Core/src/ObjLoader.cpp.o" "gcc" "CMakeFiles/SphereMeshEditor.dir/Core/src/ObjLoader.cpp.o.d"
   "/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Quadric.cpp" "CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric.cpp.o" "gcc" "CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric.cpp.o.d"
   "/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Core/src/Quadric2.cpp" "CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric2.cpp.o" "gcc" "CMakeFiles/SphereMeshEditor.dir/Core/src/Quadric2.cpp.o.d"

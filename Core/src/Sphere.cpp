@@ -30,6 +30,7 @@ namespace Renderer {
         this->center = other.center;
         this->radius = other.radius;
         this->color = other.color;
+		this->isDangling = other.isDangling;
     }
 
     Sphere::Sphere(Vertex& vertex, Math::Scalar k)
@@ -128,6 +129,7 @@ namespace Renderer {
         vertices.push_back(&vertex);
     }
 	
+#ifdef USE_THIEF_SPHERE_METHOD
 	int Sphere::clearNotLinkedVertices()
 	{
 		auto referenceSphere = -1;
@@ -146,6 +148,7 @@ namespace Renderer {
 		isDangling = vertices.empty();
 		return referenceSphere;
 	}
+#endif
 
     Sphere Sphere::lerp(const Sphere &s, Math::Scalar t) const
     {
