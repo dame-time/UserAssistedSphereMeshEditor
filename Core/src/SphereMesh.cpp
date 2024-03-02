@@ -323,11 +323,10 @@ namespace Renderer {
             return {};
         
         EdgeCollapse topEdge = edgeQueue.top((int)sphere.size());
-        edgeQueue.pop();
+        edgeQueue.extractTop();
         
         if (topEdge.idxI == -1 || topEdge.idxJ == -1)
             return {};
-	    
 		
 		while (!topEdge.isCheckedAgainstIncorporatedVertices)
 		{
@@ -355,15 +354,20 @@ namespace Renderer {
 			topEdge.updateError();
 			
 			if (topEdge.error == startError)
+			{
+				edgeQueue.increaseEdgeCollapseTimestamp(topEdge);
 				return topEdge;
+			}
 			
 			edgeQueue.push(topEdge);
 			topEdge = edgeQueue.top((int)sphere.size());
-			edgeQueue.pop();
+			edgeQueue.extractTop();
 			
 			if (topEdge.idxI == -1 || topEdge.idxJ == -1)
 				return {};
 		}
+	    
+	    edgeQueue.increaseEdgeCollapseTimestamp(topEdge);
 	    
 	    #ifdef USE_THIEF_SPHERE_METHOD
         while (!topEdge.isErrorCorrectionQuadricSet)

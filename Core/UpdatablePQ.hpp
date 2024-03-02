@@ -26,7 +26,11 @@ namespace Renderer
         
             void push(const EdgeCollapse& collapsableEdge);
             EdgeCollapse top(int sphereSize);
+			
             void pop();
+			
+			void extractTop();
+			void increaseEdgeCollapseTimestamp(const EdgeCollapse& edge);
         
             [[nodiscard]] bool isQueueDirty() const;
             void setQueueDirty();

@@ -78,6 +78,25 @@ namespace Renderer
         
         q.pop();
     }
+	
+	void UpdatablePQ::increaseEdgeCollapseTimestamp(const EdgeCollapse& edge)
+	{
+		auto extractedElement = edge;
+		auto extractedElementIdI = extractedElement.queueIdI;
+		auto extractedElementIdJ = extractedElement.queueIdJ;
+		auto topElementIndexI = extractedElement.idxI;
+		auto topElementIndexJ = extractedElement.idxJ;
+		
+		currentPoppableIndex[topElementIndexI] = extractedElementIdI + 1;
+		currentPoppableIndex[topElementIndexJ] = extractedElementIdJ + 1;
+	}
+	
+	void UpdatablePQ::extractTop()
+	{
+		if (q.empty()) return;
+		
+		q.pop();
+	}
 
     bool UpdatablePQ::isQueueDirty() const
     {
