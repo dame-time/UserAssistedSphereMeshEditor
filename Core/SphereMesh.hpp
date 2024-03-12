@@ -7,15 +7,24 @@
 #include <RenderableMesh.hpp>
 #include <Quadric.hpp>
 #include <Region.hpp>
-#include <Sphere.hpp>
 #include <EdgeCollapse.hpp>
+#include <TimedSphere.hpp>
+#include <HashDefinitions.hpp>
 
-//#include <UpdatableFibonacciPQ.hpp>
+#ifdef USE_FIB_QUEUE
+#include <UpdatableFibonacciPQ.hpp>
+#elif USE_INDEX_QUEUE
 #include <UpdatablePQ.hpp>
+#else
+#include <TemporalValidityQueue.hpp>
+#endif
 
 #include <vector>
+#include <unordered_set>
 #include <string>
 #include <cfloat>
+#include <chrono>
+#include <functional>
 
 namespace Renderer
 {
@@ -26,26 +35,6 @@ namespace Renderer
 		Pair() : i(0), j(0) {}
 		Pair(int a, int b) : i(a), j(b) {}
 	};
-	
-    struct Triangle
-    {
-        int i, j, k;
-
-        Triangle() : i(0), j(0), k(0) {}
-        Triangle(int _i, int _j, int _k) : i(_i), j(_j), k(_k) {}
-    };
-
-    struct Edge
-    {
-        int i, j;
-
-        Edge() : i(0), j(0) {}
-        Edge(int first, int second)
-        {
-            i = first;
-            j = second;
-        }
-    };
 
     enum RenderType {
         SPHERES,
@@ -56,12 +45,14 @@ namespace Renderer
     {
         private:
             Math::Scalar EPSILON{};
-        
-            std::vector<Sphere> initialSpheres;
-            UpdatablePQ edgeQueue;
+	    
+	        std::vector<TimedSphere> initialSpheres;
+            TemporalValidityQueue edgeQueue;
+			
+			int timedSphereSize {0};
             
-            std::vector<Triangle> triangle;
-            std::vector<Edge> edge;
+            std::unordered_set<Triangle> triangle;
+            std::unordered_set<Edge> edge;
         
             int perSphereVertices{};
             int renderCalls{};
@@ -72,10 +63,11 @@ namespace Renderer
             
             Shader* sphereShader;
         
-            RenderType renderType;
+            RenderType renderType {RenderType::BILLBOARDS};
             
             std::vector<std::vector<bool>> edgeConnectivity;
             std::vector<std::vector<std::vector<bool>>> triangleConnectivity;
+			std::vector<std::vector<bool>> triangleEdgeConnectivity;
 	    
 	        std::unordered_map<int, int> sphereMapper;
         
@@ -87,9 +79,6 @@ namespace Renderer
             void computeSpheresProperties(const std::vector<Vertex>& vertices);
             void updateSpheres();
             void initializeEdgeQueue();
-        
-            void updateCollapseCosts(const Sphere& newSphere, int i, int j);
-            void recalculateCollapseCosts(int edgeIndexToErase, const Sphere& newSphere, int i, int j);
         
             EdgeCollapse getBestCollapseBruteForce();
             EdgeCollapse getBestCollapseFast();
@@ -108,8 +97,6 @@ namespace Renderer
 	    [[maybe_unused]] static Math::Vector3 getTriangleCentroid(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
             static Math::Vector3 getTriangleNormal(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
         
-            void checkSphereIntersections(Sphere& s);
-        
             void renderOneSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
             void renderOneLine(const Math::Vector3& p0, const Math::Vector3& p1, const Math::Vector3& color);
             void renderOneLine(const Math::Vector3& p0, const Math::Vector3& p1, const Math::Vector3& color, int spheresPerEdge, Math::Scalar sphereSize);
@@ -121,14 +108,13 @@ namespace Renderer
         
             void clearEdges();
             void clearTriangles();
-            void clearSphereMesh();
         
             Math::Scalar getContainedRadiusOfSphere(const Sphere& s);
         
             void renderSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
         
         public:
-            std::vector<Sphere> sphere;
+            std::vector<TimedSphere> timedSpheres;
         
             SphereMesh(const SphereMesh& sm);
             SphereMesh(RenderableMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius = 0.1f);
@@ -137,14 +123,12 @@ namespace Renderer
         
             void setEpsilon(const Math::Scalar& e);
         
-            int getPerSphereVertexCount() const;
-            int getRenderCalls() const;
+            [[nodiscard]] int getPerSphereVertexCount() const;
+            [[nodiscard]] int getRenderCalls() const;
             int getTriangleSize();
             int getEdgeSize();
         
             void resetRenderCalls();
-            
-            void constructTest();
         
             RenderType getRenderType();
             void setRenderType(const RenderType& renderType);
@@ -158,7 +142,6 @@ namespace Renderer
             void renderConnectivity(int spheresPerEdge, Math::Scalar sphereSize);
         
             void renderSphereVertices(int i);
-            void clearRenderedSphereVertices();
             
             int collapse(int sphereIndexA, int sphereIndexB);
             
@@ -166,10 +149,8 @@ namespace Renderer
             bool collapseSphereMesh(int n);
             bool collapseSphereMeshFast();
             bool collapseSphereMeshFast(int n);
-        
-            Sphere getSelectedVertexSphere(int sphereIndex);
-            void resizeSphereVertex(int sphereIndex, Math::Scalar newSize);
-            void translateSphereVertex(int sphereIndex, Math::Vector3& translation);
+			
+			[[nodiscard]] int getTimedSphereSize() const;
         
             void loadFromYaml(const std::string& path);
         
@@ -182,6 +163,7 @@ namespace Renderer
             void removeSphere(int selectedSphereID);
             
             void clear();
+	        void clearSphereMesh();
         
             void reset();
     };

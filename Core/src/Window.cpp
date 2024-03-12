@@ -157,7 +157,7 @@ namespace Renderer {
             ImGui::Begin("Application Stats");
                 ImGui::Text("Frames per second: %f", ImGui::GetIO().Framerate);
                 ImGui::Text("Mesh Vertices: %lu", mesh->vertices.size());
-                ImGui::Text("Sphere Mesh Spheres: %lu", sm->sphere.size());
+                ImGui::Text("Sphere Mesh Spheres: %d", sm->getTimedSphereSize());
                 ImGui::Text("Sphere Mesh Edges: %d", sm->getEdgeSize());
                 ImGui::Text("Sphere Mesh Triangles: %d", sm->getTriangleSize());
                 ImGui::Text("Rendered vertices per sphere: %d", sm->getPerSphereVertexCount());
@@ -283,7 +283,7 @@ namespace Renderer {
             const char *defaultExtension = ".yaml";
             const char *filterPatterns[1] = { "*.yaml" };
 
-            const char *selectedSavePath = tinyfd_saveFileDialog("Save sphere mesh as *.yaml file", "", 1, filterPatterns, defaultDescription);
+            const char *selectedSavePath = tinyfd_saveFileDialog("Save timedSpheres mesh as *.yaml file", "", 1, filterPatterns, defaultDescription);
 
             if (selectedSavePath) {
                 std::string savePath(selectedSavePath);
@@ -310,7 +310,7 @@ namespace Renderer {
             const char *defaultExtension = ".txt";
             const char *filterPatterns[1] = { "*.txt" };
 
-            const char *selectedSavePath = tinyfd_saveFileDialog("Save sphere mesh as *.txt file", "", 1, filterPatterns, defaultDescription);
+            const char *selectedSavePath = tinyfd_saveFileDialog("Save timedSpheres mesh as *.txt file", "", 1, filterPatterns, defaultDescription);
 
             if (selectedSavePath) {
                 std::string savePath(selectedSavePath);
@@ -334,7 +334,7 @@ namespace Renderer {
             && glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
         {
             const char *filters[0] = { };
-            const char *selectedFilePath = tinyfd_openFileDialog("Select a sphere mesh *.yaml file", "", 0, filters, "Yaml files", 0);
+            const char *selectedFilePath = tinyfd_openFileDialog("Select a timedSpheres mesh *.yaml file", "", 0, filters, "Yaml files", 0);
 
             if (selectedFilePath) {
                 std::string filePath(selectedFilePath);
@@ -354,7 +354,8 @@ namespace Renderer {
             }
             
             if (sm->getRenderType() == RenderType::SPHERES)
-                *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
+                *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert",
+									   "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
             else
                 *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.frag");
         }
@@ -401,11 +402,11 @@ namespace Renderer {
         return {clipPos.coordinates.x, clipPos.coordinates.y, clipPos.coordinates.z};
     }
 
-    void Window::addSphereVectorToBuffer(const std::vector<Sphere>& spheres) {
+    void Window::addSphereVectorToBuffer(const std::vector<TimedSphere>& spheres) {
         if (sphereBuffer.size() > 30)
             sphereBuffer.erase(sphereBuffer.begin());
         
-        sphereBuffer.push_back(spheres);
+        sphereBuffer.emplace_back(spheres);
     }
 
     void Window::removeLastSphereVectorFromBuffer() {
@@ -437,7 +438,7 @@ namespace Renderer {
         }
         
         if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS && windowClassInstance->pickedMeshes.size() > 1) {
-            windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->sphere);
+            windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->timedSpheres);
             for (auto& m : windowClassInstance->pickedMeshes)
                 m->color = Math::Vector3(1, 0, 0);
             
@@ -448,12 +449,13 @@ namespace Renderer {
             if (result == -1)
                 windowClassInstance->displayErrorMessage("Failed to collapse the two spheres");
             
-            windowClassInstance->displayLogMessage("Current spheres: " + std::to_string(windowClassInstance->sm->sphere.size()));
+            windowClassInstance->displayLogMessage("Current spheres: " + std::to_string
+			(windowClassInstance->sm->getTimedSphereSize()));
         }
         
         if (key == GLFW_KEY_A && action == GLFW_RELEASE && windowClassInstance->pickedMeshes.size() > 1)
         {
-            windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->sphere);
+            windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->timedSpheres);
             for (auto& m : windowClassInstance->pickedMeshes)
                 m->color = Math::Vector3(1, 0, 0);
             
@@ -470,7 +472,7 @@ namespace Renderer {
             windowClassInstance->pickedMeshes.clear();
             windowClassInstance->pickedMesh = nullptr;
             
-            windowClassInstance->displayLogMessage("Current spheres: " + std::to_string(windowClassInstance->sm->sphere.size()));
+            windowClassInstance->displayLogMessage("Current spheres: " + std::to_string(windowClassInstance->sm->getTimedSphereSize()));
         }
         
         if (key == GLFW_KEY_R && action == GLFW_RELEASE && windowClassInstance->pickedMeshes.size() > 0)
@@ -484,7 +486,7 @@ namespace Renderer {
         
         if (key == GLFW_KEY_E && action == GLFW_RELEASE)
         {
-            windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->sphere);
+            windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->timedSpheres);
             windowClassInstance->pickedMeshes.clear();
             windowClassInstance->sm->reset();
         }
@@ -501,14 +503,16 @@ namespace Renderer {
                 *windowClassInstance->sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.frag");
             } else {
                 windowClassInstance->sm->setRenderType(RenderType::SPHERES);
-                *windowClassInstance->sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
+                *windowClassInstance->sphereShader = Shader
+						("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert",
+						 "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
             }
         }
         
         if (key == GLFW_KEY_Z && action == GLFW_PRESS)
         {
             if (windowClassInstance->sphereBuffer.size() > 0) {
-                windowClassInstance->sm->sphere = windowClassInstance->sphereBuffer[windowClassInstance->sphereBuffer.size() - 1];
+                windowClassInstance->sm->timedSpheres = windowClassInstance->sphereBuffer[windowClassInstance->sphereBuffer.size() - 1];
                 windowClassInstance->removeLastSphereVectorFromBuffer();
                 
                 if (windowClassInstance->pickedMesh != nullptr)
@@ -563,7 +567,7 @@ namespace Renderer {
                 const char *defaultExtension = ".yaml";
                 const char *filterPatterns[1] = { "*.yaml" };
 
-                const char *selectedSavePath = tinyfd_saveFileDialog("Save sphere mesh as *.yaml file", "", 1, filterPatterns, defaultDescription);
+                const char *selectedSavePath = tinyfd_saveFileDialog("Save timedSpheres mesh as *.yaml file", "", 1, filterPatterns, defaultDescription);
 
                 if (selectedSavePath) {
                     std::string savePath(selectedSavePath);
@@ -587,7 +591,7 @@ namespace Renderer {
                 const char *defaultExtension = ".txt";
                 const char *filterPatterns[1] = { "*.txt" };
 
-                const char *selectedSavePath = tinyfd_saveFileDialog("Save sphere mesh as *.txt file", "", 1, filterPatterns, defaultDescription);
+                const char *selectedSavePath = tinyfd_saveFileDialog("Save timedSpheres mesh as *.txt file", "", 1, filterPatterns, defaultDescription);
 
                 if (selectedSavePath) {
                     std::string savePath(selectedSavePath);
@@ -610,7 +614,7 @@ namespace Renderer {
             
             if (ImGui::MenuItem((std::string(UPLOAD_ICON) + " Load YAML Sphere Mesh...").c_str(), "Ctrl+Shift+L")) {
                 const char *filters[0] = { };
-                const char *selectedFilePath = tinyfd_openFileDialog("Select a sphere mesh *.yaml file", "", 0, filters, "Yaml files", 0);
+                const char *selectedFilePath = tinyfd_openFileDialog("Select a timedSpheres mesh *.yaml file", "", 0, filters, "Yaml files", 0);
 
                 if (selectedFilePath) {
                     std::string filePath(selectedFilePath);
@@ -630,7 +634,7 @@ namespace Renderer {
                 }
                 
                 if (sm->getRenderType() == RenderType::SPHERES)
-                    *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
+                    *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/timedSpheres.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/timedSpheres.frag");
                 else
                     *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.frag");
             }
@@ -667,7 +671,7 @@ namespace Renderer {
         if (ImGui::BeginMenu("Actions")) {
             if (ImGui::MenuItem("Collapse Two Sphere", "C")) {
                 if (pickedMesh != nullptr && pickedMeshes.size() > 1) {
-                    addSphereVectorToBuffer(sm->sphere);
+                    addSphereVectorToBuffer(sm->timedSpheres);
                     for (auto& m : pickedMeshes)
                         m->color = Math::Vector3(1, 0, 0);
                     
@@ -684,7 +688,7 @@ namespace Renderer {
             
             if (ImGui::MenuItem("Collapse All Spheres", "A")) {
                 if (pickedMeshes.size() > 1) {
-                    addSphereVectorToBuffer(sm->sphere);
+                    addSphereVectorToBuffer(sm->timedSpheres);
                     for (auto& m : pickedMeshes)
                         m->color = Math::Vector3(1, 0, 0);
                     
@@ -743,14 +747,14 @@ namespace Renderer {
             }
             
             if (ImGui::MenuItem("Reset Sphere Mesh", "E")) {
-               addSphereVectorToBuffer(sm->sphere);
+               addSphereVectorToBuffer(sm->timedSpheres);
                pickedMeshes.clear();
                sm->reset();
             }
             
             if (ImGui::MenuItem("UNDO", "Z")) {
                 if (!sphereBuffer.empty()) {
-                    sm->sphere = sphereBuffer[sphereBuffer.size() - 1];
+                    sm->timedSpheres = sphereBuffer[sphereBuffer.size() - 1];
                     removeLastSphereVectorFromBuffer();
                     
                     if (pickedMesh != nullptr)
@@ -773,7 +777,9 @@ namespace Renderer {
                     *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/impostor.frag");
                 } else {
                     sm->setRenderType(RenderType::SPHERES);
-                    *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
+                    *sphereShader = Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere"
+										   ".vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL"
+													"/sphere.frag");
                 }
             }
             
@@ -781,10 +787,10 @@ namespace Renderer {
         }
         
         if (ImGui::BeginMenu("?")) {
-            ImGui::Text("Left click over a sphere in order to select it");
-            ImGui::Text("Right click over a sphere in order to scale it");
-            ImGui::Text("Hold LEFT SHIFT while dragging your mouse in order to translate a sphere over the XY plane");
-            ImGui::Text("Hold RIGHT SHIFT while dragging your mouse in order to translate a sphere over the Z axis");
+            ImGui::Text("Left click over a timedSpheres in order to select it");
+            ImGui::Text("Right click over a timedSpheres in order to scale it");
+            ImGui::Text("Hold LEFT SHIFT while dragging your mouse in order to translate a timedSpheres over the XY plane");
+            ImGui::Text("Hold RIGHT SHIFT while dragging your mouse in order to translate a timedSpheres over the Z axis");
             ImGui::Text("Hold TAB to toggle on and off the core mesh");
             ImGui::Text("Press 'P' to switch camera from projection to perspective");
             ImGui::Text("Press 'C' to collapse the last two spheres selected");
@@ -796,9 +802,9 @@ namespace Renderer {
             ImGui::Text("Press 'S' to increase zoom percentage");
             ImGui::Text("Press 'Z' to undo up to 50 actions!");
             ImGui::Text("Press 'B' to toggle between billboards and concrete spheres");
-            ImGui::Text("Press 'N' after selecting a sphere to create an edge with a new sphere");
-            ImGui::Text("Press 'T' after selecting two spheres to create a triangle with a new mid point sphere");
-            ImGui::Text("Press 'D' to delete a sphere (NOT UNDOABLE)");
+            ImGui::Text("Press 'N' after selecting a timedSpheres to create an edge with a new timedSpheres");
+            ImGui::Text("Press 'T' after selecting two spheres to create a triangle with a new mid point timedSpheres");
+            ImGui::Text("Press 'D' to delete a timedSpheres (NOT UNDOABLE)");
             ImGui::EndMenu();
         }
         
@@ -951,12 +957,18 @@ namespace Renderer {
                 windowClassInstance->pickedMesh->color = Math::Vector3(0.5, 0.5, 0);
             
             Math::Scalar minDistance = DBL_MAX;
-            for (int i = 0; i < windowClassInstance->sm->sphere.size(); i++) {
-                auto check = (pickedPoint - windowClassInstance->sm->sphere[i].center).magnitude() - windowClassInstance->sm->sphere[i].radius;
+            for (int i = 0; i < windowClassInstance->sm->timedSpheres.size(); i++) {
+				if (!windowClassInstance->sm->timedSpheres[i].isActive)
+					continue;
+				
+                auto check = (pickedPoint - windowClassInstance->sm->timedSpheres[i].sphere.center).magnitude() -
+						windowClassInstance->sm->timedSpheres[i].sphere.radius;
+				
+				check = std::abs(check);
 
                 if (check < threshold) {
                     if (check < minDistance) {
-                        windowClassInstance->pickedMesh = &windowClassInstance->sm->sphere[i];
+                        windowClassInstance->pickedMesh = &windowClassInstance->sm->timedSpheres[i].sphere;
                         minDistance = check;
                     }
                 }
@@ -983,7 +995,7 @@ namespace Renderer {
         static double pickY = 0.0;
         if(glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS && windowClassInstance->pickedMesh != nullptr) {
             if (!isRightPressed) {
-                windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->sphere);
+                windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->timedSpheres);
                 isRightPressed = true;
                 pickX = xpos;
                 pickY = ypos;
@@ -1013,7 +1025,7 @@ namespace Renderer {
         if((glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS)
            && windowClassInstance->pickedMesh != nullptr) {
             if (!isLeftShiftPressed) {
-                windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->sphere);
+                windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->timedSpheres);
                 isLeftShiftPressed = true;
                 translateX = xpos;
                 translateY = ypos;
@@ -1113,7 +1125,7 @@ namespace Renderer {
             auto result = sm->collapseSphereMesh();
             
             if (!result)
-                displayErrorMessage("Could not find any good sphere to collapse");
+                displayErrorMessage("Could not find any good timedSpheres to collapse");
             
             sm->renderSpheresOnly();
         }
@@ -1127,7 +1139,7 @@ namespace Renderer {
         
         if (ImGui::Button("Collapse"))
         {
-            int initialSpheres = (int)sm->sphere.size();
+            int initialSpheres = (int)sm->getTimedSphereSize();
 #if DEBUG_CHRONO == 1
             auto start = std::chrono::high_resolution_clock::now();
 #endif
@@ -1142,7 +1154,7 @@ namespace Renderer {
 #endif
             
             if (!result)
-                displayErrorMessage("Could not find any good sphere to collapse,\nspheres collapsed: " + std::to_string(initialSpheres - sm->sphere.size()));
+                displayErrorMessage("Could not find any good timedSpheres to collapse,\nspheres collapsed: " + std::to_string(initialSpheres - sm->getTimedSphereSize()));
             
             sm->renderSpheresOnly();
         }
@@ -1158,7 +1170,7 @@ namespace Renderer {
         {
             for (int i = 0; i < k; i++)
                 if (!sm->collapseSphereMesh()) {
-                    std::cerr << "Could not find any good sphere to collapse,\nspheres collapsed: " << i << std::endl;
+                    std::cerr << "Could not find any good timedSpheres to collapse,\nspheres collapsed: " << i << std::endl;
                     break;
                 }
             sm->renderSpheresOnly();
@@ -1176,7 +1188,7 @@ namespace Renderer {
             auto result = sm->collapseSphereMeshFast();
 
             if (!result)
-                displayErrorMessage("Could not find any good sphere to collapse");
+                displayErrorMessage("Could not find any good timedSpheres to collapse");
             
             sm->renderSpheresOnly();
         }
@@ -1193,7 +1205,7 @@ namespace Renderer {
             for (int i = 0; i < f; i++)
                 if (!sm->collapseSphereMeshFast())
                 {
-                    std::cerr << "Could not find any good sphere to collapse,\nspheres collapsed: " << i << std::endl;
+                    std::cerr << "Could not find any good timedSpheres to collapse,\nspheres collapsed: " << i << std::endl;
                     break;
                 }
             sm->renderSpheresOnly();
@@ -1208,11 +1220,11 @@ namespace Renderer {
         
         if (ImGui::Button(("Collapse " + std::to_string(d) + " FAST").c_str()))
         {
-            int initialSpheres = sm->sphere.size();
+            int initialSpheres = sm->getTimedSphereSize();
             auto result = sm->collapseSphereMeshFast(d);
             
             if (!result)
-                displayErrorMessage("Could not find any good sphere to collapse,\nspheres collapsed: " + std::to_string(initialSpheres - sm->sphere.size()));
+                displayErrorMessage("Could not find any good timedSpheres to collapse,\nspheres collapsed: " + std::to_string(initialSpheres - sm->getTimedSphereSize()));
             sm->renderSpheresOnly();
         }
         
@@ -1257,7 +1269,8 @@ namespace Renderer {
         
         if (ImGui::Button("Clear Sphere Mesh"))
         {
-            renderFullSMWithNSpheres = 0;
+//            renderFullSMWithNSpheres = 0;
+			sm->clearSphereMesh();
         }
         
         if (ImGui::Button("Toggle Sphere Mesh"))

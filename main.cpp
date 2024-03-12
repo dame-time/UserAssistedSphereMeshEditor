@@ -36,11 +36,17 @@ int main()
     auto* mainCamera = new Renderer::Camera();
     auto* window = new Renderer::Window(1200, 1000, "Custom Renderer", mainCamera);
     
-    mainShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/vertex.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/fragment.frag");
-    sphereShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.vert", "/Users/davidepaollilo/Workspaces/C++/CustomRenderer/Shader/GLSL/sphere.frag");
+    mainShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Shader/GLSL/vertex.vert",
+									  "/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Shader/GLSL/fragment.frag");
+    sphereShader = new Renderer::Shader("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Shader/GLSL/impostor"
+										".vert", "/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Shader/GLSL"
+												 "/impostor"
+												 ".frag");
     
     if (!loadCachedResult()) {
-        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/camel-poses/camel-reference-4040.obj", mainShader);
+        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/camel-poses"
+											"/camel-reference-4040.obj", mainShader);
+//	    mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Assets/Models/horse-gallop/horse-gallop-reference.obj", mainShader);
 //        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/bunny250NH.obj", mainShader);
         sm = new Renderer::SphereMesh(mesh, sphereShader);
     }

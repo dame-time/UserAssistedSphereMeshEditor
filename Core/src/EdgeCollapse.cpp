@@ -7,13 +7,13 @@ namespace Renderer
         queueIdI = 0;
         queueIdJ = 0;
         
-        updateEdge(Sphere(), Sphere(), -1, -1);
+        updateEdge(TimedSphere(), TimedSphere(), -1, -1);
 #ifdef USE_THIEF_SPHERE_METHOD
         isErrorCorrectionQuadricSet = false;
 #endif
     }
 
-    EdgeCollapse::EdgeCollapse(const Sphere& _i, const Sphere& _j, int _idxI, int _idxJ)
+    EdgeCollapse::EdgeCollapse(const TimedSphere& _i, const TimedSphere& _j, int _idxI, int _idxJ)
     {
         queueIdI = 0;
         queueIdJ = 0;
@@ -36,7 +36,7 @@ namespace Renderer
         return error == rhs.error;
     }
 
-    void EdgeCollapse::updateEdge(const Sphere& _i, const Sphere& _j, int _idxI, int _idxJ)
+    void EdgeCollapse::updateEdge(const TimedSphere& _i, const TimedSphere& _j, int _idxI, int _idxJ)
     {
         i = _i;
         j = _j;
@@ -69,9 +69,9 @@ namespace Renderer
         else
             error = (i.getSphereQuadric() + j.getSphereQuadric() + errorCorrectionQuadric).minimum();
 #else
-		auto chainError = i.getSphereQuadric() + j.getSphereQuadric();
+		auto chainError = i.sphere.getSphereQuadric() + j.sphere.getSphereQuadric();
 		for (auto &s : chainOfCollapse)
-			chainError += s->getSphereQuadric();
+			chainError += s.second->sphere.getSphereQuadric();
 		
 	    error = chainError.minimum();
 #endif
@@ -80,8 +80,9 @@ namespace Renderer
     std::ostream& operator<<(std::ostream& os, const EdgeCollapse& edge)
     {
         os << "EdgeCollapse { "
-            << "i: (" << edge.i.center[0] << ", " << edge.i.center[1] << ", " << edge.i.center[2] << ", " << edge.i.radius << ")" << std::endl
-            << "j: (" << edge.j.center[0] << ", " << edge.j.center[1] << ", " << edge.j.center[2] << ", " << edge.j.radius << ")"
+            << "i: (" << edge.i.sphere.center[0] << ", " << edge.i.sphere.center[1] << ", " << edge.i.sphere.center[2] << ", " << edge.i
+                                                                                                                                      .sphere.radius << ")" << std::endl
+            << "j: (" << edge.j.sphere.center[0] << ", " << edge.j.sphere.center[1] << ", " << edge.j.sphere.center[2] << ", " << edge.j.sphere.radius << ")"
             << ", idxI: " << edge.idxI
             << ", idxJ: " << edge.idxJ
             << ", error: " << edge.error
@@ -95,8 +96,8 @@ namespace Renderer
         return os;
     }
 	
-	void EdgeCollapse::addSphereCollapseToChain(Sphere& sphereToCollapse)
+	void EdgeCollapse::addSphereCollapseToChain(TimedSphere& sphereToCollapse)
 	{
-		this->chainOfCollapse.emplace_back(&sphereToCollapse);
+		this->chainOfCollapse[sphereToCollapse.sphere.getID()] = &sphereToCollapse;
 	}
 }

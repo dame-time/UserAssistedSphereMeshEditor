@@ -5,6 +5,7 @@ layout (location = 1) in vec3 aNormal;
 
 out vec3 FragPos;
 out vec3 Normal;
+out vec3 ViewDir;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -18,4 +19,5 @@ void main()
     
     FragPos = vec3(worldPosition.xyz);
     Normal = aNormal;
+    ViewDir = normalize(vec3(view[0][2], view[1][2], view[2][2]));
 }

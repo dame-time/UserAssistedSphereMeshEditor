@@ -3,7 +3,7 @@
 #include <Math.hpp>
 #include <Vector4.hpp>
 
-#include <Sphere.hpp>
+#include <TimedSphere.hpp>
 
 #include <functional>
 #include <ostream>
@@ -13,12 +13,13 @@ namespace Renderer
     class EdgeCollapse
     {
         public:
-            Sphere i, j;
+            TimedSphere i, j;
             
-            int idxI, idxJ;
+            int idxI{}, idxJ{};
             
-            Math::Scalar error;
+            Math::Scalar error{};
             
+			// TODO: Remove these two fields, useless now
             int queueIdI;
             int queueIdJ;
 
@@ -29,12 +30,12 @@ namespace Renderer
 			std::vector<Vertex*> incorporatedVertices {};
 #endif
 			
-			std::vector<Sphere*> chainOfCollapse;
+			std::unordered_map<int, TimedSphere*> chainOfCollapse;
 		
 			bool isCheckedAgainstIncorporatedVertices {false};
             
             EdgeCollapse();
-            EdgeCollapse(const Sphere& _i, const Sphere& _j, int _idxI, int _idxJ);
+            EdgeCollapse(const TimedSphere& _i, const TimedSphere& _j, int _idxI, int _idxJ);
             EdgeCollapse(const EdgeCollapse& other)
             {
                 i = other.i;
@@ -65,8 +66,8 @@ namespace Renderer
             void updateCorrectionErrorQuadric(const Quadric& q);
 #endif
 			
-            void updateEdge(const Sphere& _i, const Sphere& _j, int _idxI, int _idxJ);
-			void addSphereCollapseToChain(Sphere& sphereToChainCollapse);
+            void updateEdge(const TimedSphere& _i, const TimedSphere& _j, int _idxI, int _idxJ);
+			void addSphereCollapseToChain(TimedSphere& sphereToChainCollapse);
             
             bool containsIndex(int a);
             

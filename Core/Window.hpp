@@ -117,7 +117,7 @@ namespace Renderer {
             bool renderConnectivity;
             float sphereSize{};
         
-            std::vector<std::vector<Sphere>> sphereBuffer;
+            std::vector<std::vector<TimedSphere>> sphereBuffer;
             
             int connectivitySpheresPerEdge;
             Math::Scalar connectivitySpheresSize;
@@ -131,7 +131,7 @@ namespace Renderer {
             void renderMenu();
             void renderSphereMesh(const Math::Matrix4& perspective);
         
-            void addSphereVectorToBuffer(const std::vector<Sphere>& spheres);
+            void addSphereVectorToBuffer(const std::vector<TimedSphere>& spheres);
             void removeLastSphereVectorFromBuffer();
         
             void displayErrorMessage(const std::string& message);

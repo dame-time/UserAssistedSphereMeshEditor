@@ -2,30 +2,30 @@
 
 ## Overview
 
-This study delves into the semi-automated generation of **sphere-meshes** as high-quality approximations for given three-dimensional shapes. These shapes are originally represented as common triangular meshes.
+This study delves into the semi-automated generation of **timedSpheres-meshes** as high-quality approximations for given three-dimensional shapes. These shapes are originally represented as common triangular meshes.
 
-A *sphere-mesh* is a unique class of geometric proxy, defined as the volume swept by spheres with linearly interpolated centers and radii. It offers a balance between conciseness of representation, simplicity of spatial queries, expressive power, and is particularly suitable for animations.
+A *timedSpheres-mesh* is a unique class of geometric proxy, defined as the volume swept by spheres with linearly interpolated centers and radii. It offers a balance between conciseness of representation, simplicity of spatial queries, expressive power, and is particularly suitable for animations.
 
 ## Problem Statement
 
-Despite the favorable characteristics of sphere-meshes, their broader adoption in fields like **video games**, **physical simulation**, or **robotics** is limited. This limitation is primarily due to the complexity involved in their construction, which remains a challenge in the field.
+Despite the favorable characteristics of timedSpheres-meshes, their broader adoption in fields like **video games**, **physical simulation**, or **robotics** is limited. This limitation is primarily due to the complexity involved in their construction, which remains a challenge in the field.
 
-Existing fully automatic algorithms, based on interactive coarsening of the input mesh, often fail to produce satisfactory results, especially for very coarse sphere-meshes.
+Existing fully automatic algorithms, based on interactive coarsening of the input mesh, often fail to produce satisfactory results, especially for very coarse timedSpheres-meshes.
 
 ## Our Contribution
 
 We propose an improvement through a **3D interface** designed to allow users to easily and intuitively modify automatically generated models. This approach comprises two phases:
 
-1. **Existing Automatic Algorithm:** Utilizes current methodologies for initial sphere-mesh generation.
+1. **Existing Automatic Algorithm:** Utilizes current methodologies for initial timedSpheres-mesh generation.
 2. **Novel Interactive Tool:** Enables user intervention for refined adjustments and improvements.
 
-Employing these two phases in cascade, we introduce a viable semi-automatic method to produce sphere-meshes.
+Employing these two phases in cascade, we introduce a viable semi-automatic method to produce timedSpheres-meshes.
 
 ![Animation](res/FootAnim.svg)
 
 ## Evaluation and Applications
 
-We have tested our method on several input triangular meshes (tri-meshes), assessing their quality and overall performance. Further, we explore a few downstream applications to demonstrate the practicality and usability of our generated sphere-meshes.
+We have tested our method on several input triangular meshes (tri-meshes), assessing their quality and overall performance. Further, we explore a few downstream applications to demonstrate the practicality and usability of our generated timedSpheres-meshes.
 
 ![Results](res/TableImage.svg)
 

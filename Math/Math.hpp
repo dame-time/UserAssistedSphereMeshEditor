@@ -11,7 +11,11 @@
 
 namespace Math
 {
+#ifdef LOW_PRECISON_MATH
+	typedef float Scalar;
+#else
     typedef double Scalar;
+#endif
 
     const Scalar EPSILON = 1e-10;
 
@@ -102,7 +106,7 @@ namespace Math
                 {
                     Scalar f;
                     uint32_t i;
-                } conv;
+                } conv{};
                 Scalar x2;
                 const Scalar threehalfs = 1.5f;
 

@@ -162,7 +162,7 @@ public:
   bool montecarlo;
   unsigned int montecarloN;
 
-  searchType st; /* Use either a sphere search or a k-ring search */
+  searchType st; /* Use either a timedSpheres search or a k-ring search */
   normalType nt;
 
   double lastRadius;

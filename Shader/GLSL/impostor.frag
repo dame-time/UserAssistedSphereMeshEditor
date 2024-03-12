@@ -17,11 +17,11 @@ struct Light {
 
 in vec2 TexCoords;
 in vec4 worldPos;
+in vec3 ViewDir;
 flat in float radiusClip;
 
 out vec4 FragColor;
 
-uniform vec3 viewPos;
 uniform Material material;
 uniform Light light;
 uniform vec3 sphereCenter;
@@ -55,9 +55,8 @@ void main()
     vec3 diffuse = light.diffuse * diff * material.diffuse;
 
     // Specular component
-    vec3 viewDir = normalize(viewPos - sphereCenter);
     vec3 reflectDir = reflect(-lightDir, normal);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
+    float spec = pow(max(dot(ViewDir, reflectDir), 0.0), material.shininess);
     vec3 specular = light.specular * spec * material.specular;
 
     // Final color

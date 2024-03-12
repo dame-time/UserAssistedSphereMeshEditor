@@ -10,6 +10,7 @@ uniform float radius;
 
 out vec2 TexCoords;
 out vec4 worldPos;
+out vec3 ViewDir;
 flat out float radiusClip;
 
 void main()
@@ -30,4 +31,6 @@ void main()
     
     gl_Position = projection * vec4(worldPos.xyz, 1.0);
     gl_Position.w = 1;
+
+    ViewDir = normalize(vec3(view[0][2], view[1][2], view[2][2]));
 }

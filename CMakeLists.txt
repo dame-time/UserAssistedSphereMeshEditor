@@ -62,8 +62,7 @@ endforeach()
 
 link_directories(/usr/local/lib)
 
-add_executable(${PROJECT_NAME} ${SOURCES} main.cpp
-)
+add_executable(${PROJECT_NAME} ${SOURCES} main.cpp)
 target_compile_options(${PROJECT_NAME} PUBLIC -g -O3 -march=native -flto -funroll-loops -std=c++17)
 #target_include_directories(${PROJECT_NAME} PUBLIC ${includes})
 target_link_libraries(${PROJECT_NAME} glfw GLAD ${CMAKE_DL_LIBS} yaml-cpp tinyfiledialogs OpenMP::OpenMP_CXX)
