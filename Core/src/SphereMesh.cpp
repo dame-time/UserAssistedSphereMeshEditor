@@ -361,10 +361,6 @@ namespace Renderer {
 			
 			auto startError = topEdge.error;
 			
-			// TODO: Check this problem: when I do that maybe a timedSpheres exist in this moment, but not in the future so
-			//  store in a separate map where all the old timedSpheres collapse into, and then when I get an edge that has
-			//  already been checked against the incorporated vertices, I want to recheck if the spheres of the chain
-			//  still exists, if so then perfect, otherwise I want to recompute the error of the edge
 			for (auto& vertex : referenceMesh->vertices)
 				if (newSphere.intersectsVertex(vertex.position))
 				{
@@ -1410,6 +1406,7 @@ namespace Renderer {
         return i;
     }
 
+	// TODO: Remove this
     void SphereMesh::removeDegenerates()
     {
 //        std::vector<int> degeneratedTriangles;
@@ -1493,7 +1490,7 @@ namespace Renderer {
         out << YAML::BeginMap;
             out << YAML::Key << "Reference Mesh" << YAML::Value << referenceMesh->path;
             out << YAML::Key << "Start Mesh Resolution" << YAML::Value << initialSpheres.size();
-            out << YAML::Key << "Sphere Mesh Resolution" << YAML::Value << timedSpheres.size();
+            out << YAML::Key << "Sphere Mesh Resolution" << YAML::Value << timedSphereSize;
             out << YAML::Key << "Initial Spheres" << YAML::Value;
             out << YAML::BeginSeq;
                 for (auto & initialSphere : initialSpheres)
@@ -1513,6 +1510,9 @@ namespace Renderer {
             out << YAML::BeginSeq;
                 for (auto & i : timedSpheres)
                 {
+					if (!i.isActive)
+						continue;
+					
                     out << YAML::BeginMap;
                         out << YAML::Key << "Center" << YAML::Value;
                         YAMLSerializeVector3(out, i.sphere.center);
@@ -1628,28 +1628,34 @@ namespace Renderer {
         
         // Stating the count for each type: spheres, triangles, and edges
         fileContent << "Sphere Mesh 1.0" << std::endl;
-        fileContent << timedSpheres.size();
+        fileContent << timedSphereSize;
         fileContent << " " << triangle.size();
         fileContent << " " << edge.size() << std::endl;
         fileContent << "====================" << std::endl;
+		
+		std::unordered_map<int, int> activeSpheres;
+		std::vector<TimedSphere> activeEdges;
+		std::vector<TimedSphere> activeTris;
+		int idx = 0;
+		for (const auto& s : timedSpheres)
+			if (s.isActive)
+				activeSpheres[s.sphere.getID()] = idx++;
         
         // Saving timedSpheres details
         for (const auto& s : timedSpheres)
-        {
-            fileContent << s.sphere.center[0] << " " << s.sphere.center[1] << " " << s.sphere.center[2] << " " << s.sphere.radius << std::endl;
-        }
+			if (s.isActive)
+                fileContent << s.sphere.center[0] << " " << s.sphere.center[1] << " "
+					<< s.sphere.center[2] << " " << s.sphere.radius << std::endl;
 
         // Saving triangle details
         for (const auto& t : triangle)
-        {
-            fileContent << t.i << " " << t.j << " " << t.k << std::endl;
-        }
+            fileContent << activeSpheres[timedSpheres[t.i].sphere.getID()] << " " << activeSpheres[timedSpheres[t.j]
+			.sphere.getID()] << " " << activeSpheres[timedSpheres[t.k].sphere.getID()] << std::endl;
 
         // Saving edge details
         for (const auto& e : edge)
-        {
-            fileContent << e.i << " " << e.j << std::endl;
-        }
+            fileContent << activeSpheres[timedSpheres[e.i].sphere.getID()] << " " << activeSpheres[timedSpheres[e.j]
+			.sphere.getID()] << std::endl;
 
         namespace fs = std::__fs::filesystem;
 
@@ -1674,17 +1680,7 @@ namespace Renderer {
     }
 
     void SphereMesh::addEdge(int selectedSphereID) {
-        int selectedSphereIndex = -1;
-        
-        for (int i = 0; i < timedSpheres.size(); i++)
-            if (selectedSphereID == timedSpheres[i].sphere.getID()) {
-                selectedSphereIndex = i;
-                break;
-            }
-        
-        if (selectedSphereIndex == -1)
-            return;
-        
+        int selectedSphereIndex = sphereMapper[selectedSphereID];
         auto selectedSphere = timedSpheres[selectedSphereIndex];
         Sphere sphereCopy = Sphere(timedSpheres[selectedSphereIndex].sphere.center, timedSpheres[selectedSphereIndex].sphere.radius);
         sphereCopy.quadric = selectedSphere.sphere.quadric;
@@ -1697,18 +1693,8 @@ namespace Renderer {
     }
 
     void SphereMesh::addTriangle(int sphereA, int sphereB) {
-        int idxA = -1;
-        int idxB = -1;
-        
-        for (int i = 0; i < timedSpheres.size(); i++) {
-            if (sphereA == timedSpheres[i].sphere.getID())
-                idxA = i;
-            if (sphereB == timedSpheres[i].sphere.getID())
-                idxB = i;
-        }
-        
-        if (idxA == -1 || idxB == -1)
-            return;
+        int idxA = sphereMapper[sphereA];
+        int idxB = sphereMapper[sphereB];
         
         auto selectedA = timedSpheres[idxA];
         auto selectedB = timedSpheres[idxB];
@@ -1724,34 +1710,21 @@ namespace Renderer {
     }
 
     void SphereMesh::removeSphere(int selectedSphereID) {
-        int selectedSphereIndex = -1;
-        
-        for (int i = 0; i < timedSpheres.size(); i++)
-            if (selectedSphereID == timedSpheres[i].sphere.getID()) {
-                selectedSphereIndex = i;
-                break;
-            }
-        
-        if (selectedSphereIndex == -1)
-            return;
+        int selectedSphereIndex = sphereMapper[selectedSphereID];
 	    
 	    timedSpheres[selectedSphereIndex].isActive = false;
 		
 		for (auto it = triangle.begin(); it != triangle.end();)
-		{
 			if (it->i == selectedSphereIndex || it->j == selectedSphereIndex || it->k == selectedSphereIndex)
 				it = triangle.erase(it);
 			else
 				++it;
-		}
 		
 		for (auto it = edge.begin(); it != edge.end();)
-		{
 			if (it->i == selectedSphereIndex || it->j == selectedSphereIndex)
 				it = edge.erase(it);
 			else
 				++it;
-		}
 		
 		sphereMapper.erase(selectedSphereID);
   

@@ -44,9 +44,12 @@ int main()
 												 ".frag");
     
     if (!loadCachedResult()) {
-        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/camel-poses"
-											"/camel-reference-4040.obj", mainShader);
-//	    mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Assets/Models/horse-gallop/horse-gallop-reference.obj", mainShader);
+//        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor"
+//											"/Assets/Models/camel-poses"
+//											"/camel-reference-4040.obj", mainShader);
+	    mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Assets/Models"
+											"/horse"
+											".obj", mainShader);
 //        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/bunny250NH.obj", mainShader);
         sm = new Renderer::SphereMesh(mesh, sphereShader);
     }
