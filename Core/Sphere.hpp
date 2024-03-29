@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_set>
 
 namespace Renderer {
     class Sphere
@@ -27,6 +28,7 @@ namespace Renderer {
 			bool isDangling{false};
 			
             std::vector<Vertex*> vertices;
+			std::unordered_set<int> neighbourSpheres;
         
             Math::Scalar quadricWeights{};
         
@@ -51,6 +53,8 @@ namespace Renderer {
             void approximateSphereOverPlanarRegion(const Math::Vector3& edge0, const Math::Vector3& edge1);
         
             void addVertex(Vertex& vertex);
+			void addNeighbourSphere(int sphereIndex);
+			
 #ifdef USE_THIEF_SPHERE_METHOD
 			int clearNotLinkedVertices();
 #endif
@@ -60,7 +64,7 @@ namespace Renderer {
             [[nodiscard]] int getID() const;
 
             [[nodiscard]] Sphere lerp(const Sphere &s, Math::Scalar t) const;
-            bool intersectsVertex(const Math::Vector3& vertex);
+            bool containsVertex(const Math::Vector3& vertex);
     };
 }
 

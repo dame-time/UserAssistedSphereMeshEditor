@@ -16,10 +16,12 @@ namespace Renderer
 		public:
 			Sphere sphere;
 			long long creationTime;
-			bool isActive;
+			int alias;
 			
 			TimedSphere();
 			TimedSphere(const TimedSphere& other);
-			explicit TimedSphere(const Sphere& sphere, bool isActive = true);
+			explicit TimedSphere(const Sphere& sphere, int alias);
+			
+			bool operator == (const TimedSphere& rhs) const;
 	};
 }

@@ -1,12 +1,12 @@
 #include <EdgeCollapse.hpp>
 
+#include <algorithm>
+#include <numeric>
+
 namespace Renderer
 {
     EdgeCollapse::EdgeCollapse()
     {
-        queueIdI = 0;
-        queueIdJ = 0;
-        
         updateEdge(TimedSphere(), TimedSphere(), -1, -1);
 #ifdef USE_THIEF_SPHERE_METHOD
         isErrorCorrectionQuadricSet = false;
@@ -15,9 +15,6 @@ namespace Renderer
 
     EdgeCollapse::EdgeCollapse(const TimedSphere& _i, const TimedSphere& _j, int _idxI, int _idxJ)
     {
-        queueIdI = 0;
-        queueIdJ = 0;
-        
         updateEdge(_i, _j, _idxI, _idxJ);
 #ifdef USE_THIEF_SPHERE_METHOD
         isErrorCorrectionQuadricSet = false;
@@ -73,7 +70,11 @@ namespace Renderer
 		for (auto &s : chainOfCollapse)
 			chainError += s.second->sphere.getSphereQuadric();
 		
-	    error = chainError.minimum();
+		auto sizeOfChainCollapses = static_cast<int>(chainOfCollapse.size());
+		auto chainOfCollapseSize = 1 + sizeOfChainCollapses;
+		
+	    error = chainError.minimum() / chainOfCollapseSize;
+//	    error = chainError.minimum();
 #endif
     }
 
@@ -86,12 +87,11 @@ namespace Renderer
             << ", idxI: " << edge.idxI
             << ", idxJ: " << edge.idxJ
             << ", error: " << edge.error
-            << ", queueIdI: " << edge.queueIdI
-            << ", queueIdJ: " << edge.queueIdJ
+			<< ", chainOfCollapse: " << edge.chainOfCollapse.size();
 #ifdef USE_THIEF_SPHERE_METHOD
             << ", isErrorCorrectionQuadricSet: " << edge.isErrorCorrectionQuadricSet
 #endif
-            << " }";
+            os << " }";
         
         return os;
     }
@@ -99,5 +99,21 @@ namespace Renderer
 	void EdgeCollapse::addSphereCollapseToChain(TimedSphere& sphereToCollapse)
 	{
 		this->chainOfCollapse[sphereToCollapse.sphere.getID()] = &sphereToCollapse;
+	}
+	
+	Math::Scalar EdgeCollapse::getPlainEdgeError() const
+	{
+		auto chainError = i.sphere.getSphereQuadric() + j.sphere.getSphereQuadric();
+		for (auto &s : chainOfCollapse)
+			chainError += s.second->sphere.getSphereQuadric();
+		
+	    return chainError.minimum();
+	}
+	
+	int EdgeCollapse::getNumberOfVerticesInCollapse ()
+	{
+		return i.sphere.vertices.size() + j.sphere.vertices.size() + std::accumulate(chainOfCollapse.begin(), chainOfCollapse.end(), 0, [](int acc, const auto& pair) {
+			return acc + pair.second->sphere.vertices.size();
+		});
 	}
 }

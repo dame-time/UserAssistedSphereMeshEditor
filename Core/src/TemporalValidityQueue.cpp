@@ -29,15 +29,18 @@ namespace Renderer
 		return q.empty();
 	}
 	
-	TemporalValidityQueue::TemporalValidityQueue (std::vector<TimedSphere> &spheres)
+	TemporalValidityQueue::TemporalValidityQueue (std::vector<TimedSphere> &spheres,
+												  std::unordered_map<int, int>& sphereMapper)
 	{
 		this->spheres = &spheres;
+		this->sphereMapper = &sphereMapper;
 		isDirty = false;
 	}
 	
 	TemporalValidityQueue::TemporalValidityQueue ()
 	{
 		spheres = nullptr;
+		sphereMapper = nullptr;
 		isDirty = false;
 	}
 	
@@ -50,7 +53,7 @@ namespace Renderer
 		{
 			auto topElement = q.top();
 			
-			if (areTheSpheresUpToDate(topElement) && areBothSpheresAlive(topElement))
+			if (areTheSpheresUpToDate(topElement) && areAllSpheresAlive(topElement))
 				return topElement;
 			
 			q.pop();
@@ -73,12 +76,40 @@ namespace Renderer
 	
 	bool TemporalValidityQueue::areTheSpheresUpToDate (const EdgeCollapse &edgeCollapse)
 	{
-		return edgeCollapse.i.creationTime == spheres->at(edgeCollapse.idxI).creationTime &&
+		auto checkAB = edgeCollapse.i.creationTime == spheres->at(edgeCollapse.idxI).creationTime &&
 				edgeCollapse.j.creationTime == spheres->at(edgeCollapse.idxJ).creationTime;
+		
+		if (!checkAB)
+			return false;
+		
+		return std::all_of(edgeCollapse.chainOfCollapse.begin(),
+						   edgeCollapse.chainOfCollapse.end(),
+						   [this](const auto& pair) {
+										if (sphereMapper->find(pair.second->sphere.getID()) == sphereMapper->end())
+											return false;
+										
+										return pair.second->creationTime ==
+										spheres->at((*sphereMapper)[pair.second->sphere.getID()]).creationTime;
+							});
 	}
 	
 	bool TemporalValidityQueue::areBothSpheresAlive (const EdgeCollapse &edgeCollapse)
 	{
-		return spheres->at(edgeCollapse.idxI).isActive && spheres->at(edgeCollapse.idxJ).isActive;
+		return spheres->at(edgeCollapse.idxI).alias == edgeCollapse.idxI
+		&& spheres->at(edgeCollapse.idxJ).alias == edgeCollapse.idxJ;
+	}
+	
+	bool TemporalValidityQueue::areAllSpheresAlive (const EdgeCollapse &edgeCollapse)
+	{
+		if (!areBothSpheresAlive(edgeCollapse))
+			return false;
+		
+		return std::all_of(edgeCollapse.chainOfCollapse.begin(),
+						   edgeCollapse.chainOfCollapse.end(),
+						   [this](const auto& pair) {
+										return *pair.second == spheres->at(pair.second->alias);
+							});
+		
+		return true;
 	}
 }

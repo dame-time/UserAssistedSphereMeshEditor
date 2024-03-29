@@ -38,6 +38,12 @@ namespace Renderer
 
                 // (p * I * p - 2 * t * p + t * t) * weight -> con t sfera target, ovvero mi sposto sulla normale nella direzione negativa t = (vertex.position - k * vertex.normal, k) -> (sfera)
                 Math::Vector3 n = vertex.normal;
+				n.normalize();
+				
+				if (n.squareMagnitude() - 0.99 < 0)
+				{
+					std::cerr << "Normal not normalized: " << n.magnitude() << std::endl;
+				}
 
                 Math::Vector4 t = Math::Vector4(vertex.position - targetSphereRadius * n, targetSphereRadius);
 

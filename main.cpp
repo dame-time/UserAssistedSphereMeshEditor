@@ -48,7 +48,7 @@ int main()
 //											"/Assets/Models/camel-poses"
 //											"/camel-reference-4040.obj", mainShader);
 	    mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Assets/Models"
-											"/horse"
+											"/gorilla"
 											".obj", mainShader);
 //        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/bunny250NH.obj", mainShader);
         sm = new Renderer::SphereMesh(mesh, sphereShader);

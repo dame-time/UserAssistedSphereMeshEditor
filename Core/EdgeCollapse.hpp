@@ -1,5 +1,7 @@
 #pragma once
 
+#define REGISTER_EPSILON
+
 #include <Math.hpp>
 #include <Vector4.hpp>
 
@@ -18,10 +20,10 @@ namespace Renderer
             int idxI{}, idxJ{};
             
             Math::Scalar error{};
-            
-			// TODO: Remove these two fields, useless now
-            int queueIdI;
-            int queueIdJ;
+	    
+#ifdef REGISTER_EPSILON
+			Math::Scalar epsilonOfCollapse{-1};
+#endif
 
 #ifdef USE_THIEF_SPHERE_METHOD
             Quadric errorCorrectionQuadric;
@@ -45,9 +47,13 @@ namespace Renderer
                 idxJ = other.idxJ;
                 
                 error = other.error;
-                
-                queueIdI = other.queueIdI;
-                queueIdJ = other.queueIdJ;
+	            
+	            chainOfCollapse = other.chainOfCollapse;
+				isCheckedAgainstIncorporatedVertices = other.isCheckedAgainstIncorporatedVertices;
+				
+#ifdef REGISTER_EPSILON
+				epsilonOfCollapse = other.epsilonOfCollapse;
+#endif
 	            
 #ifdef USE_THIEF_SPHERE_METHOD
                 isErrorCorrectionQuadricSet = other.isErrorCorrectionQuadricSet;
@@ -72,6 +78,9 @@ namespace Renderer
             bool containsIndex(int a);
             
             void updateError();
+			
+			Math::Scalar getPlainEdgeError() const;
+			int getNumberOfVerticesInCollapse();
         
             friend std::ostream& operator<<(std::ostream& os, const EdgeCollapse& edge);
     };

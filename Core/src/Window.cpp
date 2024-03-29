@@ -958,7 +958,7 @@ namespace Renderer {
             
             Math::Scalar minDistance = DBL_MAX;
             for (int i = 0; i < windowClassInstance->sm->timedSpheres.size(); i++) {
-				if (!windowClassInstance->sm->timedSpheres[i].isActive)
+				if (!windowClassInstance->sm->isTimedSphereAlive(i))
 					continue;
 				
                 auto check = (pickedPoint - windowClassInstance->sm->timedSpheres[i].sphere.center).magnitude() -
@@ -1102,7 +1102,7 @@ namespace Renderer {
         
         ImGui::Separator();
         
-        static float epsilon = 0.04f;
+        static float epsilon = 0.1f;
         ImGui::PushItemWidth(80);
         ImGui::SliderFloat("Slider", &epsilon, 0.0001f, 1.0f, "%.4f");
         ImGui::PopItemWidth();
@@ -1265,12 +1265,6 @@ namespace Renderer {
         {
             renderFullSMWithNSpheres = 0;
             sm->renderSpheresOnly();
-        }
-        
-        if (ImGui::Button("Clear Sphere Mesh"))
-        {
-//            renderFullSMWithNSpheres = 0;
-			sm->clearSphereMesh();
         }
         
         if (ImGui::Button("Toggle Sphere Mesh"))

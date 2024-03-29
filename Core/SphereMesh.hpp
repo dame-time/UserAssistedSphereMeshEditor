@@ -1,5 +1,8 @@
 #pragma once
 
+//#define MEASURE_EPSILON_MAX
+#define LOG_TOUCH_OF_SPHERES
+
 #include <Vector2.hpp>
 #include <Vector3.hpp>
 #include <Vector4.hpp>
@@ -44,12 +47,15 @@ namespace Renderer
     class SphereMesh
     {
         private:
-            Math::Scalar EPSILON{};
+            Math::Scalar EPSILON{0};
 	    
 	        std::vector<TimedSphere> initialSpheres;
             TemporalValidityQueue edgeQueue;
 			
 			int timedSphereSize {0};
+#ifdef MEASURE_EPSILON_MAX
+			Math::Scalar maxEpsilon {0};
+#endif
             
             std::unordered_set<Triangle> triangle;
             std::unordered_set<Edge> edge;
@@ -94,7 +100,7 @@ namespace Renderer
             void drawSpheresOverEdge(const Edge &e, int nSpheres = 4, Math::Scalar rescaleRadii = 1.0, Math::Scalar minRadiiScale = 0.3);
             void drawSpheresOverTriangle(const Triangle& t, int nSpheres = 4, Math::Scalar size = 1.0, Math::Scalar minRadiiScale = 0.3);
 	    
-	    [[maybe_unused]] static Math::Vector3 getTriangleCentroid(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
+	        [[maybe_unused]] static Math::Vector3 getTriangleCentroid(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
             static Math::Vector3 getTriangleNormal(const Math::Vector3 &v1, const Math::Vector3 &v2, const Math::Vector3 &v3);
         
             void renderOneSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
@@ -103,18 +109,18 @@ namespace Renderer
         
             void renderOneBillboardSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
         
-            void buildEdgeConnectivity();
-            void buildTriangleConnectivity();
-        
-            void clearEdges();
-            void clearTriangles();
-        
             Math::Scalar getContainedRadiusOfSphere(const Sphere& s);
         
             void renderSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
+			
+			void merge(std::vector<int>& toMerge);
+			void updateNeighborsOf(Sphere& s);
         
         public:
             std::vector<TimedSphere> timedSpheres;
+		
+			int getActiveTimedSphere(int alias);
+			bool isTimedSphereAlive(int id);
         
             SphereMesh(const SphereMesh& sm);
             SphereMesh(RenderableMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius = 0.1f);
@@ -163,7 +169,6 @@ namespace Renderer
             void removeSphere(int selectedSphereID);
             
             void clear();
-	        void clearSphereMesh();
         
             void reset();
     };

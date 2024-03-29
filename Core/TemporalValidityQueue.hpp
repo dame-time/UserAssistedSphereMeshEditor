@@ -20,15 +20,17 @@ namespace Renderer
 			std::priority_queue<EdgeCollapse, std::vector<EdgeCollapse>, std::greater<>> q;
 			
 			std::vector<TimedSphere>* spheres;
+			std::unordered_map<int, int>* sphereMapper;
 		
 			bool isDirty;
 			
 			bool areTheSpheresUpToDate(const EdgeCollapse& edgeCollapse);
 			bool areBothSpheresAlive(const EdgeCollapse& edgeCollapse);
+			bool areAllSpheresAlive(const EdgeCollapse& edgeCollapse);
 		
 		public:
 			TemporalValidityQueue();
-			explicit TemporalValidityQueue(std::vector<TimedSphere>& spheres);
+			explicit TemporalValidityQueue(std::vector<TimedSphere>& spheres, std::unordered_map<int, int>& sphereMapper);
 		
 			void push(const EdgeCollapse& collapsableEdge);
 			EdgeCollapse top();

@@ -6,8 +6,8 @@
 
 namespace Renderer
 {
-	TimedSphere::TimedSphere(const Sphere& sphere, bool isActive)
-			: sphere(sphere), isActive(isActive) {
+	TimedSphere::TimedSphere(const Sphere& sphere, int aliasID)
+			: sphere(sphere), alias(aliasID) {
 		auto now = std::chrono::system_clock::now();
 		auto duration = now.time_since_epoch();
 		creationTime = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
@@ -17,16 +17,21 @@ namespace Renderer
 	TimedSphere::TimedSphere (const TimedSphere &other)
 	{
 		this->sphere = other.sphere;
-		this->isActive = other.isActive;
+		this->alias = other.alias;
 		this->creationTime = other.creationTime;
 	}
 	
 	TimedSphere::TimedSphere ()
 	{
 		sphere = Sphere();
-		isActive = false;
+		alias = -1;
 		auto now = std::chrono::system_clock::now();
 		auto duration = now.time_since_epoch();
 		creationTime = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+	}
+	
+	bool TimedSphere::operator==(const TimedSphere &rhs) const
+	{
+		return this->alias == rhs.alias && this->creationTime == rhs.creationTime;
 	}
 }
