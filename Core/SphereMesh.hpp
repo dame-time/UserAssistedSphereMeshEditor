@@ -115,6 +115,8 @@ namespace Renderer
 			
 			void merge(std::vector<int>& toMerge);
 			void updateNeighborsOf(Sphere& s);
+			
+			void extendSpheresNeighboursOneStep();
         
         public:
             std::vector<TimedSphere> timedSpheres;

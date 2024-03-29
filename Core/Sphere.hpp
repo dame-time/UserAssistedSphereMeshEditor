@@ -17,6 +17,8 @@
 #include <unordered_set>
 
 namespace Renderer {
+	typedef std::unordered_set<int> set_of_int;
+	
     class Sphere
     {
         private:
@@ -28,7 +30,7 @@ namespace Renderer {
 			bool isDangling{false};
 			
             std::vector<Vertex*> vertices;
-			std::unordered_set<int> neighbourSpheres;
+			set_of_int neighbourSpheres;
         
             Math::Scalar quadricWeights{};
         
@@ -66,6 +68,10 @@ namespace Renderer {
             [[nodiscard]] Sphere lerp(const Sphere &s, Math::Scalar t) const;
             bool containsVertex(const Math::Vector3& vertex);
     };
+	
+	inline void operator += (set_of_int& A, const set_of_int& B){
+		A.insert(B.begin(), B.end());
+	}
 }
 
 #endif /* Sphere_hpp */

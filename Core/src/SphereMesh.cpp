@@ -99,7 +99,8 @@ namespace Renderer {
 			triangleEdgeConnectivity[j][k] = true;
 			triangleEdgeConnectivity[i][k] = true;
 		}
-		
+	    
+	    extendSpheresNeighboursOneStep();
         initializeEdgeQueue();
     }
 
@@ -116,12 +117,15 @@ namespace Renderer {
 	{
 		int merged = getActiveTimedSphere(toMerge.front());
 		for (int i : toMerge)
+		{
 			timedSpheres[i].alias = merged;
-		
-		// TODO: not all spheres need this! only the ones in toMerge and their friends
-		for (TimedSphere& s : timedSpheres ) {
-			updateNeighborsOf(s.sphere);
+			timedSpheres[merged].sphere.neighbourSpheres += timedSpheres[i].sphere.neighbourSpheres;
 		}
+		
+		updateNeighborsOf(timedSpheres[merged].sphere);
+		
+		for (int i : timedSpheres[merged].sphere.neighbourSpheres)
+			updateNeighborsOf(timedSpheres[i].sphere);
 	}
 	
 	void SphereMesh::updateNeighborsOf(Sphere& s)
@@ -132,6 +136,17 @@ namespace Renderer {
 			newNeighbors.insert(getActiveTimedSphere(i));
 		
 		s.neighbourSpheres = newNeighbors;
+	}
+	
+	void SphereMesh::extendSpheresNeighboursOneStep()
+	{
+		std::vector<set_of_int> originalFriends(timedSpheres.size());
+		for (int i = 0; i < timedSpheres.size(); i++)
+			originalFriends[i] = timedSpheres[i].sphere.neighbourSpheres;
+		
+		for (TimedSphere& s : timedSpheres)
+			for (int j : s.sphere.neighbourSpheres)
+				s.sphere.neighbourSpheres += originalFriends[j];
 	}
 
     void SphereMesh::setEpsilon(const Math::Scalar& e)
