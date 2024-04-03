@@ -7,7 +7,7 @@
 #include <Math.hpp>
 #include <Quaternion.hpp>
 
-#include <RenderableMesh.hpp>
+#include <TriMesh.hpp>
 
 #include <iostream>
 
@@ -15,9 +15,6 @@ namespace Renderer
 {
     class Quadric
     {
-        private:
-            Math::Scalar minRadius = 0.001;
-        
         public:
             Math::Matrix4 A;
             Math::Vector4 b;
@@ -54,17 +51,17 @@ namespace Renderer
                 return  q;
             }
         
-            Math::Matrix4 getA() const
+            [[nodiscard]] Math::Matrix4 getA() const
             {
                 return A;
             }
         
-            Math::Vector4 getB() const
+            [[nodiscard]] Math::Vector4 getB() const
             {
                 return b;
             }
         
-            Math::Scalar getC() const
+            [[nodiscard]] Math::Scalar getC() const
             {
                 return c;
             }
@@ -75,15 +72,17 @@ namespace Renderer
             void operator += (const Quadric& quadric);
             void operator *= (const Math::Scalar& multiplier);
 
-            Math::Scalar evaluateSQEM (const Math::Vector4& sphere) const;
-            Math::Scalar minimum () const;
-            Math::Vector4 minimizer () const;
+            [[nodiscard]] Math::Scalar evaluateSQEM (const Math::Vector4& sphere) const;
+            [[nodiscard]] Math::Vector4 minimizer (Math::Scalar minimumRadius, Math::Scalar maximumRadius = DBL_MAX)
+			const;
+			void getMinimumAndMinimizer(Math::Scalar& min, Math::Vector4& _minimizer, Math::Scalar maximumRadius =
+					DBL_MAX, Math::Scalar minimumRadius	= 0.01) const;
             
             Math::Vector4 constrainIntoVector(const Math::Vector3& start, const Math::Vector3& end, const Math::Scalar& radius);
             Math::Vector4 constrainR(const Math::Scalar& radius);
         
             void addQuadricToTargetRadius(const Math::Scalar& t);
 
-            void print ();
+            void print () const;
     };
 }

@@ -7,7 +7,7 @@
 #include <Vector3.hpp>
 #include <Vector4.hpp>
 
-#include <RenderableMesh.hpp>
+#include <TriMesh.hpp>
 #include <Quadric.hpp>
 #include <Region.hpp>
 #include <EdgeCollapse.hpp>
@@ -47,15 +47,11 @@ namespace Renderer
     class SphereMesh
     {
         private:
-            Math::Scalar EPSILON{0};
-	    
-	        std::vector<TimedSphere> initialSpheres;
             TemporalValidityQueue edgeQueue;
+			std::string lastCollapseDuration;
 			
-			int timedSphereSize {0};
-#ifdef MEASURE_EPSILON_MAX
-			Math::Scalar maxEpsilon {0};
-#endif
+			int performedOperations{0};
+			int numberOfActiveSpheres {0};
             
             std::unordered_set<Triangle> triangle;
             std::unordered_set<Edge> edge;
@@ -63,39 +59,24 @@ namespace Renderer
             int perSphereVertices{};
             int renderCalls{};
         
-            RenderableMesh* referenceMesh;
+            TriMesh* referenceMesh;
         
             Math::Scalar BDDSize;
             
             Shader* sphereShader;
         
             RenderType renderType {RenderType::BILLBOARDS};
-            
-            std::vector<std::vector<bool>> edgeConnectivity;
-            std::vector<std::vector<std::vector<bool>>> triangleConnectivity;
-			std::vector<std::vector<bool>> triangleEdgeConnectivity;
 	    
 	        std::unordered_map<int, int> sphereMapper;
-        
-            void initializeEPSILON();
             
             void initializeSphereMeshTriangles(const std::vector<Face>& Faces);
             void initializeSpheres(std::vector<Vertex>& vertices, Math::Scalar initialRadius);
             
-            void computeSpheresProperties(const std::vector<Vertex>& vertices);
+            void computeSpheresProperties(const std::vector<Vertex>& vertices, const std::vector<Face>& faces);
             void updateSpheres();
             void initializeEdgeQueue();
-        
-            EdgeCollapse getBestCollapseBruteForce();
-            EdgeCollapse getBestCollapseFast();
-            EdgeCollapse getBestCollapseInConnectivity();
-        
-            Sphere collapseEdgeIntoSphere(EdgeCollapse& edgeToCollapse);
-            
-            void updateEdgesAfterCollapse(int i, int j);
-            void updateTrianglesAfterCollapse(int i, int j);
-            void removeDegenerates();
-            void updateEdgeQueue(const EdgeCollapse& collapsedEdge);
+			
+			void updateConnectivityAfterCollapses();
             
             void drawSpheresOverEdge(const Edge &e, int nSpheres = 4, Math::Scalar rescaleRadii = 1.0, Math::Scalar minRadiiScale = 0.3);
             void drawSpheresOverTriangle(const Triangle& t, int nSpheres = 4, Math::Scalar size = 1.0, Math::Scalar minRadiiScale = 0.3);
@@ -109,27 +90,38 @@ namespace Renderer
         
             void renderOneBillboardSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
         
-            Math::Scalar getContainedRadiusOfSphere(const Sphere& s);
-        
             void renderSphere(const Math::Vector3& center, Math::Scalar radius, const Math::Vector3& color);
 			
-			void merge(std::vector<int>& toMerge);
 			void updateNeighborsOf(Sphere& s);
+		
+			bool engulfsAnything(EdgeCollapse& e);
+			void execute(const EdgeCollapse& e);
+			void addPotentialCollapse(int i, int j);
+			
+			bool isOutOfDate(const EdgeCollapse& e);
+			void updateCost(EdgeCollapse& e);
+			
+			bool debugCheckNoLoops(); // Check that in the graphs there are no loops
 			
 			void extendSpheresNeighboursOneStep();
+			
+		    // ONLY FOR IMPLEMENTATION OF THIERY-ET-AL-2013
+		    static bool normalTest(const Vertex& v, const Vertex& v1);
+			void addGeometricallyCloseNeighbours(Math::Scalar epsilon);
         
         public:
             std::vector<TimedSphere> timedSpheres;
+			
+			bool IMPLEMENT_THIERY_2013{false};
 		
-			int getActiveTimedSphere(int alias);
+			int alias(int alias);
+			Sphere& currentSphere(int id) { return timedSpheres[alias(id)].sphere; }
 			bool isTimedSphereAlive(int id);
         
             SphereMesh(const SphereMesh& sm);
-            SphereMesh(RenderableMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius = 0.1f);
+            SphereMesh(TriMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius = 0.1f);
         
             SphereMesh& operator = (const SphereMesh& sm);
-        
-            void setEpsilon(const Math::Scalar& e);
         
             [[nodiscard]] int getPerSphereVertexCount() const;
             [[nodiscard]] int getRenderCalls() const;
@@ -140,9 +132,7 @@ namespace Renderer
         
             RenderType getRenderType();
             void setRenderType(const RenderType& renderType);
-            
-            void renderSelectedSpheresOnly();
-            void renderFastSelectedSpheresOnly();
+			
             void render();
             void renderWithNSpherePerEdge(int n, Math::Scalar rescaleRadii = 1.0, Math::Scalar minRadiiScale = 0.3);
             void renderSpheresOnly();
@@ -155,8 +145,6 @@ namespace Renderer
             
             bool collapseSphereMesh();
             bool collapseSphereMesh(int n);
-            bool collapseSphereMeshFast();
-            bool collapseSphereMeshFast(int n);
 			
 			[[nodiscard]] int getTimedSphereSize() const;
         
@@ -164,14 +152,19 @@ namespace Renderer
         
             void saveYAML(const std::string& path = ".", const std::string& fileName = "SphereMesh.yaml");
             void saveTXT(const std::string& path = ".", const std::string& fileName = "SphereMesh.txt");
+            void saveTXTToAutoPath();
         
             void addEdge(int selectedSphereID);
             void addTriangle(int sphereA, int sphereB);
         
             void removeSphere(int selectedSphereID);
+			void resetSphereMesh();
             
             void clear();
-        
-            void reset();
     };
+	
+	inline bool includes(std::vector<int>& A, int B)
+	{
+		return std::find(A.begin(), A.end(), B) != A.end();
+	}
 }

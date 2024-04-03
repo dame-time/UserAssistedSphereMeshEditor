@@ -1,5 +1,5 @@
 //
-//  RenderableMesh.h
+//  TriMesh.h
 //  CustomRenderer
 //
 //  Created by Davide Paollilo on 21/06/23.
@@ -62,7 +62,7 @@ namespace Renderer {
         }
     };
 
-    class RenderableMesh {
+    class TriMesh {
         private:
             int ID;
         
@@ -108,10 +108,10 @@ namespace Renderer {
             bool isFilled;
             bool isBlended;
         
-            RenderableMesh(const std::string& pathToLoadFrom, Shader* shader);
-            RenderableMesh(const std::vector<Vertex>& vertices, const std::vector<Face>& faces, Shader* shader);
+            TriMesh(const std::string& pathToLoadFrom, Shader* shader);
+            TriMesh(const std::vector<Vertex>& vertices, const std::vector<Face>& faces, Shader* shader);
         
-            RenderableMesh& operator = (const RenderableMesh& other) {
+            TriMesh& operator = (const TriMesh& other) {
                 this->vertices = other.vertices;
                 this->faces = other.faces;
                 
@@ -133,6 +133,8 @@ namespace Renderer {
         
             Math::Matrix4 getModel();
             Math::Vector3 getCentroid();
+			
+			void updateVertexNormals();
         
             void scale(const Math::Vector3& scale);
             void translate(const Math::Vector3& translate);

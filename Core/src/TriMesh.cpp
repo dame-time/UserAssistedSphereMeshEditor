@@ -1,5 +1,5 @@
 //
-//  RenderableMesh.cpp
+//  TriMesh.cpp
 //  CustomRenderer
 //
 //  Created by Davide Paollilo on 21/06/23.
@@ -7,7 +7,7 @@
 
 #include <glad/glad.h>
 
-#include <RenderableMesh.hpp>
+#include <TriMesh.hpp>
 
 #include <ObjLoader.hpp>
 
@@ -24,7 +24,7 @@
 #include <unordered_map>
 
 namespace Renderer {
-    RenderableMesh::RenderableMesh(const std::string& pathToLoadFrom, Shader* s) :  shader(s) {
+    TriMesh::TriMesh(const std::string& pathToLoadFrom, Shader* s) : shader(s) {
         ObjLoader loader = ObjLoader();
         path = pathToLoadFrom;
         
@@ -37,7 +37,6 @@ namespace Renderer {
             Vertex v = Vertex();
             
             v.position = loader.vertices[i];
-            v.normal = loader.normals[i];
             v.color = loader.colors[i];
             v.curvature = Math::Vector2();
             
@@ -46,6 +45,8 @@ namespace Renderer {
         
         for (int i = 0; i < loader.indices.size(); i += 3)
             this->faces.push_back(Face(loader.indices[i], loader.indices[i + 1], loader.indices[i + 2]));
+	    
+	    updateVertexNormals();
         
         setup();
         
@@ -57,9 +58,11 @@ namespace Renderer {
         this->setBlended(true);
     }
 
-    RenderableMesh::RenderableMesh(const std::vector<Vertex>& vertices, const std::vector<Face>& faces, Shader* s) : shader(s) {
+    TriMesh::TriMesh(const std::vector<Vertex>& vertices, const std::vector<Face>& faces, Shader* s) : shader(s) {
         this->vertices = vertices;
         this->faces = faces;
+	    
+	    updateVertexNormals();
         
         setup();
         
@@ -70,8 +73,30 @@ namespace Renderer {
         
         this->setBlended(true);
     }
+	
+	void TriMesh::updateVertexNormals()
+	{
+		for (Vertex& v : vertices)
+			v.normal = Math::Vector3();
+		
+		for (const Face& f : faces)
+		{
+			Math::Vector3 v1 = vertices[f.i].position;
+			Math::Vector3 v2 = vertices[f.j].position;
+			Math::Vector3 v3 = vertices[f.k].position;
+			
+			Math::Vector3 normal = (v2 - v1).cross(v3 - v1);
+			
+			vertices[f.i].normal += normal;
+			vertices[f.j].normal += normal;
+			vertices[f.k].normal += normal;
+		}
+		
+		for (Vertex& v : vertices)
+			v.normal.normalize();
+	}
 
-    void RenderableMesh::computeVerticesCurvatureIGL()
+    void TriMesh::computeVerticesCurvatureIGL()
     {
         Eigen::MatrixXd v(vertices.size(), 3);
         Eigen::MatrixXi f(faces.size(), 3);
@@ -99,7 +124,7 @@ namespace Renderer {
             vertices[i].curvature = Math::Vector2(PV1(i, 0), PV2(i, 0));
     }
 
-    void RenderableMesh::computeVerticesCurvature()
+    void TriMesh::computeVerticesCurvature()
     {
         for (int v = 0; v < this->vertices.size(); v++)
         {
@@ -140,7 +165,7 @@ namespace Renderer {
         }
     }
 
-    Math::Scalar RenderableMesh::distance(const Math::Vector3& p0, const Math::Vector3& p1)
+    Math::Scalar TriMesh::distance(const Math::Vector3& p0, const Math::Vector3& p1)
     {
         return std::sqrt(
                              std::pow(p1.coordinates.x - p0.coordinates.x, 2) +
@@ -149,7 +174,7 @@ namespace Renderer {
                          );
     }
 
-    Math::Scalar RenderableMesh::getAngleOfVertexAtFace(const Face& f, const Vertex& v)
+    Math::Scalar TriMesh::getAngleOfVertexAtFace(const Face& f, const Vertex& v)
     {
         Math::Vector3 v1 = vertices[f.i].position;
         Math::Vector3 v2 = vertices[f.j].position;
@@ -196,7 +221,7 @@ namespace Renderer {
         return std::acos(dotProduct / (magnitude1 * magnitude2));
     }
 
-    Math::Scalar RenderableMesh::getCotAlpha(Vertex v, Vertex adjVertex)
+    Math::Scalar TriMesh::getCotAlpha(Vertex v, Vertex adjVertex)
     {
         std::vector<Face> sharingFaces;
         // Find the two faces sharing the edge (v, adjVertex)
@@ -233,7 +258,7 @@ namespace Renderer {
         return 1 / std::tan(alpha);
     }
 
-    Math::Scalar RenderableMesh::getCotBeta(Vertex v, Vertex adjVertex)
+    Math::Scalar TriMesh::getCotBeta(Vertex v, Vertex adjVertex)
     {
         std::vector<Face> sharingFaces;
         // Find the two faces sharing the edge (v, adjVertex)
@@ -272,7 +297,7 @@ namespace Renderer {
         return 1 / std::tan(beta);
     }
 
-    std::vector<Face> RenderableMesh::getVertexAdjacentFaces(int vertexIndex)
+    std::vector<Face> TriMesh::getVertexAdjacentFaces(int vertexIndex)
     {
         std::vector<Face> adjacentFaces;
 
@@ -283,7 +308,7 @@ namespace Renderer {
         return adjacentFaces;
     }
 
-    std::vector<Vertex> RenderableMesh::getAdjacentVertices(int vertexIndex)
+    std::vector<Vertex> TriMesh::getAdjacentVertices(int vertexIndex)
     {
         std::vector<Vertex> adjacentVertices;
         std::unordered_map<int, bool> addedIndices;
@@ -315,11 +340,11 @@ namespace Renderer {
         return adjacentVertices;
     }
 
-    int RenderableMesh::getID() {
+    int TriMesh::getID() {
         return this->ID;
     }
 
-    Math::Scalar RenderableMesh::getMeshRadius() {
+    Math::Scalar TriMesh::getMeshRadius() {
         Math::Scalar max_distance = 0;
 
         auto centerOfMass = getCentroid();
@@ -336,7 +361,7 @@ namespace Renderer {
         return radius;
     }
 
-    void RenderableMesh::generateUUID() {
+    void TriMesh::generateUUID() {
         std::random_device rd;
         std::mt19937 generator(rd());
         std::uniform_int_distribution<> distr(0, 999999);
@@ -346,17 +371,17 @@ namespace Renderer {
         this->ID = random_number;
     }
 
-    void RenderableMesh::updateBBOX() {
+    void TriMesh::updateBBOX() {
         bbox = AABB();
         for (auto & vertex : vertices)
             bbox.addPoint(vertex.position);
     }
 
-    Math::Matrix4 RenderableMesh::getModel() {
+    Math::Matrix4 TriMesh::getModel() {
         return model;
     }
 
-    Math::Vector3 RenderableMesh::getCentroid() {
+    Math::Vector3 TriMesh::getCentroid() {
         Math::Vector3 centroid = Math::Vector3();
         
         for (auto v : this->vertices) {
@@ -372,7 +397,7 @@ namespace Renderer {
                              );
     }
 
-    Math::Scalar RenderableMesh::getBoundingSphereRadius() {
+    Math::Scalar TriMesh::getBoundingSphereRadius() {
         Math::Scalar maxSquaredDistance = 0.0;
         
         Math::Vector3 centroid = getCentroid();
@@ -390,41 +415,41 @@ namespace Renderer {
         return std::sqrt(maxSquaredDistance);
     }
 
-    void RenderableMesh::scale(const Math::Vector3 &scale) {
+    void TriMesh::scale(const Math::Vector3 &scale) {
         this->model.data[0] = scale.coordinates.x;
         this->model.data[5] = scale.coordinates.y;
         this->model.data[10] = scale.coordinates.z;
     }
 
-    void RenderableMesh::translate(const Math::Vector3 &translate) {
+    void TriMesh::translate(const Math::Vector3 &translate) {
         this->model.setColumnVector(3, Math::Vector4(translate, 1));
     }
 
-    void RenderableMesh::scaleUniform(const Math::Scalar& scaleValue) {
+    void TriMesh::scaleUniform(const Math::Scalar& scaleValue) {
         this->scale(Math::Vector3(scaleValue, scaleValue, scaleValue));
     }
 
-    void RenderableMesh::translateUniform(const Math::Scalar& translateValue) {
+    void TriMesh::translateUniform(const Math::Scalar& translateValue) {
         this->translate(Math::Vector3(translateValue, translateValue, translateValue));
     }
 
-    Math::Vector3 RenderableMesh::getPosition() {
+    Math::Vector3 TriMesh::getPosition() {
         return Math::Vector3(this->getModel().data[3], this->getModel().data[7], this->getModel().data[11]);
     }
 
-    Math::Vector3 RenderableMesh::getScale() {
+    Math::Vector3 TriMesh::getScale() {
         return Math::Vector3(this->getModel().data[0], this->getModel().data[5], this->getModel().data[10]);
     }
 
-    Math::Vector3 RenderableMesh::getCurrentScale() {
+    Math::Vector3 TriMesh::getCurrentScale() {
         return Math::Vector3(model.data[0], model.data[5], model.data[10]);
     }
 
-    Math::Vector3 RenderableMesh::getCurrentTranslation() {
+    Math::Vector3 TriMesh::getCurrentTranslation() {
         return Math::Vector3(model.data[3], model.data[7], model.data[11]);
     }
 
-    void RenderableMesh::setup() {
+    void TriMesh::setup() {
         isPickable = false;
         model = Math::Matrix4();
         
@@ -472,7 +497,7 @@ namespace Renderer {
         glBindVertexArray(0);
     }
 
-    void RenderableMesh::setColors(const std::vector<Math::Vector3>& colors) {
+    void TriMesh::setColors(const std::vector<Math::Vector3>& colors) {
         // Update colors in CPU-side vertex data
         for (size_t i = 0; i < colors.size() && i < vertices.size(); i++)
             vertices[i].color = colors[i];
@@ -480,14 +505,14 @@ namespace Renderer {
         updateGPUVertexData();
     }
 
-    void RenderableMesh::setUniformColor(Math::Vector3 color) {
+    void TriMesh::setUniformColor(Math::Vector3 color) {
         for (auto& vertex : vertices)
             vertex.color = color;
 
         updateGPUVertexData();
     }
 
-    void RenderableMesh::updateGPUVertexData() {
+    void TriMesh::updateGPUVertexData() {
         // Pack vertex data
         std::vector<float> vertexFloats;
         vertexFloats.reserve(vertices.size() * 11);
@@ -509,7 +534,7 @@ namespace Renderer {
         glBindVertexArray(0);
     }
 
-    void RenderableMesh::setWireframe(bool isActive) {
+    void TriMesh::setWireframe(bool isActive) {
         this->isWireframe = isActive;
         
         if (isActive) {
@@ -518,7 +543,7 @@ namespace Renderer {
         }
     }
 
-    void RenderableMesh::setFilled(bool isActive) {
+    void TriMesh::setFilled(bool isActive) {
         this->isFilled = isActive;
         
         if (isActive) {
@@ -527,7 +552,7 @@ namespace Renderer {
         }
     }
 
-    void RenderableMesh::setBlended(bool isActive) {
+    void TriMesh::setBlended(bool isActive) {
         this->isBlended = isActive;
         
         if (isActive) {
@@ -536,12 +561,12 @@ namespace Renderer {
         }
     }
 
-    void RenderableMesh::setWireframeColor(const Math::Vector3& color) {
+    void TriMesh::setWireframeColor(const Math::Vector3& color) {
         wireframeColor = color;
         wireframeColorSetted = true;
     }
 
-    void RenderableMesh::render() {
+    void TriMesh::render() {
         shader->use();
         shader->setMat4("model", getModel());
         
@@ -604,6 +629,7 @@ namespace Renderer {
             shader->setFloat("material.shininess", 0);
             glPolygonMode(GL_FRONT, GL_FILL);
             glEnable(GL_CULL_FACE);
+			glDepthMask(GL_FALSE);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glBindVertexArray(VAO);
@@ -611,6 +637,7 @@ namespace Renderer {
             glBindVertexArray(0);
             glUseProgram(0);
             glDisable(GL_BLEND);
+			glDepthMask(GL_TRUE);
         }
     }
 }

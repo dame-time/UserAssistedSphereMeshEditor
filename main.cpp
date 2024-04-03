@@ -1,15 +1,16 @@
 #include <Window.hpp>
-#include <RenderableMesh.hpp>
+#include <TriMesh.hpp>
 #include <Shader.hpp>
 #include <Camera.hpp>
 #include <SphereMesh.hpp>
+#include <Region.hpp>
 
 #include <YAMLUtils.hpp>
 
 #include <iostream>
 #include <filesystem>
 
-Renderer::RenderableMesh* mesh;
+Renderer::TriMesh* mesh;
 Renderer::SphereMesh* sm;
 Renderer::Shader* sphereShader;
 Renderer::Shader* mainShader;
@@ -20,7 +21,7 @@ bool loadCachedResult() {
         
         std::string referenceMeshPath = getYAMLRenderableMeshPath(filePath);
         
-        mesh = new Renderer::RenderableMesh(referenceMeshPath, mainShader);
+        mesh = new Renderer::TriMesh(referenceMeshPath, mainShader);
         sm = new Renderer::SphereMesh(mesh, sphereShader);
         
         sm->loadFromYaml(filePath);
@@ -33,6 +34,8 @@ bool loadCachedResult() {
 
 int main()
 {
+	Renderer::Region::initialize();
+	
     auto* mainCamera = new Renderer::Camera();
     auto* window = new Renderer::Window(1200, 1000, "Custom Renderer", mainCamera);
     
@@ -44,13 +47,13 @@ int main()
 												 ".frag");
     
     if (!loadCachedResult()) {
-//        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor"
+//        mesh = new Renderer::TriMesh("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor"
 //											"/Assets/Models/camel-poses"
 //											"/camel-reference-4040.obj", mainShader);
-	    mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Assets/Models"
-											"/gorilla"
+	    mesh = new Renderer::TriMesh("/Users/davidepaollilo/Workspaces/C++/SphereMeshEditor/Assets/Models"
+											"/smaug"
 											".obj", mainShader);
-//        mesh = new Renderer::RenderableMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/bunny250NH.obj", mainShader);
+//        mesh = new Renderer::TriMesh("/Users/davidepaollilo/Workspaces/C++/Thesis/Assets/Models/bunny250NH.obj", mainShader);
         sm = new Renderer::SphereMesh(mesh, sphereShader);
     }
 	

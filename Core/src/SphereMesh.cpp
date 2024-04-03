@@ -1,5 +1,4 @@
 #define _LIBCPP_NO_EXPERIMENTAL_DEPRECATION_WARNING_FILESYSTEM
-//#define  LOG_SPHERE_NUMBER
 #include "../SphereMesh.hpp"
 
 #include <Math.hpp>
@@ -10,12 +9,8 @@
 #include <omp.h>
 
 #include <filesystem>
-#include <algorithm>
 #include <cmath>
 
-#ifdef MEASURE_EPSILON_MAX
-#include <fstream>
-#endif
 
 // TODO: Define a stop criteria for the collapsing of the timedSpheres-mesh (error of the quadrics)
 // TODO: Define a way to avoid using the EPSILON/improve its usage
@@ -29,10 +24,8 @@ namespace Renderer {
     SphereMesh::SphereMesh(const SphereMesh& sm) : referenceMesh(sm.referenceMesh)
     {
         BDDSize = sm.BDDSize;
-        initializeEPSILON();
 	    
 	    timedSpheres = sm.timedSpheres;
-        initialSpheres = sm.initialSpheres;
 		
         triangle = sm.triangle;
         edge = sm.edge;
@@ -40,102 +33,120 @@ namespace Renderer {
         sphereShader = sm.sphereShader;
         renderType = RenderType::BILLBOARDS;
 	    
-	    edgeConnectivity.resize(timedSpheres.size(), std::vector<bool>(timedSpheres.size(), false));
-	    triangleConnectivity.resize(timedSpheres.size(),
-									std::vector<std::vector<bool>>(timedSpheres.size(),
-											std::vector<bool>(timedSpheres.size(), false)));
-	    
 	    initializeEdgeQueue();
     }
 
-    SphereMesh::SphereMesh(RenderableMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius) : referenceMesh(mesh)
+    SphereMesh::SphereMesh(TriMesh* mesh, Shader* shader, Math::Scalar vertexSphereRadius) : referenceMesh(mesh)
     {
         this->sphereShader = shader;
         renderType = RenderType::BILLBOARDS;
         
         BDDSize = mesh->bbox.BDD().magnitude();
-        initializeEPSILON();
 
         initializeSphereMeshTriangles(mesh->faces);
-        initializeSpheres(mesh->vertices, 0.01f * BDDSize);
+        initializeSpheres(mesh->vertices, 0.01 * BDDSize);
         
-        computeSpheresProperties(mesh->vertices);
+        computeSpheresProperties(mesh->vertices, mesh->faces);
         updateSpheres();
-
-		// TODO: update this so also the connectivity reset after a rest, right now only the array is resetted, but
-		//  not the connectivity
-        initialSpheres.reserve(timedSpheres.size());
-		for (auto& s : timedSpheres)
-			initialSpheres.emplace_back(s.sphere, s.alias);
 		
-		edgeConnectivity.resize(timedSpheres.size(), std::vector<bool>(timedSpheres.size(), false));
-		triangleEdgeConnectivity.resize(timedSpheres.size(),
-										std::vector<bool>(timedSpheres.size(), false));
-		triangleConnectivity.resize(timedSpheres.size(),
-									std::vector<std::vector<bool>>(timedSpheres.size(),
-											std::vector<bool>(timedSpheres.size(), false)));
+	    for (const Triangle& t : triangle)
+	    {
+		    timedSpheres[t.i].sphere.addNeighbourSphere(t.j);
+		    timedSpheres[t.i].sphere.addNeighbourSphere(t.k);
+		    timedSpheres[t.j].sphere.addNeighbourSphere(t.i);
+		    timedSpheres[t.j].sphere.addNeighbourSphere(t.k);
+		    timedSpheres[t.k].sphere.addNeighbourSphere(t.i);
+		    timedSpheres[t.k].sphere.addNeighbourSphere(t.j);
+	    }
 		
-		for (auto& face : mesh->faces)
+		if (IMPLEMENT_THIERY_2013)
+			addGeometricallyCloseNeighbours(0.05 * BDDSize);
+		else
 		{
-			int min = std::min(face.i, std::min(face.j, face.k));
-			int max = std::max(face.i, std::max(face.j, face.k));
-			int mid = face.i + face.j + face.k - min - max;
-			
-			int i = min;
-			int j = mid;
-			int k = max;
-			
-			timedSpheres[i].sphere.addNeighbourSphere(j);
-			timedSpheres[i].sphere.addNeighbourSphere(k);
-			timedSpheres[j].sphere.addNeighbourSphere(i);
-			timedSpheres[j].sphere.addNeighbourSphere(k);
-			timedSpheres[k].sphere.addNeighbourSphere(i);
-			timedSpheres[k].sphere.addNeighbourSphere(j);
-			
-			triangle.insert(Triangle(i, j, k));
-			
-			triangleConnectivity[i][j][k] = true;
-			triangleEdgeConnectivity[i][j] = true;
-			triangleEdgeConnectivity[j][k] = true;
-			triangleEdgeConnectivity[i][k] = true;
+	        extendSpheresNeighboursOneStep();
+	        extendSpheresNeighboursOneStep();
 		}
-	    
-	    extendSpheresNeighboursOneStep();
         initializeEdgeQueue();
     }
-
-	// FIXME: This function is useless, I need to find a way to avoid this EPSILON
-    void SphereMesh::initializeEPSILON()
-    {
-//       EPSILON = 0.0275 * BDDSize;
-        EPSILON = 0.1 * BDDSize; // CAMEL & FOOT
-//        EPSILON = 0.095 * BDDSize; // BUNNY
-//        EPSILON = 0.035 * BDDSize; // HAND
-    }
 	
-	void SphereMesh::merge(std::vector<int>& toMerge)
+	void SphereMesh::resetSphereMesh()
 	{
-		int merged = getActiveTimedSphere(toMerge.front());
-		for (int i : toMerge)
+		timedSpheres.clear();
+		triangle.clear();
+		edge.clear();
+		edgeQueue.clear();
+		sphereMapper.clear();
+		
+		performedOperations = 0;
+		numberOfActiveSpheres = 0;
+		
+		initializeSphereMeshTriangles(referenceMesh->faces);
+		initializeSpheres(referenceMesh->vertices, 0.01 * BDDSize);
+		
+		computeSpheresProperties(referenceMesh->vertices, referenceMesh->faces);
+		updateSpheres();
+		
+		for (const Triangle& t : triangle)
 		{
-			timedSpheres[i].alias = merged;
-			timedSpheres[merged].sphere.neighbourSpheres += timedSpheres[i].sphere.neighbourSpheres;
+			timedSpheres[t.i].sphere.addNeighbourSphere(t.j);
+			timedSpheres[t.i].sphere.addNeighbourSphere(t.k);
+			timedSpheres[t.j].sphere.addNeighbourSphere(t.i);
+			timedSpheres[t.j].sphere.addNeighbourSphere(t.k);
+			timedSpheres[t.k].sphere.addNeighbourSphere(t.i);
+			timedSpheres[t.k].sphere.addNeighbourSphere(t.j);
 		}
 		
-		updateNeighborsOf(timedSpheres[merged].sphere);
-		
-		for (int i : timedSpheres[merged].sphere.neighbourSpheres)
-			updateNeighborsOf(timedSpheres[i].sphere);
+		if (IMPLEMENT_THIERY_2013)
+			addGeometricallyCloseNeighbours(0.05 * BDDSize);
+		else
+		{
+			extendSpheresNeighboursOneStep();
+			extendSpheresNeighboursOneStep();
+		}
+		initializeEdgeQueue();
+	}
+	
+	void SphereMesh::addGeometricallyCloseNeighbours(Math::Scalar epsilon)
+	{
+		for (int i = 0; i < timedSpheres.size(); i++)
+		{
+			for (int j = i + 1; j < timedSpheres.size(); j++)
+			{
+				bool check = (timedSpheres[i].sphere.center - timedSpheres[j].sphere.center).magnitude()
+				             - (timedSpheres[i].sphere.radius + timedSpheres[j].sphere.radius) <= epsilon;
+				Vertex& vi = referenceMesh->vertices[*timedSpheres[i].sphere.vertices.begin()];
+				Vertex& vj = referenceMesh->vertices[*timedSpheres[j].sphere.vertices.begin()];
+				if (check && normalTest(vi, vj))
+				{
+					timedSpheres[i].sphere.neighbourSpheres.insert(j);
+					timedSpheres[j].sphere.neighbourSpheres.insert(i);
+				}
+			}
+		}
 	}
 	
 	void SphereMesh::updateNeighborsOf(Sphere& s)
 	{
-		std::unordered_set<int> newNeighbors;
+		set_of_int newNeighbors;
 		
+		int sphereAlias = alias(sphereMapper[s.getID()]);
 		for (int i : s.neighbourSpheres)
-			newNeighbors.insert(getActiveTimedSphere(i));
+		{
+			int j = alias(i);
+			if (j != sphereAlias)
+				newNeighbors.insert(j);
+		}
 		
 		s.neighbourSpheres = newNeighbors;
+	}
+	
+	int SphereMesh::alias(int i)
+	{
+		int j = timedSpheres[i].alias;
+		
+		if (i == j) return i;
+		
+		return timedSpheres[i].alias = alias(j);
 	}
 	
 	void SphereMesh::extendSpheresNeighboursOneStep()
@@ -147,27 +158,14 @@ namespace Renderer {
 		for (TimedSphere& s : timedSpheres)
 			for (int j : s.sphere.neighbourSpheres)
 				s.sphere.neighbourSpheres += originalFriends[j];
-	}
-
-    void SphereMesh::setEpsilon(const Math::Scalar& e)
-    {
-        EPSILON = e * BDDSize;
 		
-		edgeQueue.setQueueDirty();
-    }
+		for (int i = 0; i < timedSpheres.size(); i++)
+			timedSpheres[i].sphere.neighbourSpheres.erase(i);
+	}
 	
 	bool SphereMesh::isTimedSphereAlive(int id)
 	{
 		return timedSpheres[id].alias == id;
-	}
-	
-	int SphereMesh::getActiveTimedSphere(int i)
-	{
-		int j = timedSpheres[i].alias;
-		
-		if (i == j) return i;
-		
-		return timedSpheres[i].alias = getActiveTimedSphere(j);
 	}
 
     int SphereMesh::getPerSphereVertexCount() const {
@@ -196,13 +194,8 @@ namespace Renderer {
 		
 		BDDSize = sm.BDDSize;
 		timedSpheres = sm.timedSpheres;
-		initialSpheres = sm.initialSpheres;
 		triangle = sm.triangle;
 		edge = sm.edge;
-		edgeConnectivity = sm.edgeConnectivity;
-		triangleConnectivity = sm.triangleConnectivity;
-		triangleEdgeConnectivity = sm.triangleEdgeConnectivity;
-		EPSILON = sm.EPSILON;
 		
 		return *this;
 	}
@@ -217,101 +210,43 @@ namespace Renderer {
 
     void SphereMesh::initializeSpheres(std::vector<Vertex>& vertices, Math::Scalar initialRadius)
     {
+		timedSpheres.clear();
         timedSpheres.reserve(vertices.size());
-	    
-		int i = 0;
-	    for (auto& vertex : vertices)
+		
+	    for (int i = 0; i < vertices.size(); i++)
 	    {
-			auto newSphere = Sphere(vertex, initialRadius);
+			auto newSphere = Sphere(vertices[i], i, initialRadius);
 			
-		    timedSpheres.emplace_back(newSphere, i);
-			++i;
+			if (IMPLEMENT_THIERY_2013)
+				newSphere.initTHIERY(vertices[i]);
+			
+		    timedSpheres.emplace_back(newSphere, timedSpheres.size(), performedOperations);
 			
 			sphereMapper[newSphere.getID()] = static_cast<int>(timedSpheres.size()) - 1;
 		}
-		
-		timedSphereSize = static_cast<int>(timedSpheres.size());
+	    
+	    numberOfActiveSpheres = static_cast<int>(timedSpheres.size());
     }
+	
+	void SphereMesh::addPotentialCollapse(int i, int j)
+	{
+		EdgeCollapse e = EdgeCollapse(i, j, performedOperations);
+		updateCost(e);
+		edgeQueue.push(e);
+	}
 
     void SphereMesh::initializeEdgeQueue()
     {
-        int sphereSize = (int)timedSpheres.size();
 	    edgeQueue = TemporalValidityQueue(timedSpheres, sphereMapper);
+		performedOperations = 0;
+		numberOfActiveSpheres = static_cast<int>(timedSpheres.size());
 		
-        std::queue<EdgeCollapse> localQueues[omp_get_max_threads()];
-
-        #pragma omp parallel default(none) shared(timedSpheres, sphereSize, localQueues, edgeQueue)
-        {
-            int tid = omp_get_thread_num();
-
-            #pragma omp for schedule(dynamic, 64)
-            for (int i = 0; i < sphereSize; ++i) {
-                for (int j = i + 1; j < sphereSize; ++j) {
-	                
-	                auto checkInRange = (timedSpheres[i].sphere.center - timedSpheres[j].sphere.center)
-							.squareMagnitude() <= EPSILON * EPSILON;
-	                auto checkEdgesConnected = edgeConnectivity[i][j]
-	                                           || triangleEdgeConnectivity[i][j] ||
-											   triangleEdgeConnectivity[i][j];
-                    if (checkInRange || checkEdgesConnected) {
-                        EdgeCollapse e(timedSpheres[i], timedSpheres[j], i, j);
-                        e.updateError();
-
-                        localQueues[tid].push(e);
-                    }
-                }
-            }
-        }
-	    
-	    for (int i = 0; i < omp_get_max_threads(); ++i)
-		    while (!localQueues[i].empty())
-		    {
-			    edgeQueue.push(localQueues[i].front());
-			    localQueues[i].pop();
-		    }
-	    
+		for (int i = 0; i < timedSpheres.size(); i++)
+			for (int j : timedSpheres[i].sphere.neighbourSpheres)
+				if (i > j)
+					addPotentialCollapse(i, j);
     }
-
-    void SphereMesh::updateEdgeQueue(const EdgeCollapse& collapsedEdge)
-    {
-        auto& edgeI = collapsedEdge.idxI;
-        auto& edgeJ = collapsedEdge.idxJ;
-		
-        const auto size = timedSpheres.size();
-
-        auto updateEdges = [&](int i, int edgeIdx) {
-			auto minIndex = std::min(i, edgeIdx);
-			auto maxIndex = std::max(i, edgeIdx);
-			
-			auto checkIndexNotTheSame = i != edgeIdx;
-			auto checkBothSpheresAreActive = isTimedSphereAlive(i) && isTimedSphereAlive(edgeIdx);
-			auto checkInRange = (timedSpheres[i].sphere.center - timedSpheres[edgeIdx].sphere.center).magnitude()
-			                            <= EPSILON;
-			auto checkEdgesConnected = edgeConnectivity[minIndex][maxIndex]
-					|| triangleEdgeConnectivity[minIndex][maxIndex] || triangleEdgeConnectivity[maxIndex][minIndex];
-//			auto checkSphereTouch
-			
-			auto checkInRangeOrConnected = checkInRange || checkEdgesConnected;
-			
-            if (checkIndexNotTheSame && checkInRangeOrConnected && checkBothSpheresAreActive) {
-                EdgeCollapse newEdge = EdgeCollapse(timedSpheres[i], timedSpheres[edgeIdx], i, edgeIdx);
-                
-                newEdge.updateError();
-#ifdef MEASURE_EPSILON_MAX
-				if (!checkEdgesConnected)
-					newEdge.epsilonOfCollapse =
-						(timedSpheres[i].sphere.center - timedSpheres[edgeIdx].sphere.center).magnitude() / BDDSize;
-#endif
-                edgeQueue.push(newEdge);
-            }
-        };
-
-        for (int i = 0; i < size; ++i) {
-            updateEdges(i, edgeI);
-            updateEdges(i, edgeJ);
-        }
-    }
-
+	
     RenderType SphereMesh::getRenderType() {
         return this->renderType;
     }
@@ -327,237 +262,12 @@ namespace Renderer {
         else
             renderOneBillboardSphere(center, radius, color);
     }
-	
-    EdgeCollapse SphereMesh::getBestCollapseFast()
-    {
-        if (edgeQueue.size() < 1)
-            return {};
-        
-        EdgeCollapse topEdge = edgeQueue.top();
-		edgeQueue.pop();
-        
-        if (topEdge.idxI == -1 || topEdge.idxJ == -1)
-            return {};
-		
-		while (!topEdge.isCheckedAgainstIncorporatedVertices)
-		{
-		    Sphere newSphere = Sphere();
-		    newSphere.color = Math::Vector3(1, 0, 0);
-		    newSphere.addQuadric(timedSpheres[topEdge.idxI].sphere.getSphereQuadric());
-		    newSphere.addQuadric(timedSpheres[topEdge.idxJ].sphere.getSphereQuadric());
-			
-			for (auto& q : topEdge.chainOfCollapse)
-				newSphere.addQuadric(q.second->sphere.getSphereQuadric());
-			
-			auto chainCollapseSize = topEdge.chainOfCollapse.size();
-			
-			for (auto& vertex : referenceMesh->vertices)
-				if (newSphere.containsVertex(vertex.position))
-				{
-					Math::Scalar vertexInSphereDistance = (newSphere.center - vertex.position).magnitude() -
-							newSphere.radius;
-					bool checkVertexDeepContained = vertexInSphereDistance <= -std::sqrt(topEdge.getPlainEdgeError() /
-							topEdge.getNumberOfVerticesInCollapse());
-					bool checkVertexAlreadyIncluded = vertex.referenceSphere == topEdge.i.sphere.getID()
-					                                  || vertex.referenceSphere == topEdge.j.sphere.getID()
-													  || !std::all_of(topEdge.chainOfCollapse.begin(),
-								topEdge.chainOfCollapse.end(),
-								[&vertex](const auto& pair) {
-									if (pair.second->sphere.getID() == vertex.referenceSphere)
-										return false;
-									return true;
-								});
-					
-					if (checkVertexAlreadyIncluded || !checkVertexDeepContained)
-						continue;
-					
-					topEdge.addSphereCollapseToChain(timedSpheres[sphereMapper[vertex.referenceSphere]]);
-					break; // Find one and break out, we will see the next iteration if we have another
-				}
-			
-			// I did not find any new vertices to incorporate so the edge is fully checked
-			if (chainCollapseSize == topEdge.chainOfCollapse.size())
-				topEdge.isCheckedAgainstIncorporatedVertices = true;
-			
-			topEdge.updateError();
-			
-			edgeQueue.push(topEdge);
-			topEdge = edgeQueue.top();
-			edgeQueue.pop();
-			
-			if (topEdge.idxI == -1 || topEdge.idxJ == -1)
-				return {};
-		}
-	    
-	    #ifdef USE_THIEF_SPHERE_METHOD
-        while (!topEdge.isErrorCorrectionQuadricSet)
-        {
-            Sphere newSphere = Sphere();
-            newSphere.color = Math::Vector3(1, 0, 0);
-            newSphere.addQuadric(timedSpheres[topEdge.idxI].getSphereQuadric());
-            newSphere.addQuadric(timedSpheres[topEdge.idxJ].getSphereQuadric());
-	        
-	        #ifdef ENABLE_REGION_BOUND
-            newSphere.region = timedSpheres[topEdge.idxI].region;
-            newSphere.region.join(timedSpheres[topEdge.idxJ].region);
-			#endif
-            
-            auto startError = topEdge.error;
-            for (auto& vertex : referenceMesh->vertices)
-                if (newSphere.intersectsVertex(vertex.position))
-                {
-                    bool isAlreadyContained = false;
-                    for (auto& ownVertex : timedSpheres[topEdge.idxI].vertices)
-                    {
-                        if (ownVertex->position == vertex.position)
-                        {
-                            isAlreadyContained = true;
-                            break;
-                        }
-                    }
-                    
-                    if (isAlreadyContained)
-                        break;
-                    
-                    for (auto& ownVertex : timedSpheres[topEdge.idxJ].vertices)
-                        if (ownVertex->position == vertex.position)
-                        {
-                            isAlreadyContained = true;
-                            break;
-                        }
-                    
-                    if (isAlreadyContained)
-                        break;
-                    
-                    topEdge.updateCorrectionErrorQuadric(Quadric::initializeQuadricFromVertex(vertex, 0.1 * BDDSize));
-					topEdge.incorporatedVertices.emplace_back(&vertex);
-                }
-            topEdge.updateError();
-            topEdge.isErrorCorrectionQuadricSet = true;
-            
-            if (topEdge.error == startError)
-                return topEdge;
-            
-            edgeQueue.push(topEdge);
-            topEdge = edgeQueue.top((int)timedSpheres.size());
-            edgeQueue.pop();
-            
-            if (topEdge.idxI == -1 || topEdge.idxJ == -1)
-                return {};
-        }
-		#endif
-	 
-#ifdef MEASURE_EPSILON_MAX
-		maxEpsilon = std::max(maxEpsilon, topEdge.epsilonOfCollapse);
-#endif
-		
-        return topEdge;
-    }
 
-    EdgeCollapse SphereMesh::getBestCollapseBruteForce()
-    {
-        if (timedSpheres.size() <= 1)
-            return {};
-        
-        Math::Scalar minErorr = DBL_MAX;
-        EdgeCollapse bestEdge = EdgeCollapse(timedSpheres[0], timedSpheres[1], -1, -1);
-        
-        for (int i = 0; i < timedSpheres.size(); i++)
-            for (int j = i + 1; j < timedSpheres.size(); j++)
-            {
-                if (i == j || (timedSpheres[i].sphere.center - timedSpheres[j].sphere.center).squareMagnitude() >
-		                              (EPSILON * EPSILON) || isTimedSphereAlive(i) || isTimedSphereAlive(j))
-                    continue;
-                
-                EdgeCollapse candidateEdge = EdgeCollapse(timedSpheres[i], timedSpheres[j], i, j);
-	            
-	            Sphere newSphere = Sphere();
-	            newSphere.color = Math::Vector3(1, 0, 0);
-	            newSphere.addQuadric(candidateEdge.i.sphere.getSphereQuadric());
-	            newSphere.addQuadric(candidateEdge.j.sphere.getSphereQuadric());
-	            
-	            for (auto& vertex : referenceMesh->vertices)
-		            if (newSphere.containsVertex(vertex.position))
-		            {
-			            if (vertex.referenceSphere == candidateEdge.i.sphere.getID()
-			                || vertex.referenceSphere == candidateEdge.j.sphere.getID())
-				            continue;
-			            
-			            candidateEdge.addSphereCollapseToChain(timedSpheres[sphereMapper[vertex.referenceSphere]]);
-		            }
-                
-                candidateEdge.updateError();
-                
-                if (candidateEdge.error < minErorr)
-                {
-                    bestEdge = candidateEdge;
-                    minErorr = candidateEdge.error;
-                }
-            }
-        
-        if (bestEdge.idxI == -1 || bestEdge.idxJ == -1)
-            return {};
-        
-        return bestEdge;
-    }
-
-    EdgeCollapse SphereMesh::getBestCollapseInConnectivity()
-    {
-        if (triangle.empty() && edge.empty())
-            return {};
-        
-        Math::Scalar minError = DBL_MAX;
-        EdgeCollapse bestEdge;
-        
-        for (auto & i : triangle)
-        {
-            int v1 = i.i;
-            int v2 = i.j;
-            int v3 = i.k;
-            
-            EdgeCollapse e1 = EdgeCollapse(timedSpheres[v1], timedSpheres[v2], v1, v2);
-            EdgeCollapse e2 = EdgeCollapse(timedSpheres[v1], timedSpheres[v3], v1, v3);
-            EdgeCollapse e3 = EdgeCollapse(timedSpheres[v2], timedSpheres[v3], v2, v3);
-            
-            EdgeCollapse bestInTriangle;
-            if (e1.error <= e2.error && e1.error <= e3.error)
-                bestInTriangle = e1;
-            else if (e2.error <= e1.error && e2.error <= e3.error)
-                bestInTriangle = e2;
-            else
-                bestInTriangle = e3;
-            
-            if (bestInTriangle.error < minError)
-            {
-                bestEdge = bestInTriangle;
-	            minError = bestEdge.error;
-            }
-        }
-        
-        for (auto & i : edge)
-        {
-            int v1 = i.i;
-            int v2 = i.j;
-            
-            EdgeCollapse candidateEdge = EdgeCollapse(timedSpheres[v1], timedSpheres[v2], v1, v2);
-            if (candidateEdge.error < minError)
-            {
-                bestEdge = candidateEdge;
-	            minError = bestEdge.error;
-            }
-        }
-        
-        if (bestEdge.idxI == -1 || bestEdge.idxJ == -1)
-            return {};
-        
-        return bestEdge;
-    }
-
-    void SphereMesh::computeSpheresProperties(const std::vector<Vertex>& vertices)
+    void SphereMesh::computeSpheresProperties(const std::vector<Vertex>& vertices, const std::vector<Face>& faces)
     {
         const Math::Scalar sigma = 1.0;
         
-        for (auto & j : triangle)
+        for (const Face& j : faces)
         {
             int i0 = j.i;
             int i1 = j.j;
@@ -587,30 +297,16 @@ namespace Renderer {
 	        timedSpheres[i0].sphere.quadricWeights += weight;
 	        timedSpheres[i1].sphere.quadricWeights += weight;
 	        timedSpheres[i2].sphere.quadricWeights += weight;
-	        
-	        #ifdef ENABLE_REGION_BOUND
-            timedSpheres[i0].region.addVertex(vertices[i0].position);
-            timedSpheres[i0].region.addVertex(vertices[i1].position);
-            timedSpheres[i0].region.addVertex(vertices[i2].position);
-
-            timedSpheres[i1].region.addVertex(vertices[i0].position);
-            timedSpheres[i1].region.addVertex(vertices[i1].position);
-            timedSpheres[i2].region.addVertex(vertices[i2].position);
-
-            timedSpheres[i2].region.addVertex(vertices[i0].position);
-            timedSpheres[i2].region.addVertex(vertices[i1].position);
-            timedSpheres[i2].region.addVertex(vertices[i2].position);
-	        #endif
         }
     }
 
     void SphereMesh::updateSpheres()
     {
-        for (auto & i : timedSpheres)
+        for (TimedSphere& i : timedSpheres)
         {
             i.sphere.quadric *= (1/i.sphere.quadricWeights);
-
-            Math::Vector4 result = i.sphere.quadric.minimizer();
+			
+            Math::Vector4 result = i.sphere.quadric.minimizer(0.001);
             i.sphere.center = result.toQuaternion().immaginary;
             i.sphere.radius = result.coordinates.w;
         }
@@ -944,633 +640,265 @@ namespace Renderer {
     void SphereMesh::renderSpheresOnly()
     {
         Math::Vector3 color = Math::Vector3(0, 0, 1);
-
+		
         for (int i = 0; i < timedSpheres.size(); i++)
         {
-            if (timedSpheres[i].sphere.radius <= 0)
+            if (timedSpheres[i].sphere.radius <= 0 && isTimedSphereAlive(i))
             {
-                std::cout << "Sphere [" << i << "] has radius = " << timedSpheres[i].sphere.radius << std::endl;
+//                std::cout << "Sphere [" << i << "] has radius = " << timedSpheres[i].sphere.radius << std::endl;
                 continue;
             }
-            
-            auto r = timedSpheres[i].sphere.radius;
-            
+			
 			if (isTimedSphereAlive(i))
-                renderSphere(timedSpheres[i].sphere.center, r, timedSpheres[i].sphere.color);
-        }
-    }
-
-    Math::Scalar SphereMesh::getContainedRadiusOfSphere(const Sphere& s)
-    {
-        auto center = s.center;
-        Math::Scalar minDistance2 = DBL_MAX;
-        
-        for (auto & vertex : referenceMesh->vertices)
-        {
-            auto distance2 = (center - vertex.position).squareMagnitude();
-            minDistance2 = std::min(distance2, minDistance2);
-        }
-        
-        return std::sqrt(minDistance2);
-    }
-
-    void SphereMesh::renderSelectedSpheresOnly()
-    {
-        if (edgeQueue.isQueueDirty())
-        {
-            edgeQueue.clear();
-            initializeEdgeQueue();
-        }
-        
-        EdgeCollapse e = getBestCollapseFast();
-        if (e.idxI == -1 || e.idxJ == -1)
-            return;
-		
-		if (isTimedSphereAlive(e.idxI) || isTimedSphereAlive(e.idxJ))
-			return;
-        
-        if (e.i.sphere.radius > 0)
-        {
-            auto r = e.i.sphere.radius;
-            
-            renderSphere(e.i.sphere.center, r + 0.01f, e.i.sphere.color);
-        }
-        
-        if (e.j.sphere.radius > 0)
-        {
-            auto r = e.j.sphere.radius;
-            
-            renderSphere(e.j.sphere.center, r + 0.01f, e.j.sphere.color);
-        }
-    }
-
-    void SphereMesh::renderFastSelectedSpheresOnly()
-    {
-        Math::Vector3 color = Math::Vector3(0, 1, 0);
-        
-        EdgeCollapse e = getBestCollapseInConnectivity();
-        if (e.idxI == -1 || e.idxJ == -1)
-            return;
-	    
-	    if (isTimedSphereAlive(e.idxI) || isTimedSphereAlive(e.idxJ))
-		    return;
-        
-        if (e.i.sphere.radius > 0)
-        {
-            auto r = e.i.sphere.radius;
-            
-            renderSphere(e.i.sphere.center, r + 0.01f, e.i.sphere.color);
-        }
-        
-        if (e.j.sphere.radius > 0)
-        {
-            auto r = e.j.sphere.radius;
-            
-            renderSphere(e.j.sphere.center, r + 0.01f, e.j.sphere.color);
+                renderSphere(timedSpheres[i].sphere.center, timedSpheres[i].sphere.radius, timedSpheres[i].sphere.color);
         }
     }
 
     void SphereMesh::renderSphereVertices(int i)
     {
-        for (int idx = 0; i < timedSpheres.size(); i++)
-	        if (timedSpheres[idx].sphere.getID() == i && isTimedSphereAlive(idx))
-		        for (auto &vertex: timedSpheres[idx].sphere.vertices)
-			        renderSphere(vertex->position, 0.02 * BDDSize, Math::Vector3(0, 1, 0));
+		if (sphereMapper.find(i) == sphereMapper.end())
+			return;
+		
+		int idx = sphereMapper[i];
+		for (auto &vertex: timedSpheres[idx].sphere.vertices)
+			renderSphere(referenceMesh->vertices[vertex].position, 0.02 * BDDSize, Math::Vector3(0, 1, 0));
     }
+	
+	void SphereMesh::updateCost(EdgeCollapse& e)
+	{
+		e.error = Quadric();
+		for(int c : e.toCollapse)
+			e.error += currentSphere(c).quadric;
+		
 
-    Sphere SphereMesh::collapseEdgeIntoSphere(EdgeCollapse& edgeToCollapse)
-    {
-		if (edgeToCollapse.idxI > edgeToCollapse.idxJ)
-			edgeToCollapse.updateEdge(edgeToCollapse.j, edgeToCollapse.i, edgeToCollapse.idxJ, edgeToCollapse.idxI);
+		if (IMPLEMENT_THIERY_2013)
+		{
+			e.region.clear();
+			for (int c : e.toCollapse)
+				e.region.unionWith(currentSphere(c).region);
+			
+			e.error.getMinimumAndMinimizer(e.cost, e.centerRadius, e.region.getWidth() * (3.0 / 4.0));
+		}
+		else
+		{
+			e.error.getMinimumAndMinimizer(e.cost, e.centerRadius);
+		}
+		e.cost /= (e.toCollapse.size() - 1);
+	}
+	
+	bool SphereMesh::isOutOfDate(const EdgeCollapse& e)
+	{
+		for (int c : e.toCollapse)
+			if (timedSpheres[alias(c)].timestamp > e.timestamp)
+				return true;
 		
-        TimedSphere& collapsedSphereA = timedSpheres[edgeToCollapse.idxI];
-	    TimedSphere& collapsedSphereB = timedSpheres[edgeToCollapse.idxJ];
-        
-        Sphere newSphere = Sphere();
-        
-        newSphere.color = Math::Vector3(1, 0, 0);
-	    
-	    #ifdef ENABLE_REGION_BOUND
-        newSphere.region.join(collapsedSphereA.region);
-        newSphere.region.join(collapsedSphereB.region);
-	    #endif
-        
-        newSphere.addQuadric(collapsedSphereA.sphere.getSphereQuadric());
-        newSphere.addQuadric(collapsedSphereB.sphere.getSphereQuadric());
-	    
-	    #ifdef USE_THIEF_SPHERE_METHOD
-		if (edgeToCollapse.isErrorCorrectionQuadricSet)
-			newSphere.addQuadric(edgeToCollapse.errorCorrectionQuadric);
-	    #endif
-	    
-	    #ifdef ENABLE_REGION_BOUND
-        if (newSphere.checkSphereOverPlanarRegion())
-            newSphere.approximateSphereOverPlanarRegion(collapsedSphereA.center, collapsedSphereB.center);
-        
-        newSphere.constrainSphere(newSphere.region.directionalWidth);
-        newSphere.constrainSphere(getContainedRadiusOfSphere(newSphere));
-		#endif
-	    
-	    #ifdef USE_THIEF_SPHERE_METHOD
-        newSphere.vertices.reserve(collapsedSphereA.vertices.size() + collapsedSphereB.vertices.size() + edgeToCollapse.incorporatedVertices.size());
-		#else
-		newSphere.vertices.reserve(collapsedSphereA.sphere.vertices.size() + collapsedSphereB.sphere.vertices.size());
-		#endif
-		
-	    #ifndef DISABLE_VERTEX_INCLUSION_IN_SPHERES
-        for (auto& vertex : collapsedSphereA.sphere.vertices)
-            newSphere.addVertex(*vertex);
+		return false;
+	}
+	
+	bool SphereMesh::debugCheckNoLoops()
+	{
+		for (int i = 0; i < timedSpheres.size(); i++)
+		{
+			if (alias(i) != i) continue;
+			
+			for (int j : timedSpheres[i].sphere.neighbourSpheres)
+				if (alias(j) == i)
+				{
+					std::cerr << "Loop detected between " << i << " and " << j << std::endl;
+					return false;
+				}
+		}
 
-        for (auto& vertex : collapsedSphereB.sphere.vertices)
-            newSphere.addVertex(*vertex);
-	    
-	    #ifdef USE_THIEF_SPHERE_METHOD
-		if (edgeToCollapse.isErrorCorrectionQuadricSet)
-			for (auto& vertex : edgeToCollapse.incorporatedVertices)
-				newSphere.addVertex(*vertex);
-		#endif
+		return true;
+	}
+	
+	bool SphereMesh::normalTest(const Vertex& vA, const Vertex& vB)
+	{
+		Math::Vector3 directionAB = (vB.position - vA.position);
 		
-		#endif
-        
-        return newSphere;
-    }
+		bool doesAseeB = directionAB.dot(vA.normal) > 0;
+		bool doesBseeA = directionAB.dot(vB.normal) < 0;
+		
+		return !(doesAseeB && doesBseeA);
+	}
+	
+	void SphereMesh::execute(const EdgeCollapse& e)
+	{
+		performedOperations++;
+		numberOfActiveSpheres -= e.toCollapse.size() - 1;
+		
+		int merged = alias(e.toCollapse.front());
+		for (int i : e.toCollapse)
+		{
+			timedSpheres[i].alias = merged;
+			sphereMapper.erase(timedSpheres[i].sphere.getID());
+			timedSpheres[merged].sphere.neighbourSpheres += timedSpheres[i].sphere.neighbourSpheres;
+			if (merged != i)
+				for (auto& vertex : timedSpheres[i].sphere.vertices)
+					timedSpheres[merged].sphere.addVertex(referenceMesh->vertices[vertex], vertex);
+		}
+		
+		timedSpheres[merged].sphere.quadric = e.error;
+		timedSpheres[merged].sphere.center = e.centerRadius.toQuaternion().immaginary;
+		timedSpheres[merged].sphere.radius = e.centerRadius.coordinates.w;
+		
+		if (IMPLEMENT_THIERY_2013)
+			timedSpheres[merged].sphere.region = e.region;
+		
+		timedSpheres[merged].timestamp = performedOperations;
+		sphereMapper[timedSpheres[merged].sphere.getID()] = merged;
+		
+		updateNeighborsOf(timedSpheres[merged].sphere);
+		
+		for (int i : timedSpheres[merged].sphere.neighbourSpheres)
+			if (i != merged && alias(i) != merged)
+				updateNeighborsOf(timedSpheres[i].sphere);
+		
+		for (int i : timedSpheres[merged].sphere.neighbourSpheres)
+			addPotentialCollapse(merged, i);
+		
+		debugCheckNoLoops();
+	}
 
     bool SphereMesh::collapseSphereMesh()
     {
-        if (edgeQueue.isQueueDirty())
-        {
-            edgeQueue.clear();
-            initializeEdgeQueue();
-        }
-		
-        EdgeCollapse e = getBestCollapseFast();
-	  
-#ifdef TEST_COLLAPSING_QUEUE
-		EdgeCollapse e1 = getBestCollapseBruteForce();
-		
-		if (e.error != e1.error)
+		int initialNumberOfActiveSpheres = numberOfActiveSpheres;
+		while (initialNumberOfActiveSpheres == numberOfActiveSpheres && !edgeQueue.empty())
 		{
-			e.updateError();
-			e1.updateError();
-
-			std::cout << "Best collapse fast: (" << e.idxI << ", " << e.idxJ << "); with error: " << e.error << std::endl;
-			std::cout << "Best collapse brute force: (" << e1.idxI << ", " << e1.idxJ << "); with error: " << e1.error <<
-			std::endl;
-
-			std::cout << "Spheres fast: (" << timedSpheres[e.idxI].creationTime << ", " << timedSpheres[e.idxJ].creationTime
-			<< ")" << std::endl;
-			std::cout << "Spheres brute: (" << timedSpheres[e1.idxI].creationTime << ", " << timedSpheres[e1.idxJ]
-			.creationTime << ")" << std::endl;
-
-			std::cout << "Real fast quadric error: " << (timedSpheres[e.idxI].sphere.getSphereQuadric() +
-			timedSpheres[e.idxJ].sphere.getSphereQuadric()).minimum() << std::endl;
+			EdgeCollapse e = edgeQueue.top();
+			edgeQueue.pop();
+			
+			if (isOutOfDate(e)) continue;
+			
+			execute(e);
 		}
-#endif
-
-        if (e.idxI == -1 || e.idxJ == -1)
-            return false;
-		
-        Sphere newSphere = collapseEdgeIntoSphere(e);
 	    
-	    timedSpheres[e.idxI] = TimedSphere(newSphere, e.idxI);
-	    timedSpheres[e.idxJ].alias = e.idxI;
+	    updateConnectivityAfterCollapses();
 		
-		sphereMapper.erase(e.i.sphere.getID());
-		sphereMapper.erase(e.j.sphere.getID());
-	    sphereMapper[newSphere.getID()] = e.idxI;
-		
-		timedSphereSize--;
-  
-		// TODO: The edges are updated wrongly, I should call clear mesh at each collapse, but how to do it? (without
-		//  compromising performances)
-        updateEdgesAfterCollapse(e.idxI, e.idxJ);
-	    updateTrianglesAfterCollapse(e.idxI, e.idxJ);
-	    
-	    removeDegenerates();
-	    updateEdgeQueue(e);
-	    
-	    int result = newSphere.getID();
-		
-	    for (auto& s : e.chainOfCollapse)
-	    {
-			if (sphereMapper.find(s.second->sphere.getID()) != sphereMapper.end()
-//			&& sphereMapper.find(result) != sphereMapper.end()
-//			&& timedSpheres[sphereMapper[result]].isActive
-			&& isTimedSphereAlive(sphereMapper[s.second->sphere.getID()]))
-			{
-				auto idx = result;
-				auto idy = s.second->sphere.getID();
-
-				if (sphereMapper[idx] > sphereMapper[idy])
-					std::swap(idx, idy);
-
-				auto tmp = collapse(idx, idy);
-
-				if (tmp == -1)
-				{
-					std::cerr << "Collapse gone wrong, skipping..." << std::endl;
-					continue;
-				}
-
-				result = timedSpheres[tmp].sphere.getID();
-			}
+        return initialNumberOfActiveSpheres != numberOfActiveSpheres;
+    }
+	
+	void SphereMesh::updateConnectivityAfterCollapses()
+	{
+		std::unordered_set<Edge> newEdges;
+		std::unordered_set<Triangle> newTriangles;
+		for (const Edge& e : edge)
+		{
+			Edge toInsert = Edge(
+					alias(e.i),
+					alias(e.j)
+			);
+			
+			if (toInsert.i == toInsert.j)
+				continue;
 			else
-			{
-				std::cerr << "Not chain collapsing timedSpheres " << s.second->sphere.getID() << " cos is not "
-																								 "active: " <<
-				isTimedSphereAlive(s.second->alias) << std::endl;
-			}
-	    }
-		
-#ifdef LOG_SPHERE_NUMBER
-		std::cout << "Number of spheres: " << timedSphereSize << std::endl;
-#endif
-	 
-#ifdef USE_THIEF_SPHERE_METHOD
-		std::vector<Pair> toCollapse;
-	    for (auto& s : timedSpheres)
-	    {
-			auto value = s.clearNotLinkedVertices();
-			if (value != -1)
-				toCollapse.emplace_back(value, s.getID());
+				newEdges.insert(toInsert);
 		}
 		
-		for (auto& c : toCollapse)
+		for (const Triangle& t : triangle)
 		{
-			std::cout << "Collapsing parentless timedSpheres " << c.j << " into " << c.i << std::endl;
-			collapse(c.j, c.i);
+			Triangle toInsert = Triangle(
+					alias(t.i),
+					alias(t.j),
+					alias(t.k)
+			);
+			
+			if (toInsert.i == toInsert.k)
+				continue;
+			else if (toInsert.i == toInsert.j || toInsert.j == toInsert.k)
+				newEdges.insert(Edge(toInsert.i, toInsert.k));
+			else
+				newTriangles.insert(toInsert);
 		}
-#endif
-        
-        return true;
-    }
-
-    bool SphereMesh::collapseSphereMeshFast()
-    {
-        EdgeCollapse e = getBestCollapseInConnectivity();
-        if (e.idxI == -1 || e.idxJ == -1)
-            return false;
-        
-        Sphere newSphere = collapseEdgeIntoSphere(e);
-	    
-	    timedSpheres[e.idxI] = TimedSphere(newSphere, e.idxI);
-	    timedSpheres[e.idxJ].alias = e.idxI;
-
-        updateEdgesAfterCollapse(e.idxI, e.idxJ);
-	    updateTrianglesAfterCollapse(e.idxI, e.idxJ);
-
-        removeDegenerates();
-        
-        return true;
-    }
-
-    void SphereMesh::updateEdgesAfterCollapse(int i, int j)
-    {
-		// Here I just set in all the edges with the dead spheres the index of the newly generated sphere
-		std::vector<Edge> toUpdate;
-		std::vector<Edge> toRemove;
-        for (const auto& e : edge) {
-			if (e.i == j || e.j == j)
-			{
-				auto minIndex = std::min({e.i, e.j});
-				auto maxIndex = std::max({e.i, e.j});
-				
-				edgeConnectivity[minIndex][maxIndex] = false;
-			}
-			
-			if (e.i == j)
-			{
-				if (e.j != i)
-					toUpdate.emplace_back(i, e.j);
-
-				toRemove.emplace_back(e);
-			}
-			
-			if (e.j == j)
-			{
-				if (e.i != i)
-					toUpdate.emplace_back(e.i, i);
-				
-				toRemove.emplace_back(e);
-			}
-        }
 		
-		for (auto& e : toRemove)
-			edge.erase(e);
+		std::swap(edge, newEdges);
+		std::swap(triangle, newTriangles);
+	}
+	
+	bool SphereMesh::engulfsAnything(EdgeCollapse& e)
+	{
+		Math::Vector3 center = e.centerRadius.truncateToVector3();
+		Math::Scalar radius = e.centerRadius.coordinates.w;
+		Math::Scalar radiusSquared = radius * radius;
 		
-		for (auto& e : toUpdate)
-			edge.insert(e);
-    }
-
-    void SphereMesh::updateTrianglesAfterCollapse(int i, int j)
-    {
-	    // Here I just set in all the triangles with the dead spheres the index of the newly generated sphere
-	    std::vector<Triangle> toUpdate;
-	    std::vector<Triangle> toRemove;
-        for (const auto& t : triangle) {
-			if (t.i == j || t.j == j || t.k == j)
+		for (int vi = 0; vi < referenceMesh->vertices.size(); vi++)
+		{
+			Vertex& v = referenceMesh->vertices[vi];
+			Math::Scalar distanceSquared = (v.position - center).squareMagnitude();
+			int si = alias(vi);
+			if (distanceSquared < radiusSquared && !includes(e.toCollapse, si))
 			{
-				auto minIndex = std::min({t.i, t.j, t.k});
-				auto maxIndex = std::max({t.i, t.j, t.k});
-				auto midIndex = t.i + t.j + t.k - minIndex - maxIndex;
-				
-				triangleConnectivity[minIndex][midIndex][maxIndex] = false;
-				triangleEdgeConnectivity[minIndex][midIndex] = false;
-				triangleEdgeConnectivity[minIndex][maxIndex] = false;
-				triangleEdgeConnectivity[midIndex][maxIndex] = false;
+				e.toCollapse.emplace_back(si);
+				updateCost(e);
+				return true;
 			}
-			
-			if (t.i == j)
-			{
-				if (t.j != i && t.k != i)
-					toUpdate.emplace_back(i, t.j, t.k);
-				else
-				{
-					auto minIndex = std::min({i, t.j, t.k});
-					auto maxIndex = std::max({i, t.j, t.k});
-					
-					edgeConnectivity[minIndex][maxIndex] = true;
-					edge.insert(Edge(minIndex, maxIndex));
-				}
-				
-				toRemove.emplace_back(t);
-			}
-			
-			if (t.j == j)
-			{
-				if (t.i != i && t.k != i)
-					toUpdate.emplace_back(t.i, i, t.k);
-				else
-				{
-					auto minIndex = std::min({t.i, i, t.k});
-					auto maxIndex = std::max({t.i, i, t.k});
-					
-					edgeConnectivity[minIndex][maxIndex] = true;
-					edge.insert(Edge(minIndex, maxIndex));
-				}
-				
-				toRemove.emplace_back(t);
-			}
-			
-			if (t.k == j)
-			{
-				if (t.i != i && t.j != i)
-					toUpdate.emplace_back(t.i, t.j, i);
-				else
-				{
-					auto minIndex = std::min({t.i, t.j, i});
-					auto maxIndex = std::max({t.i, t.j, i});
-					
-					edgeConnectivity[minIndex][maxIndex] = true;
-					edge.insert(Edge(minIndex, maxIndex));
-				}
-				
-				toRemove.emplace_back(t);
-			}
-        }
+		}
 		
-		for (auto& t : toRemove)
-			triangle.erase(t);
-		
-		for (auto& t : toUpdate)
-			triangle.insert(t);
-    }
+		return false;
+	}
 
     bool SphereMesh::collapseSphereMesh(int n)
     {
-        while (timedSphereSize > n)
-            if(!this->collapseSphereMesh())
-                return false;
-		
-#ifdef MEASURE_EPSILON_MAX
-		std::cout << "Epsilon value: " << maxEpsilon << std::endl;
-		
-	    std::ofstream outFile("maxEpsilonOnEdge.txt", std::ios::app);
-	    
-	    if (outFile.is_open()) {
-		    outFile << "Mesh: " << referenceMesh->path << std::endl;
-		    outFile << "Epsilon to 90 spheres: " << maxEpsilon;
-		    outFile << std::endl;
-		    outFile.close();
-	    } else {
-		    std::cerr << "Unable to open file for appending." << std::endl;
+	    auto start = std::chrono::high_resolution_clock::now();
+	    while (!edgeQueue.empty())
+	    {
+		    EdgeCollapse e = edgeQueue.top();
+		    edgeQueue.pop();
+		    
+		    if (isOutOfDate(e)) continue;
+			
+			if (!IMPLEMENT_THIERY_2013)
+				if (engulfsAnything(e))
+				{
+					edgeQueue.push(e);
+					continue;
+				}
+			
+		    execute(e);
+			
+			if (numberOfActiveSpheres <= n) break;
 	    }
-#endif
-        
-        return true;
-    }
-
-    bool SphereMesh::collapseSphereMeshFast(int n)
-    {
-        while (timedSphereSize > n)
-            if(!this->collapseSphereMeshFast())
-                return false;
-        
-        return true;
+	    auto stop = std::chrono::high_resolution_clock::now();
+	    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+		lastCollapseDuration = std::to_string(duration.count() / 1e6);
+	    
+	    updateConnectivityAfterCollapses();
+	    
+	    saveTXTToAutoPath();
+        return numberOfActiveSpheres <= n;
     }
 
     int SphereMesh::collapse(int i, int j)
     {
-		auto idI = i;
-		auto idJ = j;
-	    
-#ifndef USE_NON_MAPPER
-		if (sphereMapper.find(i) == sphereMapper.end() || sphereMapper.find(j) == sphereMapper.end())
-		{
-			std::cerr << "Sphere not found in mapper" << std::endl;
-			return -1;
-		}
+		int aliasI = alias(sphereMapper[i]);
+		int aliasJ = alias(sphereMapper[j]);
 		
-		i = sphereMapper[i];
-		j = sphereMapper[j];
-#endif
-	    
-#ifdef USE_NON_MAPPER
-        for (int idx = 0; idx < timedSpheres.size(); idx++)
-            if (timedSpheres[idx].getID() == i)
-            {
-                i = idx;
-                break;
-            }
-        
-        for (int idx = 0; idx < timedSpheres.size(); idx++)
-            if (timedSpheres[idx].getID() == j)
-            {
-                j = idx;
-                break;
-            }
-#endif
-        
-        if (i == j || i >= timedSpheres.size() || j >= timedSpheres.size())
-        {
-			if (i == j)
-				std::cerr << "i == j" << std::endl;
-	        if (i >= timedSpheres.size())
-		        std::cerr << "i too large" << std::endl;
-	        if (j >= timedSpheres.size())
-		        std::cerr << "j too large" << std::endl;
-            return -1;
-		}
-
-        if (i > j)
-        {
-            std::swap(i, j);
-			std::swap(idI, idJ);
-		}
-  
-//        edgeQueue.setQueueDirty();
-        
-        Sphere newSphere = Sphere();
-        newSphere.color = Math::Vector3(1, 0, 0);
-        newSphere.addQuadric(timedSpheres[i].sphere.getSphereQuadric());
-        newSphere.addQuadric(timedSpheres[j].sphere.getSphereQuadric());
-	    
-	    #ifndef DISABLE_VERTEX_INCLUSION_IN_SPHERES
-        for (auto& vertex : timedSpheres[i].sphere.vertices)
-            newSphere.addVertex(*vertex);
-        
-        for (auto& vertex : timedSpheres[j].sphere.vertices)
-            newSphere.addVertex(*vertex);
-	    
-	    #ifdef USE_THIEF_SPHERE_METHOD
-//	    if (edgeToCollapse.isErrorCorrectionQuadricSet)
-//		    for (auto& vertex : edgeToCollapse.incorporatedVertices)
-//			    newSphere.addVertex(*vertex);
-		#endif
+		if (aliasI == aliasJ)
+			return aliasI;
 		
-		#endif
-	    
-	    #ifdef ENABLE_REGION_BOUND
-        newSphere.region = timedSpheres[i].region;
-        newSphere.region.join(timedSpheres[j].region);
-	    #endif
-	    
-	    timedSpheres[i] = TimedSphere(newSphere, i);
-	    timedSpheres[j].alias = i;
+		EdgeCollapse e = EdgeCollapse(aliasI, aliasJ, performedOperations);
+	    updateCost(e);
 		
-		timedSphereSize--;
-	    
-#ifndef USE_NON_MAPPER
-	    sphereMapper.erase(idI);
-	    sphereMapper.erase(idJ);
-	    sphereMapper[newSphere.getID()] = i;
-#endif
-
-        updateEdgesAfterCollapse(i, j);
-	    updateTrianglesAfterCollapse(i, j);
-
-        removeDegenerates();
-        
-        return i;
+	    execute(e);
+	    updateConnectivityAfterCollapses();
+		
+		return aliasI;
     }
-
-	// TODO: Remove this
-    void SphereMesh::removeDegenerates()
-    {
-//        std::vector<int> degeneratedTriangles;
-//		std::vector<Triangle> trianglesToAdd;
-//		// Checking if a triangle is degenerated into an edge, or it's a duplicate
-//        for (int i = 0; i < triangle.size(); i++)
-//        {
-//			auto minIndex = std::min({triangle[i].i, triangle[i].j, triangle[i].k});
-//			auto maxIndex = std::max({triangle[i].i, triangle[i].j, triangle[i].k});
-//			auto midIndex = triangle[i].i + triangle[i].j + triangle[i].k - minIndex - maxIndex;
-//
-//	        if (triangle[i].i == triangle[i].j || triangle[i].i == triangle[i].k || triangle[i].j == triangle[i].k)
-//                degeneratedTriangles.emplace_back(i);
-//			else if (minIndex != triangle[i].i || midIndex != triangle[i].j || maxIndex != triangle[i].k)
-//	        {
-//				trianglesToAdd.emplace_back(minIndex, midIndex, maxIndex);
-//				degeneratedTriangles.emplace_back(i);
-//			}
-//		}
-//
-//        int reducedSize = 0;
-//        for (int degeneratedTriangle : degeneratedTriangles)
-//        {
-//            Edge newEdge = Edge(0, 0);
-//
-//            int index = degeneratedTriangle;
-//	        int i = triangle[degeneratedTriangle].i;
-//	        int j = triangle[degeneratedTriangle].j;
-//	        int k = triangle[degeneratedTriangle].k;
-//
-//			newEdge = i == j ? Edge(i, k) : Edge(i, j);
-//			newEdge = newEdge.i > newEdge.j ? Edge(newEdge.j, newEdge.i) : newEdge;
-//
-//            edge.emplace_back(newEdge);
-//
-//			auto minIndex = std::min({i, j, k});
-//			auto maxIndex = std::max({i, j, k});
-//
-//			edgeConnectivity[minIndex][maxIndex] = true;
-//
-//            triangle.erase(triangle.begin() + (degeneratedTriangle - reducedSize));
-//            reducedSize++;
-//        }
-//
-//		for (auto& t : trianglesToAdd)
-//			triangle.emplace_back(t);
-//
-//        std::vector<int> degeneratedEdges;
-//		std::vector<Edge> edgesToAdd;
-//		// Checking if an edge is degenerated into a point, or it's a duplicate
-//        for (int i = 0; i < edge.size(); i++)
-//        {
-//			auto minIndex = std::min({edge[i].i, edge[i].j});
-//			auto maxIndex = std::max({edge[i].i, edge[i].j});
-//
-//	        if (edge[i].i == edge[i].j)
-//		        degeneratedEdges.emplace_back(i);
-//			else if (edge[i].i != minIndex || edge[i].j != maxIndex)
-//	        {
-//				edgesToAdd.emplace_back(minIndex, maxIndex);
-//				degeneratedEdges.emplace_back(i);
-//			}
-//		}
-//
-//        reducedSize = 0;
-//        for (int degeneratedEdge : degeneratedEdges)
-//        {
-//            edge.erase(edge.begin() + (degeneratedEdge - reducedSize));
-//            reducedSize++;
-//        }
-//
-//		for (auto& e : edgesToAdd)
-//			edge.emplace_back(e);
-    }
-
-    void SphereMesh::saveYAML(const std::string& path, const std::string& fn)
+	
+	void SphereMesh::saveYAML(const std::string& path, const std::string& fn)
     {
         YAML::Emitter out;
 
         out << YAML::Comment("Sphere Mesh YAML @ author Davide Paolillo");
         out << YAML::BeginMap;
             out << YAML::Key << "Reference Mesh" << YAML::Value << referenceMesh->path;
-            out << YAML::Key << "Start Mesh Resolution" << YAML::Value << initialSpheres.size();
-            out << YAML::Key << "Sphere Mesh Resolution" << YAML::Value << timedSphereSize;
-            out << YAML::Key << "Initial Spheres" << YAML::Value;
-            out << YAML::BeginSeq;
-                for (auto & initialSphere : initialSpheres)
-                {
-                    out << YAML::BeginMap;
-                        out << YAML::Key << "Center" << YAML::Value;
-                        YAMLSerializeVector3(out, initialSphere.sphere.center);
-                        out << YAML::Key << "Radius" << YAML::Value << initialSphere.sphere.radius;
-                        out << YAML::Key << "Quadric" << YAML::Value;
-                        YAMLSerializeQuadric(out, initialSphere.sphere.quadric);
-                        out << YAML::Key << "Color" << YAML::Value;
-                        YAMLSerializeVector3(out, initialSphere.sphere.color);
-                    out << YAML::EndMap;
-                }
-            out << YAML::EndSeq;
+            out << YAML::Key << "Sphere Mesh Resolution" << YAML::Value << numberOfActiveSpheres;
+            out << YAML::Key << "Performed Operations" << YAML::Value << performedOperations;
+            out << YAML::Key << "Number of Active Spheres" << YAML::Value << numberOfActiveSpheres;
             out << YAML::Key << "Spheres" << YAML::Value;
             out << YAML::BeginSeq;
                 for (auto & i : timedSpheres)
                 {
-					if (!isTimedSphereAlive(i.alias))
-						continue;
-					
                     out << YAML::BeginMap;
                         out << YAML::Key << "Center" << YAML::Value;
                         YAMLSerializeVector3(out, i.sphere.center);
@@ -1579,6 +907,18 @@ namespace Renderer {
                         YAMLSerializeQuadric(out, i.sphere.quadric);
                         out << YAML::Key << "Color" << YAML::Value;
                         YAMLSerializeVector3(out, i.sphere.color);
+						out << YAML::Key << "Alias" << YAML::Value << i.alias;
+						out << YAML::Key << "Neighbours" << YAML::Value;
+						out << YAML::BeginSeq;
+						for (int j : i.sphere.neighbourSpheres)
+							out << j;
+						out << YAML::EndSeq;
+						out << YAML::Key << "Vertices" << YAML::Value;
+						out << YAML::BeginSeq;
+						for (auto & vertex : i.sphere.vertices)
+							out << vertex;
+						out << YAML::EndSeq;
+						out << YAML::Key << "Quadric Weights" << YAML::Value << i.sphere.quadricWeights;
                     out << YAML::EndMap;
                 }
             out << YAML::EndSeq;
@@ -1627,31 +967,21 @@ namespace Renderer {
 
     void SphereMesh::loadFromYaml(const std::string& path)
     {
-        initialSpheres.clear();
         triangle.clear();
         edge.clear();
         timedSpheres.clear();
+		sphereMapper.clear();
         
         std::ifstream stream(path);
         std::stringstream strStream;
         strStream << stream.rdbuf();
 
         YAML::Node data = YAML::Load(strStream.str());
-        
+		
+		performedOperations = data["Performed Operations"].as<int>();
+		numberOfActiveSpheres = data["Number of Active Spheres"].as<int>();
+		
 		int i = 0;
-        for (const auto& node : data["Initial Spheres"]) {
-            Sphere s;
-            
-            s.center = node["Center"].as<Math::Vector3>();
-            s.radius = node["Radius"].as<Math::Scalar>();
-            s.quadric = node["Quadric"].as<Renderer::Quadric>();
-            s.color = node["Color"].as<Math::Vector3>();
-
-            initialSpheres.emplace_back(s, i);
-			++i;
-        }
-        
-		i = 0;
         for (const auto& node : data["Spheres"]) {
             Sphere s;
             
@@ -1659,9 +989,16 @@ namespace Renderer {
             s.radius = node["Radius"].as<Math::Scalar>();
             s.quadric = node["Quadric"].as<Renderer::Quadric>();
             s.color = node["Color"].as<Math::Vector3>();
+			s.quadricWeights = node["Quadric Weights"].as<Math::Scalar>();
+			s.vertices.clear();
+			for (const auto& vertex : node["Vertices"])
+				s.addVertex(referenceMesh->vertices[vertex.as<int>()], vertex.as<int>());
+			s.neighbourSpheres.clear();
+			for (const auto& neighbour : node["Neighbours"])
+				s.neighbourSpheres.insert(neighbour.as<int>());
 
-            timedSpheres.emplace_back(Sphere(s), i);
-			++i;
+            timedSpheres.emplace_back(Sphere(s), node["Alias"].as<int>(), performedOperations);
+			sphereMapper[s.getID()] = i++;
         }
         
         for (const auto& node : data["Connectivity"]["Triangles"]) {
@@ -1683,14 +1020,31 @@ namespace Renderer {
             edge.insert(e);
         }
     }
+	
+	void SphereMesh::saveTXTToAutoPath()
+	{
+		std::string token;
+		std::string last;
+		std::istringstream tokenStream(referenceMesh->path);
+		
+		while (std::getline(tokenStream, token, '/')) {
+			last = token;
+		}
+		
+		last = token.substr(0, last.size() - 4);
+		std::string type = IMPLEMENT_THIERY_2013 ? "THIERY" : "OUR";
+		std::string name = last + "_" + type  + "_" + std::to_string(numberOfActiveSpheres) + ".sphere-mesh";
+		saveTXT("/Users/davidepaollilo/Desktop/ComparisonSM/", name);
+	}
 
     void SphereMesh::saveTXT(const std::string& path, const std::string& fn)
     {
         std::ostringstream fileContent;
         
         // Stating the count for each type: spheres, triangles, and edges
-        fileContent << "Sphere Mesh 1.0" << std::endl;
-        fileContent << timedSphereSize;
+        fileContent << "Sphere Mesh 2.0" << std::endl;
+		fileContent << "Duration: " << lastCollapseDuration << " seconds" << std::endl;
+        fileContent << numberOfActiveSpheres;
         fileContent << " " << triangle.size();
         fileContent << " " << edge.size() << std::endl;
         fileContent << "====================" << std::endl;
@@ -1699,15 +1053,15 @@ namespace Renderer {
 		std::vector<TimedSphere> activeEdges;
 		std::vector<TimedSphere> activeTris;
 		int idx = 0;
-		for (const auto& s : timedSpheres)
-			if (isTimedSphereAlive(s.alias))
-				activeSpheres[s.sphere.getID()] = idx++;
+		for (int i = 0; i < timedSpheres.size(); i++)
+			if (isTimedSphereAlive(i))
+				activeSpheres[currentSphere(i).getID()] = idx++;
         
         // Saving timedSpheres details
-        for (const auto& s : timedSpheres)
-			if (isTimedSphereAlive(s.alias))
-                fileContent << s.sphere.center[0] << " " << s.sphere.center[1] << " "
-					<< s.sphere.center[2] << " " << s.sphere.radius << std::endl;
+        for (int i = 0; i < timedSpheres.size(); i++)
+			if (isTimedSphereAlive(i))
+                fileContent << currentSphere(i).center[0] << " " << currentSphere(i).center[1] << " "
+					<< currentSphere(i).center[2] << " " << currentSphere(i).radius << std::endl;
 
         // Saving triangle details
         for (const auto& t : triangle)
@@ -1736,11 +1090,6 @@ namespace Renderer {
         fout.close();
     }
 
-    void SphereMesh::reset()
-    {
-	    timedSpheres = initialSpheres;
-    }
-
     void SphereMesh::addEdge(int selectedSphereID) {
         int selectedSphereIndex = sphereMapper[selectedSphereID];
         auto selectedSphere = timedSpheres[selectedSphereIndex];
@@ -1748,7 +1097,7 @@ namespace Renderer {
         sphereCopy.quadric = selectedSphere.sphere.quadric;
         sphereCopy.center += Math::Vector3(0.05, 0.05, 0) * BDDSize;
         
-        timedSpheres.emplace_back(Sphere(sphereCopy), timedSpheres.size());
+        timedSpheres.emplace_back(Sphere(sphereCopy), timedSpheres.size(), performedOperations);
         edge.insert(Edge(selectedSphereIndex, (int)timedSpheres.size() - 1));
     }
 
@@ -1763,7 +1112,7 @@ namespace Renderer {
         sphereCopy.quadric = selectedA.sphere.quadric;
         sphereCopy.center += Math::Vector3(0.05, 0.05, 0) * BDDSize;
         
-        timedSpheres.emplace_back(Sphere(sphereCopy), timedSpheres.size());
+        timedSpheres.emplace_back(Sphere(sphereCopy), timedSpheres.size(), performedOperations);
         triangle.insert(Triangle(idxA, idxB, (int)timedSpheres.size() - 1));
     }
 
@@ -1800,12 +1149,10 @@ namespace Renderer {
 //                i.j = selectedSphereIndex;
 //            else if (i.k == timedSpheres.size())
 //                i.k = selectedSphereIndex;
-        
-        removeDegenerates();
     }
 	
 	int SphereMesh::getTimedSphereSize () const
 	{
-		return timedSphereSize;
+		return numberOfActiveSpheres;
 	}
 }

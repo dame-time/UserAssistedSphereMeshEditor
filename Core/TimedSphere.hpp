@@ -15,12 +15,11 @@ namespace Renderer
 	class TimedSphere {
 		public:
 			Sphere sphere;
-			long long creationTime;
+			int timestamp;
 			int alias;
 			
-			TimedSphere();
 			TimedSphere(const TimedSphere& other);
-			explicit TimedSphere(const Sphere& sphere, int alias);
+			explicit TimedSphere(const Sphere& sphere, int alias, int timestamp);
 			
 			bool operator == (const TimedSphere& rhs) const;
 	};

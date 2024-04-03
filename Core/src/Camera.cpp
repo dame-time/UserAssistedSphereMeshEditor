@@ -18,6 +18,8 @@ namespace Renderer {
     }
 
     void Camera::setTarget(const Math::Vector3& target) {
+	    targetTranslation = Math::Matrix4();
+	    originTranslation = Math::Matrix4();
         targetTranslation.setColumnVector(3, Math::Vector4(-target, 1));
     }
 
@@ -32,6 +34,9 @@ namespace Renderer {
     }
 
     void Camera::resetRotation() {
+	    yRotation = Math::Matrix4();
+	    xRotation = Math::Matrix4();
+		
         phi = 0;
         theta = 0;
     }
@@ -49,7 +54,7 @@ namespace Renderer {
     }
 
     void Camera::resetScale() {
-        orthographicScale = 0;
+        orthographicScale = 0.005;
     }
 
     Math::Matrix4 Camera::getViewMatrix() {
@@ -72,7 +77,7 @@ namespace Renderer {
         return originTranslation * xRotation * yRotation * targetTranslation;
     }
 
-    Math::Matrix4 Camera::getPerspectiveMatrix(Math::Scalar fov, Math::Scalar aspect, Math::Scalar near, Math::Scalar far) const {
+    Math::Matrix4 Camera::getPerspectiveMatrix(Math::Scalar fov, Math::Scalar aspect, Math::Scalar near, Math::Scalar far) {
         Math::Matrix4 perspectiveMatrix = Math::Matrix4();
         
         Math::Scalar tanHalfFOV = std::tan(Math::Math::degreeToRandiansAngle(fov / 2.0));

@@ -35,7 +35,7 @@ namespace Renderer {
         void resetScale();
         
         Math::Matrix4 getViewMatrix();
-        Math::Matrix4 getPerspectiveMatrix(Math::Scalar fov, Math::Scalar aspect, Math::Scalar near, Math::Scalar far) const;
+        static Math::Matrix4 getPerspectiveMatrix(Math::Scalar fov, Math::Scalar aspect, Math::Scalar near, Math::Scalar far) ;
         Math::Matrix4 getOrthographicMatrix(Math::Scalar width, Math::Scalar heigh, Math::Scalar near, Math::Scalar far) const;
     };
 }

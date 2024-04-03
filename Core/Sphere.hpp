@@ -8,7 +8,7 @@
 #ifndef Sphere_hpp
 #define Sphere_hpp
 
-#include <RenderableMesh.hpp>
+#include <TriMesh.hpp>
 #include <Quadric.hpp>
 #include <Region.hpp>
 
@@ -27,9 +27,7 @@ namespace Renderer {
             void generateUUID();
         
         public:
-			bool isDangling{false};
-			
-            std::vector<Vertex*> vertices;
+            set_of_int vertices;
 			set_of_int neighbourSpheres;
         
             Math::Scalar quadricWeights{};
@@ -43,25 +41,13 @@ namespace Renderer {
 
             Sphere();
             Sphere(const Sphere& sphere);
-            Sphere(Vertex& vertex, Math::Scalar targetSphereRadius);
+            Sphere(Vertex& vertex, int vertexIdx, Math::Scalar targetSphereRadius);
             Sphere(const Math::Vector3& center, Math::Scalar radius);
-
-            [[nodiscard]] Quadric getSphereQuadric() const;
-
-            void addFace(const Math::Vector3& centroid, const Math::Vector3& normal, Math::Scalar weight = 1.0);
-            void addQuadric(const Quadric& q);
         
-            [[nodiscard]] bool checkSphereOverPlanarRegion() const;
-            void approximateSphereOverPlanarRegion(const Math::Vector3& edge0, const Math::Vector3& edge1);
-        
-            void addVertex(Vertex& vertex);
+			void init(Vertex& vertex, int vertexIdx, Math::Scalar targetSphereRadius);
+			void initTHIERY(Vertex& vertex);
+            void addVertex(Vertex& vertex, int index);
 			void addNeighbourSphere(int sphereIndex);
-			
-#ifdef USE_THIEF_SPHERE_METHOD
-			int clearNotLinkedVertices();
-#endif
-        
-            void constrainSphere(const Math::Scalar& constrainRadius);
         
             [[nodiscard]] int getID() const;
 

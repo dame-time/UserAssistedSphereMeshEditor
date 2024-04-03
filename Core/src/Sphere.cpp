@@ -30,26 +30,12 @@ namespace Renderer {
         this->center = other.center;
         this->radius = other.radius;
         this->color = other.color;
-		this->isDangling = other.isDangling;
+		this->neighbourSpheres = other.neighbourSpheres;
     }
 
-    Sphere::Sphere(Vertex& vertex, Math::Scalar k)
+    Sphere::Sphere(Vertex& vertex, int vertexIdx, Math::Scalar k)
     {
-        quadric = Quadric::initializeQuadricFromVertex(vertex, k) * 1e-6;
-        region = Region(vertex.position);
-
-        auto result = quadric.minimizer();
-        this->center = result.toQuaternion().immaginary;
-        this->radius = result.coordinates.w;
-        
-        this->color = Math::Vector3(1, 0, 0);
-        
-        this->quadricWeights = 1e-6;
-        
-        generateUUID();
-		
-		vertex.referenceSphere = this->getID();
-		this->vertices.push_back(&vertex);
+		init(vertex, vertexIdx, k);
     }
 
     Sphere::Sphere(const Math::Vector3& center, Math::Scalar radius)
@@ -61,6 +47,31 @@ namespace Renderer {
         
         generateUUID();
     }
+	
+	void Sphere::init (Vertex& vertex, int vertexIdx, Math::Scalar k)
+	{
+		quadric = Quadric::initializeQuadricFromVertex(vertex, k) * 1e-6;
+		
+		auto result = quadric.minimizer(k);
+		this->center = result.toQuaternion().immaginary;
+		this->radius = result.coordinates.w;
+		
+		this->color = Math::Vector3(1, 0, 0);
+		
+		this->quadricWeights = 1e-6;
+		
+		generateUUID();
+		
+		vertex.referenceSphere = this->getID();
+		this->vertices.insert(vertexIdx);
+	}
+	
+	void Sphere::initTHIERY (Renderer::Vertex &vertex)
+	{
+		quadric = Quadric(); // Removing "OUR" regularizer
+		this->quadricWeights = 0;
+		region.setAsPoint(vertex.position);
+	}
 
     void Sphere::generateUUID()
     {
@@ -77,56 +88,11 @@ namespace Renderer {
     {
         return this->renderedMeshID;
     }
-
-    Quadric Sphere::getSphereQuadric() const
-    {
-        return this->quadric;
-    }
-
-    void Sphere::addFace(const Math::Vector3& centroid, const Math::Vector3& normal, Math::Scalar weight)
-    {
-        this->quadric += (Quadric(centroid, normal) * weight);
-
-        auto result = quadric.minimizer();
-        this->center = result.toQuaternion().immaginary;
-        this->radius = result.coordinates.w;
-    }
-
-    void Sphere::addQuadric(const Quadric& q)
-    {
-        this->quadric += q;
-        
-        auto result = quadric.minimizer();
-        this->center = result.toQuaternion().immaginary;
-        this->radius = result.coordinates.w;
-    }
-
-    void Sphere::constrainSphere(const Math::Scalar& constrainRadius)
-    {
-        if (this->radius <= constrainRadius)
-            return;
-        
-        auto result = this->quadric.constrainR(constrainRadius);
-        this->center = result.toQuaternion().immaginary;
-        this->radius = result.coordinates.w;
-    }
-
-    bool Sphere::checkSphereOverPlanarRegion() const
-    {
-        return this->center == Math::Vector3(-1, -1, -1) && this->radius == 0;
-    }
-
-    void Sphere::approximateSphereOverPlanarRegion(const Math::Vector3& edge0, const Math::Vector3& edge1)
-    {
-        auto result = this->quadric.constrainIntoVector(edge0, edge1, region.directionalWidth);
-        this->center = result.toQuaternion().immaginary;
-        this->radius = result.coordinates.w;
-    }
-
-    void Sphere::addVertex(Vertex& vertex)
+	
+    void Sphere::addVertex(Vertex& vertex, int index)
     {
 		vertex.referenceSphere = this->getID();
-        vertices.push_back(&vertex);
+        vertices.insert(index);
     }
 	
 #ifdef USE_THIEF_SPHERE_METHOD

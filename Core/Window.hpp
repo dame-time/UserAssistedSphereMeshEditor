@@ -5,7 +5,7 @@
 
 #include <Vector3.hpp>
 
-#include <RenderableMesh.hpp>
+#include <TriMesh.hpp>
 #include <Shader.hpp>
 #include <Camera.hpp>
 
@@ -83,7 +83,7 @@ namespace Renderer {
             
             void setMeshShader(Shader* shader);
             void setSphereMeshShader(Shader* shader);
-            void setTargetMesh(RenderableMesh* targetMesh);
+            void setTargetMesh(TriMesh* targetMesh);
             void setSphereMesh(SphereMesh* sphereMesh);
         
             Math::Vector3 worldPosToClipPos(const Math::Vector3& worldPos);
@@ -101,7 +101,7 @@ namespace Renderer {
             unsigned int SCR_HEIGHT;
             Renderer::Shader* mainShader{};
             Renderer::Shader* sphereShader{};
-            Renderer::RenderableMesh* mesh{};
+            Renderer::TriMesh* mesh{};
             Renderer::SphereMesh* sm{};
             Renderer::Camera* mainCamera;
             bool commandPressed;

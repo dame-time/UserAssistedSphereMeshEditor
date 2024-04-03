@@ -23,10 +23,6 @@ namespace Renderer
 			std::unordered_map<int, int>* sphereMapper;
 		
 			bool isDirty;
-			
-			bool areTheSpheresUpToDate(const EdgeCollapse& edgeCollapse);
-			bool areBothSpheresAlive(const EdgeCollapse& edgeCollapse);
-			bool areAllSpheresAlive(const EdgeCollapse& edgeCollapse);
 		
 		public:
 			TemporalValidityQueue();
@@ -40,7 +36,8 @@ namespace Renderer
 			[[nodiscard]] bool isQueueDirty() const;
 			void setQueueDirty();
 		
-			bool clear();
+			void clear();
+			bool empty();
 		
 			int size();
 	};

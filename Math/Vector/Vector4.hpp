@@ -40,13 +40,13 @@ namespace Math
             Vector4(const Vector3& vector, const Scalar& w);
             Vector4(const Vector4& vector);
 
-            Scalar dot(const Vector4& vector) const;
-            Vector4 componentWise(const Vector4& vector) const;
+            [[nodiscard]] Scalar dot(const Vector4& vector) const;
+            [[nodiscard]] Vector4 componentWise(const Vector4& vector) const;
 
-            Scalar magnitude() const;
-            Scalar squareMagnitude() const;
+            [[nodiscard]] Scalar magnitude() const;
+            [[nodiscard]] Scalar squareMagnitude() const;
 
-            Vector4 normalized() const;
+            [[nodiscard]] Vector4 normalized() const;
             void normalize();
 
             Scalar operator [] (const short& i) const;
@@ -69,20 +69,20 @@ namespace Math
 
             Vector3 xyz();
 
-            Scalar angleBetween (const Vector4& vector) const;
+            [[nodiscard]] Scalar angleBetween (const Vector4& vector) const;
 
-            Vector4 lerp(const Vector4& vector, const Scalar& t) const;
-            Vector4 lerp(const Vector4 &v1, const Vector4 &v2, const Scalar &t) const;
+            [[nodiscard]] Vector4 lerp(const Vector4& vector, const Scalar& t) const;
+            [[nodiscard]] Vector4 lerp(const Vector4 &v1, const Vector4 &v2, const Scalar &t) const;
 
-            Quaternion toQuaternion() const;
+            [[nodiscard]] Quaternion toQuaternion() const;
 
-            bool isZero() const;
-            bool areEquals(const Vector4& vector) const;
+            [[nodiscard]] bool isZero() const;
+            [[nodiscard]] bool areEquals(const Vector4& vector) const;
         
-            Vector3 truncateToVector3() const;
+            [[nodiscard]] Vector3 truncateToVector3() const;
 
-            Versor4 asVersor4() const;
-            Point4 asPoint4() const;
+            [[nodiscard]] Versor4 asVersor4() const;
+            [[nodiscard]] Point4 asPoint4() const;
 
             void print() const;
     };

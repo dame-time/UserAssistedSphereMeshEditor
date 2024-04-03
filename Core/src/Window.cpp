@@ -123,7 +123,7 @@ namespace Renderer {
         this->sphereShader = shader;
     }
 
-    void Window::setTargetMesh(RenderableMesh *targetMesh) {
+    void Window::setTargetMesh(TriMesh *targetMesh) {
         this->mesh = targetMesh;
     }
 
@@ -345,7 +345,7 @@ namespace Renderer {
                 
                 std::string referenceMeshPath = getYAMLRenderableMeshPath(filePath);
                 
-                mesh = new RenderableMesh(referenceMeshPath, mainShader);
+                mesh = new TriMesh(referenceMeshPath, mainShader);
                 sm = new Renderer::SphereMesh(mesh, sphereShader);
                 
                 sm->loadFromYaml(filePath);
@@ -373,7 +373,7 @@ namespace Renderer {
                 delete mesh;
                 delete sm;
                 
-                mesh = new RenderableMesh(filePath, mainShader);
+                mesh = new TriMesh(filePath, mainShader);
                 sm = new Renderer::SphereMesh(mesh, sphereShader);
                 
                 mainCamera->resetRotation();
@@ -482,13 +482,6 @@ namespace Renderer {
             
             windowClassInstance->pickedMesh = nullptr;
             windowClassInstance->pickedMeshes.clear();
-        }
-        
-        if (key == GLFW_KEY_E && action == GLFW_RELEASE)
-        {
-            windowClassInstance->addSphereVectorToBuffer(windowClassInstance->sm->timedSpheres);
-            windowClassInstance->pickedMeshes.clear();
-            windowClassInstance->sm->reset();
         }
         
         if (key == GLFW_KEY_V && action == GLFW_PRESS)
@@ -625,7 +618,7 @@ namespace Renderer {
                     
                     std::string referenceMeshPath = getYAMLRenderableMeshPath(filePath);
                     
-                    mesh = new RenderableMesh(referenceMeshPath, mainShader);
+                    mesh = new TriMesh(referenceMeshPath, mainShader);
                     sm = new Renderer::SphereMesh(mesh, sphereShader);
                     
                     sm->loadFromYaml(filePath);
@@ -651,15 +644,24 @@ namespace Renderer {
                     
                     delete mesh;
                     delete sm;
+					delete mainCamera;
                     
-                    mesh = new RenderableMesh(filePath, mainShader);
+                    mesh = new TriMesh(filePath, mainShader);
                     sm = new Renderer::SphereMesh(mesh, sphereShader);
+					sm->resetSphereMesh();
+					mainCamera = new Camera();
                     
-                    mainCamera->resetRotation();
-                    mainCamera->resetTranslation();
-                    mainCamera->resetScale();
+//                    mainCamera->resetRotation();
+//                    mainCamera->resetTranslation();
+//                    mainCamera->resetScale();
                     
                     mainCamera->setTarget(mesh->getCentroid());
+					mainCamera->translate(2 * mesh->getBoundingSphereRadius());
+	                
+	                setMeshShader(mainShader);
+	                setSphereMeshShader(sphereShader);
+	                setTargetMesh(mesh);
+	                setSphereMesh(sm);
                 } else {
                     displayWarningMessage("No file selected!");
                 }
@@ -744,12 +746,6 @@ namespace Renderer {
                     pickedMesh = nullptr;
                     pickedMeshes.clear();
                 }
-            }
-            
-            if (ImGui::MenuItem("Reset Sphere Mesh", "E")) {
-               addSphereVectorToBuffer(sm->timedSpheres);
-               pickedMeshes.clear();
-               sm->reset();
             }
             
             if (ImGui::MenuItem("UNDO", "Z")) {
@@ -1101,34 +1097,22 @@ namespace Renderer {
         }
         
         ImGui::Separator();
-        
-        static float epsilon = 0.1f;
-        ImGui::PushItemWidth(80);
-        ImGui::SliderFloat("Slider", &epsilon, 0.0001f, 1.0f, "%.4f");
-        ImGui::PopItemWidth();
-        ImGui::SameLine();
-        ImGui::PushItemWidth(120);
-        ImGui::InputFloat("Input", &epsilon, 0.0001f, 1.0f, "%.4f");
-        ImGui::PopItemWidth();
-        ImGui::SameLine();
-        
-        epsilon = Math::Math::clamp01(epsilon);
-
-        if (ImGui::Button("Set EPSILON"))
-            sm->setEpsilon(static_cast<Math::Scalar>(epsilon));
-
-        
-        ImGui::Separator();
-        
-        if (ImGui::Button("Collapse Edge"))
-        {
-            auto result = sm->collapseSphereMesh();
-            
-            if (!result)
-                displayErrorMessage("Could not find any good timedSpheres to collapse");
-            
-            sm->renderSpheresOnly();
-        }
+	    
+		static bool implementThiery = false;
+	    if (ImGui::Checkbox("Implement Thiery 2013", &implementThiery))
+	    {
+		    sm->IMPLEMENT_THIERY_2013 = implementThiery;
+			sm->resetSphereMesh();
+		}
+	    
+	    if (ImGui::IsItemHovered())
+	    {
+		    ImGui::BeginTooltip();
+		    ImGui::Text("Feature that shows the implementation of Thiery et al. 2013\n DOES RESET THE SPHERE MESH.");
+		    ImGui::EndTooltip();
+	    }
+		
+		ImGui::Separator();
         
         static int j = 0;
         ImGui::PushItemWidth(120);
@@ -1176,63 +1160,6 @@ namespace Renderer {
             sm->renderSpheresOnly();
         }
         
-        if (ImGui::Button("Select Best BF Sphere Mesh Edge"))
-        {
-            sm->renderSelectedSpheresOnly();
-        }
-        
-        ImGui::Separator();
-        
-        if (ImGui::Button("Collapse Edge FAST"))
-        {
-            auto result = sm->collapseSphereMeshFast();
-
-            if (!result)
-                displayErrorMessage("Could not find any good timedSpheres to collapse");
-            
-            sm->renderSpheresOnly();
-        }
-        
-        static int f = 0;
-        ImGui::PushItemWidth(120);
-        ImGui::InputInt("n Spheres to Collapse FAST", &f);
-        ImGui::PopItemWidth();
-        
-        ImGui::SameLine();
-        
-        if (ImGui::Button("Collapse FAST"))
-        {
-            for (int i = 0; i < f; i++)
-                if (!sm->collapseSphereMeshFast())
-                {
-                    std::cerr << "Could not find any good timedSpheres to collapse,\nspheres collapsed: " << i << std::endl;
-                    break;
-                }
-            sm->renderSpheresOnly();
-        }
-        
-        static int d = 0;
-        ImGui::PushItemWidth(120);
-        ImGui::InputInt("n Spheres to Reach FAST", &d);
-        ImGui::PopItemWidth();
-        
-        ImGui::SameLine();
-        
-        if (ImGui::Button(("Collapse " + std::to_string(d) + " FAST").c_str()))
-        {
-            int initialSpheres = sm->getTimedSphereSize();
-            auto result = sm->collapseSphereMeshFast(d);
-            
-            if (!result)
-                displayErrorMessage("Could not find any good timedSpheres to collapse,\nspheres collapsed: " + std::to_string(initialSpheres - sm->getTimedSphereSize()));
-            sm->renderSpheresOnly();
-        }
-        
-        if (ImGui::Button("Select Fast Best Sphere Mesh Edge"))
-        {
-            sm->renderFastSelectedSpheresOnly();
-        }
-        
         ImGui::Separator();
         
         static int n = 1;
@@ -1257,9 +1184,13 @@ namespace Renderer {
             sm->renderWithNSpherePerEdge(n, sphereSizes, 0.05);
             renderFullSMWithNSpheres = n;
         }
-        
-        if (ImGui::Button("Reset Full Sphere Mesh Size"))
-            sphereSizes = 1;
+	    
+	    ImGui::Separator();
+		
+		if (ImGui::Button("Reset Sphere-mesh"))
+			sm->resetSphereMesh();
+		
+	    ImGui::Separator();
         
         if (ImGui::Button("Render Sphere Only Sphere Mesh"))
         {
@@ -1281,5 +1212,11 @@ namespace Renderer {
                 mesh->setBlended(true);
             }
         }
+	    
+	    ImGui::Separator();
+		
+		// TODO: Remove this in a final version
+		if (ImGui::Button("Auto-save to default export path"))
+			sm->saveTXTToAutoPath();
     }
 }

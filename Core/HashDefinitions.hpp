@@ -12,7 +12,18 @@ namespace Renderer {
 		int i, j, k;
 		
 		Triangle() : i(0), j(0), k(0) {}
-		Triangle(int _i, int _j, int _k) : i(_i), j(_j), k(_k) {}
+		Triangle(int _i, int _j, int _k)
+		{
+			i = std::min(_i, std::min(_j, _k));
+			k = std::max(_i, std::max(_j, _k));
+			j = _i + _j + _k - i - k;
+		}
+		Triangle(const Triangle& t)
+		{
+			i = t.i;
+			j = t.j;
+			k = t.k;
+		}
 		
 		bool operator==(const Triangle& other) const {
 			std::array<int, 3> vertices1{{i, j, k}};
@@ -30,8 +41,13 @@ namespace Renderer {
 		Edge() : i(0), j(0) {}
 		Edge(int first, int second)
 		{
-			i = first;
-			j = second;
+			i = std::min(first, second);
+			j = std::max(first, second);
+		}
+		Edge(const Edge& e)
+		{
+			i = e.i;
+			j = e.j;
 		}
 		
 		bool operator==(const Edge &other) const {
