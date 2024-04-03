@@ -762,20 +762,7 @@ namespace Renderer {
 
     bool SphereMesh::collapseSphereMesh()
     {
-		int initialNumberOfActiveSpheres = numberOfActiveSpheres;
-		while (initialNumberOfActiveSpheres == numberOfActiveSpheres && !edgeQueue.empty())
-		{
-			EdgeCollapse e = edgeQueue.top();
-			edgeQueue.pop();
-			
-			if (isOutOfDate(e)) continue;
-			
-			execute(e);
-		}
-	    
-	    updateConnectivityAfterCollapses();
-		
-        return initialNumberOfActiveSpheres != numberOfActiveSpheres;
+	    return collapseSphereMesh(numberOfActiveSpheres - 1);
     }
 	
 	void SphereMesh::updateConnectivityAfterCollapses()
@@ -861,10 +848,10 @@ namespace Renderer {
 	    auto stop = std::chrono::high_resolution_clock::now();
 	    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 		lastCollapseDuration = std::to_string(duration.count() / 1e6);
-	    
-	    updateConnectivityAfterCollapses();
-	    
-	    saveTXTToAutoPath();
+	 
+		
+        updateConnectivityAfterCollapses();
+		
         return numberOfActiveSpheres <= n;
     }
 
@@ -1027,9 +1014,8 @@ namespace Renderer {
 		std::string last;
 		std::istringstream tokenStream(referenceMesh->path);
 		
-		while (std::getline(tokenStream, token, '/')) {
+		while (std::getline(tokenStream, token, '/'))
 			last = token;
-		}
 		
 		last = token.substr(0, last.size() - 4);
 		std::string type = IMPLEMENT_THIERY_2013 ? "THIERY" : "OUR";
